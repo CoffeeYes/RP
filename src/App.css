@@ -30,3 +30,43 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-color: #551a8b;
+}
+
+a {
+  text-decoration:none;
+  color: inherit;
+}
+
+input {
+  display:block;
+}
+
+button {
+  display:block;
+}
+
+.content-container {
+  width:100%;
+  height: 100vh;
+  display : flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  height: 20vh;
+  width: 15vw;
+  border: 2px solid white;
+  border-radius : 50px;
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  color:white;
+}
