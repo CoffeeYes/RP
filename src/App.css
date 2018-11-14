@@ -32,7 +32,7 @@
 }
 
 body {
-  background-color: #551a8b;
+  background-color: 	#f9f9f9;
 }
 
 a {
@@ -59,7 +59,7 @@ button {
 .login-container {
   height: 20vh;
   width: 15vw;
-  border: 2px solid white;
+  border: 2px solid #551a8b;
   border-radius : 50px;
   padding: 20px 20px 20px 20px;
   display: flex;
