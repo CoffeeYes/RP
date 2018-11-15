@@ -68,5 +68,11 @@ button {
 }
 
 .login-form {
-  color:white;
+  color: #551a8b;
+  font-family: "Source Sans Pro";
+}
+
+.login-form-text {
+  margin-left: 2.5vw;
+  margin-top: 1vh;
 }

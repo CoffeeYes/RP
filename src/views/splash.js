@@ -11,8 +11,10 @@ class Splash extends Component {
             <input name="username"/>
             <label>Password:</label>
             <input name="password"/>
-            <button>Login</button>
-            <a href="/enter-code">Got a Code?</a>
+            <div className="login-form-text">
+              <button>Login</button>
+              <a href="/enter-code">Got a Code?</a>
+            </div>
           </form>
         </div>
       </div>
