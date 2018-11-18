@@ -13,7 +13,7 @@ class Splash extends Component {
             <input name="password"/>
             <div className="login-form-text">
               <button>Login</button>
-              <a href="/enter-code">Got a Code?</a>
+              <a href="/code">Got a Code?</a>
             </div>
           </form>
         </div>
