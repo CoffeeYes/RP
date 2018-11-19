@@ -76,3 +76,10 @@ button {
   margin-left: 2.5vw;
   margin-top: 1vh;
 }
+
+.main-bg-img {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: -999;
+}
