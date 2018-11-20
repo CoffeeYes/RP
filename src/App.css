@@ -68,8 +68,10 @@ button {
 }
 
 .login-form {
-  color: #551a8b;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   font-family: "Source Sans Pro";
+  font-size: 1.5em;
 }
 
 .login-form-text {
