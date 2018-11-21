@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <div className="main">
         <Route exact path="/" render={() => (
-          <Splash login={this.handleLogin}/>
+          <Splash handleLogin={this.handleLogin}/>
         )}/>
         <Route exact path="/code/" render={() => (
           <Code/>
