@@ -11,7 +11,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      username : '',
+      password : '',
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -19,7 +20,16 @@ class App extends Component {
 
   handleLogin(event) {
     event.preventDefault();
-    console.log("click");
+    fetch('/login',{
+      method : 'POST',
+      headers : {
+        'Content-type' : 'application/json'
+      },
+      body : JSON.stringify({
+        username : this.state.username,
+        password : this.state.password
+      })
+    })
   }
 
   render() {
