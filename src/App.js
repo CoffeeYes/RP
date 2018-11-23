@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Splash from './views/splash.js';
 import {Route} from 'react-router-dom';
-import Code from './views/code.js'
+
+import Code from './views/code.js';
+import Splash from './views/splash.js';
 
 
 class App extends Component {
