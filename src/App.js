@@ -17,6 +17,7 @@ class App extends Component {
     }
 
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
   }
 
   handleLogin(event) {
@@ -33,11 +34,15 @@ class App extends Component {
     })
   }
 
+  handleTextChange(event) {
+    this.setState({[event.target.name] : event.target.value});
+  }
+
   render() {
     return (
       <div className="main">
         <Route exact path="/" render={() => (
-          <Splash handleLogin={this.handleLogin}/>
+          <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange}/>
         )}/>
         <Route exact path="/code/" render={() => (
           <Code/>
