@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
-const connect = require('./src/connect.js')
+const connect = require('./src/connect.js');
+const Mclient = require('mongodb').MongoClient;
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.json());
@@ -18,5 +19,13 @@ app.get('/', function (req, res) {
 
 app.post('/login',function(req,res,next) {
   console.log(req.body);
+  Mclient.connect(connect.mongo.url,function(error,client) {
+    if(error)throw error;
+    let database = client.db('rp');
+
+    database.collection('user_data').find({username : req.body.username}).toArray(function(error,data) {
+      console.log(data)
+    })
+  })
 })
 app.listen(process.env.PORT || 5000);
