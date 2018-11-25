@@ -14,6 +14,7 @@ class App extends Component {
     this.state = {
       username : '',
       password : '',
+      error: ''
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -32,6 +33,10 @@ class App extends Component {
         password : this.state.password
       })
     })
+    .then(res => res.json())
+    .then(data => {
+      this.setState({error : data.error})
+    })
   }
 
   handleTextChange(event) {
@@ -42,7 +47,7 @@ class App extends Component {
     return (
       <div className="main">
         <Route exact path="/" render={() => (
-          <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange}/>
+          <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
         )}/>
         <Route exact path="/code/" render={() => (
           <Code/>

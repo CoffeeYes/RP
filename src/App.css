@@ -85,3 +85,8 @@ button {
   position: absolute;
   z-index: -999;
 }
+
+.error {
+  color: red;
+  font-weight: bold;
+}

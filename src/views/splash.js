@@ -8,6 +8,7 @@ class Splash extends Component {
       <div className="content-container">
         <img className="main-bg-img" src={main_img}/>
         <div className="login-container">
+          <p className="error">{this.props.error}</p>
           <form action="/login" method="POST" className="login-form">
             <label>Username:</label>
             <input name="username" onChange={this.props.handleTextChange}/>

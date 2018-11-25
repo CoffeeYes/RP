@@ -25,6 +25,9 @@ app.post('/login',function(req,res,next) {
 
     database.collection('user_data').find({username : req.body.username}).toArray(function(error,data) {
       console.log(data)
+      if(data == '') {
+        res.send({error: 'User not found'})
+      }
     })
   })
 })
