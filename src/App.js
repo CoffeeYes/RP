@@ -23,6 +23,7 @@ class App extends Component {
 
   handleLogin(event) {
     event.preventDefault();
+    this.setState({error: ''})
     fetch('/login',{
       method : 'POST',
       headers : {
@@ -35,7 +36,9 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      this.setState({error : data.error})
+      if(data.error) {
+        this.setState({error : data.error})
+      }
     })
   }
 
