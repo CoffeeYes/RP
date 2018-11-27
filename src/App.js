@@ -14,7 +14,8 @@ class App extends Component {
     this.state = {
       username : '',
       password : '',
-      error: ''
+      error: '',
+      loggedIn : false
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -38,6 +39,9 @@ class App extends Component {
     .then(data => {
       if(data.error) {
         this.setState({error : data.error})
+      }
+      else if(data.loggedIn === true){
+        this.setState({loggedIn: true})
       }
     })
   }

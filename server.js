@@ -31,6 +31,9 @@ app.post('/login',function(req,res,next) {
       else if(data[0].password != req.body.password){
         res.send({error: 'Incorrect Password'})
       }
+      else {
+        res.send({loggedIn : true})
+      }
     })
   })
 })
