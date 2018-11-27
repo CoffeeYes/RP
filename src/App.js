@@ -25,6 +25,9 @@ class App extends Component {
   handleLogin(event) {
     event.preventDefault();
     this.setState({error: ''})
+    if(this.state.username.trim() == "" || this.state.password.trim() == "") {
+      return this.setState({error: 'fields cannot be empty'})
+    }
     fetch('/login',{
       method : 'POST',
       headers : {
