@@ -28,6 +28,9 @@ app.post('/login',function(req,res,next) {
       if(data == '') {
         res.send({error: 'User not found'})
       }
+      else if(data[0].password != req.body.password){
+        res.send({error: 'Incorrect Password'})
+      }
     })
   })
 })
