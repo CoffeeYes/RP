@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Route} from 'react-router-dom';
+import {Route, Redirect} from 'react-router-dom';
 
 import Code from './views/code.js';
 import Splash from './views/splash.js';
@@ -22,7 +22,7 @@ class App extends Component {
     this.handleTextChange = this.handleTextChange.bind(this);
   }
 
-  handleLogin(event) {
+  handleLogin = (event) => {
     event.preventDefault();
     this.setState({error: ''})
     if(this.state.username.trim() == "" || this.state.password.trim() == "") {
@@ -43,8 +43,9 @@ class App extends Component {
       if(data.error) {
         this.setState({error : data.error})
       }
-      else if(data.loggedIn === true){
-        this.setState({loggedIn: true})
+      else if(data.loggedIn == true){
+        this.setState({loggedIn: true});
+        window.location = '/panel'
       }
     })
   }
