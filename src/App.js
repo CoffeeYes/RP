@@ -5,6 +5,7 @@ import {Route, Redirect} from 'react-router-dom';
 
 import Code from './views/code.js';
 import Splash from './views/splash.js';
+import Panel from './views/panel.js';
 
 
 class App extends Component {
@@ -63,6 +64,9 @@ class App extends Component {
         <Route exact path="/code/" render={() => (
           <Code/>
         )} />
+        <Route exact path='/panel' render={() => (
+          <Panel />
+        )}/>
       </div>
     );
   }
