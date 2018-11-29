@@ -64,7 +64,7 @@ class App extends Component {
         <Route exact path="/code/" render={() => (
           <Code/>
         )} />
-        <Route exact path='/panel' render={() => (
+        <Route path='/panel' render={() => (
           <Panel />
         )}/>
       </div>

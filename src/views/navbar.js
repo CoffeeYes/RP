@@ -6,9 +6,9 @@ class Navbar extends Component {
     return (
       <div className="navbar">
           <a className="navItem" href="/lobby">Lobby</a>
-          <a className="navItem" href="/mode">Mode</a>
-          <a className="navItem" href="/users">Users</a>
-          <a className="navItem" href="/vote">vote</a>
+          <a className="navItem" href="/panel/mode">Mode</a>
+          <a className="navItem" href="/panel/users">Users</a>
+          <a className="navItem" href="/panel/vote">vote</a>
       </div>
     );
   }
