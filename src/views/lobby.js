@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Navbar from './navbar.js';
 
-class Panel extends Component {
+class Lobby extends Component {
 
   render() {
     return (
-      <Navbar />
+      <p>Lobby</p>
     );
   }
 }
 
-export default Panel;
+export default Lobby;

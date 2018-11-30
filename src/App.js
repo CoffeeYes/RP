@@ -6,6 +6,9 @@ import {Route, Redirect} from 'react-router-dom';
 import Code from './views/code.js';
 import Splash from './views/splash.js';
 import Panel from './views/panel.js';
+import Lobby from './views/lobby.js';
+import Vote from './views/vote.js';
+import Mode from './views/mode.js';
 
 
 class App extends Component {
@@ -67,6 +70,11 @@ class App extends Component {
         <Route path='/panel' render={() => (
           <Panel />
         )}/>
+        <Route path='/lobby' render={() => (
+          <Lobby/>
+        )}/>
+        <Route path='/panel/mode' Component={Mode}/>
+        <Route path='/panel/vote' Component={Vote}/>
       </div>
     );
   }

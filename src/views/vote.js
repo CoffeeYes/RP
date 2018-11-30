@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import Navbar from './navbar.js';
 
-class Panel extends Component {
+class Vote extends Component {
 
   render() {
     return (
-      <Navbar />
+      <div>
+        <Navbar/>
+        <p>Vote</p>
+      </div>
     );
   }
 }
 
-export default Panel;
+export default Vote;

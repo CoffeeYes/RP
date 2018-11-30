@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import Navbar from './navbar.js';
 
-class Panel extends Component {
+class Mode extends Component {
 
   render() {
     return (
-      <Navbar />
+      <div>
+        <Navbar/>
+        <p>mode</p>
+      </div>
     );
   }
 }
 
-export default Panel;
+export default Mode;
