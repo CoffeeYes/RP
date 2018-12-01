@@ -17,6 +17,18 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+app.get('/mode',function(req,res) {
+  Mclient.connect(connect.mongo.url,function(error,client) {
+    if(error)throw error;
+    let database = client.db('rp');
+
+    database.collection('app_data').find({title: "modes"}).toArray(function(error,data) {
+      if(error)throw error;
+      res.send({data : data[0].data});
+    })
+  })
+})
+
 app.post('/login',function(req,res,next) {
   console.log(req.body);
   Mclient.connect(connect.mongo.url,function(error,client) {
