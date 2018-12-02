@@ -19,11 +19,13 @@ class App extends Component {
       username : '',
       password : '',
       error: '',
-      loggedIn : false
+      loggedIn : false,
+      modes : JSON.parse(localStorage.getItem('modes')) || []
     }
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
+    this.fetchModes = this.fetchModes.bind(this);
   }
 
   handleLogin = (event) => {
@@ -58,6 +60,18 @@ class App extends Component {
     this.setState({[event.target.name] : event.target.value});
   }
 
+  fetchModes(event) {
+    event.preventDefault()
+    fetch('/modes')
+    .then(res => res.json())
+    .then(data => {
+      localStorage.setItem('modes',JSON.stringify(data.modes));
+    })
+    .then(() => {
+      window.location = '/panel/mode'
+    })
+  }
+
   render() {
     return (
       <div className="main">
@@ -68,12 +82,14 @@ class App extends Component {
           <Code/>
         )} />
         <Route path='/panel' render={() => (
-          <Panel />
+          <Panel fetchModes={this.fetchModes}/>
         )}/>
         <Route path='/lobby' render={() => (
           <Lobby/>
         )}/>
-        <Route path='/panel/mode' Component={Mode}/>
+        <Route path='/panel/mode' render={() => (
+          <Mode/>
+        )}/>
         <Route path='/panel/vote' Component={Vote}/>
       </div>
     );

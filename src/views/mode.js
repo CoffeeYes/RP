@@ -6,7 +6,6 @@ class Mode extends Component {
   render() {
     return (
       <div>
-        <Navbar/>
         <p>mode</p>
       </div>
     );

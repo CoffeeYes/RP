@@ -5,7 +5,7 @@ class Panel extends Component {
 
   render() {
     return (
-      <Navbar />
+      <Navbar fetchModes={this.props.fetchModes}/>
     );
   }
 }
