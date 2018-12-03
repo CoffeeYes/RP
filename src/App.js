@@ -88,7 +88,7 @@ class App extends Component {
           <Lobby/>
         )}/>
         <Route path='/panel/mode' render={() => (
-          <Mode/>
+          <Mode modes={this.state.modes}/>
         )}/>
         <Route path='/panel/vote' Component={Vote}/>
       </div>

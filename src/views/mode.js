@@ -6,7 +6,11 @@ class Mode extends Component {
   render() {
     return (
       <div>
-        <p>mode</p>
+        {this.props.modes.map((item,index) => {
+          return(
+            <p>{item}</p>
+          )
+        })}
       </div>
     );
   }
