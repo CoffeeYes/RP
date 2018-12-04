@@ -20,7 +20,8 @@ class App extends Component {
       password : '',
       error: '',
       loggedIn : false,
-      modes : JSON.parse(localStorage.getItem('modes')) || []
+      modes : JSON.parse(localStorage.getItem('modes')) || [],
+      mode: ''
     }
 
     this.handleLogin = this.handleLogin.bind(this);

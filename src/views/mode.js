@@ -5,12 +5,18 @@ class Mode extends Component {
 
   render() {
     return (
-      <div>
+      <div className="content-container">
+        <form>
         {this.props.modes.map((item,index) => {
           return(
-            <p>{item}</p>
+            <div>
+              <input type="radio" className="radioForm"/>
+              <label className="modeChoiceText">{item}</label>
+            </div>
           )
         })}
+        <button>Save</button>
+        </form>
       </div>
     );
   }

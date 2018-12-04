@@ -117,3 +117,11 @@ ul {
 .navItem:hover {
   background-color: white;
 }
+
+.modeChoiceText{
+  display:inline;
+}
+
+.radioForm {
+  display: inline;
+}
