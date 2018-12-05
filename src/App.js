@@ -27,6 +27,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.fetchModes = this.fetchModes.bind(this);
+    this.changeMode = this.changeMode.bind(this);
   }
 
   handleLogin = (event) => {
@@ -73,6 +74,10 @@ class App extends Component {
     })
   }
 
+  changeMode(event) {
+    event.preventDefault();
+
+  }
   render() {
     return (
       <div className="main">
@@ -89,7 +94,7 @@ class App extends Component {
           <Lobby/>
         )}/>
         <Route path='/panel/mode' render={() => (
-          <Mode modes={this.state.modes}/>
+          <Mode modes={this.state.modes} changeMode={this.changeMode}/>
         )}/>
         <Route path='/panel/vote' Component={Vote}/>
       </div>

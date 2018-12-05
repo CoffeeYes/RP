@@ -15,7 +15,7 @@ class Mode extends Component {
             </div>
           )
         })}
-        <button>Save</button>
+        <button onClick={this.props.changeMode}>Save</button>
         </form>
       </div>
     );
