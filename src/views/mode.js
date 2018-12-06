@@ -6,7 +6,7 @@ class Mode extends Component {
   render() {
     return (
       <div className="content-container">
-        <form>
+        <form className="modeForm">
         {this.props.modes.map((item,index) => {
           return(
             <div>

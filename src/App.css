@@ -125,3 +125,12 @@ ul {
 .radioForm {
   display: inline;
 }
+
+.modeForm {
+  border: 1px solid black;
+  height: 30vh;
+  width: 20vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
