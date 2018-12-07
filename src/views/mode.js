@@ -9,13 +9,13 @@ class Mode extends Component {
         <form className="modeForm">
         {this.props.modes.map((item,index) => {
           return(
-            <div>
+            <div className="modeChoiceContainer">
               <input type="radio" className="radioForm"/>
               <label className="modeChoiceText">{item}</label>
             </div>
           )
         })}
-        <button onClick={this.props.changeMode}>Save</button>
+        <button onClick={this.props.changeMode} className="modeFormBtn">Save</button>
         </form>
       </div>
     );

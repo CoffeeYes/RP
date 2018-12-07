@@ -133,4 +133,16 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.modeChoiceContainer {
+  display:block;
+  margin-bottom: 2em;
+}
+
+.modeFormBtn {
+  display:block;
+  width: 5vw;
+  height: 3vh;
 }
