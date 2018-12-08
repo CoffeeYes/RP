@@ -49,4 +49,15 @@ app.post('/login',function(req,res,next) {
     })
   })
 })
+
+app.post('/updateMode',function(req,res,next) {
+
+  Mclient.connect(connect.mongo.url,function(error,client) {
+    if(error)throw error;
+
+    let database = client.db('rp');
+
+    database.collection('user_data').updateOne({title : 'currentMode'},{data : req.body.mode});
+  })
+})
 app.listen(process.env.PORT || 5000);
