@@ -75,7 +75,6 @@ class App extends Component {
   }
 
   changeMode(event) {
-    event.preventDefault();
 
   }
   render() {

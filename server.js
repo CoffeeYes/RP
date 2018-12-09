@@ -56,8 +56,12 @@ app.post('/updateMode',function(req,res,next) {
     if(error)throw error;
 
     let database = client.db('rp');
-
-    database.collection('user_data').updateOne({title : 'currentMode'},{data : req.body.mode});
+    try {
+      database.collection('user_data').update({title : 'currentMode'},{data : req.body.mode});
+    }
+    catch(error) {
+      console.log('database could not be updated : ' + error)
+    }
   })
 })
 app.listen(process.env.PORT || 5000);
