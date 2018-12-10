@@ -7,7 +7,7 @@ const Mclient = require('mongodb').MongoClient;
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/ping', function (req, res) {
  return res.send('pong');
@@ -30,13 +30,11 @@ app.get('/modes',function(req,res) {
 })
 
 app.post('/login',function(req,res,next) {
-  console.log(req.body);
   Mclient.connect(connect.mongo.url,function(error,client) {
     if(error)throw error;
     let database = client.db('rp');
 
     database.collection('user_data').find({username : req.body.username}).toArray(function(error,data) {
-      console.log(data)
       if(data == '') {
         res.send({error: 'User not found'})
       }
@@ -51,13 +49,13 @@ app.post('/login',function(req,res,next) {
 })
 
 app.post('/updateMode',function(req,res,next) {
-
+  console.log(req.body)
   Mclient.connect(connect.mongo.url,function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
     try {
-      database.collection('user_data').update({title : 'currentMode'},{data : req.body.mode});
+      database.collection('user_data').update({title : 'currentMode'},{"data" : req.body.modeChoice});
     }
     catch(error) {
       console.log('database could not be updated : ' + error)
