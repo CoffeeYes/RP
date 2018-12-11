@@ -49,13 +49,12 @@ app.post('/login',function(req,res,next) {
 })
 
 app.post('/updateMode',function(req,res,next) {
-  console.log(req.body)
   Mclient.connect(connect.mongo.url,function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
     try {
-      database.collection('user_data').update({title : 'currentMode'},{"data" : req.body.modeChoice});
+      database.collection('app_data').update({title : 'currentMode'},{"data" : req.body.modeChoice});
     }
     catch(error) {
       console.log('database could not be updated : ' + error)
