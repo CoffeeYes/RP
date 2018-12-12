@@ -27,7 +27,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.fetchModes = this.fetchModes.bind(this);
-    this.changeMode = this.changeMode.bind(this);
+    this.prepLobby = this.prepLobby.bind(this);
   }
 
   handleLogin = (event) => {
@@ -74,8 +74,11 @@ class App extends Component {
     })
   }
 
-  changeMode(event) {
-
+  prepLobby(event) {
+    //get current mode
+    fetch('../mode')
+    .then(res => res.json())
+    .then(data => this.setState({mode : data}))
   }
   render() {
     return (
@@ -87,7 +90,7 @@ class App extends Component {
           <Code/>
         )} />
         <Route path='/panel' render={() => (
-          <Panel fetchModes={this.fetchModes}/>
+          <Panel fetchModes={this.fetchModes} prepLobby={this.prepLobby}/>
         )}/>
         <Route path='/lobby' render={() => (
           <Lobby/>
