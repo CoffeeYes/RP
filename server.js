@@ -37,8 +37,7 @@ app.get('/mode',function(req,res,next){
 
     database.collection('app_data').find({title : 'currentMode'}).toArray(function(error,data) {
       if(error) throw error;
-
-      res.send(data[0].data);
+      res.send({mode : data[0].data});
     })
   })
 })

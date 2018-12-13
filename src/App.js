@@ -78,7 +78,9 @@ class App extends Component {
     //get current mode
     fetch('../mode')
     .then(res => res.json())
-    .then(data => this.setState({mode : data}))
+    .then(data => this.setState({mode : data.mode},function() {
+      window.location = '/lobby'
+    }))
   }
   render() {
     return (
