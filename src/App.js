@@ -21,7 +21,7 @@ class App extends Component {
       error: '',
       loggedIn : false,
       modes : JSON.parse(localStorage.getItem('modes')) || [],
-      mode: ''
+      mode: JSON.parse(localStorage.getItem('mode')) || ''
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -75,12 +75,16 @@ class App extends Component {
   }
 
   prepLobby(event) {
+    event.preventDefault()
     //get current mode
     fetch('../mode')
     .then(res => res.json())
-    .then(data => this.setState({mode : data.mode},function() {
+    .then(data => {
+      localStorage.setItem("mode",JSON.stringify(data.mode))
+    })
+    .then(() => {
       window.location = '/lobby'
-    }))
+    })
   }
   render() {
     return (
