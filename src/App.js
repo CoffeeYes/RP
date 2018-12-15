@@ -99,7 +99,7 @@ class App extends Component {
           <Panel fetchModes={this.fetchModes} prepLobby={this.prepLobby}/>
         )}/>
         <Route path='/lobby' render={() => (
-          <Lobby/>
+          <Lobby mode={this.state.mode}/>
         )}/>
         <Route path='/panel/mode' render={() => (
           <Mode modes={this.state.modes} changeMode={this.changeMode}/>
