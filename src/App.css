@@ -146,3 +146,19 @@ ul {
   width: 5vw;
   height: 3vh;
 }
+
+.cam-container {
+  display:flex;
+  width:100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.cam {
+  border: 0.5px solid black;
+  width: 25vw;
+  height: 30vh;
+  margin-left: 1vw;
+  margin-top: 2vh;
+}

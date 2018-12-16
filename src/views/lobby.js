@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Navbar from './navbar.js';
+import Koth from './koth.js'
 
 class Lobby extends Component {
 
   render() {
     if(this.props.mode.toLowerCase() == "king of the hill") {
       return (
-        <p>king of the hill</p>
+        <Koth />
       )
     }
     else {
