@@ -6,12 +6,20 @@ class Koth extends Component {
     return (
       <div className="cam-container">
         <div className="cam-row">
-          <div className="cam guest"></div>
-          <div className="cam guest"></div>
+          <div className="cam guest">
+            <p>name1</p>
+          </div>
+          <div className="cam guest">
+            <p>name2</p>
+          </div>
         </div>
         <div className="cam-row">
-          <div className="cam guest"></div>
-          <div className="cam guest"></div>
+          <div className="cam guest">
+            <p>name3</p>
+          </div>
+          <div className="cam guest">
+            <p>name4</p>
+          </div>
         </div>
       </div>
     );
