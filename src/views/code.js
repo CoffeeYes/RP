@@ -5,7 +5,10 @@ class Splash extends Component {
   render() {
     return (
       <div className="content-container">
-        <p>code</p>
+        <form action='/roomCode' method='post'>
+          <input name="codeInput"/>
+          <button>Submit</button>
+        </form>
       </div>
     );
   }
