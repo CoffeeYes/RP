@@ -46,6 +46,7 @@ a {
 
 input {
   display:block;
+  margin-bottom : 10px;
 }
 
 button {
@@ -54,6 +55,13 @@ button {
 
 ul {
   list-style: none;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .content-container {
@@ -161,4 +169,10 @@ ul {
   height: 30vh;
   margin-left: 1vw;
   margin-top: 2vh;
+}
+
+.codeForm {
+  border : 1px solid black;
+  padding: 3vh 3vw 3vh 3vw;
+  border-radius: 10px;
 }
