@@ -19,6 +19,7 @@ class App extends Component {
       username : '',
       password : '',
       error: '',
+      codeInput : '',
       loggedIn : false,
       modes : JSON.parse(localStorage.getItem('modes')) || [],
       mode: JSON.parse(localStorage.getItem('mode')) || ''
@@ -28,6 +29,7 @@ class App extends Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.fetchModes = this.fetchModes.bind(this);
     this.prepLobby = this.prepLobby.bind(this);
+    this.handleCode = this.handleCode.bind(this);
   }
 
   handleLogin = (event) => {
@@ -86,6 +88,24 @@ class App extends Component {
       window.location = '/lobby'
     })
   }
+
+  handleCode(event) {
+    event.preventDefault();
+    this.setState({error : ""})
+
+    if(this.state.codeInput.trim() == "") {
+      return this.setState({error : "field cannot be empty"})
+    }
+      fetch('/roomCode',{
+        method : 'POST',
+        headers : {
+          'Content-type' : 'application/json'
+        },
+        body : JSON.stringify({
+          code : this.state.codeInput
+        })
+      })
+  }
   render() {
     return (
       <div className="main">
@@ -93,7 +113,7 @@ class App extends Component {
           <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
         )}/>
         <Route exact path="/code/" render={() => (
-          <Code/>
+          <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
         )} />
         <Route path='/panel' render={() => (
           <Panel fetchModes={this.fetchModes} prepLobby={this.prepLobby}/>

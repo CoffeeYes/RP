@@ -74,4 +74,9 @@ app.post('/updateMode',function(req,res,next) {
     }
   })
 })
+
+app.post('/roomCode',function(req,res,next) {
+  let code = req.body.code
+  console.log(code)
+})
 app.listen(process.env.PORT || 5000);
