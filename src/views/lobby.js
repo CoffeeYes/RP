@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import Navbar from './navbar.js';
-import Koth from './koth.js'
+import Koth from './koth.js';
+import Generate from './generate.js';
+import RenderMode from './renderMode.js'
 
 class Lobby extends Component {
 
   render() {
-    if(this.props.mode.toLowerCase() == "king of the hill") {
-      return (
-        <Koth />
-      )
-    }
-    else {
-      return (
-        <p>lobby</p>
-      )
-    }
+    return (
+      <div>
+        <Generate />
+        <RenderMode mode={this.props.mode}/>
+      </div>
+    )
   }
 }
 
