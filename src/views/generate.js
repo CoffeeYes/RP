@@ -7,7 +7,7 @@ class Generate extends Component {
       <div className="horizontal-center">
         <form className="generateForm">
           <input name="codeOutput"/>
-          <button onClick={this.props.handleCode}>Generate</button>
+          <button onClick={this.props.createCode}>Generate</button>
         </form>
       </div>
     );

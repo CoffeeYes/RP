@@ -106,6 +106,13 @@ class App extends Component {
         })
       })
   }
+
+  createCode(event) {
+    event.preventDefault();
+    var code = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+    console.log(code)
+  }
   render() {
     return (
       <div className="main">
@@ -119,7 +126,7 @@ class App extends Component {
           <Panel fetchModes={this.fetchModes} prepLobby={this.prepLobby}/>
         )}/>
         <Route path='/lobby' render={() => (
-          <Lobby mode={this.state.mode}/>
+          <Lobby mode={this.state.mode} createCode={this.createCode}/>
         )}/>
         <Route path='/panel/mode' render={() => (
           <Mode modes={this.state.modes} changeMode={this.changeMode}/>
