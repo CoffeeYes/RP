@@ -111,7 +111,15 @@ class App extends Component {
     event.preventDefault();
     var code = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-    console.log(code)
+    fetch('/createCode',{
+      method : 'POST',
+      headers : {
+        'Content-type' : 'application/json'
+      },
+      body : JSON.stringify({
+        code : code
+      })
+    })
   }
   render() {
     return (

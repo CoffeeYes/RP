@@ -79,4 +79,16 @@ app.post('/roomCode',function(req,res,next) {
   let code = req.body.code
   console.log(code)
 })
+
+app.post('/createCode',function(req,res,next) {
+  let code = req.body.code;
+
+  Mclient.connect(connect.mongo.url,function(error,client) {
+    if(error)throw error;
+
+    let database = client.db('rp');
+
+    database.collection('app_data').update({title: 'accessCode'},{data : code});
+  })
+})
 app.listen(process.env.PORT || 5000);
