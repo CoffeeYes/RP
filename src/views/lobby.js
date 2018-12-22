@@ -9,7 +9,7 @@ class Lobby extends Component {
   render() {
     return (
       <div>
-        <Generate createCode={this.props.createCode}/>
+        <Generate createCode={this.props.createCode} generatedCode={this.props.generatedCode}/>
         <RenderMode mode={this.props.mode}/>
       </div>
     )

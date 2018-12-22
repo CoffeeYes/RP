@@ -20,6 +20,7 @@ class App extends Component {
       password : '',
       error: '',
       codeInput : '',
+      generatedCode : '',
       loggedIn : false,
       modes : JSON.parse(localStorage.getItem('modes')) || [],
       mode: JSON.parse(localStorage.getItem('mode')) || ''
@@ -30,6 +31,7 @@ class App extends Component {
     this.fetchModes = this.fetchModes.bind(this);
     this.prepLobby = this.prepLobby.bind(this);
     this.handleCode = this.handleCode.bind(this);
+    this.createCode = this.createCode.bind(this);
   }
 
   handleLogin = (event) => {
@@ -110,7 +112,7 @@ class App extends Component {
   createCode(event) {
     event.preventDefault();
     var code = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-
+    this.setState({generatedCode : code});
     fetch('/createCode',{
       method : 'POST',
       headers : {
@@ -134,7 +136,7 @@ class App extends Component {
           <Panel fetchModes={this.fetchModes} prepLobby={this.prepLobby}/>
         )}/>
         <Route path='/lobby' render={() => (
-          <Lobby mode={this.state.mode} createCode={this.createCode}/>
+          <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode}/>
         )}/>
         <Route path='/panel/mode' render={() => (
           <Mode modes={this.state.modes} changeMode={this.changeMode}/>
