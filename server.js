@@ -78,17 +78,34 @@ app.post('/updateMode',function(req,res,next) {
 app.post('/roomCode',function(req,res,next) {
   let code = req.body.code
   console.log(code)
-})
-
-app.post('/createCode',function(req,res,next) {
-  let code = req.body.code;
 
   Mclient.connect(connect.mongo.url,function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
 
-    database.collection('app_data').update({title: 'accessCode'},{data : code});
+    //compare entered code to database code
+    database.collection('app_data').find({title : 'accessCode'}).toArray(function(error,data) {
+      if(data[0].data != code) {
+        res.send({error: 'Wrong code'})
+      }
+      else {
+        //redirect to lobby and establish connection;
+      }
+    })
+  })
+})
+
+app.post('/createCode',function(req,res,next) {
+  let code = req.body.code;
+
+  //update database roomcode 
+  Mclient.connect(connect.mongo.url,function(error,client) {
+    if(error)throw error;
+
+    let database = client.db('rp');
+
+    database.collection('app_data').update({title: 'accessCode'},{$set : {data : code}});
   })
 })
 app.listen(process.env.PORT || 5000);

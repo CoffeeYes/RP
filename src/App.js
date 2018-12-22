@@ -95,9 +95,11 @@ class App extends Component {
     event.preventDefault();
     this.setState({error : ""})
 
+    //check empty
     if(this.state.codeInput.trim() == "") {
       return this.setState({error : "field cannot be empty"})
     }
+    //post code to backend and handle response
       fetch('/roomCode',{
         method : 'POST',
         headers : {
@@ -107,12 +109,21 @@ class App extends Component {
           code : this.state.codeInput
         })
       })
+      .then(res => res.json())
+      .then(data => {
+        if(data.error) {
+          this.setState({error : data.error})
+        }
+      })
   }
 
   createCode(event) {
     event.preventDefault();
+    //generate random string for room code
     var code = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     this.setState({generatedCode : code});
+
+    //post to backend and update database
     fetch('/createCode',{
       method : 'POST',
       headers : {
@@ -123,6 +134,7 @@ class App extends Component {
       })
     })
   }
+
   render() {
     return (
       <div className="main">
