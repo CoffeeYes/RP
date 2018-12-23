@@ -111,8 +111,11 @@ class App extends Component {
       })
       .then(res => res.json())
       .then(data => {
-        if(data.error) {
-          this.setState({error : data.error})
+        if(data.sucess == false) {
+          return this.setState({error : data.error})
+        }
+        else {
+          window.location = "/lobby"
         }
       })
   }

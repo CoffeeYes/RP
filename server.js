@@ -77,7 +77,6 @@ app.post('/updateMode',function(req,res,next) {
 
 app.post('/roomCode',function(req,res,next) {
   let code = req.body.code
-  console.log(code)
 
   Mclient.connect(connect.mongo.url,function(error,client) {
     if(error)throw error;
@@ -87,10 +86,11 @@ app.post('/roomCode',function(req,res,next) {
     //compare entered code to database code
     database.collection('app_data').find({title : 'accessCode'}).toArray(function(error,data) {
       if(data[0].data != code) {
-        res.send({error: 'Wrong code'})
+        res.send({error: 'Wrong code',success : false})
       }
       else {
         //redirect to lobby and establish connection;
+        res.send({success : true});
       }
     })
   })
@@ -99,7 +99,7 @@ app.post('/roomCode',function(req,res,next) {
 app.post('/createCode',function(req,res,next) {
   let code = req.body.code;
 
-  //update database roomcode 
+  //update database roomcode
   Mclient.connect(connect.mongo.url,function(error,client) {
     if(error)throw error;
 
