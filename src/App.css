@@ -176,3 +176,19 @@ form {
   padding: 3vh 3vw 3vh 3vw;
   border-radius: 10px;
 }
+.panel-link {
+  float: right;
+  margin-right: 2vw;
+  margin-top: 2vh;
+  padding: 2px 2px 2px 2px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 2vw;
+  align-self: flex-end;
+  display: block;
+}
+
+.hor-center {
+  display: flex;
+  flex-direction: column;
+}
