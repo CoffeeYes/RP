@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Route, Redirect} from 'react-router-dom';
+import {Route, Redirect, Switch} from 'react-router-dom';
 
 import Code from './views/code.js';
 import Splash from './views/splash.js';
@@ -165,7 +165,14 @@ class App extends Component {
     }
     else {
       return (
-        <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
+        <Switch>
+          <Route exact path="/code/" render={() => (
+            <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
+          )} />
+          <Route path="/" render={() => (
+            <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
+          )}/>
+        </Switch>
       )
     }
   }
