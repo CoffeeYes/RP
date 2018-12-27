@@ -24,7 +24,8 @@ class App extends Component {
       loggedIn : false,
       modes : JSON.parse(localStorage.getItem('modes')) || [],
       mode: JSON.parse(localStorage.getItem('mode')) || '',
-      authenticated: sessionStorage.getItem('authenticated') || false
+      authenticated: sessionStorage.getItem('authenticated') || false,
+      user_type : sessionStorage.getItem('user_type') || ''
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -117,6 +118,8 @@ class App extends Component {
           return this.setState({error : data.error})
         }
         else {
+          sessionStorage.setItem('authenticated',true);
+          sessionStorage.setItem('user_type','guest');
           window.location = "/lobby"
         }
       })
