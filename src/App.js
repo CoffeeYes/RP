@@ -61,7 +61,8 @@ class App extends Component {
         this.setState({loggedIn: true});
         sessionStorage.setItem('authenticated',true);
         sessionStorage.setItem('user_type',data.user_type);
-        window.location = '/panel'
+        window.location = '/lobby';
+        this.getMode();
       }
     })
   }
@@ -82,14 +83,18 @@ class App extends Component {
     })
   }
 
-  prepLobby(event) {
-    event.preventDefault()
-    //get current mode
+  getMode() {
     fetch('../mode')
     .then(res => res.json())
     .then(data => {
       localStorage.setItem("mode",JSON.stringify(data.mode))
     })
+  }
+
+  prepLobby(event) {
+    event.preventDefault()
+    //get current mode
+    this.getMode()
     .then(() => {
       window.location = '/lobby'
     })
@@ -121,7 +126,8 @@ class App extends Component {
         else {
           sessionStorage.setItem('authenticated',true);
           sessionStorage.setItem('user_type',data.user_type);
-          window.location = "/lobby"
+          window.location = "/lobby";
+          this.getMode();
         }
       })
   }
