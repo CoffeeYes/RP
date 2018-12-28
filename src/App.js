@@ -60,6 +60,7 @@ class App extends Component {
       else if(data.loggedIn == true){
         this.setState({loggedIn: true});
         sessionStorage.setItem('authenticated',true);
+        sessionStorage.setItem('user_type',data.user_type);
         window.location = '/panel'
       }
     })
@@ -119,7 +120,7 @@ class App extends Component {
         }
         else {
           sessionStorage.setItem('authenticated',true);
-          sessionStorage.setItem('user_type','guest');
+          sessionStorage.setItem('user_type',data.user_type);
           window.location = "/lobby"
         }
       })
@@ -145,26 +146,35 @@ class App extends Component {
 
   render = () => {
     if(this.state.authenticated) {
-      return (
-        <div className="main">
-          <Route exact path="/" render={() => (
-            <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
-          )}/>
-          <Route exact path="/code/" render={() => (
-            <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
-          )} />
-          <Route path='/panel' render={() => (
-            <Panel fetchModes={this.fetchModes} prepLobby={this.prepLobby}/>
-          )}/>
+      if(this.state.user_type == 'admin') {
+        return (
+          <div className="main">
+            <Route exact path="/" render={() => (
+              <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
+            )}/>
+            <Route exact path="/code/" render={() => (
+              <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
+            )} />
+            <Route path='/panel' render={() => (
+              <Panel fetchModes={this.fetchModes} prepLobby={this.prepLobby}/>
+            )}/>
+            <Route path='/lobby' render={() => (
+              <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode} renderFull={true}/>
+            )}/>
+            <Route path='/panel/mode' render={() => (
+              <Mode modes={this.state.modes} changeMode={this.changeMode}/>
+            )}/>
+            <Route path='/panel/vote' Component={Vote}/>
+          </div>
+        );
+      }
+      else {
+        return(
           <Route path='/lobby' render={() => (
-            <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode}/>
+            <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode} renderFull={false}/>
           )}/>
-          <Route path='/panel/mode' render={() => (
-            <Mode modes={this.state.modes} changeMode={this.changeMode}/>
-          )}/>
-          <Route path='/panel/vote' Component={Vote}/>
-        </div>
-      );
+        )
+      }
     }
     else {
       return (

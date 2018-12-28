@@ -12,7 +12,7 @@ class RenderMode extends Component {
     }
     else {
       return (
-        <p>lobby</p>
+        <p>mode not defined</p>
       )
     }
   }

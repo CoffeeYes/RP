@@ -55,7 +55,12 @@ app.post('/login',function(req,res,next) {
         res.send({error: 'Incorrect Password'})
       }
       else {
-        res.send({loggedIn : true})
+        if(data[0].username == "QueenRajj") {
+          return res.send({loggedIn : true,user_type : 'admin'})
+        }
+        else {
+          return res.send({loggedIn : true,user_type : 'host'})
+        }
       }
     })
   })
@@ -90,7 +95,7 @@ app.post('/roomCode',function(req,res,next) {
       }
       else {
         //redirect to lobby and establish connection;
-        res.send({success : true});
+        res.send({success : true,user_type : 'guest'});
       }
     })
   })
