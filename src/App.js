@@ -71,6 +71,7 @@ class App extends Component {
     this.setState({[event.target.name] : event.target.value});
   }
 
+  //fetch all modes for admin select
   fetchModes(event) {
     event.preventDefault()
     fetch('/modes')
@@ -83,6 +84,7 @@ class App extends Component {
     })
   }
 
+  //fetch current mode, renders different lobbies
   getMode() {
     fetch('../mode')
     .then(res => res.json())
@@ -152,6 +154,7 @@ class App extends Component {
 
   render = () => {
     if(this.state.authenticated) {
+      //render full panel and allow access to other routes if admin login
       if(this.state.user_type == 'admin') {
         return (
           <div className="main">
@@ -176,6 +179,7 @@ class App extends Component {
       }
       else {
         return(
+          //if not admin only allow access to the lobby
           <Route path='/lobby' render={() => (
             <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode} renderFull={false}/>
           )}/>
@@ -184,6 +188,7 @@ class App extends Component {
     }
     else {
       return (
+        //unauthenticated users only have access to the splash and code pages
         <Switch>
           <Route exact path="/code/" render={() => (
             <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
