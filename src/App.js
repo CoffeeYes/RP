@@ -139,6 +139,7 @@ class App extends Component {
     //generate random string for room code
     var code = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     this.setState({generatedCode : code});
+    navigator.clipboard.writeText(code);
 
     //post to backend and update database
     fetch('/createCode',{
