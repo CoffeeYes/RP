@@ -6,8 +6,7 @@ class Generate extends Component {
     return (
       <div className="horizontal-center">
         <form className="generateForm">
-          <input name="codeOutput" value={this.props.generatedCode}/>
-          <button onClick={this.props.createCode}>Generate</button>
+          <button onClick={this.props.createCode} className="generateButton">Generate Code</button>
         </form>
       </div>
     );
