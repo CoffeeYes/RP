@@ -61,8 +61,7 @@ class App extends Component {
         this.setState({loggedIn: true});
         sessionStorage.setItem('authenticated',true);
         sessionStorage.setItem('user_type',data.user_type);
-        window.location = '/lobby';
-        this.getMode();
+        this.getMode('/lobby');
       }
     })
   }
@@ -85,21 +84,21 @@ class App extends Component {
   }
 
   //fetch current mode, renders different lobbies
-  getMode() {
+  getMode(redirect) {
     fetch('../mode')
     .then(res => res.json())
     .then(data => {
       localStorage.setItem("mode",JSON.stringify(data.mode))
+    })
+    .then( () => {
+      window.location = redirect;
     })
   }
 
   prepLobby(event) {
     event.preventDefault()
     //get current mode
-    this.getMode()
-    .then(() => {
-      window.location = '/lobby'
-    })
+    this.getMode('/lobby');
   }
 
   handleCode(event) {
@@ -128,8 +127,7 @@ class App extends Component {
         else {
           sessionStorage.setItem('authenticated',true);
           sessionStorage.setItem('user_type',data.user_type);
-          window.location = "/lobby";
-          this.getMode();
+          this.getMode('/lobby');
         }
       })
   }
