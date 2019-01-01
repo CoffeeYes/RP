@@ -191,6 +191,10 @@ form {
 .hor-center {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 100vw;
+  height: 50px;
 }
 
 .generateButton {
@@ -199,4 +203,8 @@ form {
   width: 4vw;
   border-radius: 10px;
   margin-top: 2vh;
+}
+
+.generateForm {
+  position:absolute;
 }
