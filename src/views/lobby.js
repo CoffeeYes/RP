@@ -11,7 +11,7 @@ class Lobby extends Component {
       return (
         <div>
           <div className="hor-center">
-            <Generate createCode={this.props.createCode} generatedCode={this.props.generatedCode}/>
+            <Generate createCode={this.props.createCode} generatedCode={this.props.generatedCode} showCopied={this.props.showCopied}/>
             <a href="/panel" className="panel-link">Panel</a>
           </div>
           <RenderMode mode={this.props.mode}/>

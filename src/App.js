@@ -25,7 +25,8 @@ class App extends Component {
       modes : JSON.parse(localStorage.getItem('modes')) || [],
       mode: JSON.parse(localStorage.getItem('mode')) || '',
       authenticated: sessionStorage.getItem('authenticated') || false,
-      user_type : sessionStorage.getItem('user_type') || ''
+      user_type : sessionStorage.getItem('user_type') || '',
+      showCopied : false,
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -138,6 +139,7 @@ class App extends Component {
     var code = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     this.setState({generatedCode : code});
     navigator.clipboard.writeText(code);
+    this.setState({showCopied: true})
 
     //post to backend and update database
     fetch('/createCode',{
@@ -149,6 +151,10 @@ class App extends Component {
         code : code
       })
     })
+
+    setTimeout( () => {
+      this.setState({showCopied: false})
+    },1500)
   }
 
   render = () => {
@@ -167,7 +173,7 @@ class App extends Component {
               <Panel fetchModes={this.fetchModes} prepLobby={this.prepLobby}/>
             )}/>
             <Route path='/lobby' render={() => (
-              <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode} renderFull={true}/>
+              <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode} renderFull={true} showCopied={this.state.showCopied}/>
             )}/>
             <Route path='/panel/mode' render={() => (
               <Mode modes={this.state.modes} changeMode={this.changeMode}/>
