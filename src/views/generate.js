@@ -7,7 +7,7 @@ class Generate extends Component {
         <form className="generateForm">
           {
             this.props.showCopied &&
-            <p>Copied!</p>
+            <p className="copied">Copied!</p>
           }
           <button onClick={this.props.createCode} className="generateButton">Generate Code</button>
         </form>
