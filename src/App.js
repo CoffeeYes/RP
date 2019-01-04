@@ -9,6 +9,7 @@ import Panel from './views/panel.js';
 import Lobby from './views/lobby.js';
 import Vote from './views/vote.js';
 import Mode from './views/mode.js';
+import AddUser from './views/addUser.js'
 
 
 class App extends Component {
@@ -179,6 +180,9 @@ class App extends Component {
               <Mode modes={this.state.modes} changeMode={this.changeMode}/>
             )}/>
             <Route path='/panel/vote' Component={Vote}/>
+            <Route path='/panel/users' render={() => (
+              <AddUser />
+            )}/>
           </div>
         );
       }

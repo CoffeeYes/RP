@@ -215,3 +215,15 @@ form {
   padding : 5px 5px 5px 5px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
 }
+
+.addUserForm {
+  border : 1px solid black;
+  width : 10vw;
+  margin-top : 2vh;
+  padding : 20px 20px 20px 20px;
+}
+
+.horcent {
+  display: flex;
+  justify-content: center;
+}
