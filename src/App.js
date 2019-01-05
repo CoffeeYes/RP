@@ -9,7 +9,8 @@ import Panel from './views/panel.js';
 import Lobby from './views/lobby.js';
 import Vote from './views/vote.js';
 import Mode from './views/mode.js';
-import AddUser from './views/addUser.js'
+import AddUser from './views/addUser.js';
+import UserList from './views/userlist.js'
 
 
 class App extends Component {
@@ -181,7 +182,10 @@ class App extends Component {
             )}/>
             <Route path='/panel/vote' Component={Vote}/>
             <Route path='/panel/users' render={() => (
-              <AddUser />
+              <div>
+                <AddUser />
+                <UserList />
+              </div>
             )}/>
           </div>
         );
