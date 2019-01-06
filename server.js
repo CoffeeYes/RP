@@ -42,6 +42,20 @@ app.get('/mode',function(req,res,next){
   })
 })
 
+app.get('/getUsers',function(req,res,next) {
+  Mclient.connect(connect.mongo.url,function(error,client){
+    if(error)throw error;
+
+    let database = client.db('rp');
+
+    database.collection('user_data').find({title : 'users'}).toArray(function(error,data) {
+      if(error)throw error;
+
+      res.send({data : data[0].data})
+    })
+  })
+})
+
 app.post('/login',function(req,res,next) {
   Mclient.connect(connect.mongo.url,function(error,client) {
     if(error)throw error;

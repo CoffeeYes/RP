@@ -159,6 +159,14 @@ class App extends Component {
     },1500)
   }
 
+  getUsers() {
+    fetch('/getUsers')
+    .then(res => res.json())
+    .then( (data) => {
+      this.setState({userlist : data})
+    })
+  }
+
   render = () => {
     if(this.state.authenticated) {
       //render full panel and allow access to other routes if admin login
