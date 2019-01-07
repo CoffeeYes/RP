@@ -29,6 +29,7 @@ class App extends Component {
       authenticated: sessionStorage.getItem('authenticated') || false,
       user_type : sessionStorage.getItem('user_type') || '',
       showCopied : false,
+      userlist : []
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -37,6 +38,7 @@ class App extends Component {
     this.prepLobby = this.prepLobby.bind(this);
     this.handleCode = this.handleCode.bind(this);
     this.createCode = this.createCode.bind(this);
+    this.getUsers = this.getUsers.bind(this);
   }
 
   handleLogin = (event) => {
@@ -159,11 +161,14 @@ class App extends Component {
     },1500)
   }
 
-  getUsers() {
+  getUsers(event) {
+    event.preventDefault();
     fetch('/getUsers')
     .then(res => res.json())
     .then( (data) => {
-      this.setState({userlist : data})
+      this.setState({userlist : data},() => {
+        window.location = '/panel/users'
+      })
     })
   }
 
@@ -180,7 +185,7 @@ class App extends Component {
               <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
             )} />
             <Route path='/panel' render={() => (
-              <Panel fetchModes={this.fetchModes} prepLobby={this.prepLobby}/>
+              <Panel fetchModes={this.fetchModes} prepLobby={this.prepLobby} getUsers={this.getUsers}/>
             )}/>
             <Route path='/lobby' render={() => (
               <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode} renderFull={true} showCopied={this.state.showCopied}/>
@@ -192,7 +197,7 @@ class App extends Component {
             <Route path='/panel/users' render={() => (
               <div>
                 <AddUser />
-                <UserList />
+                <UserList list={this.state.userlist}/>
               </div>
             )}/>
           </div>
