@@ -12,7 +12,7 @@ class addUser extends Component {
           <input name="password"/>
           <label>Display Name</label>
           <input name="displayname"/>
-          <button>Add</button>
+          <button onClick={this.props.addUser}>Add</button>
         </form>
       </div>
     );

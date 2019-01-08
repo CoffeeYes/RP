@@ -39,6 +39,7 @@ class App extends Component {
     this.handleCode = this.handleCode.bind(this);
     this.createCode = this.createCode.bind(this);
     this.getUsers = this.getUsers.bind(this);
+    this.addUser = this.addUser.bind(this);
   }
 
   handleLogin = (event) => {
@@ -172,6 +173,22 @@ class App extends Component {
     })
   }
 
+  addUser(event) {
+    event.preventDefault();
+
+    fetch('/addUser',{
+      method : 'POST',
+      headers : {
+        'Content-type' : 'application/json'
+      },
+      body : JSON.stringify({
+        username : this.state.addUser.username,
+        password : this.state.addUser.password,
+        dName : this.state.addUser.dName
+      })
+    })
+  }
+
   render = () => {
     if(this.state.authenticated) {
       //render full panel and allow access to other routes if admin login
@@ -196,7 +213,7 @@ class App extends Component {
             <Route path='/panel/vote' Component={Vote}/>
             <Route path='/panel/users' render={() => (
               <div>
-                <AddUser />
+                <AddUser addUser={this.addUser}/>
                 <UserList list={this.state.userlist}/>
               </div>
             )}/>
