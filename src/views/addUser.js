@@ -7,11 +7,11 @@ class addUser extends Component {
       <div className="horcent">
         <form className="addUserForm">
           <label>Username</label>
-          <input name="username"/>
+          <input name="username" onChange={this.props.update}/>
           <label>Password</label>
-          <input name="password"/>
+          <input name="password" onChange={this.props.update}/>
           <label>Display Name</label>
-          <input name="displayname"/>
+          <input name="displayname" onChange={this.props.update}/>
           <button onClick={this.props.addUser}>Add</button>
         </form>
       </div>

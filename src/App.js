@@ -29,6 +29,9 @@ class App extends Component {
       authenticated: sessionStorage.getItem('authenticated') || false,
       user_type : sessionStorage.getItem('user_type') || '',
       showCopied : false,
+      addUser : {
+
+      },
       userlist : []
     }
 
@@ -40,6 +43,7 @@ class App extends Component {
     this.createCode = this.createCode.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.addUser = this.addUser.bind(this);
+    this.updateAddUser = this.updateAddUser.bind(this);
   }
 
   handleLogin = (event) => {
@@ -189,6 +193,10 @@ class App extends Component {
     })
   }
 
+  updateAddUser(event) {
+    this.setState({addUser : {...this.state.addUser,[event.target.name] : event.target.value}})
+  }
+
   render = () => {
     if(this.state.authenticated) {
       //render full panel and allow access to other routes if admin login
@@ -213,7 +221,7 @@ class App extends Component {
             <Route path='/panel/vote' Component={Vote}/>
             <Route path='/panel/users' render={() => (
               <div>
-                <AddUser addUser={this.addUser}/>
+                <AddUser addUser={this.addUser} update={this.updateAddUser}/>
                 <UserList list={this.state.userlist}/>
               </div>
             )}/>
