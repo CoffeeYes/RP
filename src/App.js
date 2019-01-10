@@ -188,7 +188,7 @@ class App extends Component {
       body : JSON.stringify({
         username : this.state.addUser.username,
         password : this.state.addUser.password,
-        dName : this.state.addUser.dName
+        displayname : this.state.addUser.displayname
       })
     })
   }

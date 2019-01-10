@@ -127,4 +127,17 @@ app.post('/createCode',function(req,res,next) {
     database.collection('app_data').update({title: 'accessCode'},{$set : {data : code}});
   })
 })
+
+app.post('/addUser',function(req,res,next) {
+  console.log(req.body)
+  let userData = req.body
+
+  Mclient.connect(connect.mongo.url,function(error,client) {
+    if(error)throw error;
+
+    let database = client.db('rp');
+
+    database.collection('user_data').update({title : 'users'},{$push : {data : userData}})
+  })
+})
 app.listen(process.env.PORT || 5000);
