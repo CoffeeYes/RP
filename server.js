@@ -51,7 +51,7 @@ app.get('/getUsers',function(req,res,next) {
     database.collection('user_data').find({title : 'users'}).toArray(function(error,data) {
       if(error)throw error;
 
-      res.send({data : data[0].data})
+      res.send({list : data[0].data})
     })
   })
 })

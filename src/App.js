@@ -32,7 +32,7 @@ class App extends Component {
       addUser : {
 
       },
-      userlist : []
+      userlist : JSON.parse(sessionStorage.getItem('userlist')) || []
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -171,9 +171,9 @@ class App extends Component {
     fetch('/getUsers')
     .then(res => res.json())
     .then( (data) => {
-      this.setState({userlist : data},() => {
-        window.location = '/panel/users'
-      })
+      console.log(data)
+      window.location = '/panel/users'
+      sessionStorage.setItem('userlist',JSON.stringify(data.list))
     })
   }
 
