@@ -6,7 +6,11 @@ class UserList extends Component {
     return (
       <div className="horcent">
         <ul>
-        <li>list of users</li>
+        {this.props.list.map((item,index) => {
+          return (
+            <li key={index}>{item.displayname} {item.username} {item.password}</li>
+          )
+        })}
         </ul>
       </div>
     );
