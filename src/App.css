@@ -227,3 +227,26 @@ form {
   display: flex;
   justify-content: center;
 }
+
+.userListItem {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  width: 30vw;
+  height: 5vh;
+  margin-bottom: 2vh;
+  justify-content: space-between;
+}
+
+.userListText {
+  display: inline;
+}
+
+.userListHead {
+  display: flex;
+  flex-direction: row;
+  width: 30vw;
+  height: 5vh;
+  margin-bottom: 2vh;
+  justify-content: space-between;
+}
