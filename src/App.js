@@ -30,7 +30,9 @@ class App extends Component {
       user_type : sessionStorage.getItem('user_type') || '',
       showCopied : false,
       addUser : {
-
+        username : '',
+        password : '',
+        displayname : '',
       },
       userlist : JSON.parse(sessionStorage.getItem('userlist')) || []
     }
@@ -180,6 +182,9 @@ class App extends Component {
   addUser(event) {
     event.preventDefault();
 
+    if(this.state.addUser.username.trim() == "" || this.state.addUser.password.trim() == "" ||this.state.addUser.displayname.trim() == "") {
+      return this.setState({error : "fields cannot be empty"})
+    }
     fetch('/addUser',{
       method : 'POST',
       headers : {
@@ -221,7 +226,7 @@ class App extends Component {
             <Route path='/panel/vote' Component={Vote}/>
             <Route path='/panel/users' render={() => (
               <div>
-                <AddUser addUser={this.addUser} update={this.updateAddUser}/>
+                <AddUser addUser={this.addUser} update={this.updateAddUser} error={this.state.error}/>
                 <UserList list={this.state.userlist}/>
               </div>
             )}/>

@@ -6,6 +6,7 @@ class addUser extends Component {
     return (
       <div className="horcent">
         <form className="addUserForm">
+          <p className="error">{this.props.error}</p>
           <label>Username</label>
           <input name="username" onChange={this.props.update}/>
           <label>Password</label>
