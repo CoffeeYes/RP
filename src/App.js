@@ -185,17 +185,25 @@ class App extends Component {
     if(this.state.addUser.username.trim() == "" || this.state.addUser.password.trim() == "" ||this.state.addUser.displayname.trim() == "") {
       return this.setState({error : "fields cannot be empty"})
     }
-    fetch('/addUser',{
-      method : 'POST',
-      headers : {
-        'Content-type' : 'application/json'
-      },
-      body : JSON.stringify({
-        username : this.state.addUser.username,
-        password : this.state.addUser.password,
-        displayname : this.state.addUser.displayname
+    else {
+      fetch('/addUser',{
+        method : 'POST',
+        headers : {
+          'Content-type' : 'application/json'
+        },
+        body : JSON.stringify({
+          username : this.state.addUser.username,
+          password : this.state.addUser.password,
+          displayname : this.state.addUser.displayname
+        })
       })
-    })
+      .then( res => res.json())
+      .then( data => {
+        if(data.error) {
+          this.setState({error: data.error})
+        }
+      })
+    }
   }
 
   updateAddUser(event) {
