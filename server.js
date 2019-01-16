@@ -129,7 +129,6 @@ app.post('/createCode',function(req,res,next) {
 })
 
 app.post('/addUser',function(req,res,next) {
-  console.log(req.body)
   let userData = req.body
 
   Mclient.connect(connect.mongo.url,function(error,client) {
@@ -137,7 +136,19 @@ app.post('/addUser',function(req,res,next) {
 
     let database = client.db('rp');
 
-    database.collection('user_data').update({title : 'users'},{$push : {data : userData}})
+    database.collection('user_data').find({title: 'users'}).toArray(function(error,data) {
+
+
+      let users = data[0].data
+      for(var item in users) {
+        if(users[item].username == userData.username) {
+          return res.send({error : "user already exists"})
+        }
+      }
+      database.collection('user_data').update({title : 'users'},{$push : {data : userData}})
+    })
+
+
   })
 })
 app.listen(process.env.PORT || 5000);
