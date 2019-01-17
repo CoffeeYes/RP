@@ -202,6 +202,15 @@ class App extends Component {
         if(data.error) {
           this.setState({error: data.error})
         }
+        else {
+          fetch('/getUsers')
+          .then(res => res.json())
+          .then( (data) => {
+            console.log(data)
+            window.location = '/panel/users'
+            sessionStorage.setItem('userlist',JSON.stringify(data.list))
+          })
+        }
       })
     }
   }

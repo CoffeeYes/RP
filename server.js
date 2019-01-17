@@ -144,8 +144,11 @@ app.post('/addUser',function(req,res,next) {
         if(users[item].username == userData.username) {
           return res.send({error : "user already exists"})
         }
+        else {
+          database.collection('user_data').update({title : 'users'},{$push : {data : userData}})
+          return res.send({success : true})
+        }
       }
-      database.collection('user_data').update({title : 'users'},{$push : {data : userData}})
     })
 
 
