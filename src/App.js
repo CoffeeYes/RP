@@ -46,6 +46,7 @@ class App extends Component {
     this.getUsers = this.getUsers.bind(this);
     this.addUser = this.addUser.bind(this);
     this.updateAddUser = this.updateAddUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   handleLogin = (event) => {
@@ -215,6 +216,19 @@ class App extends Component {
     }
   }
 
+  deleteUser(event) {
+    event.preventDefault();
+
+    console.log(event.target)
+    fetch('/deleteUser',{
+      method: 'POST',
+      headers : {
+        'Content-type' : 'application/json'
+      },
+
+    })
+  }
+
   updateAddUser(event) {
     this.setState({addUser : {...this.state.addUser,[event.target.name] : event.target.value}})
   }
@@ -244,7 +258,7 @@ class App extends Component {
             <Route path='/panel/users' render={() => (
               <div>
                 <AddUser addUser={this.addUser} update={this.updateAddUser} error={this.state.error}/>
-                <UserList list={this.state.userlist}/>
+                <UserList list={this.state.userlist} deleteUser={this.deleteUser}/>
               </div>
             )}/>
           </div>

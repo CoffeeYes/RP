@@ -13,12 +13,12 @@ class UserList extends Component {
         </div>
         {this.props.list.map((item,index) => {
           return (
-            <div key={index} className="userListItem">
-              <p className="userListText">{item.displayname}</p>
-              <p className="userListText">{item.username}</p>
-              <p className="userListText">{item.password}</p>
-              <button name="deleteUser" className="deleteUserBtn">X</button>
-            </div>
+            <form key={index} className="userListItem">
+              <input className="userListText" value={item.displayname} name="displayname"/>
+              <input className="userListText" value={item.username} name="username"/>
+              <input className="userListText" value={item.password} name="password"/>
+              <button name="deleteUser" type="submit" className="deleteUserBtn" onClick={this.props.deleteUser}>X</button>
+            </form>
           )
         })}
         </ul>
