@@ -13,11 +13,11 @@ class UserList extends Component {
         </div>
         {this.props.list.map((item,index) => {
           return (
-            <form key={index} className="userListItem">
+            <form key={index} className="userListItem" method="post" action="/deleteUser">
               <input className="userListText" value={item.displayname} name="displayname"/>
               <input className="userListText" value={item.username} name="username"/>
               <input className="userListText" value={item.password} name="password"/>
-              <button name="deleteUser" type="submit" className="deleteUserBtn" onClick={this.props.deleteUser}>X</button>
+              <button type="submit" className="deleteUserBtn">X</button>
             </form>
           )
         })}
