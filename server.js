@@ -138,17 +138,15 @@ app.post('/addUser',function(req,res,next) {
 
     database.collection('user_data').find({title: 'users'}).toArray(function(error,data) {
 
-
       let users = data[0].data
       for(var item in users) {
         if(users[item].username == userData.username) {
           return res.send({error : "user already exists"})
         }
-        else {
-          database.collection('user_data').update({title : 'users'},{$push : {data : userData}})
-          return res.send({success : true})
-        }
       }
+
+      database.collection('user_data').update({title : 'users'},{$push : {data : userData}})
+      return res.send({success : true})
     })
   })
 })

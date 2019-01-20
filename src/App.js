@@ -217,16 +217,7 @@ class App extends Component {
   }
 
   deleteUser(event) {
-    event.preventDefault();
-
-    console.log(event.target)
-    fetch('/deleteUser',{
-      method: 'POST',
-      headers : {
-        'Content-type' : 'application/json'
-      },
-
-    })
+    window.location.href = window.location.href;
   }
 
   updateAddUser(event) {
