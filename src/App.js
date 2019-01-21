@@ -207,7 +207,6 @@ class App extends Component {
           fetch('/getUsers')
           .then(res => res.json())
           .then( (data) => {
-            console.log(data)
             window.location = '/panel/users'
             sessionStorage.setItem('userlist',JSON.stringify(data.list))
           })
@@ -217,7 +216,12 @@ class App extends Component {
   }
 
   deleteUser(event) {
-    window.location.href = window.location.href;
+    fetch('/getUsers')
+    .then(res => res.json())
+    .then( (data) => {
+      window.location = '/panel/users'
+      sessionStorage.setItem('userlist',JSON.stringify(data.list))
+    })
   }
 
   updateAddUser(event) {
