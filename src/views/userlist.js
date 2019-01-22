@@ -15,8 +15,12 @@ class UserList extends Component {
           return (
             <form key={index} className="userListItem" method="post" action="/deleteUser">
               <input className="userListText" value={item.displayname} name="displayname"/>
-              <input className="userListText" value={item.username} name="username"/>
-              <input className="userListText" value={item.password} name="password"/>
+              <div className="overlayBlock">
+                <input className="userListText" value={item.username} name="username"/>
+              </div>
+              <div className="overlayBlock">
+                <input className="userListText" value={item.password} name="password"/>
+              </div>
               <button type="submit" className="deleteUserBtn" onClick={this.props.deleteUser}>X</button>
             </form>
           )
