@@ -17,8 +17,6 @@ class UserList extends Component {
               <input className="userListText" value={item.displayname} name="displayname"/>
               <div className="overlayBlock">
                 <input className="userListText" value={item.username} name="username"/>
-              </div>
-              <div className="overlayBlock">
                 <input className="userListText" value={item.password} name="password"/>
               </div>
               <button type="submit" className="deleteUserBtn" onClick={this.props.deleteUser}>X</button>
