@@ -159,7 +159,6 @@ app.post('/deleteUser',function(req,res,next) {
     let database = client.db('rp');
 
      database.collection('user_data').update({title : 'users'},{$pull : {data : {username : req.body.username}}})
-     return res.send({success : true})
   })
 })
 app.listen(process.env.PORT || 5000);
