@@ -5,9 +5,11 @@ class Vote extends Component {
 
   render() {
     return (
-      <div>
-        <Navbar/>
-        <p>Vote</p>
+      <div className="horcent">
+        <form className="addVotingForm">
+          <input />
+          <button className="addInput">Add Field</button>
+        </form>
       </div>
     );
   }

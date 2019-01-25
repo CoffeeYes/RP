@@ -265,3 +265,9 @@ form {
   border: 1px solid black;
   margin-right: 1em;
 }
+
+.addVotingForm {
+  border : 1px solid black;
+  width: 10vw;
+  margin-top : 2vh;
+}

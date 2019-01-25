@@ -249,7 +249,9 @@ class App extends Component {
             <Route path='/panel/mode' render={() => (
               <Mode modes={this.state.modes} changeMode={this.changeMode}/>
             )}/>
-            <Route path='/panel/vote' Component={Vote}/>
+            <Route path='/panel/vote' render={() => (
+              <Vote />
+            )}/>
             <Route path='/panel/users' render={() => (
               <div>
                 <AddUser addUser={this.addUser} update={this.updateAddUser} error={this.state.error}/>
