@@ -34,7 +34,8 @@ class App extends Component {
         password : '',
         displayname : '',
       },
-      userlist : JSON.parse(sessionStorage.getItem('userlist')) || []
+      userlist : JSON.parse(sessionStorage.getItem('userlist')) || [],
+      inputCount : [1],
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -47,6 +48,7 @@ class App extends Component {
     this.addUser = this.addUser.bind(this);
     this.updateAddUser = this.updateAddUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
+    this.addField = this.addField.bind(this);
   }
 
   handleLogin = (event) => {
@@ -228,6 +230,12 @@ class App extends Component {
     this.setState({addUser : {...this.state.addUser,[event.target.name] : event.target.value}})
   }
 
+  addField(event) {
+    event.preventDefault();
+    let newValue = this.state.inputCount[this.state.inputCount.length-1] + 1;
+    this.setState({inputCount : [...this.state.inputCount,newValue]});
+  }
+
   render = () => {
     if(this.state.authenticated) {
       //render full panel and allow access to other routes if admin login
@@ -250,7 +258,7 @@ class App extends Component {
               <Mode modes={this.state.modes} changeMode={this.changeMode}/>
             )}/>
             <Route path='/panel/vote' render={() => (
-              <Vote />
+              <Vote inputCount={this.state.inputCount} addField={this.addField}/>
             )}/>
             <Route path='/panel/users' render={() => (
               <div>

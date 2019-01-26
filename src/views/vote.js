@@ -7,8 +7,12 @@ class Vote extends Component {
     return (
       <div className="horcent">
         <form className="addVotingForm">
-          <input />
-          <button className="addInput">Add Field</button>
+          {this.props.inputCount.map((item,index) => {
+              return (
+                <input name={"field" + index} key={index}/>
+              )
+          })}
+          <button className="addInput" onClick={this.props.addField}>Add Field</button>
         </form>
       </div>
     );
