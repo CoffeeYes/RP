@@ -9,10 +9,11 @@ class Vote extends Component {
         <form className="addVotingForm">
           {this.props.inputCount.map((item,index) => {
               return (
-                <input name={"field" + index} key={index}/>
+                <input name={"field" + index} key={index} onChange={this.props.handleFieldText}/>
               )
           })}
           <button className="addInput" onClick={this.props.addField}>Add Field</button>
+          <button onClick={this.props.handleAddPoll}>Submit</button>
         </form>
       </div>
     );
