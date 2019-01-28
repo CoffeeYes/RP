@@ -161,4 +161,8 @@ app.post('/deleteUser',function(req,res,next) {
      database.collection('user_data').update({title : 'users'},{$pull : {data : {username : req.body.username}}})
   })
 })
+
+app.post('/addVotingPoll',function(req,res,next) {
+  console.log(req.body);
+})
 app.listen(process.env.PORT || 5000);

@@ -51,6 +51,7 @@ class App extends Component {
     this.deleteUser = this.deleteUser.bind(this);
     this.addField = this.addField.bind(this);
     this.handleFieldText = this.handleFieldText.bind(this);
+    this.handleAddPoll = this.handleAddPoll.bind(this);
   }
 
   handleLogin = (event) => {
@@ -244,6 +245,14 @@ class App extends Component {
 
   handleAddPoll(event) {
     event.preventDefault();
+
+    fetch('/addVotingPoll',{
+      method : 'POST',
+      headers : {
+        'Content-type' : 'application/json'
+      },
+      body : JSON.stringify(this.state.pollData),
+    })
   }
   render = () => {
     if(this.state.authenticated) {
@@ -267,7 +276,7 @@ class App extends Component {
               <Mode modes={this.state.modes} changeMode={this.changeMode}/>
             )}/>
             <Route path='/panel/vote' render={() => (
-              <Vote inputCount={this.state.inputCount} addField={this.addField} handleFieldText={this.handleFieldText}/>
+              <Vote inputCount={this.state.inputCount} addField={this.addField} handleFieldText={this.handleFieldText} handleAddPoll={this.handleAddPoll}/>
             )}/>
             <Route path='/panel/users' render={() => (
               <div>
