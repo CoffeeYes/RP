@@ -10,7 +10,8 @@ import Lobby from './views/lobby.js';
 import Vote from './views/vote.js';
 import Mode from './views/mode.js';
 import AddUser from './views/addUser.js';
-import UserList from './views/userlist.js'
+import UserList from './views/userlist.js';
+import VotingPoll from './views/votingPoll.js'
 
 
 class App extends Component {
@@ -305,6 +306,9 @@ class App extends Component {
           )} />
           <Route path="/" render={() => (
             <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
+          )}/>
+          <Route path="/poll/*" render={() => (
+            <VotingPoll/>
           )}/>
         </Switch>
       )
