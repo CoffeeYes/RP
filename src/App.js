@@ -304,11 +304,11 @@ class App extends Component {
           <Route exact path="/code/" render={() => (
             <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
           )} />
-          <Route path="/" render={() => (
-            <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
-          )}/>
           <Route path="/poll/*" render={() => (
             <VotingPoll/>
+          )}/>
+          <Route path="/" render={() => (
+            <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
           )}/>
         </Switch>
       )
