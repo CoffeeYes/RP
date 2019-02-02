@@ -164,9 +164,13 @@ app.post('/deleteUser',function(req,res,next) {
 
 app.post('/addVotingPoll',function(req,res,next) {
   var code = Math.random().toString(36).substring(2, 8)
+  var pushData = {};
+  for(var item in req.body) {
+    pushData[req.body[item]] = 0;
+  }
 
-  var pushData = req.body;
   pushData.code = code;
+
   Mclient.connect(connect.mongo.url,function(error,client) {
     if(error)throw error;
 
