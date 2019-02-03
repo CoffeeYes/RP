@@ -56,6 +56,11 @@ app.get('/getUsers',function(req,res,next) {
   })
 })
 
+app.get('/getPoll',function(req,res,next) {
+  let pollCode = req.query.code;
+  console.log(pollCode);
+})
+
 app.post('/login',function(req,res,next) {
   Mclient.connect(connect.mongo.url,function(error,client) {
     if(error)throw error;
