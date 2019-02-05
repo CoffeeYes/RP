@@ -53,6 +53,7 @@ class App extends Component {
     this.addField = this.addField.bind(this);
     this.handleFieldText = this.handleFieldText.bind(this);
     this.handleAddPoll = this.handleAddPoll.bind(this);
+    this.fetchPoll = this.fetchPoll.bind(this);
   }
 
   handleLogin = (event) => {
@@ -255,6 +256,23 @@ class App extends Component {
       body : JSON.stringify(this.state.pollData),
     })
   }
+
+  fetchPoll() {
+    let pollCode = window.location.href.split('?q=')[1];
+
+    if(pollCode != undefined) {
+      fetch(['/getPoll?code=' + pollCode])
+      .then(res => res.json())
+      .then(data => {
+        if(data.error) {
+          this.setState({error: data.error})
+        }
+        else {
+          this.setState({pollResult : data.pollResult})
+        }
+      })
+    }
+  }
   render = () => {
     if(this.state.authenticated) {
       //render full panel and allow access to other routes if admin login
@@ -305,7 +323,7 @@ class App extends Component {
             <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
           )} />
           <Route path="/poll/*" render={() => (
-            <VotingPoll/>
+            <VotingPoll fetchPoll={this.fetchPoll} error={this.state.error}/>
           )}/>
           <Route path="/" render={() => (
             <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>

@@ -4,15 +4,14 @@ import Navbar from './navbar.js';
 class votingPoll extends Component {
 
   componentWillMount() {
-    let pollCode = window.location.href.split('?q=')[1];
-
-    if(pollCode != undefined) {
-      fetch(['/getPoll?code=' + pollCode])
-    }
+    this.props.fetchPoll();
   }
   render() {
     return (
-      <p>votingPoll</p>
+      <div>
+        <p>{this.props.error}</p>
+        <p>votingPoll</p>
+      </div>
     )
   }
 }

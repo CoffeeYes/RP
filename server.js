@@ -58,24 +58,19 @@ app.get('/getUsers',function(req,res,next) {
 
 app.get('/getPoll',function(req,res,next) {
   let pollCode = req.query.code;
-  console.log(pollCode);
 
-  mClient.connect(connect.mongo.url,function(error,client) {
+  Mclient.connect(connect.mongo.url,function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
 
     database.collection('app_data').find({title: 'pollData'}).toArray(function(error,data) {
-      if(data == "") {
-        return res.send({error: "no poll Found"});
-      }
-      else {
         for(var item in data[0]) {
           if(data[0][item].code == pollCode) {
             return res.send({pollResult :data[0][item]});
           }
         }
-      }
+        return res.send({error : "poll not found"})
     })
   })
 })
