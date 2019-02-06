@@ -65,9 +65,9 @@ app.get('/getPoll',function(req,res,next) {
     let database = client.db('rp');
 
     database.collection('app_data').find({title: 'pollData'}).toArray(function(error,data) {
-        for(var item in data[0]) {
-          if(data[0][item].code == pollCode) {
-            return res.send({pollResult :data[0][item]});
+        for(i = 0; i < data[0].data.length; i++) {
+          if(data[0].data[i].code == pollCode) {
+            return res.send({pollResult : data[0].data[i]})
           }
         }
         return res.send({error : "poll not found"})

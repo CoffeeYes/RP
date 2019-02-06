@@ -323,7 +323,7 @@ class App extends Component {
             <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
           )} />
           <Route path="/poll/*" render={() => (
-            <VotingPoll fetchPoll={this.fetchPoll} error={this.state.error}/>
+            <VotingPoll fetchPoll={this.fetchPoll} error={this.state.error} pollData={this.state.pollData}/>
           )}/>
           <Route path="/" render={() => (
             <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>

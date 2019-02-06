@@ -8,7 +8,7 @@ class votingPoll extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="content-container">
         <p>{this.props.error}</p>
         <p>votingPoll</p>
       </div>
