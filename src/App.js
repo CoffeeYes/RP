@@ -38,6 +38,7 @@ class App extends Component {
       userlist : JSON.parse(sessionStorage.getItem('userlist')) || [],
       inputCount : [1],
       pollData : {},
+      pollResult : []
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -323,7 +324,7 @@ class App extends Component {
             <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
           )} />
           <Route path="/poll/*" render={() => (
-            <VotingPoll fetchPoll={this.fetchPoll} error={this.state.error} pollData={this.state.pollData}/>
+            <VotingPoll fetchPoll={this.fetchPoll} error={this.state.error} pollResult={this.state.pollResult}/>
           )}/>
           <Route path="/" render={() => (
             <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>

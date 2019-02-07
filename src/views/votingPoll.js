@@ -10,7 +10,15 @@ class votingPoll extends Component {
     return (
       <div className="content-container">
         <p>{this.props.error}</p>
-        <p>votingPoll</p>
+        <form className="pollForm">
+          {this.props.pollResult.map((item,index) => {
+              return (
+                <div>
+                  <input name={"field" + index} key={index} type="radio" value={item}/>{item}
+                </div>
+              )
+          })}
+        </form>
       </div>
     )
   }
