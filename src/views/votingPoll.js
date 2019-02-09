@@ -18,6 +18,7 @@ class votingPoll extends Component {
                 </div>
               )
           })}
+          <button onClick={this.props.handleVote}>Submit</button>
         </form>
       </div>
     )
