@@ -7,21 +7,29 @@ class votingPoll extends Component {
     this.props.fetchPoll();
   }
   render() {
-    return (
-      <div className="content-container">
-        <p>{this.props.error}</p>
-        <form className="pollForm">
-          {this.props.pollResult.map((item,index) => {
-              return (
-                <div>
-                  <input name={"field" + index} key={index} type="radio" value={item}/>{item}
-                </div>
-              )
-          })}
-          <button onClick={this.props.handleVote}>Submit</button>
-        </form>
-      </div>
-    )
+    if(this.props.error) {
+      return (
+        <div className="content-container">
+          <p>{this.props.error}</p>
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="content-container">
+          <form className="pollForm">
+            {this.props.pollResult.map((item,index) => {
+                return (
+                  <div>
+                    <input name={"field" + index} key={index} type="radio" value={item}/>{item}
+                  </div>
+                )
+            })}
+            <button onClick={this.props.handleVote}>Submit</button>
+          </form>
+        </div>
+      )
+    }
   }
 }
 export default votingPoll;
