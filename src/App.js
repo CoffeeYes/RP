@@ -38,7 +38,8 @@ class App extends Component {
       userlist : JSON.parse(sessionStorage.getItem('userlist')) || [],
       inputCount : [1],
       pollData : {},
-      pollResult : []
+      pollResult : [],
+      voteChoice : ''
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -278,6 +279,14 @@ class App extends Component {
 
   handleVote(event) {
     event.preventDefault();
+
+    fetch('/addVote', {
+      method: 'POST',
+      headers : {
+        'Content-type' : 'application/json'
+      },
+      body : JSON.stringify(this.state.voteChoice)
+    })
   }
   render = () => {
     if(this.state.authenticated) {
