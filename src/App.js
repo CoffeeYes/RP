@@ -57,6 +57,7 @@ class App extends Component {
     this.handleAddPoll = this.handleAddPoll.bind(this);
     this.fetchPoll = this.fetchPoll.bind(this);
     this.handleVote = this.handleVote.bind(this);
+    this.clickVote = this.clickVote.bind(this);
   }
 
   handleLogin = (event) => {
@@ -288,6 +289,10 @@ class App extends Component {
       body : JSON.stringify(this.state.voteChoice)
     })
   }
+
+  clickVote(event) {
+    this.setState({vote : event.target.value});
+  }
   render = () => {
     if(this.state.authenticated) {
       //render full panel and allow access to other routes if admin login
@@ -338,7 +343,7 @@ class App extends Component {
             <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
           )} />
           <Route path="/poll/*" render={() => (
-            <VotingPoll fetchPoll={this.fetchPoll} error={this.state.error} pollResult={this.state.pollResult} handleVote={this.handleVote}/>
+            <VotingPoll fetchPoll={this.fetchPoll} error={this.state.error} pollResult={this.state.pollResult} handleVote={this.handleVote} clickVote={this.clickVote}/>
           )}/>
           <Route path="/" render={() => (
             <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
