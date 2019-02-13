@@ -200,4 +200,12 @@ app.post('/addVotingPoll',function(req,res,next) {
     database.collection('app_data').update({title : 'pollData'},{$push : {data : pushData}});
   })
 })
+
+app.post('/addVote',function(req,res,next) {
+  Mclient.connect(connect.mongo.url,function(error,client) {
+    let database = client.db('rp');
+
+    database.collection('app_data').update({title: 'pollData',"Data.code" : req.body.pollCode},{$inc : {[req.body.voteChoice] : 1}})
+  })
+})
 app.listen(process.env.PORT || 5000);

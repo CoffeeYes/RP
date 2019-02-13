@@ -281,12 +281,17 @@ class App extends Component {
   handleVote(event) {
     event.preventDefault();
 
+    let pollCode = window.location.href.split('?q=')[1];
+
     fetch('/addVote', {
       method: 'POST',
       headers : {
         'Content-type' : 'application/json'
       },
-      body : JSON.stringify(this.state.voteChoice)
+      body : JSON.stringify({
+      voteChoice : this.state.voteChoice,
+      code : pollCode
+    })
     })
   }
 
