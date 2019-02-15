@@ -73,7 +73,7 @@ form {
 }
 
 .login-container {
-  height: 20vh;
+  height: 30vh;
   width: 15vw;
   border: 2px solid #551a8b;
   border-radius : 50px;
@@ -183,7 +183,7 @@ form {
   padding: 2px 2px 2px 2px;
   border: 1px solid black;
   border-radius: 5px;
-  width: 2vw;
+  width: 3vw;
   align-self: flex-end;
   display: block;
 }
@@ -200,7 +200,7 @@ form {
 .generateButton {
   background-color: #c9fdc9;
   border: 2px solid #4ef84e;
-  width: 4vw;
+  width: 7vw;
   border-radius: 10px;
   margin-top: 2vh;
 }
