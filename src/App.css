@@ -272,3 +272,7 @@ form {
   margin-top : 2vh;
   padding: 2em 2em 2em 2em;
 }
+
+.voteChoice {
+  display: inline;
+}

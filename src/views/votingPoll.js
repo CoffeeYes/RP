@@ -21,7 +21,7 @@ class votingPoll extends Component {
             {this.props.pollResult.map((item,index) => {
                 return (
                   <div>
-                    <input name="choice" key={index} type="radio" value={item} onClick={this.props.clickVote}/>{item}
+                    <input name="choice" key={index} type="radio" value={item} onClick={this.props.clickVote} className="voteChoice"/>{item}
                   </div>
                 )
             })}
