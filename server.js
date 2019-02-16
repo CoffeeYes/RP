@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/modes',function(req,res) {
-  Mclient.connect(connect.mongo.url,function(error,client) {
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
     let database = client.db('rp');
 
@@ -30,7 +30,7 @@ app.get('/modes',function(req,res) {
 })
 
 app.get('/mode',function(req,res,next){
-  Mclient.connect(connect.mongo.url,function(error,client){
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client){
     if(error)throw error;
 
     let database = client.db('rp');
@@ -43,7 +43,7 @@ app.get('/mode',function(req,res,next){
 })
 
 app.get('/getUsers',function(req,res,next) {
-  Mclient.connect(connect.mongo.url,function(error,client){
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client){
     if(error)throw error;
 
     let database = client.db('rp');
@@ -59,7 +59,7 @@ app.get('/getUsers',function(req,res,next) {
 app.get('/getPoll',function(req,res,next) {
   let pollCode = req.query.code;
 
-  Mclient.connect(connect.mongo.url,function(error,client) {
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
@@ -78,7 +78,7 @@ app.get('/getPoll',function(req,res,next) {
 })
 
 app.post('/login',function(req,res,next) {
-  Mclient.connect(connect.mongo.url,function(error,client) {
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
     let database = client.db('rp');
 
@@ -102,7 +102,7 @@ app.post('/login',function(req,res,next) {
 })
 
 app.post('/updateMode',function(req,res,next) {
-  Mclient.connect(connect.mongo.url,function(error,client) {
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
@@ -118,7 +118,7 @@ app.post('/updateMode',function(req,res,next) {
 app.post('/roomCode',function(req,res,next) {
   let code = req.body.code
 
-  Mclient.connect(connect.mongo.url,function(error,client) {
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
@@ -140,7 +140,7 @@ app.post('/createCode',function(req,res,next) {
   let code = req.body.code;
 
   //update database roomcode
-  Mclient.connect(connect.mongo.url,function(error,client) {
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
@@ -152,7 +152,7 @@ app.post('/createCode',function(req,res,next) {
 app.post('/addUser',function(req,res,next) {
   let userData = req.body
 
-  Mclient.connect(connect.mongo.url,function(error,client) {
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
@@ -174,7 +174,7 @@ app.post('/addUser',function(req,res,next) {
 
 app.post('/deleteUser',function(req,res,next) {
 
-  Mclient.connect(connect.mongo.url,function(error,client) {
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
@@ -192,7 +192,7 @@ app.post('/addVotingPoll',function(req,res,next) {
 
   pushData.code = code;
 
-  Mclient.connect(connect.mongo.url,function(error,client) {
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
@@ -202,10 +202,14 @@ app.post('/addVotingPoll',function(req,res,next) {
 })
 
 app.post('/addVote',function(req,res,next) {
-  Mclient.connect(connect.mongo.url,function(error,client) {
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     let database = client.db('rp');
-
-    database.collection('app_data').update({title: 'pollData',"Data.code" : req.body.pollCode},{$inc : {[req.body.voteChoice] : 1}})
+    try {
+      database.collection('app_data').updateOne({title: 'pollData',"Data.code" : req.body.pollCode},{$inc : {[req.body.voteChoice] : 1}})
+    }
+    catch(error) {
+      console.log("Error : " + error)
+    }
   })
 })
 app.listen(process.env.PORT || 5000);
