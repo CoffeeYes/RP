@@ -205,7 +205,7 @@ app.post('/addVote',function(req,res,next) {
   Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     let database = client.db('rp');
     try {
-      database.collection('app_data').updateOne({title: 'pollData',"Data.code" : req.body.pollCode},{$inc : {[req.body.voteChoice] : 1}})
+      database.collection('app_data').updateOne({title: 'pollData',"data.code" : req.body.pollCode},{$inc : {["data.$." + req.body.voteChoice] : 1}})
     }
     catch(error) {
       console.log("Error : " + error)
