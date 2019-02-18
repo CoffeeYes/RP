@@ -290,13 +290,13 @@ class App extends Component {
       },
       body : JSON.stringify({
       voteChoice : this.state.voteChoice,
-      code : pollCode
+      pollCode : pollCode
     })
     })
   }
 
   clickVote(event) {
-    this.setState({vote : event.target.value});
+    this.setState({voteChoice : event.target.value});
   }
   render = () => {
     if(this.state.authenticated) {
