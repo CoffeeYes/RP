@@ -178,8 +178,12 @@ app.post('/deleteUser',function(req,res,next) {
     if(error)throw error;
 
     let database = client.db('rp');
-
-     database.collection('user_data').update({title : 'users'},{$pull : {data : {username : req.body.username}}})
+    try {
+      database.collection('user_data').update({title : 'users'},{$pull : {data : {username : req.body.username}}})
+    }
+    catch(error) {
+      console.log("ERROR(deleting user) : " + error)
+    }
   })
 })
 
@@ -197,7 +201,12 @@ app.post('/addVotingPoll',function(req,res,next) {
 
     let database = client.db('rp');
 
-    database.collection('app_data').update({title : 'pollData'},{$push : {data : pushData}});
+    try{
+      database.collection('app_data').update({title : 'pollData'},{$push : {data : pushData}});
+    }
+    catch(error) {
+      console.log("ERROR(adding vote poll) : " + error)
+    }
   })
 })
 
