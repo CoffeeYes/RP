@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './navbar.js';
+import PollList from './pollList.js';
 
 class Vote extends Component {
 
@@ -15,6 +16,7 @@ class Vote extends Component {
           <button className="addInput" onClick={this.props.addField}>Add Field</button>
           <button onClick={this.props.handleAddPoll}>Submit</button>
         </form>
+        <PollList />
       </div>
     );
   }
