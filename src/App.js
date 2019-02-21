@@ -58,6 +58,7 @@ class App extends Component {
     this.fetchPoll = this.fetchPoll.bind(this);
     this.handleVote = this.handleVote.bind(this);
     this.clickVote = this.clickVote.bind(this);
+    this.getAllPolls = this.getAllPolls.bind(this);
   }
 
   handleLogin = (event) => {
@@ -295,6 +296,14 @@ class App extends Component {
     })
   }
 
+  getAllPolls() {
+    fetch('/allPolls')
+    .then(res => res.json())
+    .then(data => {
+      this.setState({pollsData : data})
+    })
+  }
+
   clickVote(event) {
     this.setState({voteChoice : event.target.value});
   }
@@ -320,7 +329,7 @@ class App extends Component {
               <Mode modes={this.state.modes} changeMode={this.changeMode}/>
             )}/>
             <Route path='/panel/vote' render={() => (
-              <Vote inputCount={this.state.inputCount} addField={this.addField} handleFieldText={this.handleFieldText} handleAddPoll={this.handleAddPoll}/>
+              <Vote inputCount={this.state.inputCount} addField={this.addField} handleFieldText={this.handleFieldText} handleAddPoll={this.handleAddPoll} getAllPolls={this.getAllPolls}/>
             )}/>
             <Route path='/panel/users' render={() => (
               <div>

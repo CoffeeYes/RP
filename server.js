@@ -77,6 +77,15 @@ app.get('/getPoll',function(req,res,next) {
   })
 })
 
+app.get('/allPolls',function(req,res,next) {
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+    let database = client.db('rp');
+
+    database.collection('app_data').find({title : 'pollData'}).toArray(function(error,data) {
+      res.send({data : data[0].data})
+    })
+  })
+})
 app.post('/login',function(req,res,next) {
   Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
