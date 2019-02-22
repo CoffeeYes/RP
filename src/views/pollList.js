@@ -8,7 +8,15 @@ class pollList extends Component {
 
   render() {
     return (
-      <p>pollList</p>
+      <div className="pollContainer">
+      {this.props.pollsData.map((item,index) => {
+        return (
+          <div className="pollItem">
+            <p>poll</p>
+          </div>
+        )
+      })}
+      </div>
     );
   }
 }

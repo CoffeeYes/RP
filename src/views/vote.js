@@ -16,7 +16,7 @@ class Vote extends Component {
           <button className="addInput" onClick={this.props.addField}>Add Field</button>
           <button onClick={this.props.handleAddPoll}>Submit</button>
         </form>
-        <PollList getAllPolls={this.props.getAllPolls}/>
+        <PollList getAllPolls={this.props.getAllPolls} pollsData={this.props.pollsData}/>
       </div>
     );
   }

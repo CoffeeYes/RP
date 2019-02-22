@@ -38,6 +38,7 @@ class App extends Component {
       userlist : JSON.parse(sessionStorage.getItem('userlist')) || [],
       inputCount : [1],
       pollData : {},
+      pollsData : [],
       pollResult : [],
       voteChoice : ''
     }
@@ -300,7 +301,7 @@ class App extends Component {
     fetch('/allPolls')
     .then(res => res.json())
     .then(data => {
-      this.setState({pollsData : data})
+      this.setState({pollsData : data.data})
     })
   }
 
@@ -329,7 +330,13 @@ class App extends Component {
               <Mode modes={this.state.modes} changeMode={this.changeMode}/>
             )}/>
             <Route path='/panel/vote' render={() => (
-              <Vote inputCount={this.state.inputCount} addField={this.addField} handleFieldText={this.handleFieldText} handleAddPoll={this.handleAddPoll} getAllPolls={this.getAllPolls}/>
+              <Vote
+              inputCount={this.state.inputCount}
+              addField={this.addField}
+              handleFieldText={this.handleFieldText}
+              handleAddPoll={this.handleAddPoll}
+              getAllPolls={this.getAllPolls}
+              pollsData ={this.state.pollsData}/>
             )}/>
             <Route path='/panel/users' render={() => (
               <div>
