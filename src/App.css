@@ -225,7 +225,8 @@ form {
 
 .horcent {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .userListItem {
@@ -275,4 +276,8 @@ form {
 
 .voteChoice {
   display: inline;
+}
+
+.pollContainer {
+  margin-top: 3vh;
 }
