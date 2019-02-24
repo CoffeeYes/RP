@@ -12,7 +12,11 @@ class pollList extends Component {
       {this.props.pollsData.map((item,index) => {
         return (
           <div className="pollItem">
-            <p>poll</p>
+            {Object.keys(item).map((keyItem,keyIndex) => {
+              return(
+                <p>{item[keyItem]}</p>
+              )
+            })}
           </div>
         )
       })}
