@@ -13,9 +13,11 @@ class pollList extends Component {
         return (
           <div className="pollItem">
             {Object.keys(item).map((keyItem,keyIndex) => {
-              return(
-                <p>{item[keyItem]}</p>
-              )
+              if(keyItem != "code") {
+                return(
+                  <p className="pollChoice">{keyItem} : {item[keyItem]}</p>
+                )
+              }
             })}
           </div>
         )

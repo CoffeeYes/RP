@@ -281,3 +281,14 @@ form {
 .pollContainer {
   margin-top: 3vh;
 }
+
+.pollItem {
+  border : 1px solid black;
+  width : 50vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pollChoice {
+
+}
