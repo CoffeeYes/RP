@@ -292,3 +292,7 @@ form {
 .pollChoice {
 
 }
+
+.deletePollCode {
+  display : none;
+}

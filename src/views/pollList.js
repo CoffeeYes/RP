@@ -18,6 +18,14 @@ class pollList extends Component {
                   <p className="pollChoice">{keyItem} : {item[keyItem]}</p>
                 )
               }
+              else {
+                return (
+                  <form className="deletePollForm" method="POST" action="/deletePoll">
+                    <input value={item[keyItem]} className="deletePollCode"/>
+                    <button type="submit">X</button>
+                  </form>
+                )
+              }
             })}
           </div>
         )
