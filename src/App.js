@@ -60,6 +60,7 @@ class App extends Component {
     this.handleVote = this.handleVote.bind(this);
     this.clickVote = this.clickVote.bind(this);
     this.getAllPolls = this.getAllPolls.bind(this);
+    this.deletePoll = this.deletePoll.bind(this);
   }
 
   handleLogin = (event) => {
@@ -308,6 +309,20 @@ class App extends Component {
   clickVote(event) {
     this.setState({voteChoice : event.target.value});
   }
+
+  deletePoll(event) {
+    event.preventDefault();
+
+    fetch('/deletePoll', {
+      method : 'POST',
+      headers : {
+        'Content-type' : 'application/json'
+      },
+      body : JSON.stringify({
+        pollCode : event.target.value
+      })
+    })
+  }
   render = () => {
     if(this.state.authenticated) {
       //render full panel and allow access to other routes if admin login
@@ -336,7 +351,8 @@ class App extends Component {
               handleFieldText={this.handleFieldText}
               handleAddPoll={this.handleAddPoll}
               getAllPolls={this.getAllPolls}
-              pollsData ={this.state.pollsData}/>
+              pollsData ={this.state.pollsData}
+              deletePoll={this.deletePoll}/>
             )}/>
             <Route path='/panel/users' render={() => (
               <div>

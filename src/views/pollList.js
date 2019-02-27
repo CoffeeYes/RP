@@ -21,8 +21,7 @@ class pollList extends Component {
               else {
                 return (
                   <form className="deletePollForm" method="POST" action="/deletePoll">
-                    <input value={item[keyItem]} className="deletePollCode"/>
-                    <button type="submit">X</button>
+                    <button name="pollCode" value={item[keyItem]} onClick={this.props.deletePoll}>X</button>
                   </form>
                 )
               }

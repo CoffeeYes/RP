@@ -230,4 +230,8 @@ app.post('/addVote',function(req,res,next) {
     }
   })
 })
+
+app.post('/deletePoll',function(req,res,next) {
+  console.log(req.body)
+})
 app.listen(process.env.PORT || 5000);
