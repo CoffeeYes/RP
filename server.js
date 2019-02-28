@@ -232,6 +232,14 @@ app.post('/addVote',function(req,res,next) {
 })
 
 app.post('/deletePoll',function(req,res,next) {
-  console.log(req.body)
+  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+    let database = client.db('rp')
+    try {
+      database.collection('app_data').updateOne({title: 'pollData'},{$pull : {data : {code : req.body.pollCode}}})
+    }
+    catch(error) {
+      console.log("Error(deleting poll) : " + error)
+    }
+  })
 })
 app.listen(process.env.PORT || 5000);
