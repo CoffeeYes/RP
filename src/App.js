@@ -262,6 +262,7 @@ class App extends Component {
       },
       body : JSON.stringify(this.state.pollData),
     })
+    this.getAllPolls();
   }
 
   fetchPoll() {
@@ -322,6 +323,7 @@ class App extends Component {
         pollCode : event.target.value
       })
     })
+    this.getAllPolls();
   }
   render = () => {
     if(this.state.authenticated) {

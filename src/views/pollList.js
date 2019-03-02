@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class pollList extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getAllPolls()
   }
 
