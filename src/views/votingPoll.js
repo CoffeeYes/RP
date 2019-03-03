@@ -3,7 +3,7 @@ import Navbar from './navbar.js';
 
 class votingPoll extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchPoll();
   }
   render() {
