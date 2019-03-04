@@ -7,7 +7,7 @@ class Navbar extends Component {
       <div className="navbar">
           <a className="navItem" href="/lobby" onClick={this.props.prepLobby}>Lobby</a>
           <a className="navItem" href="/panel/mode" onClick={this.props.fetchModes}>Mode</a>
-          <a className="navItem" href="/panel/users"onClick={this.props.getUsers}>Users</a>
+          <a className="navItem" href="/panel/users">Users</a>
           <a className="navItem" href="/panel/vote" >vote</a>
       </div>
     );

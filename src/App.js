@@ -183,13 +183,10 @@ class App extends Component {
     },1500)
   }
 
-  getUsers(event) {
-    event.preventDefault();
+  getUsers() {
     fetch('/getUsers')
     .then(res => res.json())
     .then( (data) => {
-      console.log(data)
-      window.location = '/panel/users'
       sessionStorage.setItem('userlist',JSON.stringify(data.list))
     })
   }
@@ -359,7 +356,7 @@ class App extends Component {
             <Route path='/panel/users' render={() => (
               <div>
                 <AddUser addUser={this.addUser} update={this.updateAddUser} error={this.state.error}/>
-                <UserList list={this.state.userlist} deleteUser={this.deleteUser}/>
+                <UserList list={this.state.userlist} deleteUser={this.deleteUser} getUsers={this.getUsers}/>
               </div>
             )}/>
           </div>

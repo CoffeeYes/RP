@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 class UserList extends Component {
 
+  componentDidMount() {
+    this.props.getUsers();
+  }
   render() {
     return (
       <div className="horcent">
