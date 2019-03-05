@@ -215,24 +215,14 @@ class App extends Component {
           this.setState({error: data.error})
         }
         else {
-          fetch('/getUsers')
-          .then(res => res.json())
-          .then( (data) => {
-            window.location = '/panel/users'
-            sessionStorage.setItem('userlist',JSON.stringify(data.list))
-          })
+          this.getUsers()
         }
       })
     }
   }
 
   deleteUser(event) {
-    fetch('/getUsers')
-    .then(res => res.json())
-    .then( (data) => {
-      window.location = '/panel/users'
-      sessionStorage.setItem('userlist',JSON.stringify(data.list))
-    })
+    this.getUsers()
   }
 
   updateAddUser(event) {
