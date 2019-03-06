@@ -35,7 +35,7 @@ class App extends Component {
         password : '',
         displayname : '',
       },
-      userlist : JSON.parse(sessionStorage.getItem('userlist')) || [],
+      userlist : [],
       inputCount : [1],
       pollData : {},
       pollsData : [],
@@ -187,7 +187,7 @@ class App extends Component {
     fetch('/getUsers')
     .then(res => res.json())
     .then( (data) => {
-      sessionStorage.setItem('userlist',JSON.stringify(data.list))
+      this.setState({userlist : data.list})
     })
   }
 
@@ -222,6 +222,16 @@ class App extends Component {
   }
 
   deleteUser(event) {
+    event.preventDefault();
+    fetch('/deleteUser',{
+      method : 'POST',
+      headers : {
+        'Content-type' : 'application/json'
+      },
+      body : JSON.stringify({
+        username : event.target.value
+      })
+    })
     this.getUsers()
   }
 
