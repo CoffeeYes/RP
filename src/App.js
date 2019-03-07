@@ -99,14 +99,10 @@ class App extends Component {
 
   //fetch all modes for admin select
   fetchModes(event) {
-    event.preventDefault()
     fetch('/modes')
     .then(res => res.json())
     .then(data => {
       localStorage.setItem('modes',JSON.stringify(data.modes));
-    })
-    .then(() => {
-      window.location = '/panel/mode'
     })
   }
 
@@ -341,7 +337,7 @@ class App extends Component {
               <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode} renderFull={true} showCopied={this.state.showCopied}/>
             )}/>
             <Route path='/panel/mode' render={() => (
-              <Mode modes={this.state.modes} changeMode={this.changeMode}/>
+              <Mode modes={this.state.modes} changeMode={this.changeMode} fetchModes={this.fetchModes}/>
             )}/>
             <Route path='/panel/vote' render={() => (
               <Vote

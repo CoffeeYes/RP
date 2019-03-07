@@ -3,6 +3,10 @@ import Navbar from './navbar.js';
 
 class Mode extends Component {
 
+  componentDidMount() {
+    this.props.fetchModes();
+  }
+
   render() {
     return (
       <div className="content-container">
