@@ -6,6 +6,10 @@ import RenderMode from './renderMode.js'
 
 class Lobby extends Component {
 
+  componentDidMount() {
+    this.props.getMode();
+  }
+
   render() {
     if(this.props.renderFull) {
       return (

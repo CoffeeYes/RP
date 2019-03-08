@@ -46,7 +46,6 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.fetchModes = this.fetchModes.bind(this);
-    this.prepLobby = this.prepLobby.bind(this);
     this.handleCode = this.handleCode.bind(this);
     this.createCode = this.createCode.bind(this);
     this.getUsers = this.getUsers.bind(this);
@@ -107,21 +106,12 @@ class App extends Component {
   }
 
   //fetch current mode, renders different lobbies
-  getMode(redirect) {
+  getMode() {
     fetch('../mode')
     .then(res => res.json())
     .then(data => {
       localStorage.setItem("mode",JSON.stringify(data.mode))
     })
-    .then( () => {
-      window.location = redirect;
-    })
-  }
-
-  prepLobby(event) {
-    event.preventDefault()
-    //get current mode
-    this.getMode('/lobby');
   }
 
   handleCode(event) {
@@ -150,7 +140,7 @@ class App extends Component {
         else {
           sessionStorage.setItem('authenticated',true);
           sessionStorage.setItem('user_type',data.user_type);
-          this.getMode('/lobby');
+          window.location = '/lobby'
         }
       })
   }
@@ -334,7 +324,14 @@ class App extends Component {
               <Panel fetchModes={this.fetchModes} prepLobby={this.prepLobby} getUsers={this.getUsers}/>
             )}/>
             <Route path='/lobby' render={() => (
-              <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode} renderFull={true} showCopied={this.state.showCopied}/>
+              <Lobby
+              mode={this.state.mode}
+              createCode={this.createCode}
+              generatedCode={this.state.generatedCode}
+              renderFull={true}
+              showCopied={this.state.showCopied}
+              getMode={this.getMode}
+              />
             )}/>
             <Route path='/panel/mode' render={() => (
               <Mode modes={this.state.modes} changeMode={this.changeMode} fetchModes={this.fetchModes}/>
@@ -362,7 +359,7 @@ class App extends Component {
         return(
           //if not admin only allow access to the lobby
           <Route path='/lobby' render={() => (
-            <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode} renderFull={false}/>
+            <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode} renderFull={false} getMode={this.getMode}/>
           )}/>
         )
       }

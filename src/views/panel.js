@@ -5,7 +5,7 @@ class Panel extends Component {
 
   render() {
     return (
-      <Navbar prepLobby={this.props.prepLobby}/>
+      <Navbar/>
     );
   }
 }
