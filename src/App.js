@@ -87,7 +87,7 @@ class App extends Component {
         this.setState({loggedIn: true});
         sessionStorage.setItem('authenticated',true);
         sessionStorage.setItem('user_type',data.user_type);
-        this.getMode('/lobby');
+        window.location = '/lobby'
       }
     })
   }
