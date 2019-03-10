@@ -116,7 +116,7 @@ app.post('/updateMode',function(req,res,next) {
 
     let database = client.db('rp');
     try {
-      database.collection('app_data').update({title : 'currentMode'},{"data" : req.body.modeChoice});
+      database.collection('app_data').updateOne({title : 'currentMode'},{"data" : req.body.modeChoice});
     }
     catch(error) {
       console.log('database could not be updated : ' + error)
@@ -154,7 +154,7 @@ app.post('/createCode',function(req,res,next) {
 
     let database = client.db('rp');
 
-    database.collection('app_data').update({title: 'accessCode'},{$set : {data : code}});
+    database.collection('app_data').updateOne({title: 'accessCode'},{$set : {data : code}});
   })
 })
 
@@ -175,7 +175,7 @@ app.post('/addUser',function(req,res,next) {
         }
       }
 
-      database.collection('user_data').update({title : 'users'},{$push : {data : userData}})
+      database.collection('user_data').updateOne({title : 'users'},{$push : {data : userData}})
       return res.send({success : true})
     })
   })
@@ -188,7 +188,7 @@ app.post('/deleteUser',function(req,res,next) {
 
     let database = client.db('rp');
     try {
-      database.collection('user_data').update({title : 'users'},{$pull : {data : {username : req.body.username}}})
+      database.collection('user_data').updateOne({title : 'users'},{$pull : {data : {username : req.body.username}}})
     }
     catch(error) {
       console.log("ERROR(deleting user) : " + error)
@@ -211,7 +211,7 @@ app.post('/addVotingPoll',function(req,res,next) {
     let database = client.db('rp');
 
     try{
-      database.collection('app_data').update({title : 'pollData'},{$push : {data : pushData}});
+      database.collection('app_data').updateOne({title : 'pollData'},{$push : {data : pushData}});
     }
     catch(error) {
       console.log("ERROR(adding vote poll) : " + error)
