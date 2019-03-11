@@ -1,19 +1,8 @@
 import React, { Component } from 'react';
+import Webcam from './webcam.js'
 
 class Koth extends Component {
-  setRef = webcam => {
-    this.webcam = webcam
-  }
 
-  handleUserMedia = () => {
-    console.log(this.webcam.stream)
-  }
-
-  record = () => {
-    setInterval( () => {
-      console.log("image")
-    },(30/1000))
-  }
   render() {
 
     return (
@@ -21,6 +10,7 @@ class Koth extends Component {
         <div className="cam-row">
           <div className="camBox guest">
             <p>name1</p>
+            <Webcam/>
           </div>
           <div className="camBox guest">
             <p>name2</p>
