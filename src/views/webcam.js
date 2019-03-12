@@ -1,5 +1,8 @@
 import React,{Component} from 'react';
 
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:5001')
+
 export default class Webcam extends Component {
 
   componentDidMount = () => {
@@ -13,6 +16,8 @@ export default class Webcam extends Component {
       var video = document.querySelector('#testCam')
       video.srcObject = stream
     })
+
+    socket.emit('lobbyConnect')
   }
   render() {
     return(

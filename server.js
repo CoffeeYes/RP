@@ -5,6 +5,9 @@ const app = express();
 const connect = require('./src/connect.js');
 const Mclient = require('mongodb').MongoClient;
 
+const io = require('socket.io')();
+const socketStream = require('socket.io-stream')
+
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -242,4 +245,16 @@ app.post('/deletePoll',function(req,res,next) {
     }
   })
 })
+
+//---------------------------------------------------------------- sockets --------------------------------------------------------------
+io.on('connection',(client) => {
+  client.on('lobbyConnect',() => {
+    console.log("client connected to lobby")
+  })
+})
+
+const port = 5001;
+io.listen(port)
+console.log('Sockets listening on port : ' + port)
+//---------------------------------------------------------------------------------------------------------------------------------------
 app.listen(process.env.PORT || 5000);
