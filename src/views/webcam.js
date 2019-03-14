@@ -6,6 +6,14 @@ const socket = openSocket('http://localhost:5001')
 
 export default class Webcam extends Component {
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      videoSrc: null
+    }
+  }
+
   componentDidMount = () => {
     let constraints = {
       video : {width: 640,height : 480}
@@ -16,9 +24,14 @@ export default class Webcam extends Component {
       this.setState({videoSrc : stream })
       var video = document.querySelector('#testCam')
       video.srcObject = stream
+      socket.emit('webcamConnect')
+    })
+    .catch( error => {
+      console.log(error)
     })
 
-    socket.emit('lobbyConnect')
+
+
   }
   render() {
     return(

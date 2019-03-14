@@ -248,8 +248,8 @@ app.post('/deletePoll',function(req,res,next) {
 
 //---------------------------------------------------------------- sockets --------------------------------------------------------------
 io.on('connection',(client) => {
-  client.on('lobbyConnect',() => {
-    console.log("client connected to lobby")
+  client.on('webcamConnect',() => {
+    console.log("Webcam connected")
   })
 })
 
