@@ -25,6 +25,17 @@ export default class Webcam extends Component {
       var video = document.querySelector('#testCam')
       video.srcObject = stream
       socket.emit('webcamConnect')
+
+      let thisPC = new RTCPeerConnection();
+      socket.emit('newRTCConnection','test')
+
+      /*
+      thisPC.createOffer( (offer) => {
+        thisPC.setLocalDescription(new RTCSessionDescription(offer),() => {
+          socket.emit('newRTCConnection','test')
+        })
+      })
+      */
     })
     .catch( error => {
       console.log(error)

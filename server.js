@@ -251,7 +251,13 @@ io.on('connection',(client) => {
   client.on('webcamConnect',() => {
     console.log("Webcam connected")
   })
+
+  client.on('newRTCConnection',(offer) => {
+    console.log("new rtc offer")
+    console.log(offer)
+  })
 })
+
 
 const port = 5001;
 io.listen(port)
