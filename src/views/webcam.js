@@ -27,15 +27,7 @@ export default class Webcam extends Component {
       socket.emit('webcamConnect')
 
       let thisPC = new RTCPeerConnection();
-      socket.emit('newRTCConnection','test')
-
-      /*
-      thisPC.createOffer( (offer) => {
-        thisPC.setLocalDescription(new RTCSessionDescription(offer),() => {
-          socket.emit('newRTCConnection','test')
-        })
-      })
-      */
+      thisPC.addStream(stream)
     })
     .catch( error => {
       console.log(error)
@@ -46,7 +38,7 @@ export default class Webcam extends Component {
   }
   render() {
     return(
-      <video autoPlay="true" className="cam2" id="testCam"></video>
+      <video autoPlay={true} className="cam2" id="testCam"></video>
     )
   }
 }
