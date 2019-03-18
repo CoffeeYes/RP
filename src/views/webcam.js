@@ -33,7 +33,6 @@ export default class Webcam extends Component {
       function handleNegotiationNeededEvent() {
         thisPC.createOffer()
         .then(function(offer) {
-          console.log(offer)
           socket.emit("newRTCConnection",offer)
           return thisPC.setLocalDescription(offer);
         })
@@ -43,7 +42,9 @@ export default class Webcam extends Component {
       //add mediadevices tracks to the rtc object
       stream.getTracks().forEach(track => thisPC.addTrack(track,stream))
 
-
+      socket.on("receiveRTCConnection",function(offer) {
+        console.log("new RTC offer received from server")
+      })
     })
     .catch( error => {
       console.log(error)

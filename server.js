@@ -253,8 +253,10 @@ io.on('connection',(client) => {
   })
 
   client.on('newRTCConnection',(offer) => {
-    console.log("new rtc offer")
-    console.log(offer)
+    console.log("new rtc offer received from client")
+    console.log("Connected Clients : " + Object.keys(io.sockets.sockets))
+
+    client.broadcast.emit("receiveRTCConnection",offer)
   })
 })
 
