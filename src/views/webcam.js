@@ -31,12 +31,11 @@ export default class Webcam extends Component {
 
       //negotiation event handler, adding tracks fires negotiation needed
       function handleNegotiationNeededEvent() {
-        thisPC.createOffer().then(function(offer) {
+        thisPC.createOffer()
+        .then(function(offer) {
           console.log(offer)
+          socket.emit("newRTCConnection",offer)
           return thisPC.setLocalDescription(offer);
-        })
-        .then(function() {
-          //emit connection info to socket
         })
       }
       thisPC.onnegotiationneeded = handleNegotiationNeededEvent()
