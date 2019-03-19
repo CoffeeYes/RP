@@ -24,18 +24,33 @@ export default class Webcam extends Component {
       this.setState({videoSrc : stream })
       var video = document.querySelector('#testCam')
       video.srcObject = stream
-      socket.emit('webcamConnect')
+
+
 
       //create RTC object
       let thisPC = new RTCPeerConnection() || window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection || window.msRTCPeerConnection;
 
       //negotiation event handler, adding tracks fires negotiation needed
       function handleNegotiationNeededEvent() {
-        thisPC.createOffer()
-        .then(function(offer) {
-          socket.emit("newRTCConnection",offer)
-          return thisPC.setLocalDescription(offer);
+        //get number of connected clients from server
+        socket.emit("getConnectedClientCount")
+        socket.on("returnConnectedClientCount",(count) => {
+          //create offers for the number of connected clients
+          let offers = []
+          for(var i = 1; i < count ; i++) {
+            //createOffer is async, so we check for length match in the .then block before emitting offers array, otherwise empty synchronous array is emitted
+            thisPC.createOffer()
+            .then(function(offer) {
+              offers.push(offer)
+
+              if(offers.length == count - 1) {
+                socket.emit("newRTCConnections",offers)
+              }
+            })
+          }
         })
+
+
       }
       thisPC.onnegotiationneeded = handleNegotiationNeededEvent()
 

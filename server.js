@@ -247,16 +247,27 @@ app.post('/deletePoll',function(req,res,next) {
 })
 
 //---------------------------------------------------------------- sockets --------------------------------------------------------------
+let offers = []
 io.on('connection',(client) => {
-  client.on('webcamConnect',() => {
-    console.log("Webcam connected")
+
+  connectedClientCount = Object.keys(io.sockets.sockets).length
+  console.log("Connected Clients : " + connectedClientCount)
+
+  client.on("getConnectedClientCount",() => {
+    client.emit("returnConnectedClientCount",connectedClientCount)
   })
 
   client.on('newRTCConnection',(offer) => {
     console.log("new rtc offer received from client")
-    console.log("Connected Clients : " + Object.keys(io.sockets.sockets))
+    offers.push({clientName : client.id,offer : offer})
 
+    client.emit(offers)
     client.broadcast.emit("receiveRTCConnection",offer)
+  })
+
+  client.on('newRTCConnections',(offers) => {
+    console.log("new client offers received")
+    console.log(offers)
   })
 })
 
