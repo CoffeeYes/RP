@@ -251,6 +251,7 @@ let offers = []
 io.on('connection',(client) => {
 
   connectedClientCount = Object.keys(io.sockets.sockets).length
+  clientList = Object.keys(io.sockets.sockets)
   console.log("Connected Clients : " + connectedClientCount)
 
   client.on("getConnectedClientCount",() => {
@@ -265,9 +266,15 @@ io.on('connection',(client) => {
     client.broadcast.emit("receiveRTCConnection",offer)
   })
 
+  //emit the newly created offers to all other created clients
   client.on('newRTCConnections',(offers) => {
     console.log("new client offers received")
-    console.log(offers)
+
+    for(var i = 0; i < connectedClientCount ;i++) {
+      if(client.id != clientList[i]) {
+        io.to(clientList[i]).emit("receiveRTCConnection",offers[i])
+      }
+    }
   })
 })
 
