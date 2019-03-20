@@ -58,7 +58,7 @@ export default class Webcam extends Component {
       stream.getTracks().forEach(track => thisPC.addTrack(track,stream))
 
       //handle receiving of RTC offer
-      socket.on("receiveRTCConnection",function(offer) {
+      socket.on("receiveNewRTCOffer",function(offer) {
         console.log("new RTC offer received from server")
         console.log(offer)
       })

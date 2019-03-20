@@ -254,27 +254,21 @@ io.on('connection',(client) => {
   clientList = Object.keys(io.sockets.sockets)
   console.log("Connected Clients : " + connectedClientCount)
 
+  //returns number of connected clients to frontend so it can create correct amount of RTC offers
   client.on("getConnectedClientCount",() => {
     client.emit("returnConnectedClientCount",connectedClientCount)
   })
 
-  client.on('newRTCConnection',(offer) => {
-    console.log("new rtc offer received from client")
-    offers.push({clientName : client.id,offer : offer})
-
-    client.emit(offers)
-    client.broadcast.emit("receiveRTCConnection",offer)
-  })
-
-  //emit the newly created offers to all other created clients
+  //emit the newly created offers to all other connected clients
   client.on('newRTCConnections',(offers) => {
     console.log("new client offers received")
 
     for(var i = 0; i < connectedClientCount ;i++) {
       if(client.id != clientList[i]) {
-        io.to(clientList[i]).emit("receiveRTCConnection",offers[i])
+        io.to(clientList[i]).emit("receiveNewRTCOffer",offers[i])
       }
     }
+
   })
 })
 
