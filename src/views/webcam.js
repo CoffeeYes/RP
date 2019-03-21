@@ -60,7 +60,21 @@ export default class Webcam extends Component {
       //handle receiving of RTC offer
       socket.on("receiveNewRTCOffer",function(offer) {
         console.log("new RTC offer received from server")
-        console.log(offer)
+
+        //set remote description to the received offer
+        thisPC.setRemoteDescription(offer)
+        .then(() => {
+          console.log("remote description set")
+          //create an answer, set it as local description and forward it to server
+           thisPC.createAnswer()
+           .then( (answer) => {
+             console.log("answer created")
+             thisPC.setLocalDescription(answer)
+             .then( () => {
+               socket.emit("createdRTCAnswer",answer)
+             })
+           })
+        })
       })
     })
     .catch( error => {

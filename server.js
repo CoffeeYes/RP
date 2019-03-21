@@ -270,6 +270,10 @@ io.on('connection',(client) => {
     }
 
   })
+
+  client.on("createdRTCAnswer", (answer) => {
+    console.log(answer)
+  })
 })
 
 
