@@ -248,6 +248,7 @@ app.post('/deletePoll',function(req,res,next) {
 
 //---------------------------------------------------------------- sockets --------------------------------------------------------------
 let offers = []
+let currentOfferHost = '';
 io.on('connection',(client) => {
 
   connectedClientCount = Object.keys(io.sockets.sockets).length
@@ -262,6 +263,7 @@ io.on('connection',(client) => {
   //emit the newly created offers to all other connected clients
   client.on('newRTCConnections',(offers) => {
     console.log("new client offers received")
+    currentOfferHost = client.id;
 
     for(var i = 0; i < connectedClientCount ;i++) {
       if(client.id != clientList[i]) {
@@ -273,6 +275,8 @@ io.on('connection',(client) => {
 
   client.on("createdRTCAnswer", (answer) => {
     console.log(answer)
+
+    io.to(currentOfferHost).emit("receiveRTCAnswer",answer)
   })
 })
 

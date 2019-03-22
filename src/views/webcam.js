@@ -76,6 +76,14 @@ export default class Webcam extends Component {
            })
         })
       })
+
+
+      socket.on("receiveRTCAnswer", (answer) => {
+        thisPC.setRemoteDescription(answer)
+        .then( () => {
+          console.log("RTC peer connection complete")
+        })
+      })
     })
     .catch( error => {
       console.log(error)
