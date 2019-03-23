@@ -255,21 +255,22 @@ io.on('connection',(client) => {
   clientList = Object.keys(io.sockets.sockets)
   console.log("Connected Clients : " + connectedClientCount)
 
-  //ping other connected clients to create new RTC offers, include id of new client so we know where to send the offer once its sent back
-  client.broadcast.emit('createNewRTCOffer',client.id);
+  //when a new client turns on their webcam
+  client.on("newWebcamMounted", () => {
+    //ping other connected clients to create new RTC offers, include id of new client so we know where to send the offer once its sent back
+    client.broadcast.emit('createNewRTCOffer',client.id);
+  })
 
   //get offers for the newly connected client
   client.on("RTCOfferCreated", (offer) => {
     //save the origin of the offer and forward it to the destination client
     offer.originID = client.id;
-    console.log(offer)
     io.to([offer.destinationID]).emit("receiveRTCOffer",offer)
   })
 
   //forward RTC answer to the offer creator
   client.on("sendRTCAnswer", (answer) => {
-    console.log(answer)
-    io.to([answer.destindationID]).emit("receiveRTCAnswer",answer)
+    io.to([answer.destinationID]).emit("receiveRTCAnswer",answer)
   })
   /*
   //returns number of connected clients to frontend so it can create correct amount of RTC offers

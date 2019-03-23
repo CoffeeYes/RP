@@ -28,6 +28,9 @@ export default class Webcam extends Component {
       var video = document.querySelector('#testCam')
       video.srcObject = stream
 
+      //let the server know the user allowed the webcam so it can begin RTC handshake
+      socket.emit("newWebcamMounted")
+
       //when another client connects
       socket.on("createNewRTCOffer", (clientID) => {
         //create new RTC connection and add it to the connection array, correct the currentindex
@@ -57,7 +60,6 @@ export default class Webcam extends Component {
           RTCConnections[currentIndex].createAnswer()
           .then( (answer) => {
             //reverse destination and origin for the answer
-            console.log(offer)
             answer.originID = offer.destinationID;
             answer.destinationID = offer.originID;
 
