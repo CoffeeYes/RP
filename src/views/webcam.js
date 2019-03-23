@@ -19,14 +19,67 @@ export default class Webcam extends Component {
       video : {width: 640,height : 480}
     }
 
+    let RTCConnections = [];
+    let currentIndex = 0;
+
     navigator.mediaDevices.getUserMedia(constraints)
     .then( (stream) => {
       this.setState({videoSrc : stream })
       var video = document.querySelector('#testCam')
       video.srcObject = stream
 
+      //when another client connects
+      socket.on("createNewRTCOffer", (clientID) => {
+        //create new RTC connection and add it to the connection array, correct the currentindex
+        RTCConnections.push(new RTCPeerConnection());
+        currentIndex = RTCConnections.length - 1;
+
+        //add local stream to new RTC object
+        stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
+
+        //create offer and emit to backend socket for relay to new client
+        RTCConnections[currentIndex].createOffer()
+        .then( (offer) => {
+          offer.destinationID = clientID
+          socket.emit("RTCOfferCreated",offer)
+        })
+      })
+
+      //receive rtc offer when this client is the newest one
+      socket.on("receiveRTCOffer", (offer) => {
+        console.log("Offer received")
+
+        RTCConnections.push(new RTCPeerConnection());
+        currentIndex = RTCConnections.length - 1;
+
+        RTCConnections[currentIndex].setRemoteDescription(offer)
+        .then ( (Offer) => {
+          RTCConnections[currentIndex].createAnswer()
+          .then( (answer) => {
+            //reverse destination and origin for the answer
+            console.log(offer)
+            answer.originID = offer.destinationID;
+            answer.destinationID = offer.originID;
+
+            socket.emit("sendRTCAnswer",answer)
+          })
+        })
+      })
+
+      socket.on("receiveRTCAnswer", (answer) => {
+        console.log("Answer Received");
+        console.log(answer)
+      })
+    })
+    .catch(error => {
+      console.log("Media Error : " + error)
+    })
 
 
+
+
+
+      /*
       //create RTC object
       let thisPC = new RTCPeerConnection() || window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection || window.msRTCPeerConnection;
 
@@ -88,9 +141,7 @@ export default class Webcam extends Component {
     .catch( error => {
       console.log(error)
     })
-
-
-
+    */
   }
   render() {
     return(
