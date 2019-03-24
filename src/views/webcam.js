@@ -43,6 +43,7 @@ export default class Webcam extends Component {
         //create offer and emit to backend socket for relay to new client
         RTCConnections[currentIndex].createOffer()
         .then( (offer) => {
+          RTCConnections[currentIndex].setLocalDescription(offer)
           offer.destinationID = clientID
           socket.emit("RTCOfferCreated",offer)
         })
@@ -55,10 +56,14 @@ export default class Webcam extends Component {
         RTCConnections.push(new RTCPeerConnection());
         currentIndex = RTCConnections.length - 1;
 
+        //add local stream to new RTC object
+        stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
+
         RTCConnections[currentIndex].setRemoteDescription(offer)
         .then ( (Offer) => {
           RTCConnections[currentIndex].createAnswer()
           .then( (answer) => {
+            RTCConnections[currentIndex].setLocalDescription(answer)
             //reverse destination and origin for the answer
             answer.originID = offer.destinationID;
             answer.destinationID = offer.originID;
@@ -71,6 +76,15 @@ export default class Webcam extends Component {
       socket.on("receiveRTCAnswer", (answer) => {
         console.log("Answer Received");
         console.log(answer)
+
+        //mount remote video to DOM
+        function handleOnTrack(event) {
+          var remoteVideo = document.querySelector('#remoteCam')
+          remoteVideo.srcObject = event.streams[0]
+        }
+        RTCConnections[currentIndex].ontrack = handleOnTrack
+
+        RTCConnections[currentIndex].setRemoteDescription(answer)
       })
     })
     .catch(error => {
@@ -147,7 +161,10 @@ export default class Webcam extends Component {
   }
   render() {
     return(
-      <video autoPlay={true} className="cam2" id="testCam"></video>
+      <div>
+        <video autoPlay={true} className="cam2" id="testCam"></video>
+        <video autoPlay={true} className="cam2" id="remoteCam"></video>
+      </div>
     )
   }
 }
