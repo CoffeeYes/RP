@@ -21,6 +21,7 @@ export default class Webcam extends Component {
 
     let RTCConnections = [];
     let currentIndex = 0;
+    const configuration = {iceServers: [{urls: 'stun:stun.example.com'}]};
 
     navigator.mediaDevices.getUserMedia(constraints)
     .then( (stream) => {
@@ -34,7 +35,7 @@ export default class Webcam extends Component {
       //when another client connects
       socket.on("createNewRTCOffer", (clientID) => {
         //create new RTC connection and add it to the connection array, correct the currentindex
-        RTCConnections.push(new RTCPeerConnection());
+        RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
 
         //add local stream to new RTC object
@@ -53,7 +54,7 @@ export default class Webcam extends Component {
       socket.on("receiveRTCOffer", (offer) => {
         console.log("Offer received")
 
-        RTCConnections.push(new RTCPeerConnection());
+        RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
 
         //add local stream to new RTC object
