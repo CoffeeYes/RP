@@ -29,6 +29,12 @@ export default class Webcam extends Component {
       var video = document.querySelector('#testCam')
       video.srcObject = stream
 
+      //function to handle ice candidate
+      function handleIceCandidate(candidate) {
+        console.log(candidate)
+        socket.emit("newIceCandidate",candidate)
+      }
+
       //let the server know the user allowed the webcam so it can begin RTC handshake
       socket.emit("newWebcamMounted")
 
@@ -37,6 +43,9 @@ export default class Webcam extends Component {
         //create new RTC connection and add it to the connection array, correct the currentindex
         RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
+
+        //add ice candidate handler
+        RTCConnections[currentIndex].onicecandidate = handleIceCandidate
 
         //add local stream to new RTC object
         stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
@@ -56,6 +65,8 @@ export default class Webcam extends Component {
 
         RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
+
+        RTCConnections[currentIndex].onicecandidate = handleIceCandidate
 
         //add local stream to new RTC object
         stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
@@ -87,6 +98,19 @@ export default class Webcam extends Component {
 
         RTCConnections[currentIndex].setRemoteDescription(answer)
       })
+
+      socket.on("receiveNewIceCandidate", (candidate) => {
+        if(candidate != null) {
+          try {
+            RTCConnections[currentIndex].addIceCandidate(candidate)
+          }
+          catch(error) {
+            console.log("error adding ice candidate : " + error)
+          }
+        }
+      })
+
+
     })
     .catch(error => {
       console.log("Media Error : " + error)

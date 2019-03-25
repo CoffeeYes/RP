@@ -272,6 +272,11 @@ io.on('connection',(client) => {
   client.on("sendRTCAnswer", (answer) => {
     io.to([answer.destinationID]).emit("receiveRTCAnswer",answer)
   })
+
+  client.on("newIceCandidate", (candidate) => {
+    console.log(candidate)
+    client.broadcast.emit("receiveNewIceCandidate",candidate)
+  })
   /*
   //returns number of connected clients to frontend so it can create correct amount of RTC offers
   client.on("getConnectedClientCount",() => {
