@@ -40,6 +40,12 @@ export default class Webcam extends Component {
         }
       }
 
+      //handle receiving remote tracks
+      function handleOnTrack(event) {
+        var remoteVideo = document.querySelector('#remoteCam')
+        remoteVideo.srcObject = event.streams[0]
+      }
+
       //let the server know the user allowed the webcam so it can begin RTC handshake
       socket.emit("newWebcamMounted")
 
@@ -72,6 +78,7 @@ export default class Webcam extends Component {
         currentIndex = RTCConnections.length - 1;
 
         RTCConnections[currentIndex].onicecandidate = handleIceCandidate
+        RTCConnections[currentIndex].ontrack = handleOnTrack
 
         //add local stream to new RTC object
         stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
@@ -94,11 +101,6 @@ export default class Webcam extends Component {
         console.log("Answer Received");
         console.log(answer)
 
-        //mount remote video to DOM
-        function handleOnTrack(event) {
-          var remoteVideo = document.querySelector('#remoteCam')
-          remoteVideo.srcObject = event.streams[0]
-        }
         RTCConnections[currentIndex].ontrack = handleOnTrack
 
         RTCConnections[currentIndex].setRemoteDescription(answer)
