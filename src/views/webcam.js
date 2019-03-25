@@ -30,9 +30,14 @@ export default class Webcam extends Component {
       video.srcObject = stream
 
       //function to handle ice candidate
-      function handleIceCandidate(candidate) {
-        console.log(candidate)
-        socket.emit("newIceCandidate",candidate)
+      function handleIceCandidate(event) {
+        if(event.candidate) {
+          console.log(event.candidate)
+          socket.emit("newIceCandidate",event.candidate)
+        }
+        else {
+          console.log("all ICE candidates sent")
+        }
       }
 
       //let the server know the user allowed the webcam so it can begin RTC handshake
