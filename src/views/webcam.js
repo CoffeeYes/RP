@@ -42,7 +42,8 @@ export default class Webcam extends Component {
 
       //handle receiving remote tracks
       function handleOnTrack(event) {
-        var remoteVideo = document.querySelector('#remoteCam')
+        console.log(RTCConnections.length)
+        var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
         remoteVideo.srcObject = event.streams[0]
       }
 
@@ -99,7 +100,6 @@ export default class Webcam extends Component {
 
       socket.on("receiveRTCAnswer", (answer) => {
         console.log("Answer Received");
-        console.log(answer)
 
         RTCConnections[currentIndex].ontrack = handleOnTrack
 
@@ -122,74 +122,6 @@ export default class Webcam extends Component {
     .catch(error => {
       console.log("Media Error : " + error)
     })
-
-
-
-
-
-      /*
-      //create RTC object
-      let thisPC = new RTCPeerConnection() || window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection || window.msRTCPeerConnection;
-
-      //negotiation event handler, adding tracks fires negotiation needed
-      function handleNegotiationNeededEvent() {
-        //get number of connected clients from server
-        socket.emit("getConnectedClientCount")
-        socket.on("returnConnectedClientCount",(count) => {
-          //create offers for the number of connected clients
-          let offers = []
-          for(var i = 1; i < count ; i++) {
-            //createOffer is async, so we check for length match in the .then block before emitting offers array, otherwise empty synchronous array is emitted
-            thisPC.createOffer()
-            .then(function(offer) {
-              offers.push(offer)
-
-              if(offers.length == count - 1) {
-                socket.emit("newRTCConnections",offers)
-              }
-            })
-          }
-        })
-
-
-      }
-      thisPC.onnegotiationneeded = handleNegotiationNeededEvent()
-
-      //add mediadevices tracks to the rtc object
-      stream.getTracks().forEach(track => thisPC.addTrack(track,stream))
-
-      //handle receiving of RTC offer
-      socket.on("receiveNewRTCOffer",function(offer) {
-        console.log("new RTC offer received from server")
-
-        //set remote description to the received offer
-        thisPC.setRemoteDescription(offer)
-        .then(() => {
-          console.log("remote description set")
-          //create an answer, set it as local description and forward it to server
-           thisPC.createAnswer()
-           .then( (answer) => {
-             console.log("answer created")
-             thisPC.setLocalDescription(answer)
-             .then( () => {
-               socket.emit("createdRTCAnswer",answer)
-             })
-           })
-        })
-      })
-
-
-      socket.on("receiveRTCAnswer", (answer) => {
-        thisPC.setRemoteDescription(answer)
-        .then( () => {
-          console.log("RTC peer connection complete")
-        })
-      })
-    })
-    .catch( error => {
-      console.log(error)
-    })
-    */
   }
   render() {
     return(

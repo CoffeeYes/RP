@@ -273,35 +273,10 @@ io.on('connection',(client) => {
     io.to([answer.destinationID]).emit("receiveRTCAnswer",answer)
   })
 
+  //relay the new ICE candidate to other clients
   client.on("newIceCandidate", (candidate) => {
-    console.log(candidate)
     client.broadcast.emit("receiveNewIceCandidate",candidate)
   })
-  /*
-  //returns number of connected clients to frontend so it can create correct amount of RTC offers
-  client.on("getConnectedClientCount",() => {
-    client.emit("returnConnectedClientCount",connectedClientCount)
-  })
-
-  //emit the newly created offers to all other connected clients
-  client.on('newRTCConnections',(offers) => {
-    console.log("new client offers received")
-    currentOfferHost = client.id;
-
-    for(var i = 0; i < connectedClientCount ;i++) {
-      if(client.id != clientList[i]) {
-        io.to(clientList[i]).emit("receiveNewRTCOffer",offers[i])
-      }
-    }
-
-  })
-
-  client.on("createdRTCAnswer", (answer) => {
-    console.log(answer)
-
-    io.to(currentOfferHost).emit("receiveRTCAnswer",answer)
-  })
-  */
 })
 
 
