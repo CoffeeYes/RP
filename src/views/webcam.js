@@ -44,7 +44,9 @@ export default class Webcam extends Component {
       function handleOnTrack(event) {
         console.log(RTCConnections.length)
         var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
-        remoteVideo.srcObject = event.streams[0]
+        if(remoteVideo) {
+          remoteVideo.srcObject = event.streams[0]
+        }
       }
 
       //let the server know the user allowed the webcam so it can begin RTC handshake
