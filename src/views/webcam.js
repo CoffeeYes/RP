@@ -4,6 +4,9 @@ import Webrtc from 'simplewebrtc'
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:5001')
 
+let RTCConnections = [];
+let currentIndex = 0;
+
 export default class Webcam extends Component {
 
   constructor(props) {
@@ -19,8 +22,6 @@ export default class Webcam extends Component {
       video : {width: 640,height : 480}
     }
 
-    let RTCConnections = [];
-    let currentIndex = 0;
     const configuration = {iceServers: [{urls: 'stun:stun.example.com'}]};
 
     navigator.mediaDevices.getUserMedia(constraints)
