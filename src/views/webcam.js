@@ -33,7 +33,6 @@ export default class Webcam extends Component {
       //function to handle ice candidate
       function handleIceCandidate(event) {
         if(event.candidate) {
-          console.log(event.candidate)
           socket.emit("newIceCandidate",event.candidate)
         }
         else {
@@ -43,7 +42,6 @@ export default class Webcam extends Component {
 
       //handle receiving remote tracks
       function handleOnTrack(event) {
-        console.log(RTCConnections.length)
         var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
         if(remoteVideo) {
           remoteVideo.srcObject = event.streams[0]
@@ -76,8 +74,6 @@ export default class Webcam extends Component {
 
       //receive rtc offer when this client is the newest one
       socket.on("receiveRTCOffer", (offer) => {
-        console.log("Offer received")
-
         RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
 
@@ -102,8 +98,6 @@ export default class Webcam extends Component {
       })
 
       socket.on("receiveRTCAnswer", (answer) => {
-        console.log("Answer Received");
-
         RTCConnections[currentIndex].ontrack = handleOnTrack
 
         RTCConnections[currentIndex].setRemoteDescription(answer)
