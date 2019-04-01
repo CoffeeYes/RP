@@ -171,6 +171,10 @@ form {
   margin-top: 2vh;
 }
 
+.cam-row {
+  display: block;
+}
+
 .cam2 {
   width: 25vw;
   height: 30vh;
