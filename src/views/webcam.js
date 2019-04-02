@@ -61,6 +61,13 @@ export default class Webcam extends Component {
         //add ice candidate handler
         RTCConnections[currentIndex].onicecandidate = handleIceCandidate
 
+        RTCConnections[currentIndex].onsignalingstatechange = function(event) {
+          console.log("connection state changed")
+          if(RTCConnections[currentIndex].signalingState === "closed") {
+            console.log("connection closed")
+          }
+        }
+
         //add local stream to new RTC object
         stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
 
