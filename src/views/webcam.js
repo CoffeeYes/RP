@@ -27,7 +27,7 @@ export default class Webcam extends Component {
     navigator.mediaDevices.getUserMedia(constraints)
     .then( (stream) => {
       this.setState({videoSrc : stream })
-      var video = document.querySelector('#testCam')
+      var video = document.querySelector('#localCam')
       video.srcObject = stream
 
       //function to handle ice candidate
@@ -145,8 +145,7 @@ export default class Webcam extends Component {
   render() {
     return(
       <div>
-        <video autoPlay={true} className="cam2" id="testCam"></video>
-        <video autoPlay={true} className="cam2" id="remoteCam"></video>
+        <video autoPlay={true} className="cam2" id="localCam"></video>
       </div>
     )
   }
