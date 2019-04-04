@@ -124,7 +124,9 @@ export default class Webcam extends Component {
         }
       })
 
-
+      socket.on("clientDisconnect", (id) => {
+        console.log("client " + id + " disconnected")
+      })
     })
     .catch(error => {
       console.log("Media Error : " + error)

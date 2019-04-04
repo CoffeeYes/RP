@@ -277,6 +277,10 @@ io.on('connection',(client) => {
   client.on("newIceCandidate", (candidate) => {
     client.broadcast.emit("receiveNewIceCandidate",candidate)
   })
+
+  client.on("disconnect", () => {
+    io.emit("clientDisconnect",client.id)
+  })
 })
 
 
