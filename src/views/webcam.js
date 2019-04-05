@@ -95,6 +95,7 @@ export default class Webcam extends Component {
 
         RTCConnections[currentIndex].setRemoteDescription(offer)
         .then ( (Offer) => {
+          RTCConnections[currentIndex].remoteSocketID= offer.originID
           RTCConnections[currentIndex].createAnswer()
           .then( (answer) => {
             RTCConnections[currentIndex].setLocalDescription(answer)
@@ -111,6 +112,7 @@ export default class Webcam extends Component {
         RTCConnections[answer.index].ontrack = handleOnTrack
 
         RTCConnections[answer.index].setRemoteDescription(answer)
+        RTCConnections[answer.index].remoteSocketID = answer.originID
       })
 
       socket.on("receiveNewIceCandidate", (candidate) => {
@@ -126,6 +128,9 @@ export default class Webcam extends Component {
 
       socket.on("clientDisconnect", (id) => {
         console.log("client " + id + " disconnected")
+        for(var item in RTCConnections) {
+          console.log(RTCConnections[item])
+        }
       })
     })
     .catch(error => {
