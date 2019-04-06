@@ -35,9 +35,6 @@ export default class Webcam extends Component {
         if(event.candidate) {
           socket.emit("newIceCandidate",event.candidate)
         }
-        else {
-          console.log("all ICE candidates sent")
-        }
       }
 
       //handle receiving remote tracks
@@ -60,13 +57,6 @@ export default class Webcam extends Component {
 
         //add ice candidate handler
         RTCConnections[currentIndex].onicecandidate = handleIceCandidate
-
-        RTCConnections[currentIndex].onsignalingstatechange = function(event) {
-          console.log("connection state changed")
-          if(RTCConnections[currentIndex].signalingState === "closed") {
-            console.log("connection closed")
-          }
-        }
 
         //add local stream to new RTC object
         stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
@@ -126,10 +116,16 @@ export default class Webcam extends Component {
         }
       })
 
+      //when another client disconnects
       socket.on("clientDisconnect", (id) => {
         console.log("client " + id + " disconnected")
         for(var item in RTCConnections) {
-          console.log(RTCConnections[item])
+          if(RTCConnections[item].remoteSocketID == id) {
+            //close connection
+            RTCConnections[item].close()
+            //remove object from array
+            RTCConnections.splice(RTCConnections.indexOf(RTCConnections[item],1))
+          }
         }
       })
     })
