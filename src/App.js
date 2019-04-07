@@ -46,6 +46,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
     this.fetchModes = this.fetchModes.bind(this);
+    this.getMode = this.getMode.bind(this);
     this.handleCode = this.handleCode.bind(this);
     this.createCode = this.createCode.bind(this);
     this.getUsers = this.getUsers.bind(this);
@@ -107,9 +108,10 @@ class App extends Component {
 
   //fetch current mode, renders different lobbies
   getMode() {
-    fetch('../mode')
+    fetch('/mode')
     .then(res => res.json())
     .then(data => {
+      this.setState({mode : data.mode})
       localStorage.setItem("mode",JSON.stringify(data.mode))
     })
   }
