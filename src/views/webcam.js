@@ -8,15 +8,6 @@ let RTCConnections = [];
 let currentIndex = 0;
 
 export default class Webcam extends Component {
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      videoSrc: null
-    }
-  }
-
   componentDidMount = () => {
     let constraints = {
       video : {width: 640,height : 480}
@@ -132,18 +123,6 @@ export default class Webcam extends Component {
     .catch(error => {
       console.log("Media Error : " + error)
     })
-  }
-
-  componentWillUnmount = () => {
-    for(var i = 0; i < RTCConnections.length; i++) {
-      var remoteVideo = document.querySelector(['#remote' + i])
-      if(remoteVideo) {
-        remoteVideo.srcObject = null
-      }
-      RTCConnections[i].close()
-    }
-    RTCConnections = []
-    console.log("RTCConnections cleared")
   }
   render() {
     return(
