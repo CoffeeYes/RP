@@ -7,19 +7,19 @@ class Koth extends Component {
 
     return (
       <div className="cam-container">
-        <div className="cam-row">
+        <div className="cam-col">
           <div className="camBox localCam guest">
             <p>name1</p>
             <Webcam/>
           </div>
           <div className="camBox remoteCam guest">
-            <p>name2</p>
+            <p>name3</p>
             <video autoPlay={true} className="cam2" id="remote1"></video>
           </div>
         </div>
-        <div className="cam-row">
+        <div className="cam-col">
           <div className="camBox remoteCam guest">
-            <p>name3</p>
+            <p>name2</p>
             <video autoPlay={true} className="cam2" id="remote2"></video>
           </div>
           <div className="camBox remoteCam guest">
