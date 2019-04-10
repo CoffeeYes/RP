@@ -5,6 +5,8 @@ const app = express();
 const connect = require('./src/connect.js');
 const Mclient = require('mongodb').MongoClient;
 
+const bcrypt = require('bcrypt')
+
 const io = require('socket.io')();
 const socketStream = require('socket.io-stream')
 
@@ -164,6 +166,13 @@ app.post('/createCode',function(req,res,next) {
 app.post('/addUser',function(req,res,next) {
   let userData = req.body
 
+  bcrypt.hash(userData.password, 10 , function(error,hash) {
+    if(error) {
+      console.log("Hashing error : " + error)
+    }
+
+    userData.password = hash;
+  })
   Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
 
