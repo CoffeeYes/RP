@@ -96,21 +96,31 @@ app.post('/login',function(req,res,next) {
     if(error)throw error;
     let database = client.db('rp');
 
+    //look up username in db
     database.collection('user_data').find({username : req.body.username}).toArray(function(error,data) {
+      //if no user is found
       if(data == '') {
         res.send({error: 'User not found'})
       }
-      else if(data[0].password != req.body.password){
-        res.send({error: 'Incorrect Password'})
-      }
-      else {
-        if(data[0].username == "QueenRajj") {
-          return res.send({loggedIn : true,user_type : 'admin'})
+
+      //compare hash
+      bcrypt.compare(req.body.password,data[0].password,function(error,result) {
+        if(error) {
+          console.log("PW compare Error : " + error)
+        }
+
+        if(result == true) {
+          if(data[0].username == "QueenRajj") {
+            return res.send({loggedIn : true,user_type : 'admin'})
+          }
+          else {
+            return res.send({loggedIn : true,user_type : 'host'})
+          }
         }
         else {
-          return res.send({loggedIn : true,user_type : 'host'})
+          res.send({error: 'Incorrect Password'})
         }
-      }
+      })
     })
   })
 })
