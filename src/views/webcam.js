@@ -127,7 +127,7 @@ export default class Webcam extends Component {
   render() {
     return(
       <div>
-        <video autoPlay={true} className="cam2" id="localCam"></video>
+        <video autoPlay={true} className="guestCam" id="localCam"></video>
       </div>
     )
   }
