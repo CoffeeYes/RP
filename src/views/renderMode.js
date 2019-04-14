@@ -7,7 +7,7 @@ class RenderMode extends Component {
   render() {
     if(this.props.mode.toLowerCase() == "king of the hill") {
       return (
-        <Koth />
+        <Koth userType={this.props.userType}/>
       )
     }
     else {

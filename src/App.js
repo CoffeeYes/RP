@@ -333,6 +333,7 @@ class App extends Component {
               renderFull={true}
               showCopied={this.state.showCopied}
               getMode={this.getMode}
+              userType={this.state.user_type}
               />
             )}/>
             <Route path='/panel/mode' render={() => (
@@ -361,7 +362,14 @@ class App extends Component {
         return(
           //if not admin only allow access to the lobby
           <Route path='/lobby' render={() => (
-            <Lobby mode={this.state.mode} createCode={this.createCode} generatedCode={this.state.generatedCode} renderFull={false} getMode={this.getMode}/>
+            <Lobby
+            mode={this.state.mode}
+            createCode={this.createCode}
+            generatedCode={this.state.generatedCode}
+            renderFull={false}
+            getMode={this.getMode}
+            userType={this.state.user_type}
+            />
           )}/>
         )
       }
