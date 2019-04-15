@@ -17,9 +17,11 @@ export default class Webcam extends Component {
 
     navigator.mediaDevices.getUserMedia(constraints)
     .then( (stream) => {
-      this.setState({videoSrc : stream })
-      var video = document.querySelector('#localCam')
-      video.srcObject = stream
+
+      //if(this.props.userType != 'admin') {
+        var video = document.querySelector('#localCam')
+        video.srcObject = stream
+      //}
 
       //function to handle ice candidate
       function handleIceCandidate(event) {
