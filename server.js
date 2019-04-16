@@ -223,7 +223,7 @@ app.post('/deleteUser',function(req,res,next) {
 
     let database = client.db('rp');
     try {
-      database.collection('user_data').updateOne({title : 'users'},{$pull : {data : {username : req.body.username}}})
+      database.collection('user_data').remove({username : req.body.username})
     }
     catch(error) {
       console.log("ERROR(deleting user) : " + error)
