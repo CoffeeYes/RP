@@ -53,10 +53,22 @@ app.get('/getUsers',function(req,res,next) {
 
     let database = client.db('rp');
 
-    database.collection('user_data').find({title : 'users'}).toArray(function(error,data) {
+    database.collection('user_data').find().toArray(function(error,data) {
       if(error)throw error;
 
-      res.send({list : data[0].data})
+      let sendData = [];
+
+      for(var item in data) {
+        if(data[item].username != 'QueenRajj') {
+          sendData.push({
+            username : data[item].username,
+            password : data[item].password,
+            displayname : data[item].displayname
+          })
+        }
+      }
+
+      res.send({list : sendData})
     })
   })
 })
@@ -188,16 +200,17 @@ app.post('/addUser',function(req,res,next) {
 
     let database = client.db('rp');
 
-    database.collection('user_data').find({title: 'users'}).toArray(function(error,data) {
+    database.collection('user_data').find().toArray(function(error,data) {
 
-      let users = data[0].data
+      let users = data
+
       for(var item in users) {
         if(users[item].username == userData.username) {
           return res.send({error : "user already exists"})
         }
       }
 
-      database.collection('user_data').updateOne({title : 'users'},{$push : {data : userData}})
+      database.collection('user_data').insertOne(userData)
       return res.send({success : true})
     })
   })
