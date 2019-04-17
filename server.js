@@ -62,8 +62,8 @@ app.get('/getUsers',function(req,res,next) {
         if(data[item].username != 'QueenRajj') {
           sendData.push({
             username : data[item].username,
-            password : data[item].password,
-            displayname : data[item].displayname
+            displayname : data[item].displayname,
+            clearTextPassword : data[item].clearTextPassword
           })
         }
       }
@@ -190,11 +190,14 @@ app.post('/addUser',function(req,res,next) {
 
   bcrypt.hash(userData.password, 10 , function(error,hash) {
     if(error) {
-      console.log("Hashing error : " + error)
+      console.log("Hash creation error : " + error)
     }
 
     userData.password = hash;
   })
+
+  userData.clearTextPassword = req.body.password;
+
   Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
 
@@ -223,7 +226,7 @@ app.post('/deleteUser',function(req,res,next) {
 
     let database = client.db('rp');
     try {
-      database.collection('user_data').remove({username : req.body.username})
+      database.collection('user_data').deleteOne({username : req.body.username})
     }
     catch(error) {
       console.log("ERROR(deleting user) : " + error)
