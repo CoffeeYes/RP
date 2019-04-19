@@ -285,11 +285,13 @@ class App extends Component {
   }
 
   getAllPolls() {
-    fetch('/allPolls')
-    .then(res => res.json())
-    .then(data => {
-      this.setState({pollsData : data.data})
-    })
+    setTimeout(() => {
+      fetch('/allPolls')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({pollsData : data.data})
+      })
+    },200)
   }
 
   clickVote(event) {
