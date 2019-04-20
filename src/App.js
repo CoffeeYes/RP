@@ -19,7 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username : '',
+      username : sessionStorage.getItem('username')|| '',
       password : '',
       error: '',
       codeInput : '',
@@ -88,6 +88,7 @@ class App extends Component {
         this.setState({loggedIn: true});
         sessionStorage.setItem('authenticated',true);
         sessionStorage.setItem('user_type',data.user_type);
+        sessionStorage.setItem('username',data.username);
         window.location = '/lobby'
       }
     })

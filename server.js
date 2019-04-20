@@ -126,7 +126,8 @@ app.post('/login',function(req,res,next) {
             return res.send({loggedIn : true,user_type : 'admin'})
           }
           else {
-            return res.send({loggedIn : true,user_type : 'host'})
+            console.log("authenticated : " + data[0].username)
+            return res.send({loggedIn : true,user_type : 'host',username : data[0].username})
           }
         }
         else {
