@@ -88,7 +88,9 @@ class App extends Component {
         this.setState({loggedIn: true});
         sessionStorage.setItem('authenticated',true);
         sessionStorage.setItem('user_type',data.user_type);
-        sessionStorage.setItem('username',data.username);
+        if(data.username) {
+          sessionStorage.setItem('username',data.username);
+        }
         window.location = '/lobby'
       }
     })
@@ -337,6 +339,7 @@ class App extends Component {
               showCopied={this.state.showCopied}
               getMode={this.getMode}
               userType={this.state.user_type}
+              localUsername={this.state.username}
               />
             )}/>
             <Route path='/panel/mode' render={() => (
@@ -372,6 +375,7 @@ class App extends Component {
             renderFull={false}
             getMode={this.getMode}
             userType={this.state.user_type}
+            localUsername={this.state.username}
             />
           )}/>
         )

@@ -18,14 +18,14 @@ class Lobby extends Component {
             <Generate createCode={this.props.createCode} generatedCode={this.props.generatedCode} showCopied={this.props.showCopied}/>
             <a href="/panel" className="panel-link">Panel</a>
           </div>
-          <RenderMode mode={this.props.mode} userType={this.props.userType}/>
+          <RenderMode mode={this.props.mode} userType={this.props.userType} localUsername={this.props.localUsername}/>
         </div>
       )
     }
     else {
       return (
         <div>
-          <RenderMode mode={this.props.mode} userType={this.props.userType}/>
+          <RenderMode mode={this.props.mode} userType={this.props.userType} localUsername={this.props.localUsername}/>
         </div>
       )
     }
