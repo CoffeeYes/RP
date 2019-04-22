@@ -126,7 +126,6 @@ app.post('/login',function(req,res,next) {
             return res.send({loggedIn : true,user_type : 'admin'})
           }
           else {
-            console.log("authenticated : " + data[0].username)
             return res.send({loggedIn : true,user_type : 'host',username : data[0].username})
           }
         }
@@ -285,6 +284,7 @@ app.post('/deletePoll',function(req,res,next) {
 //---------------------------------------------------------------- sockets --------------------------------------------------------------
 let offers = []
 let currentOfferHost = '';
+let users = [];
 io.on('connection',(client) => {
 
   connectedClientCount = Object.keys(io.sockets.sockets).length
@@ -316,6 +316,16 @@ io.on('connection',(client) => {
 
   client.on("disconnect", () => {
     io.emit("clientDisconnect",client.id)
+
+    for(var i = 0; i < users.length; i++) {
+      if(users[i].socketID == client.id) {
+        users.splice(i,1);
+      }
+    }
+  })
+
+  client.on("login", (username) => {
+    users.push({username : username,socketID : client.id});
   })
 })
 

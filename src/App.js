@@ -13,6 +13,9 @@ import AddUser from './views/addUser.js';
 import UserList from './views/userlist.js';
 import VotingPoll from './views/votingPoll.js'
 
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:5001')
+
 
 class App extends Component {
 
@@ -90,6 +93,7 @@ class App extends Component {
         sessionStorage.setItem('user_type',data.user_type);
         if(data.username) {
           sessionStorage.setItem('username',data.username);
+          socket.emit('login',data.username);
         }
         window.location = '/lobby'
       }
