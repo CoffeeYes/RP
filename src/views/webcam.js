@@ -13,6 +13,7 @@ export default class Webcam extends Component {
       video : {width: 640,height : 480}
     }
 
+    socket.emit("linkUserToSocket",this.props.localUsername);
     const configuration = {iceServers: [{urls: 'stun:stun.example.com'}]};
 
     navigator.mediaDevices.getUserMedia(constraints)

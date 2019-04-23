@@ -10,7 +10,7 @@ class Koth extends Component {
         <div className="cam-col">
           <div className="camBox localCam guest">
             <p>{this.props.localUsername}</p>
-            <Webcam userType={this.props.userType}/>
+            <Webcam userType={this.props.userType} localUsername={this.props.localUsername}/>
           </div>
           <div className="camBox remoteCam guest">
             <p>name3</p>

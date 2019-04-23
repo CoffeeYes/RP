@@ -324,8 +324,9 @@ io.on('connection',(client) => {
     }
   })
 
-  client.on("login", (username) => {
+  client.on("linkUserToSocket", (username) => {
     users.push({username : username,socketID : client.id});
+    console.log(users)
   })
 })
 
