@@ -47,7 +47,7 @@ export default class Webcam extends Component {
         //create new RTC connection and add it to the connection array, correct the currentindex
         RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
-        RTCConnections[currentIndex].index = currentIndex
+        RTCConnections[currentIndex].index = currentIndex;
 
         //add ice candidate handler
         RTCConnections[currentIndex].onicecandidate = handleIceCandidate
@@ -61,6 +61,7 @@ export default class Webcam extends Component {
           RTCConnections[currentIndex].setLocalDescription(offer)
           offer.destinationID = clientID
           offer.index = currentIndex
+          offer.remoteUsername = this.props.localUsername;
           socket.emit("RTCOfferCreated",offer)
         })
       })
@@ -69,7 +70,8 @@ export default class Webcam extends Component {
       socket.on("receiveRTCOffer", (offer) => {
         RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
-        RTCConnections[currentIndex].index = currentIndex
+        RTCConnections[currentIndex].index = currentIndex;
+        RTCConnections[currentIndex].remoteUsername = offer.remoteUsername;
 
         RTCConnections[currentIndex].onicecandidate = handleIceCandidate
         RTCConnections[currentIndex].ontrack = handleOnTrack
@@ -86,13 +88,15 @@ export default class Webcam extends Component {
             //reverse destination and origin for the answer
             answer.originID = offer.destinationID;
             answer.destinationID = offer.originID;
-            answer.index = offer.index
+            answer.index = offer.index;
+            answer.remoteUsername = this.props.localUsername;
             socket.emit("sendRTCAnswer",answer)
           })
         })
       })
 
       socket.on("receiveRTCAnswer", (answer) => {
+        RTCConnections[answer.index].remoteUsername = answer.remoteUsername;
         RTCConnections[answer.index].ontrack = handleOnTrack
 
         RTCConnections[answer.index].setRemoteDescription(answer)
