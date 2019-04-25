@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import Webcam from './webcam.js'
 
 class Koth extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      name1 : '',
+      name2 : '',
+      name3 : '',
+    }
+  }
+
+  updateUsername(number,name) {
+    this.setState({['name' + number] : name})
+  }
 
   render() {
 
@@ -10,10 +23,10 @@ class Koth extends Component {
         <div className="cam-col">
           <div className="camBox localCam guest">
             <p>{this.props.localUsername}</p>
-            <Webcam userType={this.props.userType} localUsername={this.props.localUsername}/>
+            <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)}/>
           </div>
           <div className="camBox remoteCam guest">
-            <p>name3</p>
+            <p>{this.state.name1}</p>
             <video autoPlay={true} className="guestCam" id="remote1"></video>
           </div>
         </div>
@@ -29,11 +42,11 @@ class Koth extends Component {
         </div>
         <div className="cam-col">
           <div className="camBox remoteCam guest">
-            <p>name2</p>
+            <p>{this.state.name2}</p>
             <video autoPlay={true} className="guestCam" id="remote2"></video>
           </div>
           <div className="camBox remoteCam guest">
-            <p>name4</p>
+            <p>{this.state.name3}</p>
             <video autoPlay={true} className="guestCam" id="remote3"></video>
           </div>
         </div>
