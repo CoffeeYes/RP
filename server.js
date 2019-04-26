@@ -328,6 +328,10 @@ io.on('connection',(client) => {
     users.push({username : username,socketID : client.id});
     console.log(users)
   })
+
+  client.on("usernameSend",(number,username) => {
+    io.emit("usernameRecieve",number,username)
+  })
 })
 
 
