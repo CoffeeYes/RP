@@ -34,7 +34,6 @@ export default class Webcam extends Component {
       //handle receiving remote tracks
       function handleOnTrack(event) {
         var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
-        socket.emit("usernameSend",RTCConnections.length,RTCConnections[RTCConnections.length - 1].remoteUsername)
         if(remoteVideo) {
           remoteVideo.srcObject = event.streams[0]
         }
@@ -130,10 +129,6 @@ export default class Webcam extends Component {
     })
     .catch(error => {
       console.log("Media Error : " + error)
-    })
-
-    socket.on("usernameRecieve",(number,username) => {
-      this.props.updateUsername(number,username)
     })
   }
   render() {

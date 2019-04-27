@@ -8,7 +8,68 @@ const Mclient = require('mongodb').MongoClient;
 const bcrypt = require('bcrypt')
 
 const io = require('socket.io')();
-const socketStream = require('socket.io-stream')
+const socketStream = require('socket.io-stream');
+
+//---------------------------------------------------------------- sockets --------------------------------------------------------------
+let offers = []
+let currentOfferHost = '';
+let users = [];
+let userPositionCount = -1;
+io.on('connection',(client) => {
+  userPositionCount += 1;
+
+  connectedClientCount = Object.keys(io.sockets.sockets).length
+  clientList = Object.keys(io.sockets.sockets)
+  console.log("Connected Clients : " + connectedClientCount)
+
+  //when a new client turns on their webcam
+  client.on("newWebcamMounted", () => {
+    //ping other connected clients to create new RTC offers, include id of new client so we know where to send the offer once its sent back
+    client.broadcast.emit('createNewRTCOffer',client.id);
+  })
+
+  //get offers for the newly connected client
+  client.on("RTCOfferCreated", (offer) => {
+    //save the origin of the offer and forward it to the destination client
+    offer.originID = client.id;
+    io.to([offer.destinationID]).emit("receiveRTCOffer",offer)
+  })
+
+  //forward RTC answer to the offer creator
+  client.on("sendRTCAnswer", (answer) => {
+    io.to([answer.destinationID]).emit("receiveRTCAnswer",answer)
+  })
+
+  //relay the new ICE candidate to other clients
+  client.on("newIceCandidate", (candidate) => {
+    client.broadcast.emit("receiveNewIceCandidate",candidate)
+  })
+
+  client.on("disconnect", () => {
+    io.emit("clientDisconnect",client.id)
+
+    for(var i = 0; i < users.length; i++) {
+      if(users[i].socketID == client.id) {
+        users.splice(i,1);
+      }
+    }
+    userPositionCount -= 1;
+  })
+
+  client.on("linkUserToSocket", (username) => {
+    users.push({username : username,socketID : client.id,userCount : userPositionCount});
+  })
+
+  client.on("usernameSend",(number,username) => {
+    io.emit("usernameRecieve",number,username)
+  })
+})
+
+
+const port = 5001;
+io.listen(port)
+console.log('Sockets listening on port : ' + port)
+//---------------------------------------------------------------------------------------------------------------------------------------
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.json());
@@ -102,6 +163,15 @@ app.get('/allPolls',function(req,res,next) {
       res.send({data : data[0].data})
     })
   })
+})
+
+app.get('/getUsernames',function(req,res,next) {
+  let data = [];
+  for(var item in users) {
+    data.push({number : users[item].userCount,name : users[item].username});
+  }
+
+  return res.send(data);
 })
 app.post('/login',function(req,res,next) {
   Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
@@ -281,62 +351,5 @@ app.post('/deletePoll',function(req,res,next) {
   })
 })
 
-//---------------------------------------------------------------- sockets --------------------------------------------------------------
-let offers = []
-let currentOfferHost = '';
-let users = [];
-io.on('connection',(client) => {
 
-  connectedClientCount = Object.keys(io.sockets.sockets).length
-  clientList = Object.keys(io.sockets.sockets)
-  console.log("Connected Clients : " + connectedClientCount)
-
-  //when a new client turns on their webcam
-  client.on("newWebcamMounted", () => {
-    //ping other connected clients to create new RTC offers, include id of new client so we know where to send the offer once its sent back
-    client.broadcast.emit('createNewRTCOffer',client.id);
-  })
-
-  //get offers for the newly connected client
-  client.on("RTCOfferCreated", (offer) => {
-    //save the origin of the offer and forward it to the destination client
-    offer.originID = client.id;
-    io.to([offer.destinationID]).emit("receiveRTCOffer",offer)
-  })
-
-  //forward RTC answer to the offer creator
-  client.on("sendRTCAnswer", (answer) => {
-    io.to([answer.destinationID]).emit("receiveRTCAnswer",answer)
-  })
-
-  //relay the new ICE candidate to other clients
-  client.on("newIceCandidate", (candidate) => {
-    client.broadcast.emit("receiveNewIceCandidate",candidate)
-  })
-
-  client.on("disconnect", () => {
-    io.emit("clientDisconnect",client.id)
-
-    for(var i = 0; i < users.length; i++) {
-      if(users[i].socketID == client.id) {
-        users.splice(i,1);
-      }
-    }
-  })
-
-  client.on("linkUserToSocket", (username) => {
-    users.push({username : username,socketID : client.id});
-    console.log(users)
-  })
-
-  client.on("usernameSend",(number,username) => {
-    io.emit("usernameRecieve",number,username)
-  })
-})
-
-
-const port = 5001;
-io.listen(port)
-console.log('Sockets listening on port : ' + port)
-//---------------------------------------------------------------------------------------------------------------------------------------
 app.listen(process.env.PORT || 5000);
