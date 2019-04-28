@@ -57,7 +57,17 @@ io.on('connection',(client) => {
   })
 
   client.on("linkUserToSocket", (username) => {
-    users.push({username : username,socketID : client.id,userCount : userPositionCount});
+    //check if user is already connected
+    let connectedUser = false
+    for(var item in users) {
+      if(users[item].username == username) {
+        connectedUser = true
+      }
+    }
+    //if they arent connected add them to the user array
+    if(connectedUser == false) {
+      users.push({username : username,socketID : client.id,userCount : userPositionCount});
+    }
   })
 
   client.on("usernameSend",(number,username) => {
