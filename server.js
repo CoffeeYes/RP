@@ -184,6 +184,11 @@ app.get('/getUsernames',function(req,res,next) {
   return res.send(data);
 })
 app.post('/login',function(req,res,next) {
+  for(var item in users) {
+    if(users[item].username == req.body.username) {
+      return res.send({error : "User is already logged in"})
+    }
+  }
   Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
     if(error)throw error;
     let database = client.db('rp');
