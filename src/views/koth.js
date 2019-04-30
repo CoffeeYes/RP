@@ -38,27 +38,27 @@ class Koth extends Component {
           </div>
           <div className="camBox remoteCam guest">
             <p>{this.state.name1}</p>
-            <video autoPlay={true} className="guestCam" id="remote1"></video>
+            <video autoPlay={true} className="guestCam cam" id="remote1"></video>
           </div>
         </div>
         <div className="cam-col">
           <div className="camBox remoteCam contestant">
             <p>Contestant</p>
-            <video autoPlay={true} className="contestantCam" id="contestant"></video>
+            <video autoPlay={true} className="contestantCam cam" id="contestant"></video>
           </div>
           <div className="camBox remoteCam contestant">
             <p>King</p>
-            <video autoPlay={true} className="contestantCam" id="king"></video>
+            <video autoPlay={true} className="contestantCam cam" id="king"></video>
           </div>
         </div>
         <div className="cam-col">
           <div className="camBox remoteCam guest">
             <p>{this.state.name2}</p>
-            <video autoPlay={true} className="guestCam" id="remote2"></video>
+            <video autoPlay={true} className="guestCam cam" id="remote2"></video>
           </div>
           <div className="camBox remoteCam guest">
             <p>{this.state.name3}</p>
-            <video autoPlay={true} className="guestCam" id="remote3"></video>
+            <video autoPlay={true} className="guestCam cam" id="remote3"></video>
           </div>
         </div>
       </div>

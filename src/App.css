@@ -175,6 +175,14 @@ form {
   display: block;
 }
 
+.camOverlay {
+  filter : blur(30px);
+}
+
+.cam {
+  filter : blur(30px);
+}
+
 .contestant {
   width: 20vw;
   height: 30vh;
