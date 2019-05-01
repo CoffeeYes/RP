@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Webcam from './webcam.js'
+import Cam from './cam.js'
 
 class Koth extends Component {
   constructor(props) {
@@ -33,32 +34,27 @@ class Koth extends Component {
       <div className="cam-container">
         <div className="cam-col">
           <div className="camBox localCam guest">
-            <p>{this.props.localUsername}</p>
+            <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam"/>
             <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)}/>
           </div>
           <div className="camBox remoteCam guest">
-            <p>{this.state.name1}</p>
-            <video autoPlay={true} className="guestCam cam" id="remote1"></video>
+            <Cam camName={this.state.name1} camID="remote1" camType="guestCam"/>
           </div>
         </div>
         <div className="cam-col">
           <div className="camBox remoteCam contestant">
-            <p>Contestant</p>
-            <video autoPlay={true} className="contestantCam cam" id="contestant"></video>
+            <Cam camName="Contestant" camID="contestantCam" camType="contestantCam"/>
           </div>
           <div className="camBox remoteCam contestant">
-            <p>King</p>
-            <video autoPlay={true} className="contestantCam cam" id="king"></video>
+            <Cam camName="King" camID="king" camType="contestantCam"/>
           </div>
         </div>
         <div className="cam-col">
           <div className="camBox remoteCam guest">
-            <p>{this.state.name2}</p>
-            <video autoPlay={true} className="guestCam cam" id="remote2"></video>
+            <Cam camName={this.state.name2} camID="remote2" camType="guestCam"/>
           </div>
           <div className="camBox remoteCam guest">
-            <p>{this.state.name3}</p>
-            <video autoPlay={true} className="guestCam cam" id="remote3"></video>
+            <Cam camName={this.state.name3} camID="remote3" camType="guestCam"/>
           </div>
         </div>
       </div>
