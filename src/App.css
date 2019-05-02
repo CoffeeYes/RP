@@ -179,8 +179,12 @@ form {
   filter : blur(30px);
 }
 
-.cam {
+.camBlurred {
   filter : blur(30px);
+}
+
+.camNotBlurred {
+  filter : none;
 }
 
 .contestant {
