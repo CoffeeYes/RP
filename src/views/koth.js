@@ -34,27 +34,27 @@ class Koth extends Component {
       <div className="cam-container">
         <div className="cam-col">
           <div className="camBox localCam guest">
-            <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam"/>
+            <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType}/>
             <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)}/>
           </div>
           <div className="camBox remoteCam guest">
-            <Cam camName={this.state.name1} camID="remote1" camType="guestCam"/>
+            <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType}/>
           </div>
         </div>
         <div className="cam-col">
           <div className="camBox remoteCam contestant">
-            <Cam camName="Contestant" camID="contestantCam" camType="contestantCam"/>
+            <Cam camName="Contestant" camID="contestantCam" camType="contestantCam" userType={this.props.userType}/>
           </div>
           <div className="camBox remoteCam contestant">
-            <Cam camName="King" camID="king" camType="contestantCam"/>
+            <Cam camName="King" camID="king" camType="contestantCam" userType={this.props.userType}/>
           </div>
         </div>
         <div className="cam-col">
           <div className="camBox remoteCam guest">
-            <Cam camName={this.state.name2} camID="remote2" camType="guestCam"/>
+            <Cam camName={this.state.name2} camID="remote2" camType="guestCam" userType={this.props.userType}/>
           </div>
           <div className="camBox remoteCam guest">
-            <Cam camName={this.state.name3} camID="remote3" camType="guestCam"/>
+            <Cam camName={this.state.name3} camID="remote3" camType="guestCam" userType={this.props.userType}/>
           </div>
         </div>
       </div>
