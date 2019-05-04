@@ -13,6 +13,12 @@ class Cam extends Component {
     this.toggleFilter = this.toggleFilter.bind(this);
   }
 
+  componentDidMount() {
+    if(this.props.userType != "admin") {
+      this.setState({camFilter : "camNotBlurred"})
+    }
+  }
+
   toggleFilter(event) {
     this.state.camFilter == "camBlurred" ? this.setState({camFilter : "camNotBlurred"}) : this.setState({camFilter : "camBlurred"})
   }
