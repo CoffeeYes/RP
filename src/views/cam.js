@@ -25,16 +25,16 @@ class Cam extends Component {
   render() {
       if(this.props.userType == "admin") {
         return(
-          <div>
+          <div className={["camBox " + this.props.containerType]}>
             <p>{this.props.camName}</p>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
-            <button onClick={this.toggleFilter}> B </button>
+            <button onClick={this.toggleFilter} className="filterButton"> B </button>
           </div>
         )
       }
       else {
         return (
-          <div>
+          <div className={["camBox" + this.props.containerType]}>
             <p>{this.props.camName}</p>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
           </div>
