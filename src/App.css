@@ -169,6 +169,8 @@ form {
   height: 40vh;
   margin-left: 1vw;
   margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .cam-col {
