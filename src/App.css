@@ -199,6 +199,11 @@ form {
   height: 35vh;
 }
 
+.filterButton {
+  align-self: flex-end;
+  position: absolute;
+}
+
 .codeForm {
   border : 1px solid black;
   padding: 3vh 3vw 3vh 3vw;
