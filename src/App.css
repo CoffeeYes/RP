@@ -165,8 +165,8 @@ form {
 
 .camBox {
   border: 0.5px solid black;
-  width: 35vw;
-  height: 40vh;
+  width: 30vw;
+  height: 45vh;
   margin-left: 1vw;
   margin-top: 2vh;
   display: flex;
@@ -176,11 +176,6 @@ form {
 .cam-col {
   display: block;
 }
-
-.camOverlay {
-  filter : blur(30px);
-}
-
 .camBlurred {
   filter : blur(30px);
 }
@@ -195,8 +190,7 @@ form {
 }
 
 .guestCam {
-  width: 35vw;
-  height: 35vh;
+  height: 40vh;
 }
 
 .filterButton {
