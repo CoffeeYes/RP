@@ -185,7 +185,10 @@ form {
 }
 
 .contestant {
-  width: 20vw;
+  height: 40vh;
+}
+
+.contestantCam {
   height: 30vh;
 }
 
