@@ -34,7 +34,7 @@ class Cam extends Component {
       }
       else {
         return (
-          <div className={["camBox" + this.props.containerType]}>
+          <div className={["camBox " + this.props.containerType]}>
             <p>{this.props.camName}</p>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
           </div>
