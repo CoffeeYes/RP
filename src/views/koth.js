@@ -38,8 +38,8 @@ class Koth extends Component {
             <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest"/>
         </div>
         <div className="cam-col">
-            <Cam camName="Contestant" camID="contestantCam" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant"/>
-            <Cam camName="King" camID="king" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant"/>
+            <Cam camName="Contestant" camID="contestant2" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant"/>
+            <Cam camName="King" camID="contestant2" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant"/>
         </div>
         <div className="cam-col">
             <Cam camName={this.state.name2} camID="remote2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest"/>

@@ -6,6 +6,7 @@ const socket = openSocket('http://localhost:5001')
 
 let RTCConnections = [];
 let currentIndex = 0;
+let contestantCount = 0;
 
 export default class Webcam extends Component {
   componentDidMount = () => {
@@ -31,9 +32,18 @@ export default class Webcam extends Component {
         }
       }
 
+      let userType = this.props.userType;
       //handle receiving remote tracks
       function handleOnTrack(event) {
-        var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
+        if(userType == "host") {
+          var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
+        }
+        else if(userType == "guest") {
+          contestantCount += 1;
+          var remoteVideo = document.querySelector(['#contestant' + contestantCount])
+        }
+
+
         if(remoteVideo) {
           remoteVideo.srcObject = event.streams[0]
         }
