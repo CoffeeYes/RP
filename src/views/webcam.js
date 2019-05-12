@@ -21,8 +21,14 @@ export default class Webcam extends Component {
     .then( (stream) => {
 
       //if(this.props.userType != 'admin') {
-        var video = document.querySelector('#localCam')
-        video.srcObject = stream
+      var localCam;
+      if(this.props.userType == "guest") {
+        localCam = document.querySelector('#contestant1')
+      }
+      else {
+        localCam = document.querySelector('#localCam')
+      }
+      localCam.srcObject = stream
       //}
 
       //function to handle ice candidate
