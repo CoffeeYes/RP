@@ -14,11 +14,16 @@ export default class Webcam extends Component {
       video : {width: 640,height : 480}
     }
 
+    let userType = this.props.userType;
+
     socket.emit("linkUserToSocket",this.props.localUsername);
     const configuration = {iceServers: [{urls: 'stun:stun.example.com'}]};
 
     navigator.mediaDevices.getUserMedia(constraints)
     .then( (stream) => {
+
+      var userType = this.props.userType;
+      var remoteUserType = "";
 
       //if(this.props.userType != 'admin') {
       var localCam;
@@ -37,8 +42,6 @@ export default class Webcam extends Component {
           socket.emit("newIceCandidate",event.candidate)
         }
       }
-
-      let userType = this.props.userType;
       //handle receiving remote tracks
       function handleOnTrack(event) {
         if(userType == "host") {
@@ -78,6 +81,7 @@ export default class Webcam extends Component {
           offer.destinationID = clientID
           offer.index = currentIndex
           offer.remoteUsername = this.props.localUsername;
+          offer.remoteUserType = this.props.userType;
           socket.emit("RTCOfferCreated",offer)
         })
       })
@@ -88,6 +92,7 @@ export default class Webcam extends Component {
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
         RTCConnections[currentIndex].remoteUsername = offer.remoteUsername;
+        RTCConnections[currentIndex].remoteUserType = offer.remoteUserType;
 
         RTCConnections[currentIndex].onicecandidate = handleIceCandidate
         RTCConnections[currentIndex].ontrack = handleOnTrack
@@ -106,6 +111,7 @@ export default class Webcam extends Component {
             answer.destinationID = offer.originID;
             answer.index = offer.index;
             answer.remoteUsername = this.props.localUsername;
+            answer.remoteUserType = this.props.userType;
             socket.emit("sendRTCAnswer",answer)
           })
         })
