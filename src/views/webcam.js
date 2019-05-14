@@ -15,6 +15,7 @@ export default class Webcam extends Component {
     }
 
     let userType = this.props.userType;
+    let remoteUserType = "";
 
     socket.emit("linkUserToSocket",this.props.localUsername);
     const configuration = {iceServers: [{urls: 'stun:stun.example.com'}]};
@@ -44,10 +45,10 @@ export default class Webcam extends Component {
       }
       //handle receiving remote tracks
       function handleOnTrack(event) {
-        if(userType == "host") {
+        if(remoteUserType == "host") {
           var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
         }
-        else if(userType == "guest") {
+        else if(remoteUserType == "guest") {
           contestantCount += 1;
           var remoteVideo = document.querySelector(['#contestant' + contestantCount])
         }
@@ -93,6 +94,7 @@ export default class Webcam extends Component {
         RTCConnections[currentIndex].index = currentIndex;
         RTCConnections[currentIndex].remoteUsername = offer.remoteUsername;
         RTCConnections[currentIndex].remoteUserType = offer.remoteUserType;
+        remoteUserType = offer.remoteUserType;
 
         RTCConnections[currentIndex].onicecandidate = handleIceCandidate
         RTCConnections[currentIndex].ontrack = handleOnTrack
@@ -123,6 +125,8 @@ export default class Webcam extends Component {
 
         RTCConnections[answer.index].setRemoteDescription(answer)
         RTCConnections[answer.index].remoteSocketID = answer.originID
+
+        remoteUserType = answer.remoteUserType;
       })
 
       socket.on("receiveNewIceCandidate", (candidate) => {
