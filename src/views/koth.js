@@ -28,6 +28,14 @@ class Koth extends Component {
     this.setState({['name' + number] : name})
   }
 
+  swapContestants() {
+    var contestant1 = document.querySelector('#contestant1');
+    var contestant2 = document.querySelector('#contestant2');
+    
+    var temp = contestant2.srcObject;
+    contestant2.srcObject = contestant1.srcObject;
+    contestant1.srcObject = temp;
+    }
   render() {
 
     return (
@@ -40,6 +48,7 @@ class Koth extends Component {
         <div className="cam-col">
             <Cam camName="Contestant" camID="contestant1" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant"/>
             <Cam camName="King" camID="contestant2" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant"/>
+            <button onClick={this.swapContestants}>Swap</button>
         </div>
         <div className="cam-col">
             <Cam camName={this.state.name2} camID="remote2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest"/>
