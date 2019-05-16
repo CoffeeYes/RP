@@ -125,6 +125,7 @@ export default class Webcam extends Component {
 
         RTCConnections[answer.index].setRemoteDescription(answer)
         RTCConnections[answer.index].remoteSocketID = answer.originID
+        RTCConnections[answer.index].remoteUserType = answer.remoteUserType;
 
         remoteUserType = answer.remoteUserType;
       })
