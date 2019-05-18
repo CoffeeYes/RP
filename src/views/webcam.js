@@ -43,8 +43,11 @@ export default class Webcam extends Component {
           socket.emit("newIceCandidate",event.candidate)
         }
       }
+
+
       //handle receiving remote tracks
       function handleOnTrack(event) {
+        //choose mounting position based on user type
         if(remoteUserType == "host") {
           var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
         }
@@ -115,6 +118,8 @@ export default class Webcam extends Component {
             answer.remoteUsername = this.props.localUsername;
             answer.remoteUserType = this.props.userType;
             socket.emit("sendRTCAnswer",answer)
+
+            this.props.updateUsername(currentIndex + 1, offer.remoteUsername)
           })
         })
       })
@@ -128,6 +133,7 @@ export default class Webcam extends Component {
         RTCConnections[answer.index].remoteUserType = answer.remoteUserType;
 
         remoteUserType = answer.remoteUserType;
+        this.props.updateUsername(answer.index + 1,answer.remoteUsername)
       })
 
       socket.on("receiveNewIceCandidate", (candidate) => {
