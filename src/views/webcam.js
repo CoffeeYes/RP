@@ -7,6 +7,7 @@ const socket = openSocket('http://localhost:5001')
 let RTCConnections = [];
 let currentIndex = 0;
 let contestantCount = 0;
+let positionIndex = 0;
 
 export default class Webcam extends Component {
   componentDidMount = () => {
@@ -72,6 +73,9 @@ export default class Webcam extends Component {
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
 
+        positionIndex += 1;
+        RTCConnections[currentIndex].positionIndex = currentIndex;
+
         //add ice candidate handler
         RTCConnections[currentIndex].onicecandidate = handleIceCandidate
 
@@ -95,6 +99,10 @@ export default class Webcam extends Component {
         RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
+
+        positionIndex += 1;
+        RTCConnections[currentIndex].positionIndex = positionIndex;
+
         RTCConnections[currentIndex].remoteUsername = offer.remoteUsername;
         RTCConnections[currentIndex].remoteUserType = offer.remoteUserType;
         remoteUserType = offer.remoteUserType;
@@ -151,9 +159,16 @@ export default class Webcam extends Component {
       socket.on("clientDisconnect", (id) => {
         console.log("client " + id + " disconnected")
         for(var item in RTCConnections) {
+
+
           if(RTCConnections[item].remoteSocketID == id) {
             //close connection
             RTCConnections[item].close()
+            var video = document.querySelector("#remote" + RTCConnections[item].positionIndex);
+            console.log(RTCConnections[item].positionIndex)
+            if(video) {
+              video.srcObject = undefined;
+            }
             //remove object from array
             RTCConnections.splice(RTCConnections.indexOf(RTCConnections[item],1))
           }
