@@ -162,16 +162,17 @@ export default class Webcam extends Component {
 
 
           if(RTCConnections[item].remoteSocketID == id) {
-            //close connection
-            RTCConnections[item].close()
-
             //unmount video
             if(RTCConnections[item].remoteUserType == "host") {
               var video = document.querySelector("#remote" + RTCConnections[item].positionIndex);
+              positionIndex -= 1;
             }
             if(video) {
-              video.srcObject = undefined;
+              video.srcObject = null;
             }
+            
+            //close connection
+            RTCConnections[item].close()
             //remove object from array
             RTCConnections.splice(RTCConnections.indexOf(RTCConnections[item],1))
           }
