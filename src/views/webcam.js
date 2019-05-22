@@ -8,6 +8,7 @@ let RTCConnections = [];
 let currentIndex = 0;
 let contestantCount = 0;
 let positionIndex = 0;
+let contestantPosition = 0;
 
 export default class Webcam extends Component {
   componentDidMount = () => {
@@ -100,8 +101,14 @@ export default class Webcam extends Component {
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
 
-        positionIndex += 1;
-        RTCConnections[currentIndex].positionIndex = positionIndex;
+        if(offer.remoteUserType == "host") {
+          positionIndex += 1;
+          RTCConnections[currentIndex].positionIndex = positionIndex;
+        }
+        else if (offer.remoteUserType == "guest") {
+          contestantPosition += 1;
+          RTCConnections[currentIndex].positionIndex = contestantPosition;
+        }
 
         RTCConnections[currentIndex].remoteUsername = offer.remoteUsername;
         RTCConnections[currentIndex].remoteUserType = offer.remoteUserType;
@@ -167,10 +174,15 @@ export default class Webcam extends Component {
               var video = document.querySelector("#remote" + RTCConnections[item].positionIndex);
               positionIndex -= 1;
             }
+            else if(RTCConnections[item].remoteUserType == "guest") {
+              var video = document.querySelector("#contestant" + RTCConnections[item].positionIndex);
+              positionIndex -= 1;
+            }
+            
             if(video) {
               video.srcObject = null;
             }
-            
+
             //close connection
             RTCConnections[item].close()
             //remove object from array
