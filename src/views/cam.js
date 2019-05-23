@@ -13,6 +13,7 @@ class Cam extends Component {
     this.toggleFilter = this.toggleFilter.bind(this);
   }
 
+  //set cam filters based on user type
   componentDidMount() {
     if(this.props.userType != "admin") {
       this.setState({camFilter : "camNotBlurred"})

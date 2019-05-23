@@ -162,14 +162,14 @@ export default class Webcam extends Component {
         }
       })
 
-      //when another client disconnects
+      //handle cleanup after user disconnects
       socket.on("clientDisconnect", (id) => {
         console.log("client " + id + " disconnected")
         for(var item in RTCConnections) {
 
 
           if(RTCConnections[item].remoteSocketID == id) {
-            //unmount video
+            //unmount video choosing location based on usertype
             if(RTCConnections[item].remoteUserType == "host") {
               var video = document.querySelector("#remote" + RTCConnections[item].positionIndex);
               positionIndex -= 1;
@@ -178,7 +178,7 @@ export default class Webcam extends Component {
               var video = document.querySelector("#contestant" + RTCConnections[item].positionIndex);
               positionIndex -= 1;
             }
-            
+
             if(video) {
               video.srcObject = null;
             }
