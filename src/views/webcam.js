@@ -13,7 +13,8 @@ let contestantPosition = 0;
 export default class Webcam extends Component {
   componentDidMount = () => {
     let constraints = {
-      video : {width: 640,height : 480}
+      video : {width: 640,height : 480},
+      audio : true
     }
 
     let userType = this.props.userType;
