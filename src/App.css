@@ -196,9 +196,15 @@ form {
   height: 39vh;
 }
 
-.filterButton {
+.toggleButton {
   align-self: flex-end;
-  position: absolute;
+}
+
+.buttonContainer {
+  display:flex;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
 .codeForm {
