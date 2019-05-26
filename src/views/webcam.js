@@ -38,6 +38,7 @@ export default class Webcam extends Component {
         localCam = document.querySelector('#localCam')
       }
       localCam.srcObject = stream
+      localCam.muted = true;
       //}
 
       //function to handle ice candidate
