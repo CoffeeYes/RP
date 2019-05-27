@@ -77,7 +77,7 @@ export default class Webcam extends Component {
         RTCConnections[currentIndex].index = currentIndex;
 
         positionIndex += 1;
-        RTCConnections[currentIndex].positionIndex = currentIndex;
+        RTCConnections[currentIndex].positionIndex = positionIndex;
 
         //add ice candidate handler
         RTCConnections[currentIndex].onicecandidate = handleIceCandidate
