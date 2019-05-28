@@ -181,9 +181,13 @@ export default class Webcam extends Component {
               positionIndex -= 1;
             }
 
+            //unmount video
             if(video) {
               video.srcObject = null;
             }
+
+            //clear username
+            this.props.updateUsername(RTCConnections[item].positionIndex, "")
 
             //close connection
             RTCConnections[item].close()
