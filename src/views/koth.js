@@ -31,7 +31,7 @@ class Koth extends Component {
   swapContestants() {
     var contestant1 = document.querySelector('#contestant1');
     var contestant2 = document.querySelector('#contestant2');
-    
+
     var temp = contestant2.srcObject;
     contestant2.srcObject = contestant1.srcObject;
     contestant1.srcObject = temp;
@@ -43,7 +43,7 @@ class Koth extends Component {
         <div className="cam-col">
             <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType} containerType="localCam guest"/>
             <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)}/>
-            <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest"/>
+            <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" num={1}/>
         </div>
         <div className="cam-col">
             <Cam camName="Contestant" camID="contestant1" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant"/>
@@ -51,8 +51,8 @@ class Koth extends Component {
             <button onClick={this.swapContestants}>Swap</button>
         </div>
         <div className="cam-col">
-            <Cam camName={this.state.name2} camID="remote2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest"/>
-            <Cam camName={this.state.name3} camID="remote3" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest"/>
+            <Cam camName={this.state.name2} camID="remote2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" num={2} />
+            <Cam camName={this.state.name3} camID="remote3" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" num={3} />
         </div>
       </div>
     );

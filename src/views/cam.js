@@ -33,6 +33,7 @@ class Cam extends Component {
               <button onClick={this.toggleMute} className="toggleButton"> M </button>
             </div>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
+            <audio id={["audio" + this.props.camType + this.props.num]}></audio>
           </div>
         )
       }
@@ -41,6 +42,7 @@ class Cam extends Component {
           <div className={["camBox " + this.props.containerType]}>
             <p>{this.props.camName}</p>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
+            <audio id={["audio" + this.props.camType + this.props.num]}></audio>
           </div>
         )
       }
