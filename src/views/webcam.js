@@ -18,6 +18,7 @@ export default class Webcam extends Component {
     }
 
     let userType = this.props.userType;
+    let audioID = this.props.audioID
     let remoteUserType = "";
 
     socket.emit("linkUserToSocket",this.props.localUsername);
@@ -52,6 +53,8 @@ export default class Webcam extends Component {
       //handle receiving remote tracks
       function handleOnTrack(event) {
         //choose mounting position based on user type
+
+        console.log(event.streams[0].getAudioTracks())
         if(remoteUserType == "host") {
           var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
         }
@@ -59,10 +62,14 @@ export default class Webcam extends Component {
           contestantCount += 1;
           var remoteVideo = document.querySelector(['#contestant' + contestantCount])
         }
-
+        var remoteAudio = document.querySelector(['#' + audioID])
 
         if(remoteVideo) {
           remoteVideo.srcObject = event.streams[0]
+        }
+
+        if(remoteAudio) {
+          remoteAudio.srcObject = event.streams[0].getAudioTracks()
         }
       }
 
