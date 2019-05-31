@@ -57,19 +57,20 @@ export default class Webcam extends Component {
         console.log(event.streams[0].getAudioTracks())
         if(remoteUserType == "host") {
           var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
+          var remoteAudio = document.querySelector(['#audioGuest' + RTCConnections.length])
         }
         else if(remoteUserType == "guest") {
           contestantCount += 1;
           var remoteVideo = document.querySelector(['#contestant' + contestantCount])
+          var remoteAudio = document.querySelector(['#audioContestant' + contestantCount])
         }
-        var remoteAudio = document.querySelector(['#' + audioID])
 
         if(remoteVideo) {
           remoteVideo.srcObject = event.streams[0]
         }
 
         if(remoteAudio) {
-          remoteAudio.srcObject = event.streams[0].getAudioTracks()
+          remoteAudio.srcObject = event.streams[0]
         }
       }
 
