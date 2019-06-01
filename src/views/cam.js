@@ -23,6 +23,12 @@ class Cam extends Component {
   toggleFilter(event) {
     this.state.camFilter == "camBlurred" ? this.setState({camFilter : "camNotBlurred"}) : this.setState({camFilter : "camBlurred"})
   }
+
+  toggleMute = () => {
+    var video = document.querySelector('#' + this.props.camID);
+    video.muted =  !(video.muted)
+
+  }
   render() {
       if(this.props.userType == "admin") {
         return(
@@ -33,7 +39,6 @@ class Cam extends Component {
               <button onClick={this.toggleMute} className="toggleButton"> M </button>
             </div>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
-            <audio id={this.props.audioID}></audio>
           </div>
         )
       }
@@ -42,7 +47,6 @@ class Cam extends Component {
           <div className={["camBox " + this.props.containerType]}>
             <p>{this.props.camName}</p>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
-            <audio id={this.props.audioID}></audio>
           </div>
         )
       }
