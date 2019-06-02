@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import main_img from '../assets/main.jpg';
+import unmute from '../assets/icon_unmute.png';
+import mute from '../assets/icon_mute.png';
 
 class Cam extends Component {
 
@@ -7,7 +9,8 @@ class Cam extends Component {
     super(props);
 
     this.state = {
-      camFilter : "camBlurred"
+      camFilter : "camBlurred",
+      muteIcon : unmute
     }
 
     this.toggleFilter = this.toggleFilter.bind(this);
@@ -28,6 +31,12 @@ class Cam extends Component {
     var video = document.querySelector('#' + this.props.camID);
     video.muted =  !(video.muted)
 
+    if(this.state.muteIcon == unmute) {
+      this.setState({muteIcon : mute})
+    }
+    else {
+      this.setState({muteIcon : unmute})
+    }
   }
   render() {
       if(this.props.userType == "admin") {
@@ -36,7 +45,9 @@ class Cam extends Component {
             <p>{this.props.camName}</p>
             <div className="buttonContainer">
               <button onClick={this.toggleFilter} className="toggleButton"> B </button>
-              <button onClick={this.toggleMute} className="toggleButton"> M </button>
+              <button onClick={this.toggleMute} className="toggleButton">
+                <img src={this.state.muteIcon} />
+              </button>
             </div>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
           </div>
