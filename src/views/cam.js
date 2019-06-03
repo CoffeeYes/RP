@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import main_img from '../assets/main.jpg';
 import unmute from '../assets/icon_unmute.png';
 import mute from '../assets/icon_mute.png';
+import icon_video from '../assets/icon_video.png'
+import icon_novideo from '../assets/icon_novideo.png'
 
 class Cam extends Component {
 
@@ -10,7 +12,8 @@ class Cam extends Component {
 
     this.state = {
       camFilter : "camBlurred",
-      muteIcon : unmute
+      muteIcon : unmute,
+      videoIcon : icon_novideo
     }
 
     this.toggleFilter = this.toggleFilter.bind(this);
@@ -25,6 +28,9 @@ class Cam extends Component {
 
   toggleFilter(event) {
     this.state.camFilter == "camBlurred" ? this.setState({camFilter : "camNotBlurred"}) : this.setState({camFilter : "camBlurred"})
+
+    //toggle icon
+    this.state.videoIcon == icon_novideo ? this.setState({videoIcon : icon_video}) : this.setState({videoIcon : icon_novideo})
   }
 
   toggleMute = () => {
@@ -44,7 +50,9 @@ class Cam extends Component {
           <div className={["camBox " + this.props.containerType]}>
             <p>{this.props.camName}</p>
             <div className="buttonContainer">
-              <button onClick={this.toggleFilter} className="toggleButton"> B </button>
+              <button onClick={this.toggleFilter} className="toggleButton">
+                <img src={this.state.videoIcon} />
+              </button>
               <button onClick={this.toggleMute} className="toggleButton">
                 <img src={this.state.muteIcon} />
               </button>
