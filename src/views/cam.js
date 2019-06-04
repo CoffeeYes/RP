@@ -48,15 +48,17 @@ class Cam extends Component {
       if(this.props.userType == "admin") {
         return(
           <div className={["camBox " + this.props.containerType]}>
-            <p>{this.props.camName}</p>
-            <div className="buttonContainer">
-              <button onClick={this.toggleFilter} className="toggleButton">
-                <img src={this.state.videoIcon} />
-              </button>
-              <button onClick={this.toggleMute} className="toggleButton">
-                <img src={this.state.muteIcon} />
-              </button>
+          <div className="camHeader">
+              <p>{this.props.camName}</p>
+              <div className="buttonContainer">
+                <button onClick={this.toggleFilter} className="toggleButton">
+                  <img src={this.state.videoIcon} />
+                </button>
+                <button onClick={this.toggleMute} className="toggleButton">
+                  <img src={this.state.muteIcon} />
+                </button>
             </div>
+          </div>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
           </div>
         )
