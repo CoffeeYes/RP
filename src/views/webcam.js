@@ -30,17 +30,17 @@ export default class Webcam extends Component {
       var userType = this.props.userType;
       var remoteUserType = "";
 
-      //if(this.props.userType != 'admin') {
-      var localCam;
-      if(this.props.userType == "guest") {
-        localCam = document.querySelector('#contestant1')
+      if(this.props.userType != 'admin') {
+        var localCam;
+        if(this.props.userType == "guest") {
+          localCam = document.querySelector('#contestant1')
+        }
+        else {
+          localCam = document.querySelector('#localCam')
+        }
+        localCam.srcObject = stream
+        localCam.muted = true;
       }
-      else {
-        localCam = document.querySelector('#localCam')
-      }
-      localCam.srcObject = stream
-      localCam.muted = true;
-      //}
 
       //function to handle ice candidate
       function handleIceCandidate(event) {
