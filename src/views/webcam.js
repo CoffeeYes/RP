@@ -21,15 +21,18 @@ export default class Webcam extends Component {
     let audioID = this.props.audioID
     let remoteUserType = "";
 
+    //maps username to socket on the backend
     socket.emit("linkUserToSocket",this.props.localUsername);
     const configuration = {iceServers: [{urls: 'stun:stun.example.com'}]};
 
     navigator.mediaDevices.getUserMedia(constraints)
     .then( (stream) => {
 
+      //mount props as local variables due to function scope
       var userType = this.props.userType;
       var remoteUserType = "";
 
+      //webcam mounting location selection
       if(this.props.userType != 'admin') {
         var localCam;
         if(this.props.userType == "guest") {
@@ -52,7 +55,7 @@ export default class Webcam extends Component {
 
       //handle receiving remote tracks
       function handleOnTrack(event) {
-        //choose mounting position based on user type
+        //choose remote mounting position based on user type
 
         console.log(event.streams[0].getAudioTracks())
         if(remoteUserType == "host") {
@@ -155,6 +158,7 @@ export default class Webcam extends Component {
         this.props.updateUsername(answer.index + 1,answer.remoteUsername)
       })
 
+      //adds ics candidates to RTCPeerConnection object
       socket.on("receiveNewIceCandidate", (candidate) => {
         if(candidate != null) {
           try {
