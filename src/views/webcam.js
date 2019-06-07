@@ -68,6 +68,7 @@ export default class Webcam extends Component {
 
         if(remoteVideo) {
           remoteVideo.srcObject = event.streams[0]
+          remoteVideo.muted = true;
         }
       }
 

@@ -12,7 +12,7 @@ class Cam extends Component {
 
     this.state = {
       camFilter : "camBlurred",
-      muteIcon : unmute,
+      muteIcon : mute,
       videoIcon : icon_novideo
     }
 
