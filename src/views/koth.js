@@ -41,7 +41,12 @@ class Koth extends Component {
     for(var i = 1; i < 4; i++) {
       var video = document.querySelector('#remote' + i);
       video.muted = true;
+      if(i < 3) {
+        video = document.querySelector('#contestant' + i);
+        video.muted = true;
+      }
     }
+
   }
   render() {
     if(this.props.userType == "admin") {
