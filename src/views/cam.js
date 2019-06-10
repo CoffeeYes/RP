@@ -34,6 +34,15 @@ class Cam extends Component {
     else {
       this.setState({muteIcon : unmute});
     }
+
+    if(this.props.allBlurred == true) {
+      this.setState({camFilter : "camBlurred"});
+      this.setState({videoIcon : icon_novideo});
+    }
+    else {
+      this.setState({camFilter : "camNotBlurred"})
+      this.setState({videoIcon : icon_video});
+    }
   }
 
   toggleFilter(event) {
