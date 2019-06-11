@@ -52,9 +52,26 @@ class Koth extends Component {
     this.setState({allMuted : true})
   }
 
+  unmuteAll = () => {
+    for(var i = 1; i < 4; i++) {
+      var video = document.querySelector('#remote' + i);
+      video.muted = true;
+      if(i < 3) {
+        video = document.querySelector('#contestant' + i);
+        video.muted = undefined;
+      }
+    }
+    this.setState({allMuted : false})
+  }
+
   blurAll = () => {
     this.setState({allBlurred : true})
   }
+
+  unblurAll = () => {
+    this.setState({allBlurred : false})
+  }
+
   render() {
     if(this.props.userType == "admin") {
       return (
@@ -67,9 +84,13 @@ class Koth extends Component {
           <div className="cam-col">
               <Cam camName="Contestant" camID="contestant1" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant1" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred}/>
               <Cam camName="King" camID="contestant2" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant2" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred}/>
-              <button onClick={this.swapContestants}>Swap</button>
-              <button onClick={this.muteAll}>Mute All</button>
-              <button onClick={this.blurAll}>Blur All</button>
+              <div className="buttonsContainer">
+                <button onClick={this.swapContestants}>Swap</button>
+                <button onClick={this.muteAll}>Mute All</button>
+                <button onClick={this.blurAll}>Blur All</button>
+                <button onClick={this.unmuteAll}>Unmute All</button>
+                <button onClick={this.unblurAll}>unblur All</button>
+              </div>
           </div>
           <div className="cam-col">
               <Cam camName={this.state.name2} camID="remote2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest2" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred}/>
