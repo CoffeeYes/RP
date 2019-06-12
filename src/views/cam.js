@@ -27,15 +27,15 @@ class Cam extends Component {
   }
 
   //track prop change to change icons when all cams are muted or blurred
-  componentWillReceiveProps(props) {
-    if(this.props.allMuted == true) {
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.allMuted == true) {
       this.setState({muteIcon : mute})
     }
     else {
       this.setState({muteIcon : unmute});
     }
 
-    if(this.props.allBlurred == true) {
+    if(nextProps.allBlurred == true) {
       this.setState({camFilter : "camBlurred"});
       this.setState({videoIcon : icon_novideo});
     }
