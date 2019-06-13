@@ -207,6 +207,12 @@ form {
   justify-content: flex-end;
 }
 
+.buttonsContainer {
+  display: flex;
+  width : 100%;
+  justify-content: center;
+}
+
 .camHeader {
   display: flex;
   width: 100%;
