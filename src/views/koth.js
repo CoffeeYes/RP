@@ -87,9 +87,9 @@ class Koth extends Component {
               <div className="buttonsContainer">
                 <button onClick={this.swapContestants}>Swap</button>
                 <button onClick={this.muteAll}>Mute All</button>
-                <button onClick={this.blurAll}>Blur All</button>
                 <button onClick={this.unmuteAll}>Unmute All</button>
-                <button onClick={this.unblurAll}>unblur All</button>
+                <button onClick={this.blurAll}>Blur All</button>
+                <button onClick={this.unblurAll}>Unblur All</button>
               </div>
           </div>
           <div className="cam-col">
