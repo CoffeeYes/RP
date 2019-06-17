@@ -1,9 +1,6 @@
 import React,{Component} from 'react';
 import Webrtc from 'simplewebrtc'
 
-import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:5001')
-
 let RTCConnections = [];
 let currentIndex = 0;
 let contestantCount = 0;
@@ -17,6 +14,7 @@ export default class Webcam extends Component {
       audio : true
     }
 
+    let socket = this.props.socket;
     let userType = this.props.userType;
     let audioID = this.props.audioID
     let remoteUserType = "";

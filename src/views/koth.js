@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Webcam from './webcam.js'
 import Cam from './cam.js'
 
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:5001')
+
 class Koth extends Component {
   constructor(props) {
     super(props)
@@ -104,7 +107,7 @@ class Koth extends Component {
           <div className="cam-container">
             <div className="cam-col">
                 <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType} containerType="localCam guest"/>
-                <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)}/>
+                <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={socket}/>
                 <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1"/>
             </div>
             <div className="cam-col">
