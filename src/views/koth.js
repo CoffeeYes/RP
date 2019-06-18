@@ -75,6 +75,10 @@ class Koth extends Component {
     this.setState({allBlurred : false})
   }
 
+  hostVoteYes = () => {
+    socket.emit("hostVoteYes");
+  }
+
   render() {
     if(this.props.userType == "admin") {
       return (
@@ -114,7 +118,7 @@ class Koth extends Component {
                 <Cam camName="Contestant" camID="contestant1" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant1"/>
                 <Cam camName="King" camID="contestant2" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant2"/>
                 <div className="buttonsContainer">
-                  <button>Yes</button>
+                  <button onClick={this.hostVoteYes}>Yes</button>
                   <button>No</button>
                 </div>
             </div>

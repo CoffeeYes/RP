@@ -73,6 +73,14 @@ io.on('connection',(client) => {
   client.on("usernameSend",(number,username) => {
     io.emit("usernameRecieve",number,username)
   })
+
+  client.on("hostVoteYes", () => {
+    for(var item in users) {
+      if(users[item].socketID == client.id) {
+        console.log(users[item].username)
+      }
+    }
+  })
 })
 
 

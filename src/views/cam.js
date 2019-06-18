@@ -86,7 +86,7 @@ class Cam extends Component {
                 <button onClick={this.toggleMute} className="toggleButton">
                   <img src={this.state.muteIcon} />
                 </button>
-            </div>
+              </div>
           </div>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
           </div>
@@ -95,7 +95,13 @@ class Cam extends Component {
       else {
         return (
           <div className={["camBox " + this.props.containerType]}>
+          <div className="camHeader">
             <p>{this.props.camName}</p>
+            <div className="buttonContainer">
+              <img src={this.state.tickIcon}/>
+              <img src={this.state.xIcon}/>
+            </div>
+          </div>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
           </div>
         )
