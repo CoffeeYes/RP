@@ -75,9 +75,11 @@ io.on('connection',(client) => {
   })
 
   client.on("hostVoteYes", () => {
-    for(var item in users) {
-      if(users[item].socketID == client.id) {
-        console.log(users[item].username)
+    for(var i = 0 ; i < users.length; i++) {
+      if(users[i].socketID == client.id) {
+        console.log(users[i].username)
+
+        socket.emit("hostVotedYes",i);
       }
     }
   })

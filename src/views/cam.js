@@ -98,8 +98,8 @@ class Cam extends Component {
           <div className="camHeader">
             <p>{this.props.camName}</p>
             <div className="buttonContainer">
-              <img src={this.state.tickIcon}/>
-              <img src={this.state.xIcon}/>
+              <img src={this.state.tickIcon} id={["tick" + this.props.iconID]}/>
+              <img src={this.state.xIcon} id={["cross" + this.props.iconID]}/>
             </div>
           </div>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
