@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import Webcam from './webcam.js'
 import Cam from './cam.js'
 
+import tick_empty from '../assets/tick_empty.svg'
+import tick_filled from '../assets/tick_filled.svg'
+import x_empty from '../assets/x_empty.svg'
+import x_filled from '../assets/x_filled.svg'
+
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:5001')
 
@@ -15,6 +20,14 @@ class Koth extends Component {
       name3 : '',
       allMuted : true,
       allBlurred : true,
+      tick1 : tick_empty,
+      tick2 : tick_empty,
+      tick3 : tick_empty,
+      tick4 : tick_empty,
+      cross1 : x_empty,
+      cross2 : x_empty,
+      cross3 : x_empty,
+      cross4 : x_empty,
     }
   }
 
@@ -84,13 +97,13 @@ class Koth extends Component {
       return (
         <div className="cam-container">
           <div className="cam-col">
-              <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType} containerType="localCam guest" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={1}/>
+              <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType} containerType="localCam guest" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={1} tickIcon={this.state.tick1} crossIcon={this.state.cross1}/>
               <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)}/>
-              <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={2} />
+              <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={2} tickIcon={this.state.tick2} crossIcon={this.state.cross2}/>
           </div>
           <div className="cam-col">
-              <Cam camName="Contestant" camID="contestant1" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant1" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={3}/>
-              <Cam camName="King" camID="contestant2" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant2" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={4}/>
+              <Cam camName="Contestant" camID="contestant1" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant1" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={3} tickIcon={this.state.tick3} crossIcon={this.state.cross3}/>
+              <Cam camName="King" camID="contestant2" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant2" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={4} tickIcon={this.state.tick4} crossIcon={this.state.cross4}/>
               <div className="buttonsContainer">
                 <button onClick={this.swapContestants}>Swap</button>
                 <button onClick={this.muteAll}>Mute All</button>
@@ -110,9 +123,9 @@ class Koth extends Component {
       return (
           <div className="cam-container">
             <div className="cam-col">
-                <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType} containerType="localCam guest" iconID={1}/>
+                <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType} containerType="localCam guest" iconID={1} tickIcon={this.state.tick1} crossIcon={this.state.cross1}/>
                 <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={socket}/>
-                <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" iconID={2}/>
+                <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" iconID={2} tickIcon={this.state.tick2} crossIcon={this.state.cross2}/>
             </div>
             <div className="cam-col">
                 <Cam camName="Contestant" camID="contestant1" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant1"/>
@@ -123,8 +136,8 @@ class Koth extends Component {
                 </div>
             </div>
             <div className="cam-col">
-                <Cam camName={this.state.name2} camID="remote2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest2" iconID={3}/>
-                <Cam camName={this.state.name3} camID="remote3" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest3" iconID={4}/>
+                <Cam camName={this.state.name2} camID="remote2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest2" iconID={3} tickIcon={this.state.tick3} crossIcon={this.state.cross3}/>
+                <Cam camName={this.state.name3} camID="remote3" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest3" iconID={4} tickIcon={this.state.tick4} crossIcon={this.state.cross4}/>
             </div>
           </div>
       )
@@ -133,17 +146,17 @@ class Koth extends Component {
       return (
         <div className="cam-container">
           <div className="cam-col">
-              <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType} containerType="localCam guest" iconID={1}/>
+              <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType} containerType="localCam guest" iconID={1} tickIcon={this.state.tick1} crossIcon={this.state.cross1}/>
               <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)}/>
-              <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" iconID={2}/>
+              <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" iconID={2} tickIcon={this.state.tick2} crossIcon={this.state.cross2}/>
           </div>
           <div className="cam-col">
               <Cam camName="Contestant" camID="contestant1" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant1"/>
               <Cam camName="King" camID="contestant2" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant2"/>
           </div>
           <div className="cam-col">
-              <Cam camName={this.state.name2} camID="remote2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest2" iconID={3}/>
-              <Cam camName={this.state.name3} camID="remote3" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest3" iconID={4}/>
+              <Cam camName={this.state.name2} camID="remote2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest2" iconID={3} tickIcon={this.state.tick3} crossIcon={this.state.cross3}/>
+              <Cam camName={this.state.name3} camID="remote3" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest3" iconID={4} tickIcon={this.state.tick4} crossIcon={this.state.cross4}/>
           </div>
         </div>
       )

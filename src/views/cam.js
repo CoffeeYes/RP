@@ -6,11 +6,6 @@ import mute from '../assets/icon_mute.png';
 import icon_video from '../assets/icon_video.png'
 import icon_novideo from '../assets/icon_novideo.png'
 
-import tick_empty from '../assets/tick_empty.svg'
-import tick_filled from '../assets/tick_filled.svg'
-import x_empty from '../assets/x_empty.svg'
-import x_filled from '../assets/x_filled.svg'
-
 class Cam extends Component {
 
   constructor(props) {
@@ -20,8 +15,6 @@ class Cam extends Component {
       camFilter : "camBlurred",
       muteIcon : mute,
       videoIcon : icon_novideo,
-      tickIcon : tick_empty,
-      xIcon : x_empty
     }
 
     this.toggleFilter = this.toggleFilter.bind(this);
@@ -98,8 +91,8 @@ class Cam extends Component {
           <div className="camHeader">
             <p>{this.props.camName}</p>
             <div className="buttonContainer">
-              <img src={this.state.tickIcon} id={["tick" + this.props.iconID]}/>
-              <img src={this.state.xIcon} id={["cross" + this.props.iconID]}/>
+              <img src={this.props.tickIcon} id={["tick" + this.props.iconID]}/>
+              <img src={this.props.crossIcon} id={["cross" + this.props.iconID]}/>
             </div>
           </div>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
