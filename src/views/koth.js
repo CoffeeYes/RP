@@ -8,7 +8,6 @@ import x_empty from '../assets/x_empty.svg'
 import x_filled from '../assets/x_filled.svg'
 
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:5001')
 
 class Koth extends Component {
   constructor(props) {
@@ -29,7 +28,10 @@ class Koth extends Component {
       cross3 : x_empty,
       cross4 : x_empty,
     }
+
+    this.socket = openSocket('http://localhost:5001')
   }
+
 
   componentDidMount() {
     fetch('/getUsernames')
@@ -39,6 +41,10 @@ class Koth extends Component {
       for(var item in data) {
         this.setState({['name' + data[item].number] : data[item].name})
       }
+    })
+
+    this.socket.on("hostVotedYes",(iconID) => {
+      this.setState({["tick" + iconID] : tick_filled})
     })
   }
 
@@ -89,7 +95,7 @@ class Koth extends Component {
   }
 
   hostVoteYes = () => {
-    socket.emit("hostVoteYes");
+    this.socket.emit("hostVoteYes");
   }
 
   render() {
@@ -124,7 +130,7 @@ class Koth extends Component {
           <div className="cam-container">
             <div className="cam-col">
                 <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType} containerType="localCam guest" iconID={1} tickIcon={this.state.tick1} crossIcon={this.state.cross1}/>
-                <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={socket}/>
+                <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={this.socket}/>
                 <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" iconID={2} tickIcon={this.state.tick2} crossIcon={this.state.cross2}/>
             </div>
             <div className="cam-col">

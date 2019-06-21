@@ -77,9 +77,7 @@ io.on('connection',(client) => {
   client.on("hostVoteYes", () => {
     for(var i = 0 ; i < users.length; i++) {
       if(users[i].socketID == client.id) {
-        console.log(users[i].username)
-
-        socket.emit("hostVotedYes",i);
+        io.emit("hostVotedYes",i+1);
       }
     }
   })
