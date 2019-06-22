@@ -45,6 +45,12 @@ class Koth extends Component {
 
     this.socket.on("hostVotedYes",(iconID) => {
       this.setState({["tick" + iconID] : tick_filled})
+      this.setState({["cross" + iconID] : x_empty})
+    })
+
+    this.socket.on("hostVotedNo",(iconID) => {
+      this.setState({["tick" + iconID] : tick_empty})
+      this.setState({["cross" + iconID] : x_filled})
     })
   }
 
@@ -98,6 +104,9 @@ class Koth extends Component {
     this.socket.emit("hostVoteYes");
   }
 
+  hostVoteNo = () => {
+    this.socket.emit("hostVoteNo");
+  }
   render() {
     if(this.props.userType == "admin") {
       return (
@@ -138,7 +147,7 @@ class Koth extends Component {
                 <Cam camName="King" camID="contestant2" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant2"/>
                 <div className="buttonsContainer">
                   <button onClick={this.hostVoteYes}>Yes</button>
-                  <button>No</button>
+                  <button onClick={this.hostVoteNo}>No</button>
                 </div>
             </div>
             <div className="cam-col">

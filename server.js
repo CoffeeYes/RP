@@ -81,6 +81,14 @@ io.on('connection',(client) => {
       }
     }
   })
+
+  client.on("hostVoteNo",() => {
+    for(var i = 0 ; i < users.length; i++) {
+      if(users[i].socketID == client.id) {
+        io.emit("hostVotedNo",i+1);
+      }
+    }
+  })
 })
 
 
