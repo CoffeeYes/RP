@@ -89,6 +89,10 @@ io.on('connection',(client) => {
       }
     }
   })
+
+  client.on("resetAllVotes",() => {
+    io.emit("resetAllVote");
+  })
 })
 
 

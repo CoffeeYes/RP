@@ -71,8 +71,8 @@ class Cam extends Component {
           <div className="camHeader">
               <p>{this.props.camName}</p>
               <div className="buttonContainer">
-                <img src={this.state.tickIcon}/>
-                <img src={this.state.xIcon}/>
+                <img src={this.props.tickIcon} id={["tick" + this.props.iconID]}/>
+                <img src={this.props.crossIcon} id={["cross" + this.props.iconID]}/>
                 <button onClick={this.toggleFilter} className="toggleButton">
                   <img src={this.state.videoIcon} />
                 </button>

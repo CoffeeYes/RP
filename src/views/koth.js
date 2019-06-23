@@ -52,6 +52,13 @@ class Koth extends Component {
       this.setState({["tick" + iconID] : tick_empty})
       this.setState({["cross" + iconID] : x_filled})
     })
+
+    this.socket.on("resetAllVote",() => {
+      for(var iconNum = 1; iconNum < 5; iconNum++) {
+        this.setState({["tick" + iconNum] : tick_empty})
+        this.setState({["cross" + iconNum] : x_empty})
+      }
+    })
   }
 
   updateUsername(number,name) {
@@ -107,13 +114,17 @@ class Koth extends Component {
   hostVoteNo = () => {
     this.socket.emit("hostVoteNo");
   }
+
+  resetAll = () => {
+    this.socket.emit("resetAllVotes");
+  }
   render() {
     if(this.props.userType == "admin") {
       return (
         <div className="cam-container">
           <div className="cam-col">
               <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType} containerType="localCam guest" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={1} tickIcon={this.state.tick1} crossIcon={this.state.cross1}/>
-              <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)}/>
+              <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={this.socket}/>
               <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={2} tickIcon={this.state.tick2} crossIcon={this.state.cross2}/>
           </div>
           <div className="cam-col">
@@ -125,6 +136,7 @@ class Koth extends Component {
                 <button onClick={this.unmuteAll}>Unmute All</button>
                 <button onClick={this.blurAll}>Blur All</button>
                 <button onClick={this.unblurAll}>Unblur All</button>
+                <button onClick={this.resetAll}>Reset Votes</button>
               </div>
           </div>
           <div className="cam-col">
