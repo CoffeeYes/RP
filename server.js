@@ -78,6 +78,7 @@ io.on('connection',(client) => {
     for(var i = 0 ; i < users.length; i++) {
       if(users[i].socketID == client.id) {
         io.emit("hostVotedYes",i+1);
+        users[i].voteState = "yes"
       }
     }
   })
@@ -86,12 +87,16 @@ io.on('connection',(client) => {
     for(var i = 0 ; i < users.length; i++) {
       if(users[i].socketID == client.id) {
         io.emit("hostVotedNo",i+1);
+        users[i].voteState = "no"
       }
     }
   })
 
   client.on("resetAllVotes",() => {
     io.emit("resetAllVote");
+    for(var i = 0 ; i < users.length; i++) {
+      users[i].voteState = "none";
+    }
   })
 })
 
