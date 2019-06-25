@@ -43,6 +43,8 @@ class Koth extends Component {
       }
     })
 
+    this.socket.emit("getUserVoteStates")
+
     this.socket.on("hostVotedYes",(iconID) => {
       this.setState({["tick" + iconID] : tick_filled})
       this.setState({["cross" + iconID] : x_empty})
@@ -57,6 +59,17 @@ class Koth extends Component {
       for(var iconNum = 1; iconNum < 5; iconNum++) {
         this.setState({["tick" + iconNum] : tick_empty})
         this.setState({["cross" + iconNum] : x_empty})
+      }
+    })
+
+    this.socket.on("receiveUserVoteStates",(voteStates) => {
+      for(var i = 0; i < voteStates.length; i++) {
+        if(voteStates[i] == "yes") {
+          this.setState({["tick" + (i+1)] : tick_filled})
+        }
+        else if(voteStates[i] == "no") {
+          this.setState({["cross" + (i+1)] : x_filled})
+        }
       }
     })
   }

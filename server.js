@@ -98,6 +98,15 @@ io.on('connection',(client) => {
       users[i].voteState = "none";
     }
   })
+
+  client.on("getUserVoteStates",() => {
+    let voteStates= [];
+    for(var i = 0; i < users.length; i++) {
+      voteStates.push(users[i].voteState)
+    }
+
+    io.to([client.id]).emit("receiveUserVoteStates",voteStates)
+  })
 })
 
 
