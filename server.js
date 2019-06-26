@@ -51,6 +51,7 @@ io.on('connection',(client) => {
     for(var i = 0; i < users.length; i++) {
       if(users[i].socketID == client.id) {
         users.splice(i,1);
+        io.emit("resetSingleVote",i+1)
       }
     }
     userPositionCount -= 1;

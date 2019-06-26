@@ -72,6 +72,11 @@ class Koth extends Component {
         }
       }
     })
+
+    this.socket.on("resetSingleVote",(iconID) => {
+      this.setState({["tick" + iconID] : tick_empty})
+      this.setState({["cross" + iconID] : x_empty})
+    })
   }
 
   updateUsername(number,name) {
