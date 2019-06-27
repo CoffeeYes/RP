@@ -15,6 +15,7 @@ let offers = []
 let currentOfferHost = '';
 let users = [];
 let userPositionCount = -1;
+let userPosition = 0;
 io.on('connection',(client) => {
   userPositionCount += 1;
 
@@ -51,7 +52,7 @@ io.on('connection',(client) => {
     for(var i = 0; i < users.length; i++) {
       if(users[i].socketID == client.id) {
         users.splice(i,1);
-        io.emit("resetSingleVote",i+1)
+        io.emit("resetSingleVote",users[i].userPosition)
       }
     }
     userPositionCount -= 1;
@@ -67,7 +68,8 @@ io.on('connection',(client) => {
     }
     //if they arent connected add them to the user array
     if(connectedUser == false) {
-      users.push({username : username,socketID : client.id,userCount : userPositionCount});
+      userPosition += 1;
+      users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : userPosition});
     }
   })
 
@@ -78,7 +80,7 @@ io.on('connection',(client) => {
   client.on("hostVoteYes", () => {
     for(var i = 0 ; i < users.length; i++) {
       if(users[i].socketID == client.id) {
-        io.emit("hostVotedYes",i+1);
+        io.emit("hostVotedYes",users[i].userPosition);
         users[i].voteState = "yes"
       }
     }
@@ -87,7 +89,7 @@ io.on('connection',(client) => {
   client.on("hostVoteNo",() => {
     for(var i = 0 ; i < users.length; i++) {
       if(users[i].socketID == client.id) {
-        io.emit("hostVotedNo",i+1);
+        io.emit("hostVotedNo",users[i].userPosition);
         users[i].voteState = "no"
       }
     }
