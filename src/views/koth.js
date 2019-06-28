@@ -27,6 +27,7 @@ class Koth extends Component {
       cross2 : x_empty,
       cross3 : x_empty,
       cross4 : x_empty,
+      personalPostion : -1
     }
 
     this.socket = openSocket('http://localhost:5001')
@@ -76,6 +77,10 @@ class Koth extends Component {
     this.socket.on("resetSingleVote",(iconID) => {
       this.setState({["tick" + iconID] : tick_empty})
       this.setState({["cross" + iconID] : x_empty})
+    })
+
+    this.socket.on("receivePersonalPosition",(position) => {
+      this.setState({personalPostion : position})
     })
   }
 
@@ -142,7 +147,7 @@ class Koth extends Component {
         <div className="cam-container">
           <div className="cam-col">
               <Cam camName={this.props.localUsername} camID="localCam" camType="guestCam" userType={this.props.userType} containerType="localCam guest" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={1} tickIcon={this.state.tick1} crossIcon={this.state.cross1}/>
-              <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={this.socket}/>
+              <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={this.socket personalPostion={this.state.personalPostion}}/>
               <Cam camName={this.state.name1} camID="remote1" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={2} tickIcon={this.state.tick2} crossIcon={this.state.cross2}/>
           </div>
           <div className="cam-col">
