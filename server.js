@@ -70,7 +70,7 @@ io.on('connection',(client) => {
     if(connectedUser == false) {
       userPosition += 1;
       users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : userPosition});
-      io.to.([client.id]).emit("receivePersonalPosition",userPosition)
+      io.to([client.id]).emit("receivePersonalPosition",userPosition)
     }
   })
 
