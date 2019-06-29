@@ -27,7 +27,7 @@ class Koth extends Component {
       cross2 : x_empty,
       cross3 : x_empty,
       cross4 : x_empty,
-      personalPostion : -1
+      personalPosition : -1
     }
 
     this.socket = openSocket('http://localhost:5001')
@@ -80,7 +80,7 @@ class Koth extends Component {
     })
 
     this.socket.on("receivePersonalPosition",(position) => {
-      this.setState({personalPostion : position})
+      this.setState({personalPosition : position})
     })
   }
 
