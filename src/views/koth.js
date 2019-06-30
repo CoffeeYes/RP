@@ -45,6 +45,7 @@ class Koth extends Component {
     })
 
     this.socket.emit("getUserVoteStates")
+    this.socket.emit("getPersonalPosition")
 
     this.socket.on("hostVotedYes",(iconID) => {
       this.setState({["tick" + iconID] : tick_filled})

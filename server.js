@@ -70,7 +70,6 @@ io.on('connection',(client) => {
     if(connectedUser == false) {
       userPosition += 1;
       users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : userPosition});
-      io.to([client.id]).emit("receivePersonalPosition",userPosition)
     }
   })
 
@@ -110,6 +109,14 @@ io.on('connection',(client) => {
     }
 
     io.to([client.id]).emit("receiveUserVoteStates",voteStates)
+  })
+
+  client.on("getPersonalPosition",() => {
+    for(var i = 0 ; i < users.length; i++) {
+      if(users[i].socketID == client.id) {
+        io.to([client.id]).emit("receivePersonalPosition",users[i].userPosition)
+      }
+    }
   })
 })
 
