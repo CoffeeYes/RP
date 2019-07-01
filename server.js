@@ -56,6 +56,7 @@ io.on('connection',(client) => {
       }
     }
     userPositionCount -= 1;
+    userPosition -= 1;
   })
 
   client.on("linkUserToSocket", (username) => {
@@ -68,7 +69,7 @@ io.on('connection',(client) => {
     }
     //if they arent connected add them to the user array
     if(connectedUser == false) {
-      userPosition += 1;
+      userPosition = userPosition + 1;
       users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : userPosition});
     }
   })
@@ -117,6 +118,17 @@ io.on('connection',(client) => {
         io.to([client.id]).emit("receivePersonalPosition",users[i].userPosition)
       }
     }
+  })
+
+  client.on("getUsernames", () => {
+    let usernames = [];
+
+    for(var item in users) {
+      usernames.push({position : users[item].userPosition,username : users[item].username})
+      console.log(users[item])
+    }
+
+    io.to([client.id]).emit("receiveUsernames",usernames)
   })
 })
 
