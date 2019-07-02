@@ -16,6 +16,7 @@ let currentOfferHost = '';
 let users = [];
 let userPositionCount = -1;
 let userPosition = 0;
+let positions = [];
 io.on('connection',(client) => {
   userPositionCount += 1;
 
@@ -69,8 +70,22 @@ io.on('connection',(client) => {
     }
     //if they arent connected add them to the user array
     if(connectedUser == false) {
-      userPosition = userPosition + 1;
-      users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : userPosition});
+      var actualPosition
+      var found = false;
+      for(var item in positions) {
+        if(positions[item].username == username) {
+          actualPosition = positions[item].position
+          found = true;
+        }
+      }
+
+      if(found == false) {
+        userPosition = userPosition + 1;
+        actualPosition = userPosition
+      }
+
+      users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : actualPosition});
+      positions.push({username : username,position : userPosition})
     }
   })
 
