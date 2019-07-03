@@ -44,7 +44,7 @@ class Koth extends Component {
         this.setState({['name' + data[item].number] : data[item].name})
       }
     })
-    
+
     this.socket.emit("getUserVoteStates")
     this.socket.emit("getPersonalPosition")
     this.socket.emit("getUsernames")
@@ -88,6 +88,7 @@ class Koth extends Component {
 
     this.socket.on("receiveUsernames", (usernames) => {
       for(var i = 0; i < usernames.length ; i++){
+        console.log("position : " + usernames[i].position + "  name : " + usernames[i].username)
         this.setState({["name" + usernames[i].position] : usernames[i].username})
       }
     })

@@ -57,7 +57,7 @@ io.on('connection',(client) => {
       }
     }
     userPositionCount -= 1;
-    userPosition -= 1;
+    //userPosition -= 1;
   })
 
   client.on("linkUserToSocket", (username) => {
@@ -72,6 +72,8 @@ io.on('connection',(client) => {
     if(connectedUser == false) {
       var actualPosition
       var found = false;
+
+      //check if they had been previously connected and already have a position
       for(var item in positions) {
         if(positions[item].username == username) {
           actualPosition = positions[item].position
@@ -79,18 +81,24 @@ io.on('connection',(client) => {
         }
       }
 
+      //if they hadnt already connected, increment userposition and add data to positions array
       if(found == false) {
         userPosition = userPosition + 1;
         actualPosition = userPosition
+        positions.push({username : username,position : userPosition})
       }
 
+      //add data to user array
       users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : actualPosition});
-      positions.push({username : username,position : userPosition})
-    }
-  })
 
-  client.on("usernameSend",(number,username) => {
-    io.emit("usernameRecieve",number,username)
+      //re-emit all usernames so clients can update their positions on frontend
+      let usernames = [];
+      for(var item in users) {
+        usernames.push({position : users[item].userPosition,username : users[item].username})
+      }
+      io.to([client.id]).emit("receiveUsernames",usernames)
+
+    }
   })
 
   client.on("hostVoteYes", () => {
@@ -140,7 +148,6 @@ io.on('connection',(client) => {
 
     for(var item in users) {
       usernames.push({position : users[item].userPosition,username : users[item].username})
-      console.log(users[item])
     }
 
     io.to([client.id]).emit("receiveUsernames",usernames)
