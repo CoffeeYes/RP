@@ -33,12 +33,15 @@ export default class Webcam extends Component {
       //webcam mounting location selection
       if(this.props.userType != 'admin') {
         var localCam;
+        /*
         if(this.props.userType == "guest") {
           localCam = document.querySelector('#contestant1')
         }
         else {
           localCam = document.querySelector('#localCam')
         }
+        */
+        localCam = document.querySelector('#cam' + this.props.personalPosition)
         localCam.srcObject = stream
         localCam.muted = true;
       }
