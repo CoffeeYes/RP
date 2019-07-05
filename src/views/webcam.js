@@ -100,6 +100,7 @@ export default class Webcam extends Component {
           offer.index = currentIndex
           offer.remoteUsername = this.props.localUsername;
           offer.remoteUserType = this.props.userType;
+          offer.position = this.props.personalPosition;
           socket.emit("RTCOfferCreated",offer)
         })
       })
@@ -141,6 +142,7 @@ export default class Webcam extends Component {
             answer.index = offer.index;
             answer.remoteUsername = this.props.localUsername;
             answer.remoteUserType = this.props.userType;
+            answer.position = this.props.personalPosition
             socket.emit("sendRTCAnswer",answer)
 
             //this.props.updateUsername(currentIndex + 1, offer.remoteUsername)
