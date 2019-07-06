@@ -7,17 +7,44 @@ let contestantCount = 0;
 let positionIndex = 0;
 let contestantPosition = 0;
 
+let socket;
+let userType;
+let audioID;
+let remoteUserType;
+
 export default class Webcam extends Component {
+
+  //handle receiving remote tracks
+  handleOnTrack = (event,position) => {
+    //choose remote mounting position based on user type
+    /*
+    if(remoteUserType == "host") {
+      var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
+    }
+    else if(remoteUserType == "guest") {
+      contestantCount += 1;
+      var remoteVideo = document.querySelector(['#contestant' + contestantCount])
+    }
+    */
+    console.log("position : " + position)
+    var remoteVideo = document.querySelector('#cam' + position);
+
+    if(remoteVideo) {
+      remoteVideo.srcObject = event.streams[0]
+      remoteVideo.muted = true;
+    }
+  }
+
   componentDidMount = () => {
     let constraints = {
       video : {width: 640,height : 480},
       audio : true
     }
 
-    let socket = this.props.socket;
-    let userType = this.props.userType;
-    let audioID = this.props.audioID
-    let remoteUserType = "";
+    socket = this.props.socket;
+    userType = this.props.userType;
+    audioID = this.props.audioID;
+    remoteUserType = "";
 
     //maps username to socket on the backend
     socket.emit("linkUserToSocket",this.props.localUsername);
@@ -54,24 +81,7 @@ export default class Webcam extends Component {
       }
 
 
-      //handle receiving remote tracks
-      function handleOnTrack(event) {
-        //choose remote mounting position based on user type
 
-        console.log(event.streams[0].getAudioTracks())
-        if(remoteUserType == "host") {
-          var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
-        }
-        else if(remoteUserType == "guest") {
-          contestantCount += 1;
-          var remoteVideo = document.querySelector(['#contestant' + contestantCount])
-        }
-
-        if(remoteVideo) {
-          remoteVideo.srcObject = event.streams[0]
-          remoteVideo.muted = true;
-        }
-      }
 
       //let the server know the user allowed the webcam so it can begin RTC handshake
       socket.emit("newWebcamMounted")
@@ -125,7 +135,9 @@ export default class Webcam extends Component {
         remoteUserType = offer.remoteUserType;
 
         RTCConnections[currentIndex].onicecandidate = handleIceCandidate
-        RTCConnections[currentIndex].ontrack = handleOnTrack
+        RTCConnections[currentIndex].ontrack = ((event) => this.handleOnTrack(event,offer.position))
+
+        RTCConnections[currentIndex].remotePosition = offer.position;
 
         //add local stream to new RTC object
         stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
@@ -152,11 +164,13 @@ export default class Webcam extends Component {
 
       socket.on("receiveRTCAnswer", (answer) => {
         RTCConnections[answer.index].remoteUsername = answer.remoteUsername;
-        RTCConnections[answer.index].ontrack = handleOnTrack
+        RTCConnections[answer.index].ontrack = ((event) => this.handleOnTrack(event,answer.position))
 
         RTCConnections[answer.index].setRemoteDescription(answer)
         RTCConnections[answer.index].remoteSocketID = answer.originID
         RTCConnections[answer.index].remoteUserType = answer.remoteUserType;
+
+        RTCConnections[answer.index].remotePosition = answer.position;
 
         remoteUserType = answer.remoteUserType;
         //this.props.updateUsername(answer.index + 1,answer.remoteUsername)
@@ -190,6 +204,8 @@ export default class Webcam extends Component {
               var video = document.querySelector("#contestant" + RTCConnections[item].positionIndex);
               positionIndex -= 1;
             }
+
+            var video = document.querySelector('#cam' + RTCConnections[item].remotePosition)
 
             //unmount video
             if(video) {
