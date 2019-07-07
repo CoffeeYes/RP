@@ -16,17 +16,7 @@ export default class Webcam extends Component {
 
   //handle receiving remote tracks
   handleOnTrack = (event,position) => {
-    //choose remote mounting position based on user type
-    /*
-    if(remoteUserType == "host") {
-      var remoteVideo = document.querySelector(['#remote' + RTCConnections.length])
-    }
-    else if(remoteUserType == "guest") {
-      contestantCount += 1;
-      var remoteVideo = document.querySelector(['#contestant' + contestantCount])
-    }
-    */
-    console.log("position : " + position)
+    //mount video based on remote users personalPosition
     var remoteVideo = document.querySelector('#cam' + position);
 
     if(remoteVideo) {
@@ -59,15 +49,9 @@ export default class Webcam extends Component {
 
       //webcam mounting location selection
       if(this.props.userType != 'admin') {
+
+        //mount local users video
         var localCam;
-        /*
-        if(this.props.userType == "guest") {
-          localCam = document.querySelector('#contestant1')
-        }
-        else {
-          localCam = document.querySelector('#localCam')
-        }
-        */
         localCam = document.querySelector('#cam' + this.props.personalPosition)
         localCam.srcObject = stream
         localCam.muted = true;
@@ -195,16 +179,6 @@ export default class Webcam extends Component {
 
 
           if(RTCConnections[item].remoteSocketID == id) {
-            //unmount video choosing location based on usertype
-            if(RTCConnections[item].remoteUserType == "host") {
-              var video = document.querySelector("#remote" + RTCConnections[item].positionIndex);
-              positionIndex -= 1;
-            }
-            else if(RTCConnections[item].remoteUserType == "guest") {
-              var video = document.querySelector("#contestant" + RTCConnections[item].positionIndex);
-              positionIndex -= 1;
-            }
-
             var video = document.querySelector('#cam' + RTCConnections[item].remotePosition)
 
             //unmount video
