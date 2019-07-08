@@ -36,14 +36,6 @@ class Koth extends Component {
 
 
   componentDidMount() {
-    fetch('/getUsernames')
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      for(var item in data) {
-        this.setState({['name' + data[item].number] : data[item].name})
-      }
-    })
 
     this.socket.emit("getUserVoteStates")
     this.socket.emit("getPersonalPosition")

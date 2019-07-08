@@ -187,7 +187,7 @@ export default class Webcam extends Component {
             }
 
             //clear username
-            //this.props.updateUsername(RTCConnections[item].positionIndex, "")
+            this.props.updateUsername(RTCConnections[item].remotePosition, "")
 
             //close connection
             RTCConnections[item].close()

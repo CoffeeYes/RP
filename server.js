@@ -150,7 +150,7 @@ io.on('connection',(client) => {
       usernames.push({position : users[item].userPosition,username : users[item].username})
     }
 
-    io.to([client.id]).emit("receiveUsernames",usernames)
+    io.emit("receiveUsernames",usernames)
   })
 })
 
