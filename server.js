@@ -119,6 +119,15 @@ io.on('connection',(client) => {
     }
   })
 
+  client.on("resetHostVote", () => {
+    for(var i = 0 ; i < users.length; i++) {
+      if(users[i].socketID == client.id) {
+        io.emit("resetSingleVote",users[i].userPosition);
+        users[i].voteState = "none"
+      }
+    }
+  })
+
   client.on("resetAllVotes",() => {
     io.emit("resetAllVote");
     for(var i = 0 ; i < users.length; i++) {

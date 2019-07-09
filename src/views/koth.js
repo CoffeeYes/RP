@@ -140,6 +140,10 @@ class Koth extends Component {
     this.socket.emit("hostVoteNo");
   }
 
+  resetHostVote = () => {
+    this.socket.emit("resetHostVote")
+  }
+
   resetAll = () => {
     this.socket.emit("resetAllVotes");
   }
@@ -185,6 +189,7 @@ class Koth extends Component {
                 <div className="buttonsContainer">
                   <button onClick={this.hostVoteYes}>Yes</button>
                   <button onClick={this.hostVoteNo}>No</button>
+                  <button onClick={this.resetHostVote}>Reset</button>
                 </div>
             </div>
             <div className="cam-col">
