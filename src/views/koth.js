@@ -100,11 +100,9 @@ class Koth extends Component {
     }
 
   muteAll = () => {
-    for(var i = 1; i < 4; i++) {
-      var video = document.querySelector('#remote' + i);
-      video.muted = true;
-      if(i < 3) {
-        video = document.querySelector('#contestant' + i);
+    for(var i = 1; i < 7; i++) {
+      var video = document.querySelector('#cam' + i);
+      if(video) {
         video.muted = true;
       }
     }
@@ -113,12 +111,10 @@ class Koth extends Component {
   }
 
   unmuteAll = () => {
-    for(var i = 1; i < 4; i++) {
-      var video = document.querySelector('#remote' + i);
-      video.muted = true;
-      if(i < 3) {
-        video = document.querySelector('#contestant' + i);
-        video.muted = undefined;
+    for(var i = 1; i < 7; i++) {
+      var video = document.querySelector('#cam' + i);
+      if(video) {
+        video.muted = true;
       }
     }
     this.setState({allMuted : false})
