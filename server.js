@@ -83,8 +83,15 @@ io.on('connection',(client) => {
 
       //if they hadnt already connected, increment userposition and add data to positions array
       if(found == false) {
-        userPosition = userPosition + 1;
-        actualPosition = userPosition
+
+        //empty username signifies admin
+        if(username != "") {
+          userPosition = userPosition + 1;
+          actualPosition = userPosition
+        }
+        else {
+          actualPosition = 0;
+        }
         positions.push({username : username,position : userPosition})
       }
 
@@ -94,7 +101,10 @@ io.on('connection',(client) => {
       //re-emit all usernames so clients can update their positions on frontend
       let usernames = [];
       for(var item in users) {
-        usernames.push({position : users[item].userPosition,username : users[item].username})
+        //empty username signifies admin
+        if(users[item].username != "") {
+          usernames.push({position : users[item].userPosition,username : users[item].username})
+        }
       }
       io.to([client.id]).emit("receiveUsernames",usernames)
 
