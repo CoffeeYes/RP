@@ -153,8 +153,8 @@ class Koth extends Component {
               <Cam camName={this.state.name2} camID="cam2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={2} tickIcon={this.state.tick2} crossIcon={this.state.cross2}/>
           </div>
           <div className="cam-col">
-              <Cam camName="Contestant" camID="cam5" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant1" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={3} tickIcon={this.state.tick3} crossIcon={this.state.cross3}/>
-              <Cam camName="King" camID="cam6" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant2" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={4} tickIcon={this.state.tick4} crossIcon={this.state.cross4}/>
+              <Cam camName="Contestant" camID="cam5" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant1" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} />
+              <Cam camName="King" camID="cam6" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant2" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} />
               <div className="buttonsContainer">
                 <button onClick={this.swapContestants}>Swap</button>
                 <button onClick={this.muteAll}>Mute All</button>
@@ -165,8 +165,8 @@ class Koth extends Component {
               </div>
           </div>
           <div className="cam-col">
-              <Cam camName={this.state.name3} camID="cam3" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest2" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred}/>
-              <Cam camName={this.state.name4} camID="cam4" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest3" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred}/>
+              <Cam camName={this.state.name3} camID="cam3" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest2" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={3} tickIcon={this.state.tick3} crossIcon={this.state.cross3}/>
+              <Cam camName={this.state.name4} camID="cam4" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest3" allMuted={this.state.allMuted} allBlurred={this.state.allBlurred} iconID={4} tickIcon={this.state.tick4} crossIcon={this.state.cross4}/>
           </div>
         </div>
       );
