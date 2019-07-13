@@ -16,6 +16,7 @@ let currentOfferHost = '';
 let users = [];
 let userPositionCount = -1;
 let userPosition = 0;
+let contPosition = 5;
 let positions = [];
 io.on('connection',(client) => {
   userPositionCount += 1;
@@ -60,7 +61,7 @@ io.on('connection',(client) => {
     //userPosition -= 1;
   })
 
-  client.on("linkUserToSocket", (username) => {
+  client.on("linkUserToSocket", (username,userType) => {
     //check if user is already connected
     let connectedUser = false
     for(var item in users) {
@@ -85,19 +86,30 @@ io.on('connection',(client) => {
       if(found == false) {
 
         //empty username signifies admin
-        if(username != "") {
+        if(userType == "host") {
           userPosition = userPosition + 1;
           actualPosition = userPosition
         }
-        else {
+        else if(userType == "admin"){
           actualPosition = 0;
+        }
+        else {
+          actualPosition = contPosition;
+          contPosition += 1;
+          username = "contestant" + contPosition - 5;
         }
         positions.push({username : username,position : userPosition})
       }
 
       //add data to user array
-      users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : actualPosition});
+      if(userType != "guest") {
+        users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : actualPosition});
+      }
+      else {
+        users.push({username : ["contestant" + (contPosition - 5)],socketID : client.id,userCount : userPositionCount,userPosition : actualPosition})
+      }
 
+      console.log(users)
       //re-emit all usernames so clients can update their positions on frontend
       let usernames = [];
       for(var item in users) {

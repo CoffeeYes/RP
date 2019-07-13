@@ -37,7 +37,7 @@ export default class Webcam extends Component {
     remoteUserType = "";
 
     //maps username to socket on the backend
-    socket.emit("linkUserToSocket",this.props.localUsername);
+    socket.emit("linkUserToSocket",this.props.localUsername,this.props.userType);
     const configuration = {iceServers: [{urls: 'stun:stun.example.com'}]};
 
     navigator.mediaDevices.getUserMedia(constraints)
