@@ -103,10 +103,10 @@ io.on('connection',(client) => {
 
       //add data to user array
       if(userType != "guest") {
-        users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : actualPosition});
+        users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : actualPosition,userType: userType});
       }
       else {
-        users.push({username : ["contestant" + (contPosition - 5)],socketID : client.id,userCount : userPositionCount,userPosition : actualPosition})
+        users.push({username : ["contestant" + (contPosition - 5)],socketID : client.id,userCount : userPositionCount,userPosition : actualPosition,userType: userType})
       }
 
       console.log(users)
@@ -160,7 +160,9 @@ io.on('connection',(client) => {
   client.on("getUserVoteStates",() => {
     let voteStates= [];
     for(var i = 0; i < users.length; i++) {
-      voteStates.push(users[i].voteState)
+      if(users[i].userType != "guest") {
+        voteStates.push(users[i].voteState)
+      }
     }
 
     io.to([client.id]).emit("receiveUserVoteStates",voteStates)
