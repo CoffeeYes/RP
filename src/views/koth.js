@@ -9,6 +9,8 @@ import x_filled from '../assets/x_filled.svg'
 
 import openSocket from 'socket.io-client';
 
+var socket;
+
 class Koth extends Component {
   constructor(props) {
     super(props)
@@ -84,6 +86,8 @@ class Koth extends Component {
         this.setState({["name" + usernames[i].position] : usernames[i].username})
       }
     })
+
+    socket = this.socket;
   }
 
   updateUsername(number,name) {
@@ -91,12 +95,14 @@ class Koth extends Component {
   }
 
   swapContestants() {
-    var contestant1 = document.querySelector('#contestant1');
-    var contestant2 = document.querySelector('#contestant2');
+    var contestant1 = document.querySelector('#cam5');
+    var contestant2 = document.querySelector('#cam6');
 
     var temp = contestant2.srcObject;
     contestant2.srcObject = contestant1.srcObject;
     contestant1.srcObject = temp;
+
+    socket.emit("swapContestants")
     }
 
   muteAll = () => {

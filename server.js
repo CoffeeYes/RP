@@ -185,6 +185,28 @@ io.on('connection',(client) => {
 
     io.emit("receiveUsernames",usernames)
   })
+
+  client.on("swapContestants", () => {
+    for(var item in users) {
+      if(users[item].userPosition == 5) {
+        users[item].userPosition = 6;
+      }
+      if(users[item].userPosition == 6) {
+        users[item].userPosition = 5;
+      }
+    }
+
+    for(var item in positions) {
+      if(positions[item].position == 5) {
+        positions[item].position = 6;
+      }
+      if(positions[item].position == 6) {
+        positions[item].position = 5;
+      }
+    }
+  })
+
+
 })
 
 
