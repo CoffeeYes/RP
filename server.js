@@ -53,15 +53,49 @@ io.on('connection',(client) => {
 
     for(var i = 0; i < users.length; i++) {
       if(users[i].socketID == client.id) {
-        io.emit("resetSingleVote",users[i].userPosition)
+
+        //change pos variables according to user type
+        if(users[i].userType == "host") {
+          io.emit("resetSingleVote",users[i].userPosition)
+          userPositionCount -= 1;
+        }
+        else if(users[i].userType == "guest") {
+          contPosition -= 1;
+        }
+        //remove user from array
         users.splice(i,1);
       }
     }
-    userPositionCount -= 1;
+
     //userPosition -= 1;
   })
 
   client.on("linkUserToSocket", (username,userType) => {
+
+    //if username is empty, a contestant/usertype=guest is connecting
+    if(username == "") {
+      //check if contestants already connected
+      var flagContestant1 = false;
+      var flagContestant2 = false;
+      for(var item in users) {
+        if(users[item].username == "contestant1") {
+          flagContestant1 = true;
+        }
+
+        if(users[item].username == "contestant2") {
+          flagContestant2 = true;
+        }
+      }
+
+      //set username based on flag
+      if(flagContestant1 == false) {
+        username = "contestant1"
+      }
+      else if(flagContestant1 == true && flagContestant2 == false) {
+        username = "contestant2"
+      }
+    }
+
     //check if user is already connected
     let connectedUser = false
     for(var item in users) {
