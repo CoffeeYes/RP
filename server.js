@@ -214,7 +214,9 @@ io.on('connection',(client) => {
     let usernames = [];
 
     for(var item in users) {
-      usernames.push({position : users[item].userPosition,username : users[item].username})
+      if(users[item].userType != "guest" && users[item].userType != "admin") {
+        usernames.push({position : users[item].userPosition,username : users[item].username})
+      }  
     }
 
     io.emit("receiveUsernames",usernames)
