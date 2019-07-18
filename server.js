@@ -142,8 +142,6 @@ io.on('connection',(client) => {
       else {
         users.push({username : ["contestant" + (contPosition - 5)],socketID : client.id,userCount : userPositionCount,userPosition : actualPosition,userType: userType})
       }
-
-      console.log(users)
       //re-emit all usernames so clients can update their positions on frontend
       let usernames = [];
       for(var item in users) {
@@ -216,7 +214,7 @@ io.on('connection',(client) => {
     for(var item in users) {
       if(users[item].userType != "guest" && users[item].userType != "admin") {
         usernames.push({position : users[item].userPosition,username : users[item].username})
-      }  
+      }
     }
 
     io.emit("receiveUsernames",usernames)
@@ -227,7 +225,7 @@ io.on('connection',(client) => {
       if(users[item].userPosition == 5) {
         users[item].userPosition = 6;
       }
-      if(users[item].userPosition == 6) {
+      else if(users[item].userPosition == 6) {
         users[item].userPosition = 5;
       }
     }
@@ -236,10 +234,11 @@ io.on('connection',(client) => {
       if(positions[item].position == 5) {
         positions[item].position = 6;
       }
-      if(positions[item].position == 6) {
+      else if(positions[item].position == 6) {
         positions[item].position = 5;
       }
     }
+    console.log(users)
   })
 
 
