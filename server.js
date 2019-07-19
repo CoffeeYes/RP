@@ -44,8 +44,8 @@ io.on('connection',(client) => {
   })
 
   //relay the new ICE candidate to other clients
-  client.on("newIceCandidate", (candidate) => {
-    client.broadcast.emit("receiveNewIceCandidate",candidate)
+  client.on("newIceCandidate", (candidate,index) => {
+    client.broadcast.emit("receiveNewIceCandidate",candidate,index)
   })
 
   client.on("disconnect", () => {

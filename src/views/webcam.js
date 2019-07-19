@@ -25,6 +25,13 @@ export default class Webcam extends Component {
     }
   }
 
+  //send candidate and index of RTCConnection to backend
+  handleIceCandidate = (event,index) => {
+    if(event.candidate) {
+      socket.emit("newIceCandidate",event.candidate,index)
+    }
+  }
+
   componentDidMount = () => {
     let constraints = {
       video : {width: 640,height : 480},
@@ -57,12 +64,7 @@ export default class Webcam extends Component {
         localCam.muted = true;
       }
 
-      //function to handle ice candidate
-      function handleIceCandidate(event) {
-        if(event.candidate) {
-          socket.emit("newIceCandidate",event.candidate)
-        }
-      }
+
 
 
 
@@ -81,7 +83,7 @@ export default class Webcam extends Component {
         RTCConnections[currentIndex].positionIndex = positionIndex;
 
         //add ice candidate handler
-        RTCConnections[currentIndex].onicecandidate = handleIceCandidate
+        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,currentIndex))
 
         //add local stream to new RTC object
         stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
@@ -118,7 +120,7 @@ export default class Webcam extends Component {
         RTCConnections[currentIndex].remoteUserType = offer.remoteUserType;
         remoteUserType = offer.remoteUserType;
 
-        RTCConnections[currentIndex].onicecandidate = handleIceCandidate
+        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,currentIndex))
         RTCConnections[currentIndex].ontrack = ((event) => this.handleOnTrack(event,offer.position))
 
         RTCConnections[currentIndex].remotePosition = offer.position;
@@ -161,10 +163,10 @@ export default class Webcam extends Component {
       })
 
       //adds ics candidates to RTCPeerConnection object
-      socket.on("receiveNewIceCandidate", (candidate) => {
+      socket.on("receiveNewIceCandidate", (candidate,index) => {
         if(candidate != null) {
           try {
-            RTCConnections[currentIndex].addIceCandidate(candidate)
+            RTCConnections[index].addIceCandidate(candidate)
           }
           catch(error) {
             console.log("error adding ice candidate : " + error)
