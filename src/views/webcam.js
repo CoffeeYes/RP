@@ -83,7 +83,7 @@ export default class Webcam extends Component {
         RTCConnections[currentIndex].positionIndex = positionIndex;
 
         //add ice candidate handler
-        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,currentIndex))
+        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].index))
 
         //add local stream to new RTC object
         stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
@@ -120,7 +120,7 @@ export default class Webcam extends Component {
         RTCConnections[currentIndex].remoteUserType = offer.remoteUserType;
         remoteUserType = offer.remoteUserType;
 
-        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,currentIndex))
+        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].index))
         RTCConnections[currentIndex].ontrack = ((event) => this.handleOnTrack(event,offer.position))
 
         RTCConnections[currentIndex].remotePosition = offer.position;
