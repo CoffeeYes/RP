@@ -4,7 +4,6 @@ import Webrtc from 'simplewebrtc'
 let RTCConnections = [];
 let currentIndex = 0;
 let contestantCount = 0;
-let positionIndex = 0;
 let contestantPosition = 0;
 
 let socket;
@@ -64,11 +63,6 @@ export default class Webcam extends Component {
         localCam.muted = true;
       }
 
-
-
-
-
-
       //let the server know the user allowed the webcam so it can begin RTC handshake
       socket.emit("newWebcamMounted")
 
@@ -78,9 +72,6 @@ export default class Webcam extends Component {
         RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
-
-        positionIndex += 1;
-        RTCConnections[currentIndex].positionIndex = positionIndex;
 
         //add ice candidate handler
         RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].index))
@@ -106,15 +97,6 @@ export default class Webcam extends Component {
         RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
-
-        if(offer.remoteUserType == "host") {
-          positionIndex += 1;
-          RTCConnections[currentIndex].positionIndex = positionIndex;
-        }
-        else if (offer.remoteUserType == "guest") {
-          contestantPosition += 1;
-          RTCConnections[currentIndex].positionIndex = contestantPosition;
-        }
 
         RTCConnections[currentIndex].remoteUsername = offer.remoteUsername;
         RTCConnections[currentIndex].remoteUserType = offer.remoteUserType;
