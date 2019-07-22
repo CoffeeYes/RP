@@ -155,6 +155,7 @@ io.on('connection',(client) => {
     }
   })
 
+  //set vote state to yes and emit to other clients
   client.on("hostVoteYes", () => {
     for(var i = 0 ; i < users.length; i++) {
       if(users[i].socketID == client.id) {
@@ -164,6 +165,7 @@ io.on('connection',(client) => {
     }
   })
 
+  //set vote state to no and emit to other clients
   client.on("hostVoteNo",() => {
     for(var i = 0 ; i < users.length; i++) {
       if(users[i].socketID == client.id) {
@@ -173,6 +175,7 @@ io.on('connection',(client) => {
     }
   })
 
+  //reset a single hosts vote
   client.on("resetHostVote", () => {
     for(var i = 0 ; i < users.length; i++) {
       if(users[i].socketID == client.id) {
@@ -182,6 +185,7 @@ io.on('connection',(client) => {
     }
   })
 
+  //admin reset vote states for all users
   client.on("resetAllVotes",() => {
     io.emit("resetAllVote");
     for(var i = 0 ; i < users.length; i++) {
@@ -189,6 +193,7 @@ io.on('connection',(client) => {
     }
   })
 
+  //emit existing user voting states for new connecting clients
   client.on("getUserVoteStates",() => {
     let voteStates= [];
     for(var i = 0; i < users.length; i++) {
@@ -200,6 +205,7 @@ io.on('connection',(client) => {
     io.to([client.id]).emit("receiveUserVoteStates",voteStates)
   })
 
+  //send frontend position
   client.on("getPersonalPosition",() => {
     for(var i = 0 ; i < users.length; i++) {
       if(users[i].socketID == client.id) {
@@ -208,6 +214,7 @@ io.on('connection',(client) => {
     }
   })
 
+  //sends all relevant usernames to new connections
   client.on("getUsernames", () => {
     let usernames = [];
 
@@ -220,6 +227,7 @@ io.on('connection',(client) => {
     io.emit("receiveUsernames",usernames)
   })
 
+  //swap contestant position on backend when admin presses swap
   client.on("swapContestants", () => {
     for(var item in users) {
       if(users[item].userPosition == 5) {
@@ -238,7 +246,6 @@ io.on('connection',(client) => {
         positions[item].position = 5;
       }
     }
-    console.log(users)
   })
 
 
