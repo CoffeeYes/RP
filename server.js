@@ -118,8 +118,6 @@ io.on('connection',(client) => {
 
       //if they hadnt already connected, increment userposition and add data to positions array
       if(found == false) {
-
-        //empty username signifies admin
         if(userType == "host") {
           userPosition = userPosition + 1;
           actualPosition = userPosition
@@ -128,6 +126,7 @@ io.on('connection',(client) => {
           actualPosition = 0;
         }
         else {
+          //contestant position starts at cam 5
           actualPosition = contPosition;
           contPosition += 1;
           username = "contestant" + contPosition - 5;
@@ -146,7 +145,7 @@ io.on('connection',(client) => {
       let usernames = [];
       for(var item in users) {
         //empty username signifies admin
-        if(users[item].username != "") {
+        if(users[item].username != "contestant1" && users[item].username != "contestant2") {
           usernames.push({position : users[item].userPosition,username : users[item].username})
         }
       }
