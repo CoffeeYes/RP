@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import Webrtc from 'simplewebrtc'
 
 let RTCConnections = [];
+let RTCCons = {};
 let currentIndex = 0;
 let contestantCount = 0;
 let contestantPosition = 0;
@@ -28,6 +29,12 @@ export default class Webcam extends Component {
   handleIceCandidate = (event,index) => {
     if(event.candidate) {
       socket.emit("newIceCandidate",event.candidate,index)
+    }
+  }
+
+  handleIceCandidate2 = (event,clientID) => {
+    if(event.candidate) {
+      socket.emit("newIceCandidate2",event.candidate,clientID)
     }
   }
 
@@ -73,6 +80,9 @@ export default class Webcam extends Component {
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
 
+        RTCCons[clientID] = new RTCPeerConnection(configuration);
+        RTCCons[clientID].onicecandidate = ( event => this.handleIceCandidate2(event,clientID))
+        stream.getTracks().forEach(track => RTCCons[clientID].addTrack(track,stream))
         //add ice candidate handler
         RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].index))
 
@@ -90,8 +100,16 @@ export default class Webcam extends Component {
           offer.position = this.props.personalPosition;
           socket.emit("RTCOfferCreated",offer)
         })
+
+        RTCCons[clientID].createOffer()
+        .then( offer => {
+          RTCCons[clientID].setLocalDescription(offer)
+          offer.position = this.props.getPersonalPosition;
+          socket.emit("RTCOfferCreated2",offer,clientID)
+        })
       })
 
+      /*
       //receive rtc offer when this client is the newest one
       socket.on("receiveRTCOffer", (offer) => {
         RTCConnections.push(new RTCPeerConnection(configuration));
@@ -129,7 +147,30 @@ export default class Webcam extends Component {
           })
         })
       })
+      */
+      socket.on("receiveRTCOffer2", (offer,clientID) => {
+        RTCCons[clientID] = new RTCPeerConnection(configuration);
+        RTCCons[clientID].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].index))
+        RTCCons[clientID].ontrack = ((event) => this.handleOnTrack(event,offer.position))
 
+        stream.getTracks().forEach(track => RTCCons[clientID].addTrack(track,stream))
+
+        RTCCons[clientID].setRemoteDescription(offer)
+        .then( (offer) => {
+          RTCCons[clientID].createAnswer()
+          .then( answer => {
+            answer.originID = offer.destinationID;
+            answer.destinationID = offer.originID;
+            answer.index = offer.index;
+            answer.remoteUsername = this.props.localUsername;
+            answer.remoteUserType = this.props.userType;
+            answer.position = this.props.personalPosition
+            socket.emit("sendRTCAnswer2",answer,clientID)
+          })
+        })
+      })
+
+      /*
       socket.on("receiveRTCAnswer", (answer) => {
         RTCConnections[answer.index].remoteUsername = answer.remoteUsername;
         RTCConnections[answer.index].ontrack = ((event) => this.handleOnTrack(event,answer.position))
@@ -143,12 +184,28 @@ export default class Webcam extends Component {
         remoteUserType = answer.remoteUserType;
         //this.props.updateUsername(answer.index + 1,answer.remoteUsername)
       })
+      */
+      socket.on("receiveRTCAnswer2", (answer,clientID) => {
+        RTCCons[clientID].ontrack = ((event) => this.handleOnTrack(event,answer.position))
+        RTCCons[clientID].setRemoteDescription(answer);
+      })
 
       //adds ics candidates to RTCPeerConnection object
       socket.on("receiveNewIceCandidate", (candidate,index) => {
         if(candidate != null) {
           try {
             RTCConnections[index].addIceCandidate(candidate)
+          }
+          catch(error) {
+            console.log("error adding ice candidate : " + error)
+          }
+        }
+      })
+
+      socket.on("receiveNewIceCandidate2", (candidate,clientID) => {
+        if(candidate != null) {
+          try {
+            RTCCons[clientID].addIceCandidate(candidate)
           }
           catch(error) {
             console.log("error adding ice candidate : " + error)
