@@ -11,6 +11,7 @@ let socket;
 let userType;
 let audioID;
 let remoteUserType;
+var socketID;
 
 export default class Webcam extends Component {
 
@@ -30,8 +31,9 @@ export default class Webcam extends Component {
     if(event.candidate) {
       socket.emit("newIceCandidate",event.candidate,index)
     }
+    console.log()
   }
-  
+
   componentDidMount = () => {
     let constraints = {
       video : {width: 640,height : 480},
@@ -66,6 +68,10 @@ export default class Webcam extends Component {
 
       //let the server know the user allowed the webcam so it can begin RTC handshake
       socket.emit("newWebcamMounted")
+
+      socket.on("receiveSelfSocketID", (id) => {
+        socketID = id;
+      })
 
       //when another client connects
       socket.on("createNewRTCOffer", (clientID) => {

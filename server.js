@@ -150,7 +150,7 @@ io.on('connection',(client) => {
         }
       }
       io.to([client.id]).emit("receiveUsernames",usernames)
-
+      io.to([client.id]).emit("receiveSelfSocketID",client.id)
     }
   })
 
