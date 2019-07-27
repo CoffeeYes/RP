@@ -35,7 +35,7 @@ io.on('connection',(client) => {
   client.on("RTCOfferCreated", (offer) => {
     //save the origin of the offer and forward it to the destination client
     offer.originID = client.id;
-    io.to([offer.destinationID]).emit("receiveRTCOffer",offer)
+    io.to([offer.destinationID]).emit("receiveRTCOffer",offer,client.id)
   })
 
   //forward RTC answer to the offer creator

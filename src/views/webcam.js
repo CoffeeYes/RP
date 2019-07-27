@@ -79,6 +79,7 @@ export default class Webcam extends Component {
         RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
+        RTCConnections[currentIndex].remoteSocketID = clientID;
 
         //add ice candidate handler
         RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].index))
@@ -101,10 +102,11 @@ export default class Webcam extends Component {
 
 
       //receive rtc offer when this client is the newest one
-      socket.on("receiveRTCOffer", (offer) => {
+      socket.on("receiveRTCOffer", (offer,remoteSocket) => {
         RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
+        RTCConnections[currentIndex].remoteSocketID = remoteSocket;
 
         RTCConnections[currentIndex].remoteUsername = offer.remoteUsername;
         RTCConnections[currentIndex].remoteUserType = offer.remoteUserType;
