@@ -44,8 +44,11 @@ io.on('connection',(client) => {
   })
 
   //relay the new ICE candidate to other clients
-  client.on("newIceCandidate", (candidate,index) => {
-    client.broadcast.emit("receiveNewIceCandidate",candidate,index)
+  client.on("newIceCandidate", (candidate,remoteSocketID) => {
+    //client.broadcast.emit("receiveNewIceCandidate",candidate,index)
+
+    //send the candidate and source ID to the saved remote ID of the RTCconnection object
+    io.to(remoteSocketID).emit("receiveNewIceCandidate",candidate,client.id)
   })
 
   client.on("disconnect", () => {

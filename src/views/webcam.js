@@ -26,12 +26,11 @@ export default class Webcam extends Component {
     }
   }
 
-  //send candidate and index of RTCConnection to backend
-  handleIceCandidate = (event,index) => {
+  //send candidate and ID of RTCConnection remotesocketID to backend
+  handleIceCandidate = (event,remoteSocketID) => {
     if(event.candidate) {
-      socket.emit("newIceCandidate",event.candidate,index)
+      socket.emit("newIceCandidate",event.candidate,remoteSocketID)
     }
-    console.log()
   }
 
   componentDidMount = () => {
@@ -82,7 +81,7 @@ export default class Webcam extends Component {
         RTCConnections[currentIndex].remoteSocketID = clientID;
 
         //add ice candidate handler
-        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].index))
+        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].remoteSocketID))
 
         //add local stream to new RTC object
         stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
@@ -112,7 +111,7 @@ export default class Webcam extends Component {
         RTCConnections[currentIndex].remoteUserType = offer.remoteUserType;
         remoteUserType = offer.remoteUserType;
 
-        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].index))
+        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].remoteSocketID))
         RTCConnections[currentIndex].ontrack = ((event) => this.handleOnTrack(event,offer.position))
 
         RTCConnections[currentIndex].remotePosition = offer.position;
@@ -157,10 +156,15 @@ export default class Webcam extends Component {
       })
 
       //adds ics candidates to RTCPeerConnection object
-      socket.on("receiveNewIceCandidate", (candidate,index) => {
+      socket.on("receiveNewIceCandidate", (candidate,remoteSocketID) => {
         if(candidate != null) {
           try {
-            RTCConnections[index].addIceCandidate(candidate)
+            //match rtc object based on received socketID
+            for(var item in RTCConnections) {
+              if (RTCConnections[item].remoteSocketID == remoteSocketID) {
+                RTCConnections[item].addIceCandidate(candidate)
+              }
+            }
           }
           catch(error) {
             console.log("error adding ice candidate : " + error)
