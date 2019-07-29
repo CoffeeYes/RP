@@ -18,11 +18,13 @@ export default class Webcam extends Component {
   //handle receiving remote tracks
   handleOnTrack = (event,position) => {
     //mount video based on remote users personalPosition
-    var remoteVideo = document.querySelector('#cam' + position);
+    if(event.streams) {
+      var remoteVideo = document.querySelector('#cam' + position);
 
-    if(remoteVideo) {
-      remoteVideo.srcObject = event.streams[0]
-      remoteVideo.muted = true;
+      if(remoteVideo) {
+        remoteVideo.srcObject = event.streams[0]
+        remoteVideo.muted = true;
+      }
     }
   }
 
