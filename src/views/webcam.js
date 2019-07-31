@@ -44,7 +44,6 @@ export default class Webcam extends Component {
     socket = this.props.socket;
     userType = this.props.userType;
     audioID = this.props.audioID;
-    remoteUserType = "";
 
     //maps username to socket on the backend
     socket.emit("linkUserToSocket",this.props.localUsername,this.props.userType);
@@ -55,7 +54,6 @@ export default class Webcam extends Component {
 
       //mount props as local variables due to function scope
       var userType = this.props.userType;
-      var remoteUserType = "";
 
       //webcam mounting location selection
       if(this.props.userType != 'admin') {
@@ -94,8 +92,6 @@ export default class Webcam extends Component {
           RTCConnections[currentIndex].setLocalDescription(offer)
           offer.destinationID = clientID
           offer.index = currentIndex
-          offer.remoteUsername = this.props.localUsername;
-          offer.remoteUserType = this.props.userType;
           offer.position = this.props.personalPosition;
           socket.emit("RTCOfferCreated",offer)
         })
@@ -108,10 +104,6 @@ export default class Webcam extends Component {
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
         RTCConnections[currentIndex].remoteSocketID = remoteSocket;
-
-        RTCConnections[currentIndex].remoteUsername = offer.remoteUsername;
-        RTCConnections[currentIndex].remoteUserType = offer.remoteUserType;
-        remoteUserType = offer.remoteUserType;
 
         RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].remoteSocketID))
         RTCConnections[currentIndex].ontrack = ((event) => this.handleOnTrack(event,offer.position))
@@ -131,8 +123,6 @@ export default class Webcam extends Component {
             answer.originID = offer.destinationID;
             answer.destinationID = offer.originID;
             answer.index = offer.index;
-            answer.remoteUsername = this.props.localUsername;
-            answer.remoteUserType = this.props.userType;
             answer.position = this.props.personalPosition
             socket.emit("sendRTCAnswer",answer)
           })
@@ -147,11 +137,8 @@ export default class Webcam extends Component {
 
         RTCConnections[answer.index].setRemoteDescription(answer)
         RTCConnections[answer.index].remoteSocketID = answer.originID
-        RTCConnections[answer.index].remoteUserType = answer.remoteUserType;
 
         RTCConnections[answer.index].remotePosition = answer.position;
-
-        remoteUserType = answer.remoteUserType;
       })
 
       //adds ics candidates to RTCPeerConnection object
