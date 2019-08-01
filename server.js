@@ -32,15 +32,15 @@ io.on('connection',(client) => {
   })
 
   //get offers for the newly connected client
-  client.on("RTCOfferCreated", (offer) => {
+  client.on("RTCOfferCreated", (offer,clientID) => {
     //save the origin of the offer and forward it to the destination client
     offer.originID = client.id;
-    io.to([offer.destinationID]).emit("receiveRTCOffer",offer,client.id)
+    io.to([clientID]).emit("receiveRTCOffer",offer,client.id)
   })
 
   //forward RTC answer to the offer creator
-  client.on("sendRTCAnswer", (answer) => {
-    io.to([answer.destinationID]).emit("receiveRTCAnswer",answer)
+  client.on("sendRTCAnswer", (answer,clientID) => {
+    io.to([clientID]).emit("receiveRTCAnswer",answer,client.id)
   })
 
   //relay the new ICE candidate to other clients

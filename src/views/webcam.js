@@ -93,7 +93,7 @@ export default class Webcam extends Component {
           offer.destinationID = clientID
           offer.index = currentIndex
           offer.position = this.props.personalPosition;
-          socket.emit("RTCOfferCreated",offer)
+          socket.emit("RTCOfferCreated",offer,clientID)
         })
       })
 
@@ -124,14 +124,15 @@ export default class Webcam extends Component {
             answer.destinationID = offer.originID;
             answer.index = offer.index;
             answer.position = this.props.personalPosition
-            socket.emit("sendRTCAnswer",answer)
+            socket.emit("sendRTCAnswer",answer,remoteSocket)
           })
         })
       })
 
 
 
-      socket.on("receiveRTCAnswer", (answer) => {
+      socket.on("receiveRTCAnswer", (answer,clientID) => {
+        /*
         RTCConnections[answer.index].remoteUsername = answer.remoteUsername;
         RTCConnections[answer.index].ontrack = ((event) => this.handleOnTrack(event,answer.position))
 
@@ -139,6 +140,15 @@ export default class Webcam extends Component {
         RTCConnections[answer.index].remoteSocketID = answer.originID
 
         RTCConnections[answer.index].remotePosition = answer.position;
+        */
+
+        for(var item in RTCConnections) {
+          if(RTCConnections[item].remoteSocketID == clientID) {
+            RTCConnections[item].setRemoteDescription(answer)
+            RTCConnections[item].ontrack = ((event) => this.handleOnTrack(event,answer.position))
+            RTCConnections[item].remotePosition = answer.position;
+          }
+        }
       })
 
       //adds ics candidates to RTCPeerConnection object
