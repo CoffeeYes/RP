@@ -249,20 +249,7 @@ io.on('connection',(client) => {
       }
     }
   })
-
-  client.on("newIceCandidate2", (candidate,clientID) => {
-    io.to(clientID).emit("receiveNewIceCandidate2",candidate,client.id)
-  })
-
-  client.on("RTCOfferCreated2", (offer,clientID) => {
-    io.to(clientID).emit("receiveRTCOffer2",(offer,client.id))
-  })
-
-  client.on("sendRTCAnswer2",(answer,clientID) => {
-    io.to(clientID).emit("receiveRTCAnswer2",answer,client.id)
-  })
-
-
+  
 })
 
 
