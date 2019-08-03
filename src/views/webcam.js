@@ -76,6 +76,7 @@ export default class Webcam extends Component {
       socket.on("createNewRTCOffer", (clientID) => {
         //create new RTC connection and add it to the connection array, correct the currentindex
         RTCConnections.push(new RTCPeerConnection(configuration));
+        /*
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
         RTCConnections[currentIndex].remoteSocketID = clientID;
@@ -95,11 +96,27 @@ export default class Webcam extends Component {
           offer.position = this.props.personalPosition;
           socket.emit("RTCOfferCreated",offer,clientID)
         })
+        */
+        RTCCons[clientID] =  new RTCPeerConnection(configuration);
+
+        RTCCons[clientID].onicecandidate = ( event => this.handleIceCandidate(event,clientID))
+
+        stream.getTracks().forEach(track => RTCCons[clientID].addTrack(track,stream))
+
+        RTCCons[clientID].createOffer()
+        .then( offer => {
+          RTCCons[clientID].setLocalDescription(offer)
+          offer.destinationID = clientID;
+          offer.originID = socketID
+          offer.position = this.props.personalPosition;
+          socket.emit("RTCOfferCreated",offer,clientID)
+        })
       })
 
 
       //receive rtc offer when this client is the newest one
       socket.on("receiveRTCOffer", (offer,remoteSocket) => {
+        /*
         RTCConnections.push(new RTCPeerConnection(configuration));
         currentIndex = RTCConnections.length - 1;
         RTCConnections[currentIndex].index = currentIndex;
@@ -127,6 +144,28 @@ export default class Webcam extends Component {
             socket.emit("sendRTCAnswer",answer,remoteSocket)
           })
         })
+        */
+
+        RTCCons[remoteSocket] = new RTCPeerConnection(configuration);
+
+        RTCCons[remoteSocket].onicecandidate = ( event => this.handleIceCandidate(event,remoteSocket))
+        RTCCons[remoteSocket].ontrack = ((event) => this.handleOnTrack(event,offer.position))
+
+        RTCCons[remoteSocket].remotePosition = offer.position
+
+        RTCCons[remoteSocket].setRemoteDescription(offer)
+        .then( () => {
+          RTCCons[remoteSocket].createAnswer()
+          .then( answer => {
+            RTCCons[remoteSocket].setLocalDescription(answer)
+            answer.position = this.props.getPersonalPosition
+            answer.destinationID = offer.originID;
+            answer.originID = offer.destinationID;
+            socket.emit("sendRTCAnswer",answer,remoteSocket)
+          })
+        })
+
+        console.log(RTCCons)
       })
 
 
@@ -142,6 +181,17 @@ export default class Webcam extends Component {
         RTCConnections[answer.index].remotePosition = answer.position;
         */
 
+        if(RTCCons[clientID]) {
+          RTCCons[clientID].ontrack = ( (event) => this.handleOnTrack(event,answer.position))
+
+          RTCCons[clientID].setRemoteDescription(answer)
+
+          RTCCons[clientID].remotePosition = answer.position;
+
+          console.log(RTCCons)
+        }
+
+        /*
         for(var item in RTCConnections) {
           if(RTCConnections[item].remoteSocketID == clientID) {
             RTCConnections[item].setRemoteDescription(answer)
@@ -149,18 +199,22 @@ export default class Webcam extends Component {
             RTCConnections[item].remotePosition = answer.position;
           }
         }
+        */
       })
 
       //adds ics candidates to RTCPeerConnection object
       socket.on("receiveNewIceCandidate", (candidate,remoteSocketID) => {
         if(candidate != null) {
           try {
+            /*
             //match rtc object based on received socketID
             for(var item in RTCConnections) {
               if (RTCConnections[item].remoteSocketID == remoteSocketID) {
                 RTCConnections[item].addIceCandidate(candidate)
               }
             }
+            */
+            RTCCons[remoteSocketID].addIceCandidate(candidate)
           }
           catch(error) {
             console.log("error adding ice candidate : " + error)
@@ -170,28 +224,20 @@ export default class Webcam extends Component {
 
       //handle cleanup after user disconnects
       socket.on("clientDisconnect", (id) => {
-        console.log("client " + id + " disconnected")
-        for(var item in RTCConnections) {
+        var video = document.querySelector('#cam' + RTCCons[id].remotePosition)
 
-
-          if(RTCConnections[item].remoteSocketID == id) {
-            var video = document.querySelector('#cam' + RTCConnections[item].remotePosition)
-
-            //unmount video
-            if(video) {
-              video.srcObject = null;
-            }
-
-            //clear username
-            this.props.updateUsername(RTCConnections[item].remotePosition, "")
-
-            //close connection
-            RTCConnections[item].close()
-            //remove object from array
-            RTCConnections.splice(RTCConnections.indexOf(RTCConnections[item],1))
-          }
+        if(video) {
+          video.srcObject = null;
         }
+
+        //clear username
+        this.props.updateUsername(RTCCons[id].remotePosition, "")
+
+        RTCCons[id].close();
+
+        RTCCons[id] = null;
       })
+
     })
     .catch(error => {
       console.log("Media Error : " + error)
