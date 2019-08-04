@@ -181,7 +181,6 @@ export default class Webcam extends Component {
         RTCConnections[answer.index].remotePosition = answer.position;
         */
 
-        if(RTCCons[clientID]) {
           RTCCons[clientID].ontrack = ( (event) => this.handleOnTrack(event,answer.position))
 
           RTCCons[clientID].setRemoteDescription(answer)
@@ -189,7 +188,6 @@ export default class Webcam extends Component {
           RTCCons[clientID].remotePosition = answer.position;
 
           console.log(RTCCons)
-        }
 
         /*
         for(var item in RTCConnections) {
@@ -235,7 +233,7 @@ export default class Webcam extends Component {
 
         RTCCons[id].close();
 
-        RTCCons[id] = null;
+        delete RTCCons[id]
       })
 
     })
