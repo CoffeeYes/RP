@@ -20,7 +20,7 @@ export default class Webcam extends Component {
     //mount video based on remote users personalPosition
     if(event.streams) {
       var remoteVideo = document.querySelector('#cam' + position);
-
+      
       if(remoteVideo) {
         remoteVideo.srcObject = event.streams[0]
         remoteVideo.muted = true;
@@ -153,19 +153,19 @@ export default class Webcam extends Component {
 
         RTCCons[remoteSocket].remotePosition = offer.position
 
+        stream.getTracks().forEach(track => RTCCons[remoteSocket].addTrack(track,stream))
+
         RTCCons[remoteSocket].setRemoteDescription(offer)
         .then( () => {
           RTCCons[remoteSocket].createAnswer()
           .then( answer => {
             RTCCons[remoteSocket].setLocalDescription(answer)
-            answer.position = this.props.getPersonalPosition
+            answer.position = this.props.personalPosition
             answer.destinationID = offer.originID;
             answer.originID = offer.destinationID;
             socket.emit("sendRTCAnswer",answer,remoteSocket)
           })
         })
-
-        console.log(RTCCons)
       })
 
 
@@ -186,8 +186,6 @@ export default class Webcam extends Component {
           RTCCons[clientID].setRemoteDescription(answer)
 
           RTCCons[clientID].remotePosition = answer.position;
-
-          console.log(RTCCons)
 
         /*
         for(var item in RTCConnections) {
