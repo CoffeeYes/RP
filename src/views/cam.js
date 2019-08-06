@@ -79,6 +79,7 @@ class Cam extends Component {
                 <button onClick={this.toggleMute} className="toggleButton">
                   <img src={this.state.muteIcon} />
                 </button>
+                <button>Kick</button>
               </div>
           </div>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
