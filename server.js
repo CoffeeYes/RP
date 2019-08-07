@@ -155,6 +155,17 @@ io.on('connection',(client) => {
       io.to([client.id]).emit("receiveUsernames",usernames)
       io.to([client.id]).emit("receiveSelfSocketID",client.id)
     }
+    var socketsAndPositions = [];
+    for(var item in users) {
+      var currentUser = {
+        position : users[item].userPosition,
+        socket : users[item].socketID
+      }
+
+      socketsAndPositions.push(currentUser)
+    }
+
+    io.emit("receiveSocketsAndPositions",socketsAndPositions)
   })
 
   //set vote state to yes and emit to other clients
@@ -249,7 +260,7 @@ io.on('connection',(client) => {
       }
     }
   })
-  
+
 })
 
 
