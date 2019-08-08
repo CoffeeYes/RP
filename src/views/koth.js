@@ -161,8 +161,8 @@ class Koth extends Component {
   resetAll = () => {
     this.socket.emit("resetAllVotes");
   }
-  kickUser = () => {
-
+  kickUser(camID) {
+    console.log(camID)
   }
   render() {
     if(this.props.userType == "admin") {
@@ -177,7 +177,7 @@ class Koth extends Component {
                allBlurred={this.state.allBlurred}
                iconID={1} tickIcon={this.state.tick1}
                crossIcon={this.state.cross1}
-               kickUser={this.kickUser}/>
+               kickUser={(camID) => this.kickUser(camID)}/>
 
               <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={this.socket} personalPosition={this.state.personalPosition}/>
 
@@ -192,7 +192,7 @@ class Koth extends Component {
               iconID={2}
               tickIcon={this.state.tick2}
               crossIcon={this.state.cross2}
-              kickUser={this.kickUser}/>
+              kickUser={(camID) => this.kickUser(camID)}/>
 
           </div>
           <div className="cam-col">
@@ -205,7 +205,7 @@ class Koth extends Component {
               audioID="audioContestant1"
               allMuted={this.state.allMuted}
               allBlurred={this.state.allBlurred}
-              kickUser={this.kickUser}/>
+              kickUser={(camID) => this.kickUser(camID)}/>
 
               <Cam
               camName="King"
@@ -216,7 +216,7 @@ class Koth extends Component {
               audioID="audioContestant2"
               allMuted={this.state.allMuted}
               allBlurred={this.state.allBlurred}
-              kickUser={this.kickUser}/>
+              kickUser={(camID) => this.kickUser(camID)}/>
 
               <div className="buttonsContainer">
                 <button onClick={this.swapContestants}>Swap</button>
@@ -239,7 +239,7 @@ class Koth extends Component {
               iconID={3}
               tickIcon={this.state.tick3}
               crossIcon={this.state.cross3}
-              kickUser={this.kickUser}/>
+              kickUser={(camID) => this.kickUser(camID)}/>
 
               <Cam
               camName={this.state.name4}
@@ -251,7 +251,7 @@ class Koth extends Component {
               allBlurred={this.state.allBlurred}
               iconID={4} tickIcon={this.state.tick4}
               crossIcon={this.state.cross4}
-              kickUser={this.kickUser}/>
+              kickUser={(camID) => this.kickUser(camID)}/>
 
           </div>
         </div>

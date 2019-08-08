@@ -6,6 +6,7 @@ import mute from '../assets/icon_mute.png';
 import icon_video from '../assets/icon_video.png'
 import icon_novideo from '../assets/icon_novideo.png'
 
+var camID;
 class Cam extends Component {
 
   constructor(props) {
@@ -25,6 +26,8 @@ class Cam extends Component {
     if(this.props.userType != "admin") {
       this.setState({camFilter : "camNotBlurred"})
     }
+
+    camID = this.props.camID
   }
 
   //track prop change to change icons when all cams are muted or blurred
@@ -79,7 +82,7 @@ class Cam extends Component {
                 <button onClick={this.toggleMute} className="toggleButton">
                   <img src={this.state.muteIcon} />
                 </button>
-                <button>Kick</button>
+                <button onClick={() => this.props.kickUser(this.props.camID)}>Kick</button>
               </div>
           </div>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
