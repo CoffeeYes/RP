@@ -261,6 +261,10 @@ io.on('connection',(client) => {
     }
   })
 
+  client.on("kickUser", (camID) => {
+    io.sockets.connected[camID].disconnect();
+  })
+
 })
 
 

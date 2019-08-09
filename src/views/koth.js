@@ -162,7 +162,10 @@ class Koth extends Component {
     this.socket.emit("resetAllVotes");
   }
   kickUser(camID) {
-    console.log(camID)
+
+    if(this.state["socketID_" + camID]) {
+      this.socket.emit("kickUser",this.state["socketID_" + camID])
+    }
   }
   render() {
     if(this.props.userType == "admin") {

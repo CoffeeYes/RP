@@ -20,7 +20,7 @@ export default class Webcam extends Component {
     //mount video based on remote users personalPosition
     if(event.streams) {
       var remoteVideo = document.querySelector('#cam' + position);
-      
+
       if(remoteVideo) {
         remoteVideo.srcObject = event.streams[0]
         remoteVideo.muted = true;
@@ -220,18 +220,24 @@ export default class Webcam extends Component {
 
       //handle cleanup after user disconnects
       socket.on("clientDisconnect", (id) => {
-        var video = document.querySelector('#cam' + RTCCons[id].remotePosition)
+        if(RTCCons[id] != undefined) {
+          var video = document.querySelector('#cam' + RTCCons[id].remotePosition)
 
-        if(video) {
-          video.srcObject = null;
+          if(video) {
+            video.srcObject = null;
+          }
+
+          //clear username
+          this.props.updateUsername(RTCCons[id].remotePosition, "")
+
+          RTCCons[id].close();
+
+          delete RTCCons[id]
+        }
+        else {
+          console.log("RTC Connection item not found in RTCCons")
         }
 
-        //clear username
-        this.props.updateUsername(RTCCons[id].remotePosition, "")
-
-        RTCCons[id].close();
-
-        delete RTCCons[id]
       })
 
     })
