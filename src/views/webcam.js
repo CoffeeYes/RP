@@ -240,6 +240,24 @@ export default class Webcam extends Component {
 
       })
 
+      socket.on("receiveKick", () => {
+        //clear RTC connections object
+        for(var item in RTCCons) {
+          RTCCons[item].close()
+
+          delete RTCCons[item]
+        }
+
+        //unmount all video from screen
+        for(var i = 1; i < 7; i++) {
+          var video = document.querySelector('#cam' + i)
+
+          video.srcObject = null
+        }
+
+
+      })
+
     })
     .catch(error => {
       console.log("Media Error : " + error)

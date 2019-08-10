@@ -262,7 +262,14 @@ io.on('connection',(client) => {
   })
 
   client.on("kickUser", (camID) => {
+
+    io.to(camID).emit("receiveKick");
+    
     io.sockets.connected[camID].disconnect();
+
+    io.emit("clientDisconnect",camID);
+
+
   })
 
 })
