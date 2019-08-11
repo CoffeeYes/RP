@@ -26,7 +26,7 @@ class App extends Component {
       loggedIn : false,
       modes : JSON.parse(localStorage.getItem('modes')) || [],
       mode: JSON.parse(localStorage.getItem('mode')) || '',
-      authenticated: sessionStorage.getItem('authenticated') || false,
+      authenticated: JSON.parse(sessionStorage.getItem('authenticated')) || false,
       user_type : sessionStorage.getItem('user_type') || '',
       showCopied : false,
       addUser : {
@@ -314,6 +314,13 @@ class App extends Component {
     })
     this.getAllPolls();
   }
+
+  kickUserFromLobby = () => {
+    sessionStorage.setItem("authenticated",false)
+    this.setState({authenticated : false})
+
+    window.close()
+  }
   render = () => {
     if(this.state.authenticated) {
       //render full panel and allow access to other routes if admin login
@@ -339,6 +346,7 @@ class App extends Component {
               getMode={this.getMode}
               userType={this.state.user_type}
               localUsername={this.state.username}
+              kickUserFromLobby={this.kickUserFromLobby}
               />
             )}/>
             <Route path='/panel/mode' render={() => (
@@ -375,6 +383,7 @@ class App extends Component {
             getMode={this.getMode}
             userType={this.state.user_type}
             localUsername={this.state.username}
+            kickUserFromLobby={this.kickUserFromLobby}
             />
           )}/>
         )

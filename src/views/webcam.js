@@ -255,7 +255,7 @@ export default class Webcam extends Component {
           video.srcObject = null
         }
 
-
+        this.props.kickUserFromLobby()
       })
 
     })

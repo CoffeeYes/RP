@@ -182,7 +182,15 @@ class Koth extends Component {
                crossIcon={this.state.cross1}
                kickUser={(camID) => this.kickUser(camID)}/>
 
-              <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={this.socket} personalPosition={this.state.personalPosition}/>
+              <Webcam
+              userType={this.props.userType}
+              localUsername={this.props.localUsername}
+              updateUsername={(number,name) => this.updateUsername(number,name)}
+              {...this.props}
+              socket={this.socket}
+              personalPosition={this.state.personalPosition}
+              kickUserFromLobby={this.kickUserFromLobby}
+               />
 
               <Cam
               camName={this.state.name2}
@@ -265,7 +273,7 @@ class Koth extends Component {
           <div className="cam-container">
             <div className="cam-col">
                 <Cam camName={this.state.name1} camID="cam1" camType="guestCam" userType={this.props.userType} containerType="localCam guest" iconID={1} tickIcon={this.state.tick1} crossIcon={this.state.cross1}/>
-                <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={this.socket} personalPosition={this.state.personalPosition} />
+                <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={this.socket} personalPosition={this.state.personalPosition} kickUserFromLobby={this.props.kickUserFromLobby}/>
                 <Cam camName={this.state.name2} camID="cam2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" iconID={2} tickIcon={this.state.tick2} crossIcon={this.state.cross2}/>
             </div>
             <div className="cam-col">
@@ -289,7 +297,7 @@ class Koth extends Component {
         <div className="cam-container">
           <div className="cam-col">
               <Cam camName={this.state.name1} camID="cam1" camType="guestCam" userType={this.props.userType} containerType="localCam guest" iconID={1} tickIcon={this.state.tick1} crossIcon={this.state.cross1}/>
-              <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} personalPosition={this.state.personalPosition} socket={this.socket} />
+              <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} personalPosition={this.state.personalPosition} socket={this.socket} kickUserFromLobby={this.props.kickUserFromLobby}/>
               <Cam camName={this.state.name2} camID="cam2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" iconID={2} tickIcon={this.state.tick2} crossIcon={this.state.cross2}/>
           </div>
           <div className="cam-col">
