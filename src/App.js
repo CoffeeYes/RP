@@ -320,6 +320,8 @@ class App extends Component {
     this.setState({authenticated : false})
 
     window.close()
+
+    this.setState({error : "You were kicked from the Lobby"})
   }
   render = () => {
     if(this.state.authenticated) {
