@@ -264,7 +264,7 @@ io.on('connection',(client) => {
   client.on("kickUser", (camID) => {
 
     io.to(camID).emit("receiveKick");
-    
+
     io.sockets.connected[camID].disconnect();
 
     io.emit("clientDisconnect",camID);
@@ -467,6 +467,16 @@ app.post('/createCode',function(req,res,next) {
 
     database.collection('app_data').updateOne({title: 'accessCode'},{$set : {data : code}});
   })
+
+  setTimeout( () => {
+    Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+      if(error)throw error;
+
+      let database = client.db('rp');
+
+      database.collection('app_data').updateOne({title: 'accessCode'},{$set : {data : ''}});
+    })
+  },180000)
 })
 
 app.post('/addUser',function(req,res,next) {
