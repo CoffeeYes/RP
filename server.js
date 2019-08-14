@@ -18,6 +18,21 @@ let userPositionCount = -1;
 let userPosition = 0;
 let contPosition = 5;
 let positions = [];
+
+function emitSocketsAndPositions() {
+  var socketsAndPositions = [];
+  for(var item in users) {
+    var currentUser = {
+      position : users[item].userPosition,
+      socket : users[item].socketID
+    }
+
+    socketsAndPositions.push(currentUser)
+  }
+
+  io.emit("receiveSocketsAndPositions",socketsAndPositions)
+}
+
 io.on('connection',(client) => {
   userPositionCount += 1;
 
@@ -155,17 +170,10 @@ io.on('connection',(client) => {
       io.to([client.id]).emit("receiveUsernames",usernames)
       io.to([client.id]).emit("receiveSelfSocketID",client.id)
     }
-    var socketsAndPositions = [];
-    for(var item in users) {
-      var currentUser = {
-        position : users[item].userPosition,
-        socket : users[item].socketID
-      }
 
-      socketsAndPositions.push(currentUser)
-    }
+    emitSocketsAndPositions();
 
-    io.emit("receiveSocketsAndPositions",socketsAndPositions)
+
   })
 
   //set vote state to yes and emit to other clients
@@ -259,6 +267,8 @@ io.on('connection',(client) => {
         positions[item].position = 5;
       }
     }
+
+    emitSocketsAndPositions();
   })
 
   client.on("kickUser", (camID) => {
@@ -268,7 +278,6 @@ io.on('connection',(client) => {
     io.sockets.connected[camID].disconnect();
 
     io.emit("clientDisconnect",camID);
-
 
   })
 
