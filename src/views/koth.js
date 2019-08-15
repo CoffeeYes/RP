@@ -163,8 +163,10 @@ class Koth extends Component {
   }
   kickUser(camID) {
 
-    if(this.state["socketID_" + camID]) {
+    if(this.state["socketID_" + camID] != "") {
       this.socket.emit("kickUser",this.state["socketID_" + camID])
+
+      this.setState({["socketID_" + camID] : ""})
     }
   }
   render() {
