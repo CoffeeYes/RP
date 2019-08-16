@@ -281,6 +281,18 @@ io.on('connection',(client) => {
       io.emit("clientDisconnect",camID);
 
       emitSocketsAndPositions();
+
+      //updated positions based on usertype of kicked user
+      for(var item in users) {
+        if(users[item].socketID == camID) {
+          if(users[item].userType == "guest") {
+            contPosition -= 1;
+          }
+          else {
+            userPosition -= 1;
+          }
+        }
+      }
     }
     catch(error) {
       console.log("Error kicking user : " + error)
