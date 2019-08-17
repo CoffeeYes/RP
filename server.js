@@ -293,6 +293,15 @@ io.on('connection',(client) => {
           }
         }
       }
+
+      //update database roomcode
+      Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+        if(error)throw error;
+
+        let database = client.db('rp');
+
+        database.collection('app_data').updateOne({title: 'accessCode'},{$set : {data : Math.random().toString(36)}});
+      })
     }
     catch(error) {
       console.log("Error kicking user : " + error)
