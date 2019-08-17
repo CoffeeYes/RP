@@ -482,12 +482,11 @@ app.post('/roomCode',function(req,res,next) {
 
     //compare entered code to database code
     database.collection('app_data').find({title : 'accessCode'}).toArray(function(error,data) {
-      if(data[0].data != code) {
-        res.send({error: 'Wrong code',success : false})
+      if(code == data[0].data) {
+        res.send({sucess : true,user_type : 'guest'})
       }
       else {
-        //redirect to lobby and establish connection;
-        res.send({success : true,user_type : 'guest'});
+        res.send({error : "Wrong Code",sucess : false})
       }
     })
   })
