@@ -253,9 +253,11 @@ io.on('connection',(client) => {
     for(var item in users) {
       if(users[item].userPosition == 5) {
         users[item].userPosition = 6;
+        io.to(users[item].socketID).emit("receivePersonalPosition",6);
       }
       else if(users[item].userPosition == 6) {
         users[item].userPosition = 5;
+        io.to(users[item].socketID).emit("receivePersonalPosition",5);
       }
     }
 
