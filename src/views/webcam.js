@@ -240,6 +240,23 @@ export default class Webcam extends Component {
 
       })
 
+      socket.on("userWasKicked",(position,id) => {
+        if(RTCCons[id] != undefined) {
+          var video = document.querySelector('#cam' + position);
+
+          if(video) {
+            video.srcObject = null;
+          }
+
+          //clear username
+          this.props.updateUsername(RTCCons[id].remotePosition, "")
+
+          RTCCons[id].close();
+
+          delete RTCCons[id]
+        }
+      })
+
       socket.on("receiveKick", () => {
         //clear RTC connections object
         for(var item in RTCCons) {

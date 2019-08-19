@@ -280,7 +280,15 @@ io.on('connection',(client) => {
 
       io.sockets.connected[camID].disconnect();
 
-      io.emit("clientDisconnect",camID);
+      var kickedUserPosition;
+
+      for(var item in users) {
+        if(users[item].socketID == camID) {
+          kickedUser = users[item].userPosition
+        }
+      }
+
+      io.emit("userWasKicked",kickedUserPosition,camID);
 
       emitSocketsAndPositions();
 

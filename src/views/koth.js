@@ -106,7 +106,7 @@ class Koth extends Component {
     this.setState({['name' + number] : name})
   }
 
-  swapContestants() {
+  swapContestants = () => {
     var contestant1 = document.querySelector('#cam5');
     var contestant2 = document.querySelector('#cam6');
 
@@ -115,6 +115,11 @@ class Koth extends Component {
     contestant1.srcObject = temp;
 
     socket.emit("swapContestants")
+
+    var tempsocket = this.state.socketID_cam5
+    this.setState({socketID_cam5 : this.state.socketID_cam6 })
+    this.setState({socketID_cam6 : tempsocket})
+
     }
 
   muteAll = () => {
