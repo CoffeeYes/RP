@@ -275,18 +275,20 @@ io.on('connection',(client) => {
 
   client.on("kickUser", (camID) => {
 
+    var kickedUserPosition;
+
+    for(var item in users) {
+      if(users[item].socketID == camID) {
+        kickedUserPosition = users[item].userPosition
+      }
+    }
+
     try {
       io.to(camID).emit("receiveKick");
 
       io.sockets.connected[camID].disconnect();
-
-      var kickedUserPosition;
-
-      for(var item in users) {
-        if(users[item].socketID == camID) {
-          kickedUser = users[item].userPosition
-        }
-      }
+      
+      console.log("kicked user position : " + kickedUserPosition)
 
       io.emit("userWasKicked",kickedUserPosition,camID);
 

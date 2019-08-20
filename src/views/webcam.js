@@ -241,6 +241,7 @@ export default class Webcam extends Component {
       })
 
       socket.on("userWasKicked",(position,id) => {
+        console.log("position : " + position)
         if(RTCCons[id] != undefined) {
           var video = document.querySelector('#cam' + position);
 
