@@ -99,6 +99,15 @@ class Koth extends Component {
       }
     })
 
+    this.socket.on("contestantsWereSwapped", () => {
+      var contestant1 = document.querySelector('#cam5');
+      var contestant2 = document.querySelector('#cam6');
+
+      var temp = contestant2.srcObject;
+      contestant2.srcObject = contestant1.srcObject;
+      contestant1.srcObject = temp;
+    })
+    
     socket = this.socket;
   }
 

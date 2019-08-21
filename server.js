@@ -270,6 +270,8 @@ io.on('connection',(client) => {
       }
     }
 
+    io.emit("contestantsWereSwapped")
+
     emitSocketsAndPositions();
   })
 
@@ -287,7 +289,7 @@ io.on('connection',(client) => {
       io.to(camID).emit("receiveKick");
 
       io.sockets.connected[camID].disconnect();
-      
+
       console.log("kicked user position : " + kickedUserPosition)
 
       io.emit("userWasKicked",kickedUserPosition,camID);
