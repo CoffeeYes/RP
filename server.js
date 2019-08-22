@@ -288,7 +288,8 @@ io.on('connection',(client) => {
     try {
       io.to(camID).emit("receiveKick");
 
-      io.sockets.connected[camID].disconnect();
+      //this line causes wrong cam to be unmounted on frontend
+      //io.sockets.connected[camID].disconnect();
 
       console.log("kicked user position : " + kickedUserPosition)
 
