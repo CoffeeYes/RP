@@ -18,6 +18,7 @@ let userPositionCount = -1;
 let userPosition = 0;
 let contPosition = 5;
 let positions = [];
+let freeContestantPositions = [5,6]
 
 function emitSocketsAndPositions() {
   var socketsAndPositions = [];
@@ -78,7 +79,8 @@ io.on('connection',(client) => {
           userPositionCount -= 1;
         }
         else if(users[i].userType == "guest") {
-          contPosition -= 1;
+          freeContestantPositions.push(users[i].userPosition)
+          freeContestantPositions.sort()
         }
         //remove user from array
         users.splice(i,1);
@@ -145,9 +147,14 @@ io.on('connection',(client) => {
         }
         else {
           //contestant position starts at cam 5
-          actualPosition = contPosition;
-          contPosition += 1;
-          username = "contestant" + contPosition - 5;
+          if(freeContestantPositions[0]) {
+            actualPosition = freeContestantPositions[0];
+            freeContestantPositions.shift();
+          }
+          else {
+            console.log("no free contestant positions available")
+          }
+          username = "contestant" + actualPosition - 4;
         }
         positions.push({username : username,position : userPosition})
       }
