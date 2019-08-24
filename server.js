@@ -19,6 +19,7 @@ let userPosition = 0;
 let contPosition = 5;
 let positions = [];
 let freeContestantPositions = [5,6]
+let freeUserPositions = [1,2,3,4]
 
 function emitSocketsAndPositions() {
   var socketsAndPositions = [];
@@ -76,7 +77,8 @@ io.on('connection',(client) => {
         //change pos variables according to user type
         if(users[i].userType == "host") {
           io.emit("resetSingleVote",users[i].userPosition)
-          userPositionCount -= 1;
+          freeUserPositions.push(users[i].userPosition)
+          freeUserPositions.sort()
         }
         else if(users[i].userType == "guest") {
           freeContestantPositions.push(users[i].userPosition)
@@ -115,32 +117,12 @@ io.on('connection',(client) => {
         username = "contestant2"
       }
     }
-
-    //check if user is already connected
-    let connectedUser = false
-    for(var item in users) {
-      if(users[item].username == username) {
-        connectedUser = true
-      }
-    }
-    //if they arent connected add them to the user array
-    if(connectedUser == false) {
-      var actualPosition
-      var found = false;
-
-      //check if they had been previously connected and already have a position
-      for(var item in positions) {
-        if(positions[item].username == username) {
-          actualPosition = positions[item].position
-          found = true;
-        }
-      }
-
       //if they hadnt already connected, increment userposition and add data to positions array
-      if(found == false) {
         if(userType == "host") {
-          userPosition = userPosition + 1;
-          actualPosition = userPosition
+          if(freeUserPositions[0]) {
+            actualPosition = freeUserPositions[0]
+            freeUserPositions.shift()
+          }
         }
         else if(userType == "admin"){
           actualPosition = 0;
@@ -157,7 +139,6 @@ io.on('connection',(client) => {
           username = "contestant" + actualPosition - 4;
         }
         positions.push({username : username,position : userPosition})
-      }
 
       //add data to user array
       if(userType != "guest") {
@@ -176,7 +157,7 @@ io.on('connection',(client) => {
       }
       io.to([client.id]).emit("receiveUsernames",usernames)
       io.to([client.id]).emit("receiveSelfSocketID",client.id)
-    }
+
 
     emitSocketsAndPositions();
 
