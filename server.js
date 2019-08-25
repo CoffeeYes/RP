@@ -267,9 +267,12 @@ io.on('connection',(client) => {
 
     var kickedUserPosition;
 
-    for(var item in users) {
-      if(users[item].socketID == camID) {
-        kickedUserPosition = users[item].userPosition
+    for(var i = 0; i < users.length; i++) {
+      if(users[i].socketID == camID) {
+        //save the position of the user being kicked
+        kickedUserPosition = users[i].userPosition
+        //remove this user from the array
+        users.splice(i,1)
       }
     }
 
@@ -284,18 +287,6 @@ io.on('connection',(client) => {
       io.emit("userWasKicked",kickedUserPosition,camID);
 
       emitSocketsAndPositions();
-
-      //updated positions based on usertype of kicked user
-      for(var item in users) {
-        if(users[item].socketID == camID) {
-          if(users[item].userType == "guest") {
-            contPosition -= 1;
-          }
-          else {
-            userPosition -= 1;
-          }
-        }
-      }
 
       //update database roomcode
       Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
