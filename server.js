@@ -271,6 +271,17 @@ io.on('connection',(client) => {
       if(users[i].socketID == camID) {
         //save the position of the user being kicked
         kickedUserPosition = users[i].userPosition
+
+        if(users[i].userType == "host") {
+          io.emit("resetSingleVote",users[i].userPosition)
+          freeUserPositions.push(users[i].userPosition)
+          freeUserPositions.sort()
+        }
+        else if(users[i].userType == "guest") {
+          freeContestantPositions.push(users[i].userPosition)
+          freeContestantPositions.sort()
+        }
+        
         //remove this user from the array
         users.splice(i,1)
       }
