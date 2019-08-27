@@ -76,13 +76,13 @@ class Cam extends Component {
               <div className="buttonContainer">
                 <img src={this.props.tickIcon} id={["tick" + this.props.iconID]}/>
                 <img src={this.props.crossIcon} id={["cross" + this.props.iconID]}/>
-                <button onClick={this.toggleFilter} className="toggleButton">
+                <button className="cameraButton" onClick={this.toggleFilter}>
                   <img src={this.state.videoIcon} />
                 </button>
-                <button onClick={this.toggleMute} className="toggleButton">
+                <button className="cameraButton" onClick={this.toggleMute}>
                   <img src={this.state.muteIcon} />
                 </button>
-                <button onClick={() => this.props.kickUser(this.props.camID)}>Kick</button>
+                <button className="cameraButton" onClick={() => this.props.kickUser(this.props.camID)}>Kick</button>
               </div>
           </div>
             <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>

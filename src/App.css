@@ -196,14 +196,15 @@ form {
   height: 39vh;
 }
 
+/**
 .toggleButton {
   align-self: flex-end;
 }
-
+**/
 .buttonContainer {
   display:flex;
   width: 100%;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-end;
 }
 
@@ -342,4 +343,9 @@ form {
 
 .deletePollCode {
   display : none;
+}
+
+.cameraButton {
+  width: 3vw;
+  height : 4vh;
 }
