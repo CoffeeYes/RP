@@ -74,35 +74,16 @@ export default class Webcam extends Component {
 
       //when another client connects
       socket.on("createNewRTCOffer", (clientID) => {
-        //create new RTC connection and add it to the connection array, correct the currentindex
-        RTCConnections.push(new RTCPeerConnection(configuration));
-        /*
-        currentIndex = RTCConnections.length - 1;
-        RTCConnections[currentIndex].index = currentIndex;
-        RTCConnections[currentIndex].remoteSocketID = clientID;
-
-        //add ice candidate handler
-        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].remoteSocketID))
-
-        //add local stream to new RTC object
-        stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
-
-        //create offer and emit to backend socket for relay to new client
-        RTCConnections[currentIndex].createOffer()
-        .then( (offer) => {
-          RTCConnections[currentIndex].setLocalDescription(offer)
-          offer.destinationID = clientID
-          offer.index = currentIndex
-          offer.position = this.props.personalPosition;
-          socket.emit("RTCOfferCreated",offer,clientID)
-        })
-        */
+        //create new RTC connection and add it to the connection object
         RTCCons[clientID] =  new RTCPeerConnection(configuration);
 
+        //attach ice candidate handler
         RTCCons[clientID].onicecandidate = ( event => this.handleIceCandidate(event,clientID))
 
+        //attach media tracks to rtc object
         stream.getTracks().forEach(track => RTCCons[clientID].addTrack(track,stream))
 
+        //initiate RTC handshake
         RTCCons[clientID].createOffer()
         .then( offer => {
           RTCCons[clientID].setLocalDescription(offer)
@@ -116,35 +97,6 @@ export default class Webcam extends Component {
 
       //receive rtc offer when this client is the newest one
       socket.on("receiveRTCOffer", (offer,remoteSocket) => {
-        /*
-        RTCConnections.push(new RTCPeerConnection(configuration));
-        currentIndex = RTCConnections.length - 1;
-        RTCConnections[currentIndex].index = currentIndex;
-        RTCConnections[currentIndex].remoteSocketID = remoteSocket;
-
-        RTCConnections[currentIndex].onicecandidate = ( event => this.handleIceCandidate(event,RTCConnections[currentIndex].remoteSocketID))
-        RTCConnections[currentIndex].ontrack = ((event) => this.handleOnTrack(event,offer.position))
-
-        RTCConnections[currentIndex].remotePosition = offer.position;
-
-        //add local stream to new RTC object
-        stream.getTracks().forEach(track => RTCConnections[currentIndex].addTrack(track,stream))
-
-        RTCConnections[currentIndex].setRemoteDescription(offer)
-        .then ( (Offer) => {
-          RTCConnections[currentIndex].remoteSocketID= offer.originID
-          RTCConnections[currentIndex].createAnswer()
-          .then( (answer) => {
-            RTCConnections[currentIndex].setLocalDescription(answer)
-            //reverse destination and origin for the answer
-            answer.originID = offer.destinationID;
-            answer.destinationID = offer.originID;
-            answer.index = offer.index;
-            answer.position = this.props.personalPosition
-            socket.emit("sendRTCAnswer",answer,remoteSocket)
-          })
-        })
-        */
 
         RTCCons[remoteSocket] = new RTCPeerConnection(configuration);
 
@@ -171,15 +123,6 @@ export default class Webcam extends Component {
 
 
       socket.on("receiveRTCAnswer", (answer,clientID) => {
-        /*
-        RTCConnections[answer.index].remoteUsername = answer.remoteUsername;
-        RTCConnections[answer.index].ontrack = ((event) => this.handleOnTrack(event,answer.position))
-
-        RTCConnections[answer.index].setRemoteDescription(answer)
-        RTCConnections[answer.index].remoteSocketID = answer.originID
-
-        RTCConnections[answer.index].remotePosition = answer.position;
-        */
 
           RTCCons[clientID].ontrack = ( (event) => this.handleOnTrack(event,answer.position))
 
@@ -187,29 +130,12 @@ export default class Webcam extends Component {
 
           RTCCons[clientID].remotePosition = answer.position;
 
-        /*
-        for(var item in RTCConnections) {
-          if(RTCConnections[item].remoteSocketID == clientID) {
-            RTCConnections[item].setRemoteDescription(answer)
-            RTCConnections[item].ontrack = ((event) => this.handleOnTrack(event,answer.position))
-            RTCConnections[item].remotePosition = answer.position;
-          }
-        }
-        */
       })
 
       //adds ics candidates to RTCPeerConnection object
       socket.on("receiveNewIceCandidate", (candidate,remoteSocketID) => {
         if(candidate != null) {
           try {
-            /*
-            //match rtc object based on received socketID
-            for(var item in RTCConnections) {
-              if (RTCConnections[item].remoteSocketID == remoteSocketID) {
-                RTCConnections[item].addIceCandidate(candidate)
-              }
-            }
-            */
             RTCCons[remoteSocketID].addIceCandidate(candidate)
           }
           catch(error) {
