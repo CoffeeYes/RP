@@ -37,7 +37,7 @@ export default class Webcam extends Component {
 
   componentDidMount = () => {
     let constraints = {
-      video : {width: 640,height : 480},
+      video : {width: 1920,height : 1080},
       audio : true
     }
 
