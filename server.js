@@ -15,8 +15,6 @@ let offers = []
 let currentOfferHost = '';
 let users = [];
 let userPositionCount = -1;
-let userPosition = 0;
-let contPosition = 5;
 let positions = [];
 let freeContestantPositions = [5,6]
 let freeUserPositions = [1,2,3,4]
@@ -138,7 +136,7 @@ io.on('connection',(client) => {
           }
           username = "contestant" + actualPosition - 4;
         }
-        positions.push({username : username,position : userPosition})
+        positions.push({username : username,position : actualPosition})
 
       //add data to user array
       if(userType != "guest") {
@@ -281,7 +279,7 @@ io.on('connection',(client) => {
           freeContestantPositions.push(users[i].userPosition)
           freeContestantPositions.sort()
         }
-        
+
         //remove this user from the array
         users.splice(i,1)
       }
