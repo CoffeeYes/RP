@@ -134,7 +134,6 @@ io.on('connection',(client) => {
           else {
             console.log("no free contestant positions available")
           }
-          username = "contestant" + actualPosition - 4;
         }
         positions.push({username : username,position : actualPosition})
 
@@ -143,8 +142,9 @@ io.on('connection',(client) => {
         users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : actualPosition,userType: userType});
       }
       else {
-        users.push({username : ["contestant" + (contPosition - 5)],socketID : client.id,userCount : userPositionCount,userPosition : actualPosition,userType: userType})
+        users.push({username : ["contestant" + actualPosition],socketID : client.id,userCount : userPositionCount,userPosition : actualPosition,userType: userType})
       }
+      console.log(users)
       //re-emit all usernames so clients can update their positions on frontend
       let usernames = [];
       for(var item in users) {
