@@ -166,7 +166,6 @@ form {
 .camBox {
   border: 0.5px solid black;
   width: 30vw;
-  height: 45vh;
   margin-left: 1vw;
   margin-top: 2vh;
   display: flex;
@@ -185,15 +184,16 @@ form {
 }
 
 .contestant {
-  height: 40vh;
+  height: 36vh;
 }
 
 .contestantCam {
   height: 30vh;
+  width: 100%;
 }
 
 .guestCam {
-  height: 39vh;
+  height: 35vh;
 }
 
 /**
