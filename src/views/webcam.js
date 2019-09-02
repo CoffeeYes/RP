@@ -62,6 +62,8 @@ export default class Webcam extends Component {
         var localCam;
         localCam = document.querySelector('#cam' + this.props.personalPosition)
         localCam.srcObject = stream
+
+        //mute audio during development, remove before release
         localCam.muted = true;
       }
 
@@ -97,16 +99,17 @@ export default class Webcam extends Component {
 
       //receive rtc offer when this client is the newest one
       socket.on("receiveRTCOffer", (offer,remoteSocket) => {
-
         RTCCons[remoteSocket] = new RTCPeerConnection(configuration);
 
         RTCCons[remoteSocket].onicecandidate = ( event => this.handleIceCandidate(event,remoteSocket))
         RTCCons[remoteSocket].ontrack = ((event) => this.handleOnTrack(event,offer.position))
 
+        //position where remote video feed will be mounted
         RTCCons[remoteSocket].remotePosition = offer.position
 
         stream.getTracks().forEach(track => RTCCons[remoteSocket].addTrack(track,stream))
 
+        //create and send offer
         RTCCons[remoteSocket].setRemoteDescription(offer)
         .then( () => {
           RTCCons[remoteSocket].createAnswer()

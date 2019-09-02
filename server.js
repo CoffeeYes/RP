@@ -72,7 +72,7 @@ io.on('connection',(client) => {
     for(var i = 0; i < users.length; i++) {
       if(users[i].socketID == client.id) {
 
-        //change pos variables according to user type
+        //add leaving users position to the available positions array based on usertype
         if(users[i].userType == "host") {
           io.emit("resetSingleVote",users[i].userPosition)
           freeUserPositions.push(users[i].userPosition)
@@ -115,7 +115,7 @@ io.on('connection',(client) => {
         username = "contestant2"
       }
     }
-      //if they hadnt already connected, increment userposition and add data to positions array
+      //pull first free position from array based on user type
         if(userType == "host") {
           if(freeUserPositions[0]) {
             actualPosition = freeUserPositions[0]
@@ -126,7 +126,7 @@ io.on('connection',(client) => {
           actualPosition = 0;
         }
         else {
-          //contestant position starts at cam 5
+          //contestant position starts at cam 5, so a separate array is available
           if(freeContestantPositions[0]) {
             actualPosition = freeContestantPositions[0];
             freeContestantPositions.shift();
@@ -144,7 +144,6 @@ io.on('connection',(client) => {
       else {
         users.push({username : ["contestant" + actualPosition],socketID : client.id,userCount : userPositionCount,userPosition : actualPosition,userType: userType})
       }
-      console.log(users)
       //re-emit all usernames so clients can update their positions on frontend
       let usernames = [];
       for(var item in users) {
@@ -156,7 +155,7 @@ io.on('connection',(client) => {
       io.to([client.id]).emit("receiveUsernames",usernames)
       io.to([client.id]).emit("receiveSelfSocketID",client.id)
 
-
+    //update socket id's and their corresponding positions on frontend
     emitSocketsAndPositions();
 
 
