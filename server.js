@@ -18,6 +18,9 @@ let userPositionCount = -1;
 let positions = [];
 let freeContestantPositions = [5,6]
 let freeUserPositions = [1,2,3,4]
+let adminUserType = "admin";
+let hostUserType = "host";
+let guestUserType = "guest";
 
 function emitSocketsAndPositions() {
   var socketsAndPositions = [];
@@ -73,12 +76,12 @@ io.on('connection',(client) => {
       if(users[i].socketID == client.id) {
 
         //add leaving users position to the available positions array based on usertype
-        if(users[i].userType == "host") {
+        if(users[i].userType == hostUserType) {
           io.emit("resetSingleVote",users[i].userPosition)
           freeUserPositions.push(users[i].userPosition)
           freeUserPositions.sort()
         }
-        else if(users[i].userType == "guest") {
+        else if(users[i].userType == guestUserType) {
           freeContestantPositions.push(users[i].userPosition)
           freeContestantPositions.sort()
         }
@@ -116,13 +119,13 @@ io.on('connection',(client) => {
       }
     }
       //pull first free position from array based on user type
-        if(userType == "host") {
+        if(userType == hostUserType) {
           if(freeUserPositions[0]) {
             actualPosition = freeUserPositions[0]
             freeUserPositions.shift()
           }
         }
-        else if(userType == "admin"){
+        else if(userType == adminUserType){
           actualPosition = 0;
         }
         else {
@@ -138,7 +141,7 @@ io.on('connection',(client) => {
         positions.push({username : username,position : actualPosition})
 
       //add data to user array
-      if(userType != "guest") {
+      if(userType != guestUserType) {
         users.push({username : username,socketID : client.id,userCount : userPositionCount,userPosition : actualPosition,userType: userType});
       }
       else {
@@ -203,7 +206,7 @@ io.on('connection',(client) => {
   client.on("getUserVoteStates",() => {
     let voteStates= [];
     for(var i = 0; i < users.length; i++) {
-      if(users[i].userType != "guest") {
+      if(users[i].userType != guestUserType) {
         voteStates.push(users[i].voteState)
       }
     }
@@ -225,7 +228,7 @@ io.on('connection',(client) => {
     let usernames = [];
 
     for(var item in users) {
-      if(users[item].userType != "guest" && users[item].userType != "admin") {
+      if(users[item].userType != guestUserType && users[item].userType != adminUserType) {
         usernames.push({position : users[item].userPosition,username : users[item].username})
       }
     }
@@ -269,12 +272,12 @@ io.on('connection',(client) => {
         //save the position of the user being kicked
         kickedUserPosition = users[i].userPosition
 
-        if(users[i].userType == "host") {
+        if(users[i].userType == hostUserType) {
           io.emit("resetSingleVote",users[i].userPosition)
           freeUserPositions.push(users[i].userPosition)
           freeUserPositions.sort()
         }
-        else if(users[i].userType == "guest") {
+        else if(users[i].userType == guestUserType) {
           freeContestantPositions.push(users[i].userPosition)
           freeContestantPositions.sort()
         }
