@@ -72,7 +72,7 @@ class Cam extends Component {
         return(
           <div className={["camBox " + this.props.containerType]}>
           <div className="camHeader">
-              <p>{this.props.camName}</p>
+              <p className="usersName">{this.props.camName}</p>
               <div className="buttonContainer">
                 <img src={this.props.tickIcon} id={["tick" + this.props.iconID]}/>
                 <img src={this.props.crossIcon} id={["cross" + this.props.iconID]}/>
@@ -93,7 +93,7 @@ class Cam extends Component {
         return (
           <div className={["camBox " + this.props.containerType]}>
           <div className="camHeader">
-            <p>{this.props.camName}</p>
+            <p className="usersName">{this.props.camName}</p>
             <div className="buttonContainer">
               <img src={this.props.tickIcon} id={["tick" + this.props.iconID]}/>
               <img src={this.props.crossIcon} id={["cross" + this.props.iconID]}/>

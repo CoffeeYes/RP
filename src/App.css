@@ -36,7 +36,7 @@ label {
 }
 
 body {
-  background-color: 	#f9f9f9;
+  background-color: #F5F5F5;
 }
 
 a {
@@ -197,6 +197,10 @@ form {
   height: 33vh;
 }
 
+.usersName {
+  margin-left : 1vw;
+  font-weight: bold;
+}
 /**
 .toggleButton {
   align-self: flex-end;
@@ -219,6 +223,7 @@ form {
   display: flex;
   width: 100%;
   border-bottom : 1px solid black;
+  background-color : #F0F0F0;
 }
 
 .codeForm {
