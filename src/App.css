@@ -196,11 +196,6 @@ form {
 .guestCam {
   height: 33vh;
 }
-
-.usersName {
-  margin-left : 1vw;
-  font-weight: bold;
-}
 /**
 .toggleButton {
   align-self: flex-end;
@@ -307,6 +302,13 @@ form {
   height: 5vh;
   margin-bottom: 2vh;
   justify-content: space-between;
+}
+
+.usersName {
+  margin-left : 1vw;
+  font-weight: bold;
+  font-family: 'Livvic', sans-serif;
+  font-size : 20px;
 }
 
 .overlayBlock {
