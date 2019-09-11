@@ -6,6 +6,7 @@ import mute from '../assets/icon_mute.png';
 import icon_video from '../assets/icon_video.png'
 import icon_novideo from '../assets/icon_novideo.png'
 
+import CamHeader from './camHeader.js'
 var camID;
 class Cam extends Component {
 
@@ -68,77 +69,24 @@ class Cam extends Component {
     }
   }
   render() {
-      if(this.props.userType == "admin") {
-        if(this.props.camType == "guestCam") {
           return(
             <div className={["camBox " + this.props.containerType]}>
-            <div className="camHeader">
-                <p className="usersName">{this.props.camName}</p>
-                <div className="buttonContainer">
-                  <img src={this.props.tickIcon} id={["tick" + this.props.iconID]} alt="tick icon"/>
-                  <img src={this.props.crossIcon} id={["cross" + this.props.iconID]} alt="cross icon"/>
-                  <button className="cameraButton" onClick={this.toggleFilter}>
-                    <img src={this.state.videoIcon} alt="video icon"/>
-                  </button>
-                  <button className="cameraButton" onClick={this.toggleMute}>
-                    <img src={this.state.muteIcon} alt="mute icon"/>
-                  </button>
-                  <button className="cameraButton" onClick={() => this.props.kickUser(this.props.camID)}>Kick</button>
-                </div>
-            </div>
+            <CamHeader
+            tickIcon={this.props.tickIcon}
+            crossIcon={this.props.crossIcon}
+            iconID={this.props.iconID}
+            camName={this.props.camName}
+            userType={this.props.userType}
+            camType={this.props.camType}
+            videoIcon={this.state.videoIcon}
+            muteIcon={this.state.muteIcon}
+            toggleFilter={this.toggleFilter}
+            toggleMute={this.toggleMute}
+            kickUser={(camID) => this.props.kickUser(camID)}
+            />
               <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
             </div>
           )
-        }
-        else {
-          return (
-            <div className={["camBox " + this.props.containerType]}>
-            <div className="camHeader">
-                <p className="usersName">{this.props.camName}</p>
-                <div className="buttonContainer">
-                  <button className="cameraButton" onClick={this.toggleFilter}>
-                    <img src={this.state.videoIcon} alt="video icon"/>
-                  </button>
-                  <button className="cameraButton" onClick={this.toggleMute}>
-                    <img src={this.state.muteIcon} alt="mute icon"/>
-                  </button>
-                  <button className="cameraButton" onClick={() => this.props.kickUser(this.props.camID)}>Kick</button>
-                </div>
-            </div>
-              <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
-            </div>
-          )
-        }
-      }
-      else {
-        if(this.props.camType == "guestCam") {
-          return (
-            <div className={["camBox " + this.props.containerType]}>
-            <div className="camHeader">
-              <p className="usersName">{this.props.camName}</p>
-              <div className="buttonContainer">
-                <img src={this.props.tickIcon} id={["tick" + this.props.iconID]} alt="tick icon"/>
-                <img src={this.props.crossIcon} id={["cross" + this.props.iconID]} alt="cross icon"/>
-              </div>
-            </div>
-              <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
-            </div>
-          )
-        }
-        else {
-          return (
-            <div className={["camBox " + this.props.containerType]}>
-            <div className="camHeader">
-              <p className="usersName">{this.props.camName}</p>
-              <div className="buttonContainer">
-              </div>
-            </div>
-              <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
-            </div>
-          )
-        }
-
-      }
   }
 }
 
