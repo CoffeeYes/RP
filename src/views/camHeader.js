@@ -39,7 +39,6 @@ class camHeader extends Component {
         )
       }
     }
-
     else {
       if(this.props.camType == "guestCam") {
         return(

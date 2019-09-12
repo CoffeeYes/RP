@@ -107,7 +107,7 @@ class Koth extends Component {
       contestant2.srcObject = contestant1.srcObject;
       contestant1.srcObject = temp;
     })
-    
+
     socket = this.socket;
   }
 
@@ -159,6 +159,9 @@ class Koth extends Component {
   unblurAll = () => {
     this.setState({allBlurred : false})
   }
+  camWasUnblurred = () => {
+    this.setState({allBlurred : false})
+  }
 
   hostVoteYes = () => {
     this.socket.emit("hostVoteYes");
@@ -196,7 +199,9 @@ class Koth extends Component {
                allBlurred={this.state.allBlurred}
                iconID={1} tickIcon={this.state.tick1}
                crossIcon={this.state.cross1}
-               kickUser={(camID) => this.kickUser(camID)}/>
+               kickUser={(camID) => this.kickUser(camID)}
+               camWasUnblurred={this.camWasUnblurred}
+               />
 
               <Webcam
               userType={this.props.userType}
@@ -219,7 +224,9 @@ class Koth extends Component {
               iconID={2}
               tickIcon={this.state.tick2}
               crossIcon={this.state.cross2}
-              kickUser={(camID) => this.kickUser(camID)}/>
+              kickUser={(camID) => this.kickUser(camID)}
+              camWasUnblurred={this.camWasUnblurred}
+              />
 
           </div>
           <div className="cam-col">
@@ -232,7 +239,9 @@ class Koth extends Component {
               audioID="audioContestant1"
               allMuted={this.state.allMuted}
               allBlurred={this.state.allBlurred}
-              kickUser={(camID) => this.kickUser(camID)}/>
+              kickUser={(camID) => this.kickUser(camID)}
+              camWasUnblurred={this.camWasUnblurred}
+              />
 
               <Cam
               camName="King"
@@ -243,7 +252,9 @@ class Koth extends Component {
               audioID="audioContestant2"
               allMuted={this.state.allMuted}
               allBlurred={this.state.allBlurred}
-              kickUser={(camID) => this.kickUser(camID)}/>
+              kickUser={(camID) => this.kickUser(camID)}
+              camWasUnblurred={this.camWasUnblurred}
+              />
 
               <div className="buttonsContainer">
                 <button onClick={this.swapContestants}>Swap</button>
