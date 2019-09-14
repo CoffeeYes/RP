@@ -159,9 +159,6 @@ class Koth extends Component {
   unblurAll = () => {
     this.setState({allBlurred : false})
   }
-  camWasUnblurred = () => {
-    this.setState({allBlurred : false})
-  }
 
   hostVoteYes = () => {
     this.socket.emit("hostVoteYes");
@@ -200,7 +197,6 @@ class Koth extends Component {
                iconID={1} tickIcon={this.state.tick1}
                crossIcon={this.state.cross1}
                kickUser={(camID) => this.kickUser(camID)}
-               camWasUnblurred={this.camWasUnblurred}
                />
 
               <Webcam
@@ -225,7 +221,6 @@ class Koth extends Component {
               tickIcon={this.state.tick2}
               crossIcon={this.state.cross2}
               kickUser={(camID) => this.kickUser(camID)}
-              camWasUnblurred={this.camWasUnblurred}
               />
 
           </div>
@@ -240,7 +235,6 @@ class Koth extends Component {
               allMuted={this.state.allMuted}
               allBlurred={this.state.allBlurred}
               kickUser={(camID) => this.kickUser(camID)}
-              camWasUnblurred={this.camWasUnblurred}
               />
 
               <Cam
@@ -253,7 +247,6 @@ class Koth extends Component {
               allMuted={this.state.allMuted}
               allBlurred={this.state.allBlurred}
               kickUser={(camID) => this.kickUser(camID)}
-              camWasUnblurred={this.camWasUnblurred}
               />
 
               <div className="buttonsContainer">

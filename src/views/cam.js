@@ -33,20 +33,24 @@ class Cam extends Component {
 
   //track prop change to change icons when all cams are muted or blurred
   componentWillReceiveProps(nextProps) {
-    if(nextProps.allMuted == true) {
-      this.setState({muteIcon : mute})
-    }
-    else {
-      this.setState({muteIcon : unmute});
+    if(nextProps.allMuted != this.props.allMuted) {
+      if(nextProps.allMuted == true) {
+        this.setState({muteIcon : mute})
+      }
+      else {
+        this.setState({muteIcon : unmute});
+      }
     }
 
-    if(nextProps.allBlurred == true) {
-      this.setState({camFilter : "camBlurred"});
-      this.setState({videoIcon : icon_novideo});
-    }
-    else {
-      this.setState({camFilter : "camNotBlurred"})
-      this.setState({videoIcon : icon_video});
+    if(nextProps.allBlurred != this.props.allBlurred) {
+      if(nextProps.allBlurred == true) {
+        this.setState({camFilter : "camBlurred"});
+        this.setState({videoIcon : icon_novideo});
+      }
+      else {
+        this.setState({camFilter : "camNotBlurred"})
+        this.setState({videoIcon : icon_video});
+      }
     }
   }
 
@@ -54,7 +58,6 @@ class Cam extends Component {
     //this.state.camFilter == "camBlurred" ? this.setState({camFilter : "camNotBlurred"}) : this.setState({camFilter : "camBlurred"})
     if(this.state.camFilter == "camBlurred") {
       this.setState({camFilter : "camNotBlurred"})
-      this.props.camWasUnblurred()
     }
     else {
       this.setState({camFilter : "camBlurred"})
