@@ -7,11 +7,9 @@ import Code from './views/code.js';
 import Splash from './views/splash.js';
 import Panel from './views/panel.js';
 import Lobby from './views/lobby.js';
-import Vote from './views/vote.js';
 import Mode from './views/mode.js';
 import AddUser from './views/addUser.js';
 import UserList from './views/userlist.js';
-import VotingPoll from './views/votingPoll.js'
 
 class App extends Component {
 
@@ -354,16 +352,6 @@ class App extends Component {
             <Route path='/panel/mode' render={() => (
               <Mode modes={this.state.modes} changeMode={this.changeMode} fetchModes={this.fetchModes}/>
             )}/>
-            <Route path='/panel/vote' render={() => (
-              <Vote
-              inputCount={this.state.inputCount}
-              addField={this.addField}
-              handleFieldText={this.handleFieldText}
-              handleAddPoll={this.handleAddPoll}
-              getAllPolls={this.getAllPolls}
-              pollsData ={this.state.pollsData}
-              deletePoll={this.deletePoll}/>
-            )}/>
             <Route path='/panel/users' render={() => (
               <div>
                 <AddUser addUser={this.addUser} update={this.updateAddUser} error={this.state.error}/>
@@ -398,9 +386,6 @@ class App extends Component {
           <Route exact path="/code/" render={() => (
             <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
           )} />
-          <Route path="/poll/*" render={() => (
-            <VotingPoll fetchPoll={this.fetchPoll} error={this.state.error} pollResult={this.state.pollResult} handleVote={this.handleVote} clickVote={this.clickVote}/>
-          )}/>
           <Route path="/" render={() => (
             <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
           )}/>

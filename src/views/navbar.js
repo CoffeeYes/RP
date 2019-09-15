@@ -8,7 +8,6 @@ class Navbar extends Component {
           <a className="navItem" href="/lobby">Lobby</a>
           <a className="navItem" href="/panel/mode">Mode</a>
           <a className="navItem" href="/panel/users">Users</a>
-          <a className="navItem" href="/panel/vote" >vote</a>
       </div>
     );
   }
