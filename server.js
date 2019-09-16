@@ -385,37 +385,6 @@ app.get('/getUsers',function(req,res,next) {
   })
 })
 
-app.get('/getPoll',function(req,res,next) {
-  let pollCode = req.query.code;
-
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
-    if(error)throw error;
-
-    let database = client.db('rp');
-
-    database.collection('app_data').find({title: 'pollData'}).toArray(function(error,data) {
-        for(i = 0; i < data[0].data.length; i++) {
-          if(data[0].data[i].code == pollCode) {
-            let array = Object.keys(data[0].data[i]);
-            array = array.splice(0,array.length-1)
-            return res.send({pollResult : array})
-          }
-        }
-        return res.send({error : "poll not found"})
-    })
-  })
-})
-
-app.get('/allPolls',function(req,res,next) {
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
-    let database = client.db('rp');
-
-    database.collection('app_data').find({title : 'pollData'}).toArray(function(error,data) {
-      res.send({data : data[0].data})
-    })
-  })
-})
-
 app.get('/getUsernames',function(req,res,next) {
   let data = [];
   for(var item in users) {
@@ -568,53 +537,5 @@ app.post('/deleteUser',function(req,res,next) {
     }
   })
 })
-
-app.post('/addVotingPoll',function(req,res,next) {
-  var code = Math.random().toString(36).substring(2, 8)
-  var pushData = {};
-  for(var item in req.body) {
-    pushData[req.body[item]] = 0;
-  }
-
-  pushData.code = code;
-
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
-    if(error)throw error;
-
-    let database = client.db('rp');
-
-    try{
-      database.collection('app_data').updateOne({title : 'pollData'},{$push : {data : pushData}});
-    }
-    catch(error) {
-      console.log("ERROR(adding vote poll) : " + error)
-    }
-  })
-})
-
-app.post('/addVote',function(req,res,next) {
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
-    let database = client.db('rp');
-    try {
-      database.collection('app_data').updateOne({title: 'pollData',"data.code" : req.body.pollCode},{$inc : {["data.$." + req.body.voteChoice] : 1}})
-    }
-    catch(error) {
-      console.log("Error : " + error)
-    }
-  })
-})
-
-app.post('/deletePoll',function(req,res,next) {
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
-    let database = client.db('rp')
-    try {
-      database.collection('app_data').updateOne({title: 'pollData'},{$pull : {data : {code : req.body.pollCode}}})
-    }
-    catch(error) {
-      console.log("Error(deleting poll) : " + error)
-    }
-  })
-})
-
 
 app.listen(process.env.PORT || 5000);
