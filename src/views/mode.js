@@ -11,6 +11,7 @@ class Mode extends Component {
     return (
       <div className="content-container">
         <form className="modeForm" method='post' action='/updateMode'>
+        <div className="modesContainer">
         {this.props.modes.map((item,index) => {
           return(
             <div className="modeChoiceContainer" key={index}>
@@ -19,6 +20,7 @@ class Mode extends Component {
             </div>
           )
         })}
+        </div>
         <button onClick={this.props.changeMode} className="modeFormBtn" type="submit">Save</button>
         </form>
       </div>
