@@ -4,6 +4,7 @@ const path = require('path');
 const app = express();
 const connect = require('./src/connect.js');
 const Mclient = require('mongodb').MongoClient;
+const mongoClientOptions = {useNewUrlParser: true,useUnifiedTopology : true}
 
 const bcrypt = require('bcrypt')
 
@@ -300,7 +301,7 @@ io.on('connection',(client) => {
       emitSocketsAndPositions();
 
       //update database roomcode
-      Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+      Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client) {
         if(error)throw error;
 
         let database = client.db('rp');
@@ -335,7 +336,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/modes',function(req,res) {
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+  Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client) {
     if(error)throw error;
     let database = client.db('rp');
 
@@ -347,7 +348,7 @@ app.get('/modes',function(req,res) {
 })
 
 app.get('/mode',function(req,res,next){
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client){
+  Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client){
     if(error)throw error;
 
     let database = client.db('rp');
@@ -360,7 +361,7 @@ app.get('/mode',function(req,res,next){
 })
 
 app.get('/getUsers',function(req,res,next) {
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client){
+  Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client){
     if(error)throw error;
 
     let database = client.db('rp');
@@ -399,7 +400,7 @@ app.post('/login',function(req,res,next) {
       return res.send({error : "User is already logged in"})
     }
   }
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+  Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client) {
     if(error)throw error;
     let database = client.db('rp');
 
@@ -433,7 +434,7 @@ app.post('/login',function(req,res,next) {
 })
 
 app.post('/updateMode',function(req,res,next) {
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+  Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
@@ -449,7 +450,7 @@ app.post('/updateMode',function(req,res,next) {
 app.post('/roomCode',function(req,res,next) {
   let code = req.body.code
 
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+  Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
@@ -470,7 +471,7 @@ app.post('/createCode',function(req,res,next) {
   let code = req.body.code;
 
   //update database roomcode
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+  Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
@@ -479,7 +480,7 @@ app.post('/createCode',function(req,res,next) {
   })
 
   setTimeout( () => {
-    Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+    Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client) {
       if(error)throw error;
 
       let database = client.db('rp');
@@ -502,7 +503,7 @@ app.post('/addUser',function(req,res,next) {
 
   userData.clearTextPassword = req.body.password;
 
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+  Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
@@ -525,7 +526,7 @@ app.post('/addUser',function(req,res,next) {
 
 app.post('/deleteUser',function(req,res,next) {
 
-  Mclient.connect(connect.mongo.url,{useNewUrlParser : true},function(error,client) {
+  Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client) {
     if(error)throw error;
 
     let database = client.db('rp');
