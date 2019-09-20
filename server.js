@@ -408,7 +408,7 @@ app.post('/login',function(req,res,next) {
     database.collection('user_data').find({username : req.body.username}).toArray(function(error,data) {
       //if no user is found
       if(data == '') {
-        res.send({error: 'User not found'})
+        return res.send({error: 'User not found'})
       }
 
       //compare hash
