@@ -92,6 +92,7 @@ class Cam extends Component {
             toggleFilter={this.toggleFilter}
             toggleMute={this.toggleMute}
             kickUser={(camID) => this.props.kickUser(camID)}
+            camID={this.props.camID}
             />
               <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
             </div>
