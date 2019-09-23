@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './navbar.js';
-import Koth from './koth.js'
+import Koth from './koth.js';
+import Bachelor from './bachelor.js'
 
 class RenderMode extends Component {
 
@@ -8,6 +9,11 @@ class RenderMode extends Component {
     if(this.props.mode.toLowerCase() == "king of the hill") {
       return (
         <Koth userType={this.props.userType} localUsername={this.props.localUsername} kickUserFromLobby={this.props.kickUserFromLobby}/>
+      )
+    }
+    else if(this.props.mode.toLowersCase() == "bachelor") {
+      return (
+        <Bachelor/>
       )
     }
     else {
