@@ -11,7 +11,7 @@ class RenderMode extends Component {
         <Koth userType={this.props.userType} localUsername={this.props.localUsername} kickUserFromLobby={this.props.kickUserFromLobby}/>
       )
     }
-    else if(this.props.mode.toLowersCase() == "bachelor") {
+    else if(this.props.mode.toLowerCase() == "bachelor") {
       return (
         <Bachelor/>
       )

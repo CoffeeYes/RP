@@ -439,7 +439,7 @@ app.post('/updateMode',function(req,res,next) {
 
     let database = client.db('rp');
     try {
-      database.collection('app_data').updateOne({title : 'currentMode'},{"data" : req.body.modeChoice});
+      database.collection('app_data').updateOne({title : 'currentMode'},{$set : {"data" : req.body.modeChoice}});
     }
     catch(error) {
       console.log('database could not be updated : ' + error)
