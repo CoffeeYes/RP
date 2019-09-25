@@ -24,6 +24,7 @@ class App extends Component {
       loggedIn : false,
       modes : JSON.parse(localStorage.getItem('modes')) || [],
       mode: JSON.parse(localStorage.getItem('mode')) || '',
+      nextMode : '',
       authenticated: JSON.parse(sessionStorage.getItem('authenticated')) || false,
       user_type : sessionStorage.getItem('user_type') || '',
       showCopied : false,
@@ -113,6 +114,34 @@ class App extends Component {
     .then(data => {
       this.setState({mode : data.mode})
       localStorage.setItem("mode",JSON.stringify(data.mode))
+    })
+  }
+
+  changeMode = (event) => {
+    this.setState({nextMode : event.target.value})
+  }
+
+  updateModeOnBackend = (event) => {
+    event.preventDefault()
+    this.setState({error : ""})
+
+    fetch('/updateMode',{
+      method : 'POST',
+      headers : {
+        'Content-type' : 'application/json'
+      },
+      body : JSON.stringify({
+        modeChoice : this.state.nextMode
+      })
+    })
+    .then( res => res.json())
+    .then( data => {
+      if(data.success == true) {
+        this.setState({error : "Mode Updated"})
+      }
+      else {
+        this.setState({error : "Could not update Mode"})
+      }
     })
   }
 
@@ -350,7 +379,13 @@ class App extends Component {
               />
             )}/>
             <Route path='/panel/mode' render={() => (
-              <Mode modes={this.state.modes} changeMode={this.changeMode} fetchModes={this.fetchModes}/>
+              <Mode
+              modes={this.state.modes}
+              changeMode={this.changeMode}
+              updateModeOnBackend={this.updateModeOnBackend}
+              fetchModes={this.fetchModes}
+              error={this.state.error}
+              />
             )}/>
             <Route path='/panel/users' render={() => (
               <div>

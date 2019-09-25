@@ -11,17 +11,18 @@ class Mode extends Component {
     return (
       <div className="content-container">
         <form className="modeForm" method='post' action='/updateMode'>
+        <p className="error">{this.props.error}</p>
         <div className="modesContainer">
         {this.props.modes.map((item,index) => {
           return(
             <div className="modeChoiceContainer" key={index}>
-              <input type="radio" className="radioForm" value={item} name="modeChoice"/>
+              <input type="radio" className="radioForm" value={item} name="modeChoice" onChange={this.props.changeMode}/>
               <label className="modeChoiceText">{item}</label>
             </div>
           )
         })}
         </div>
-        <button onClick={this.props.changeMode} className="modeFormBtn" type="submit">Save</button>
+        <button onClick={this.props.updateModeOnBackend} className="modeFormBtn" type="submit">Save</button>
         </form>
       </div>
     );
