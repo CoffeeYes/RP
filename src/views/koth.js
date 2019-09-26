@@ -7,10 +7,6 @@ import tick_filled from '../assets/tick_filled.svg'
 import x_empty from '../assets/x_empty.svg'
 import x_filled from '../assets/x_filled.svg'
 
-import openSocket from 'socket.io-client';
-
-var socket;
-
 class Koth extends Component {
   constructor(props) {
     super(props)
@@ -39,34 +35,33 @@ class Koth extends Component {
       personalPosition : -1
     }
 
-    this.socket = openSocket('http://localhost:5001');
   }
 
 
   componentDidMount() {
 
-    this.socket.emit("getUserVoteStates")
-    this.socket.emit("getPersonalPosition")
-    this.socket.emit("getUsernames")
+    this.props.socket.emit("getUserVoteStates")
+    this.props.socket.emit("getPersonalPosition")
+    this.props.socket.emit("getUsernames")
 
-    this.socket.on("hostVotedYes",(iconID) => {
+    this.props.socket.on("hostVotedYes",(iconID) => {
       this.setState({["tick" + iconID] : tick_filled})
       this.setState({["cross" + iconID] : x_empty})
     })
 
-    this.socket.on("hostVotedNo",(iconID) => {
+    this.props.socket.on("hostVotedNo",(iconID) => {
       this.setState({["tick" + iconID] : tick_empty})
       this.setState({["cross" + iconID] : x_filled})
     })
 
-    this.socket.on("resetAllVote",() => {
+    this.props.socket.on("resetAllVote",() => {
       for(var iconNum = 1; iconNum < 5; iconNum++) {
         this.setState({["tick" + iconNum] : tick_empty})
         this.setState({["cross" + iconNum] : x_empty})
       }
     })
 
-    this.socket.on("receiveUserVoteStates",(voteStates) => {
+    this.props.socket.on("receiveUserVoteStates",(voteStates) => {
       for(var i = 0; i < voteStates.length; i++) {
         if(voteStates[i] == "yes") {
           this.setState({["tick" + (i+1)] : tick_filled})
@@ -77,29 +72,29 @@ class Koth extends Component {
       }
     })
 
-    this.socket.on("resetSingleVote",(iconID) => {
+    this.props.socket.on("resetSingleVote",(iconID) => {
       this.setState({["tick" + iconID] : tick_empty})
       this.setState({["cross" + iconID] : x_empty})
     })
 
-    this.socket.on("receivePersonalPosition",(position) => {
+    this.props.socket.on("receivePersonalPosition",(position) => {
       this.setState({personalPosition : position})
     })
 
-    this.socket.on("receiveUsernames", (usernames) => {
+    this.props.socket.on("receiveUsernames", (usernames) => {
       for(var i = 0; i < usernames.length ; i++){
         console.log("position : " + usernames[i].position + "  name : " + usernames[i].username)
         this.setState({["name" + usernames[i].position] : usernames[i].username})
       }
     })
 
-    this.socket.on("receiveSocketsAndPositions",(sockets) => {
+    this.props.socket.on("receiveSocketsAndPositions",(sockets) => {
       for(var item in sockets) {
         this.setState({["socketID_cam" + sockets[item].position] : sockets[item].socket})
       }
     })
 
-    this.socket.on("contestantsWereSwapped", () => {
+    this.props.socket.on("contestantsWereSwapped", () => {
       var contestant1 = document.querySelector('#cam5');
       var contestant2 = document.querySelector('#cam6');
 
@@ -107,8 +102,6 @@ class Koth extends Component {
       contestant2.srcObject = contestant1.srcObject;
       contestant1.srcObject = temp;
     })
-
-    socket = this.socket;
   }
 
   updateUsername(number,name) {
@@ -116,7 +109,7 @@ class Koth extends Component {
   }
 
   swapContestants = () => {
-    socket.emit("swapContestants")
+    this.props.socket.emit("swapContestants")
   }
 
   muteAll = () => {
@@ -149,24 +142,24 @@ class Koth extends Component {
   }
 
   hostVoteYes = () => {
-    this.socket.emit("hostVoteYes");
+    this.props.socket.emit("hostVoteYes");
   }
 
   hostVoteNo = () => {
-    this.socket.emit("hostVoteNo");
+    this.props.socket.emit("hostVoteNo");
   }
 
   resetHostVote = () => {
-    this.socket.emit("resetHostVote")
+    this.props.socket.emit("resetHostVote")
   }
 
   resetAll = () => {
-    this.socket.emit("resetAllVotes");
+    this.props.socket.emit("resetAllVotes");
   }
   kickUser(camID) {
 
     if(this.state["socketID_" + camID] != "") {
-      this.socket.emit("kickUser",this.state["socketID_" + camID])
+      this.props.socket.emit("kickUser",this.state["socketID_" + camID])
 
       this.setState({["socketID_" + camID] : ""})
     }
@@ -192,7 +185,7 @@ class Koth extends Component {
               localUsername={this.props.localUsername}
               updateUsername={(number,name) => this.updateUsername(number,name)}
               {...this.props}
-              socket={this.socket}
+              socket={this.props.socket}
               personalPosition={this.state.personalPosition}
               kickUserFromLobby={this.kickUserFromLobby}
                />
@@ -281,7 +274,7 @@ class Koth extends Component {
           <div className="cam-container">
             <div className="cam-col">
                 <Cam camName={this.state.name1} camID="cam1" camType="guestCam" userType={this.props.userType} containerType="localCam guest" iconID={1} tickIcon={this.state.tick1} crossIcon={this.state.cross1}/>
-                <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={this.socket} personalPosition={this.state.personalPosition} kickUserFromLobby={this.props.kickUserFromLobby}/>
+                <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} {...this.props} socket={this.props.socket} personalPosition={this.state.personalPosition} kickUserFromLobby={this.props.kickUserFromLobby}/>
                 <Cam camName={this.state.name2} camID="cam2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" iconID={2} tickIcon={this.state.tick2} crossIcon={this.state.cross2}/>
             </div>
             <div className="cam-col">
@@ -305,7 +298,7 @@ class Koth extends Component {
         <div className="cam-container">
           <div className="cam-col">
               <Cam camName={this.state.name1} camID="cam1" camType="guestCam" userType={this.props.userType} containerType="localCam guest" iconID={1} tickIcon={this.state.tick1} crossIcon={this.state.cross1}/>
-              <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} personalPosition={this.state.personalPosition} socket={this.socket} kickUserFromLobby={this.props.kickUserFromLobby}/>
+              <Webcam userType={this.props.userType} localUsername={this.props.localUsername} updateUsername={(number,name) => this.updateUsername(number,name)} personalPosition={this.state.personalPosition} socket={this.props.socket} kickUserFromLobby={this.props.kickUserFromLobby}/>
               <Cam camName={this.state.name2} camID="cam2" camType="guestCam" userType={this.props.userType} containerType="remoteCam guest" audioID="audioGuest1" iconID={2} tickIcon={this.state.tick2} crossIcon={this.state.cross2}/>
           </div>
           <div className="cam-col">
