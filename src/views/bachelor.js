@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import Webcam from './webcam.js'
 
 class Bachelor extends Component {
 
   render() {
     return (
-      <p>Bachelor Component</p>
+      <div className="main-content">
+        <Webcam socket={this.props.socket}/>
+      </div>
     );
   }
 }
