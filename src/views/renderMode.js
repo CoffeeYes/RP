@@ -20,7 +20,12 @@ class RenderMode extends Component {
     }
     else if(this.props.mode.toLowerCase() == "bachelor") {
       return (
-        <Bachelor socket={this.socket}/>
+        <Bachelor
+        socket={this.socket}
+        userType={this.props.userType}
+        kickUserFromLobby={this.props.kickUserFromLobby}
+        localUsername={this.props.localUsername}
+        />
       )
     }
     else {

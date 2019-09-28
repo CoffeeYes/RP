@@ -6,7 +6,12 @@ class Bachelor extends Component {
   render() {
     return (
       <div className="main-content">
-        <Webcam socket={this.props.socket}/>
+        <Webcam
+        socket={this.props.socket}
+        userType={this.props.userType}
+        localUsername={this.props.localUsername}
+        kickUserFromLobby={this.kickUserFromLobby}
+        />
       </div>
     );
   }
