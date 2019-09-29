@@ -363,3 +363,10 @@ form {
   width: 3vw;
   height : 4vh;
 }
+
+.cams-container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
