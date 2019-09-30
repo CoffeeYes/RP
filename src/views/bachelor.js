@@ -8,8 +8,14 @@ class Bachelor extends Component {
     super(props)
 
     this.state = {
-      users : [1,2]
+      users : []
     }
+  }
+
+  componentDidMount = () => {
+    this.props.socket.on("receiveExternalUserList",(userlist) => {
+      this.setState({users : userlist})
+    })
   }
 
   render() {
