@@ -8,7 +8,7 @@ class Bachelor extends Component {
     super(props)
 
     this.state = {
-      users : []
+      users : [1,2]
     }
   }
 
@@ -30,7 +30,7 @@ class Bachelor extends Component {
         <div className="cams-container">
         {this.state.users.map( (item,index) => {
           return(
-            <Cam/>
+            <Cam camID={["cam"] + (index + 1)}/>
           )
         })}
         </div>
