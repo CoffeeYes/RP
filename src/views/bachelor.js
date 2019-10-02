@@ -16,6 +16,12 @@ class Bachelor extends Component {
     this.props.socket.on("receiveExternalUserList",(userlist) => {
       this.setState({users : userlist})
     })
+
+    this.props.socket.emit("getPersonalPosition")
+
+    this.props.socket.on("receivePersonalPosition",(position) => {
+      this.setState({personalPosition : position})
+    })
   }
 
   render() {
@@ -26,6 +32,7 @@ class Bachelor extends Component {
         userType={this.props.userType}
         localUsername={this.props.localUsername}
         kickUserFromLobby={this.kickUserFromLobby}
+        personalPosition={this.state.personalPosition}
         />
         <div className="cams-container">
         {this.state.users.map( (item,index) => {
