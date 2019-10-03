@@ -8,7 +8,7 @@ class Bachelor extends Component {
     super(props)
 
     this.state = {
-      users : [1,2]
+      users : []
     }
   }
 
@@ -21,6 +21,12 @@ class Bachelor extends Component {
 
     this.props.socket.on("receivePersonalPosition",(position) => {
       this.setState({personalPosition : position})
+    })
+
+    this.props.socket.emit("userJoinedBachelorLobby")
+
+    this.props.socket.on("receiveBachelorUserList",(bachelorUserList) => {
+      this.setState({users : bachelorUserList})
     })
   }
 

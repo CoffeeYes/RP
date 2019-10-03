@@ -22,6 +22,7 @@ let freeUserPositions = [1,2,3,4]
 let adminUserType = "admin";
 let hostUserType = "host";
 let guestUserType = "guest";
+let bachelorUserList = [];
 
 function emitSocketsAndPositions() {
   var socketsAndPositions = [];
@@ -315,6 +316,11 @@ io.on('connection',(client) => {
 
   })
 
+
+  client.on("userJoinedBachelorLobby",() => {
+    bachelorUserList.push(1)
+    io.emit("receiveBachelorUserList",bachelorUserList)
+  })
 })
 
 
