@@ -23,7 +23,7 @@ class Bachelor extends Component {
       this.setState({personalPosition : position})
     })
 
-    this.props.socket.emit("userJoinedBachelorLobby")
+    this.props.socket.emit("userJoinedBachelorLobby",this.props.userType)
 
     this.props.socket.on("receiveBachelorUserList",(bachelorUserList) => {
       this.setState({users : bachelorUserList})

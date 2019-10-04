@@ -317,9 +317,11 @@ io.on('connection',(client) => {
   })
 
 
-  client.on("userJoinedBachelorLobby",() => {
-    bachelorUserList.push(1)
-    io.emit("receiveBachelorUserList",bachelorUserList)
+  client.on("userJoinedBachelorLobby",(userType) => {
+    if(userType != adminUserType) {
+      bachelorUserList.push(1)
+      io.emit("receiveBachelorUserList",bachelorUserList)
+    }
   })
 })
 
