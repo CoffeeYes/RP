@@ -93,6 +93,12 @@ io.on('connection',(client) => {
       }
     }
 
+    for(var x = 0; i < bachelorUserList.length; x++) {
+      if(bachelorUserList[x].socketID == client.id) {
+        bachelorUserList.splice(x,1)
+      }
+    }
+
     //userPosition -= 1;
   })
 
@@ -321,7 +327,7 @@ io.on('connection',(client) => {
   client.on("userJoinedBachelorLobby",(userType) => {
     if(userType != adminUserType) {
       bachelorUserCount += 1;
-      bachelorUserList.push(bachelorUserCount)
+      bachelorUserList.push({position : bachelorUserCount,socketID : client.id})
       io.emit("receiveBachelorUserList",bachelorUserList)
     }
   })

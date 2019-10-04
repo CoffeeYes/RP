@@ -43,7 +43,7 @@ class Bachelor extends Component {
         <div className="cams-container">
         {this.state.users.map( (item,index) => {
           return(
-            <Cam camID={["cam"] + (index + 1)}/>
+            <Cam camID={["cam"] + (item.position)}/>
           )
         })}
         </div>
