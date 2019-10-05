@@ -30,6 +30,10 @@ class Bachelor extends Component {
     })
   }
 
+  updateUsername = (number,name) => {
+    this.setState({['name' + number] : name})
+  }
+
   render() {
     return (
       <div className="main-content">
@@ -39,6 +43,7 @@ class Bachelor extends Component {
         localUsername={this.props.localUsername}
         kickUserFromLobby={this.kickUserFromLobby}
         personalPosition={this.state.personalPosition}
+        updateUsername={this.updateUsername}
         />
         <div className="cams-container">
         {this.state.users.map( (item,index) => {

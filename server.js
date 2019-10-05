@@ -73,6 +73,7 @@ io.on('connection',(client) => {
   })
 
   client.on("disconnect", () => {
+
     io.emit("clientDisconnect",client.id)
 
     for(var i = 0; i < users.length; i++) {
@@ -93,13 +94,12 @@ io.on('connection',(client) => {
       }
     }
 
-    for(var x = 0; i < bachelorUserList.length; x++) {
-      if(bachelorUserList[x].socketID == client.id) {
-        bachelorUserList.splice(x,1)
+    for(var a = 0 ; a< bachelorUserList.length; a++) {
+      if(bachelorUserList[a].socketID == client.id) {
+        bachelorUserList.splice(a,1);
+        io.emit("receiveBachelorUserList",bachelorUserList)
       }
     }
-
-    //userPosition -= 1;
   })
 
   client.on("linkUserToSocket", (username,userType) => {
