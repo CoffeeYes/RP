@@ -23,7 +23,7 @@ let adminUserType = "admin";
 let hostUserType = "host";
 let guestUserType = "guest";
 let bachelorUserList = [];
-let bachelorUserCount = 0;
+let bachelorPositionList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 
 function emitSocketsAndPositions() {
   var socketsAndPositions = [];
@@ -96,7 +96,12 @@ io.on('connection',(client) => {
 
     for(var a = 0 ; a< bachelorUserList.length; a++) {
       if(bachelorUserList[a].socketID == client.id) {
+        //add user to be removed position to position array and sort it
+        bachelorPositionList.push(bachelorUserList[a].position)
+        bachelorPositionList.sort()
+        //remove user from array
         bachelorUserList.splice(a,1);
+        //send new array to frontend for re-render
         io.emit("receiveBachelorUserList",bachelorUserList)
       }
     }
@@ -326,8 +331,11 @@ io.on('connection',(client) => {
 
   client.on("userJoinedBachelorLobby",(userType) => {
     if(userType != adminUserType) {
-      bachelorUserCount += 1;
-      bachelorUserList.push({position : bachelorUserCount,socketID : client.id})
+      //add user to user array
+      bachelorUserList.push({position : bachelorPositionList[0],socketID : client.id})
+      //remove position that was just assigned from position array
+      bachelorPositionList.splice(0,1)
+      //send users and array to frontend for render
       io.emit("receiveBachelorUserList",bachelorUserList)
     }
   })
