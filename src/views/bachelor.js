@@ -51,6 +51,8 @@ class Bachelor extends Component {
             <Cam
             camID={["cam"] + (item.position)}
             camType="guestCam"
+            tickIcon={"//:0"}
+            crossIcon={"//:0"}
             />
           )
         })}

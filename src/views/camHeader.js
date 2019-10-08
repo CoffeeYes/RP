@@ -45,8 +45,8 @@ class camHeader extends Component {
           <div className="camHeader">
               <p className="usersName">{this.props.camName}</p>
               <div className="buttonContainer">
-                <img src={this.props.tickIcon} id={["tick" + this.props.iconID]} alt="tick icon"/>
-                <img src={this.props.crossIcon} id={["cross" + this.props.iconID]} alt="cross icon"/>
+                <img src={this.props.tickIcon} id={["tick" + this.props.iconID]} alt=""/>
+                <img src={this.props.crossIcon} id={["cross" + this.props.iconID]} alt=""/>
               </div>
           </div>
         )
