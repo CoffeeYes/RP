@@ -53,6 +53,7 @@ class Bachelor extends Component {
             camType="guestCam"
             tickIcon={"//:0"}
             crossIcon={"//:0"}
+            camName={item.username}
             />
           )
         })}
