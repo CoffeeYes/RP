@@ -101,7 +101,6 @@ io.on('connection',(client) => {
         bachelorPositionList.sort(function(a,b) {return a-b})
         //remove user from array
         bachelorUserList.splice(a,1);
-        console.log(bachelorPositionList)
         //send new array to frontend for re-render
         io.emit("receiveBachelorUserList",bachelorUserList)
       }

@@ -36,7 +36,7 @@ class Bachelor extends Component {
 
   render() {
     return (
-      <div className="main-content">
+      <div className="bachelor-main">
         <Webcam
         socket={this.props.socket}
         userType={this.props.userType}
@@ -50,10 +50,11 @@ class Bachelor extends Component {
           return(
             <Cam
             camID={["cam"] + (item.position)}
-            camType="guestCam"
+            camType="bachelorCam"
             tickIcon={"//:0"}
             crossIcon={"//:0"}
             camName={item.username}
+            containerType="bachelorCamBox"
             />
           )
         })}
