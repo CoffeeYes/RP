@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 
 import Webcam from './webcam.js'
 import Cam from './cam.js'
+import AdminButtons from './adminButtons';
 
 class Bachelor extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      users : [1,2,3,4,5,6,7,8,9,10,11,12]
+      users : []
     }
   }
 

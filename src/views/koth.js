@@ -7,6 +7,8 @@ import tick_filled from '../assets/tick_filled.svg'
 import x_empty from '../assets/x_empty.svg'
 import x_filled from '../assets/x_filled.svg'
 
+import AdminButtons from './adminButtons.js'
+
 class Koth extends Component {
   constructor(props) {
     super(props)
@@ -230,14 +232,14 @@ class Koth extends Component {
               kickUser={(camID) => this.kickUser(camID)}
               />
 
-              <div className="buttonsContainer">
-                <button onClick={this.swapContestants}>Swap</button>
-                <button onClick={this.muteAll}>Mute All</button>
-                <button onClick={this.unmuteAll}>Unmute All</button>
-                <button onClick={this.blurAll}>Blur All</button>
-                <button onClick={this.unblurAll}>Unblur All</button>
-                <button onClick={this.resetAll}>Reset Votes</button>
-              </div>
+              <AdminButtons
+              swapContestants={this.swapContestants}
+              mutAll={this.muteAll}
+              unmuteAll={this.unmuteAll}
+              blurAll={this.blurAll}
+              unblurAll={this.unblurAll}
+              resetAll={this.resetAll}
+              />
           </div>
           <div className="cam-col">
               <Cam
