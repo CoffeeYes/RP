@@ -8,7 +8,7 @@ class Bachelor extends Component {
     super(props)
 
     this.state = {
-      users : []
+      users : [1,2,3,4,5,6,7,8,9,10,11,12]
     }
   }
 
@@ -50,10 +50,11 @@ class Bachelor extends Component {
           return(
             <Cam
             camID={["cam"] + (item.position)}
-            camType="bachelorCam"
+            userType={this.props.userType}
             tickIcon={"//:0"}
             crossIcon={"//:0"}
             camName={item.username}
+            camType="bachelorCam"
             containerType="bachelorCamBox"
             />
           )
