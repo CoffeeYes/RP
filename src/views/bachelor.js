@@ -37,30 +37,40 @@ class Bachelor extends Component {
 
   render() {
     return (
-      <div className="bachelor-main">
-        <Webcam
-        socket={this.props.socket}
-        userType={this.props.userType}
-        localUsername={this.props.localUsername}
-        kickUserFromLobby={this.kickUserFromLobby}
-        personalPosition={this.state.personalPosition}
-        updateUsername={this.updateUsername}
-        />
-        <div className="cams-container">
-        {this.state.users.map( (item,index) => {
-          return(
-            <Cam
-            camID={["cam"] + (item.position)}
-            userType={this.props.userType}
-            tickIcon={"//:0"}
-            crossIcon={"//:0"}
-            camName={item.username}
-            camType="bachelorCam"
-            containerType="bachelorCamBox"
-            />
-          )
-        })}
+      <div>
+        <div className="bachelor-main">
+          <Webcam
+          socket={this.props.socket}
+          userType={this.props.userType}
+          localUsername={this.props.localUsername}
+          kickUserFromLobby={this.kickUserFromLobby}
+          personalPosition={this.state.personalPosition}
+          updateUsername={this.updateUsername}
+          />
+          <div className="cams-container">
+          {this.state.users.map( (item,index) => {
+            return(
+              <Cam
+              camID={["cam"] + (item.position)}
+              userType={this.props.userType}
+              tickIcon={"//:0"}
+              crossIcon={"//:0"}
+              camName={item.username}
+              camType="bachelorCam"
+              containerType="bachelorCamBox"
+              />
+            )
+          })}
+          </div>
         </div>
+        <AdminButtons
+        swapContestants={this.swapContestants}
+        mutAll={this.muteAll}
+        unmuteAll={this.unmuteAll}
+        blurAll={this.blurAll}
+        unblurAll={this.unblurAll}
+        resetAll={this.resetAll}
+        />
       </div>
     );
   }
