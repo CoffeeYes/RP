@@ -239,6 +239,7 @@ class Koth extends Component {
               blurAll={this.blurAll}
               unblurAll={this.unblurAll}
               resetAll={this.resetAll}
+              mode={this.props.mode}
               />
           </div>
           <div className="cam-col">

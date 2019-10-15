@@ -64,12 +64,11 @@ class Bachelor extends Component {
           </div>
         </div>
         <AdminButtons
-        swapContestants={this.swapContestants}
         mutAll={this.muteAll}
         unmuteAll={this.unmuteAll}
         blurAll={this.blurAll}
         unblurAll={this.unblurAll}
-        resetAll={this.resetAll}
+        mode={this.props.mode}
         />
       </div>
     );

@@ -15,7 +15,13 @@ class RenderMode extends Component {
   render() {
     if(this.props.mode.toLowerCase() == "king of the hill") {
       return (
-        <Koth userType={this.props.userType} localUsername={this.props.localUsername} kickUserFromLobby={this.props.kickUserFromLobby} socket={this.socket}/>
+        <Koth
+        userType={this.props.userType}
+        localUsername={this.props.localUsername}
+        kickUserFromLobby={this.props.kickUserFromLobby}
+        socket={this.socket}
+        mode={this.props.mode}
+        />
       )
     }
     else if(this.props.mode.toLowerCase() == "bachelor") {
@@ -25,6 +31,7 @@ class RenderMode extends Component {
         userType={this.props.userType}
         kickUserFromLobby={this.props.kickUserFromLobby}
         localUsername={this.props.localUsername}
+        mode={this.props.mode}
         />
       )
     }
