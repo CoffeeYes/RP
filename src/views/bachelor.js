@@ -58,16 +58,19 @@ class Bachelor extends Component {
               camName={item.username}
               camType="bachelorCam"
               containerType="bachelorCamBox"
+              key={index}
+              allMuted={this.props.allMuted}
+              allBlurred={this.props.allBlurred}
               />
             )
           })}
           </div>
         </div>
         <AdminButtons
-        mutAll={this.muteAll}
-        unmuteAll={this.unmuteAll}
-        blurAll={this.blurAll}
-        unblurAll={this.unblurAll}
+        mutAll={this.props.muteAll}
+        unmuteAll={this.props.unmuteAll}
+        blurAll={this.props.blurAll}
+        unblurAll={this.props.unblurAll}
         mode={this.props.mode}
         />
       </div>

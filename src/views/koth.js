@@ -24,8 +24,6 @@ class Koth extends Component {
       socketID_cam4 : '',
       socketID_cam5 : '',
       socketID_cam6 : '',
-      allMuted : true,
-      allBlurred : true,
       tick1 : tick_empty,
       tick2 : tick_empty,
       tick3 : tick_empty,
@@ -175,8 +173,8 @@ class Koth extends Component {
                camID="cam1" camType="guestCam"
                userType={this.props.userType}
                containerType="localCam guest"
-               allMuted={this.state.allMuted}
-               allBlurred={this.state.allBlurred}
+               allMuted={this.props.allMuted}
+               allBlurred={this.props.allBlurred}
                iconID={1} tickIcon={this.state.tick1}
                crossIcon={this.state.cross1}
                kickUser={(camID) => this.kickUser(camID)}
@@ -198,8 +196,8 @@ class Koth extends Component {
               userType={this.props.userType}
               containerType="remoteCam guest"
               audioID="audioGuest1"
-              allMuted={this.state.allMuted}
-              allBlurred={this.state.allBlurred}
+              allMuted={this.props.allMuted}
+              allBlurred={this.props.allBlurred}
               iconID={2}
               tickIcon={this.state.tick2}
               crossIcon={this.state.cross2}
@@ -215,8 +213,8 @@ class Koth extends Component {
               userType={this.props.userType}
               containerType="remoteCam contestant"
               audioID="audioContestant1"
-              allMuted={this.state.allMuted}
-              allBlurred={this.state.allBlurred}
+              allMuted={this.props.allMuted}
+              allBlurred={this.props.allBlurred}
               kickUser={(camID) => this.kickUser(camID)}
               />
 
@@ -227,17 +225,17 @@ class Koth extends Component {
               userType={this.props.userType}
               containerType="remoteCam contestant"
               audioID="audioContestant2"
-              allMuted={this.state.allMuted}
-              allBlurred={this.state.allBlurred}
+              allMuted={this.props.allMuted}
+              allBlurred={this.props.allBlurred}
               kickUser={(camID) => this.kickUser(camID)}
               />
 
               <AdminButtons
               swapContestants={this.swapContestants}
-              mutAll={this.muteAll}
-              unmuteAll={this.unmuteAll}
-              blurAll={this.blurAll}
-              unblurAll={this.unblurAll}
+              mutAll={this.props.muteAll}
+              unmuteAll={this.props.unmuteAll}
+              blurAll={this.props.blurAll}
+              unblurAll={this.props.unblurAll}
               resetAll={this.resetAll}
               mode={this.props.mode}
               />
@@ -249,8 +247,8 @@ class Koth extends Component {
               userType={this.props.userType}
               containerType="remoteCam guest"
               audioID="audioGuest2"
-              allMuted={this.state.allMuted}
-              allBlurred={this.state.allBlurred}
+              allMuted={this.props.allMuted}
+              allBlurred={this.props.allBlurred}
               iconID={3}
               tickIcon={this.state.tick3}
               crossIcon={this.state.cross3}
@@ -262,8 +260,8 @@ class Koth extends Component {
               userType={this.props.userType}
               containerType="remoteCam guest"
               audioID="audioGuest3"
-              allMuted={this.state.allMuted}
-              allBlurred={this.state.allBlurred}
+              allMuted={this.props.allMuted}
+              allBlurred={this.props.allBlurred}
               iconID={4} tickIcon={this.state.tick4}
               crossIcon={this.state.cross4}
               kickUser={(camID) => this.kickUser(camID)}/>

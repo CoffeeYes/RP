@@ -10,6 +10,40 @@ class RenderMode extends Component {
   constructor(props) {
     super(props)
     this.socket = openSocket('http://localhost:5001');
+
+    this.state = {
+      allMuted : true,
+      allBlurred : true,
+    }
+  }
+
+  muteAll = () => {
+    for(var i = 1; i < 20; i++) {
+      var video = document.querySelector('#cam' + i);
+      if(video) {
+        video.muted = true;
+      }
+    }
+
+    this.setState({allMuted : true})
+  }
+
+  unmuteAll = () => {
+    for(var i = 1; i < 20; i++) {
+      var video = document.querySelector('#cam' + i);
+      if(video) {
+        video.muted = true;
+      }
+    }
+    this.setState({allMuted : false})
+  }
+
+  blurAll = () => {
+    this.setState({allBlurred : true})
+  }
+
+  unblurAll = () => {
+    this.setState({allBlurred : false})
   }
 
   render() {
@@ -21,6 +55,12 @@ class RenderMode extends Component {
         kickUserFromLobby={this.props.kickUserFromLobby}
         socket={this.socket}
         mode={this.props.mode}
+        muteAll={this.muteAll}
+        unmuteAll={this.unmuteAll}
+        blurAll={this.blurAll}
+        unblurAll={this.unblurAll}
+        allBlurred={this.state.allBlurred}
+        allMuted={this.state.allMuted}
         />
       )
     }
@@ -32,6 +72,12 @@ class RenderMode extends Component {
         kickUserFromLobby={this.props.kickUserFromLobby}
         localUsername={this.props.localUsername}
         mode={this.props.mode}
+        muteAll={this.muteAll}
+        unmuteAll={this.unmuteAll}
+        blurAll={this.blurAll}
+        unblurAll={this.unblurAll}
+        allBlurred={this.state.allBlurred}
+        allMuted={this.state.allMuted}
         />
       )
     }
