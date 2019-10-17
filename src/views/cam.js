@@ -36,9 +36,18 @@ class Cam extends Component {
     if(nextProps.allMuted != this.props.allMuted) {
       if(nextProps.allMuted == true) {
         this.setState({muteIcon : mute})
+        var video = document.querySelector("#" + this.props.camID)
+        if(video) {
+          video.muted = true
+        }
+
       }
-      else {
+      else if(nextProps.allMuted == false) {
         this.setState({muteIcon : unmute});
+        var video = document.querySelector("#" + this.props.camID)
+        if(video) {
+          video.muted = false
+        }
       }
     }
 

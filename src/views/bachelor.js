@@ -67,7 +67,7 @@ class Bachelor extends Component {
           </div>
         </div>
         <AdminButtons
-        mutAll={this.props.muteAll}
+        muteAll={this.props.muteAll}
         unmuteAll={this.props.unmuteAll}
         blurAll={this.props.blurAll}
         unblurAll={this.props.unblurAll}

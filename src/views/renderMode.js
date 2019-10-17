@@ -18,23 +18,10 @@ class RenderMode extends Component {
   }
 
   muteAll = () => {
-    for(var i = 1; i < 20; i++) {
-      var video = document.querySelector('#cam' + i);
-      if(video) {
-        video.muted = true;
-      }
-    }
-
     this.setState({allMuted : true})
   }
 
   unmuteAll = () => {
-    for(var i = 1; i < 20; i++) {
-      var video = document.querySelector('#cam' + i);
-      if(video) {
-        video.muted = true;
-      }
-    }
     this.setState({allMuted : false})
   }
 
