@@ -383,8 +383,13 @@ form {
 .bachelorCamBox {
   width: 20vw;
   height: 28.7vh;
+  overflow: hidden;
 }
 
 .bachelorCam {
   width: 20vw;
+}
+
+.videoContainer {
+  overflow: hidden;
 }
