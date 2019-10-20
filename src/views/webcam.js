@@ -198,8 +198,10 @@ export default class Webcam extends Component {
         //unmount all video from screen
         for(var i = 1; i < 7; i++) {
           var video = document.querySelector('#cam' + i)
-
-          video.srcObject = null
+          if(video) {
+            video.srcObject = null
+          }
+          
         }
 
         this.props.kickUserFromLobby()

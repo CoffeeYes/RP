@@ -46,6 +46,7 @@ class Bachelor extends Component {
           kickUserFromLobby={this.kickUserFromLobby}
           personalPosition={this.state.personalPosition}
           updateUsername={this.updateUsername}
+          kickUserFromLobby={this.props.kickUserFromLobby}
           />
           <div className="cams-container">
           {this.state.users.map( (item,index) => {
@@ -61,6 +62,7 @@ class Bachelor extends Component {
               key={index}
               allMuted={this.props.allMuted}
               allBlurred={this.props.allBlurred}
+              kickUser={(camID) => this.props.kickUser(camID)}
               />
             )
           })}
