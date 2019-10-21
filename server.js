@@ -299,6 +299,18 @@ io.on('connection',(client) => {
         //remove this user from the array
         users.splice(i,1)
       }
+
+      for(var i = 0; i < bachelorUserList.length; i++) {
+        //remove kicked user from bachelor user list and emit back to frontend
+        if(bachelorUserList[i].socketID == camID) {
+          bachelorPositionList.push(bachelorUserList[i].position)
+          bachelorPositionList.sort(function(a,b) {return a-b})
+          
+          bachelorUserList.splice(i,1)
+
+          io.emit("receiveBachelorUserList",bachelorUserList)
+        }
+      }
     }
 
     try {
