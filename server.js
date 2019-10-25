@@ -353,9 +353,10 @@ io.on('connection',(client) => {
       bachelorUserList.push({position : bachelorPositionList[0],socketID : client.id,username : username})
       //remove position that was just assigned from position array
       bachelorPositionList.splice(0,1)
-      //send users and array to frontend for render
-      io.emit("receiveBachelorUserList",bachelorUserList)
+
     }
+    //send users and array to frontend for render
+    io.emit("receiveBachelorUserList",bachelorUserList)
   })
 })
 
