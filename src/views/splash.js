@@ -5,8 +5,7 @@ class Splash extends Component {
 
   render() {
     return (
-      <div className="content-container">
-        <img className="main-bg-img" src={main_img} alt="background mountains"/>
+      <div className="content-container-main">
         <div className="login-container">
           <form action="/login" method="POST" className="login-form">
             <p className="error">{this.props.error}</p>
