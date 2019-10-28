@@ -14,7 +14,7 @@ class Splash extends Component {
             <label>Password:</label>
             <input name="password" type="password"onChange={this.props.handleTextChange}/>
             <div className="login-form-text">
-              <button type="button" onClick={this.props.handleLogin}>Login</button>
+              <button type="button" onClick={this.props.handleLogin} id="login-button">Login</button>
               <a href="/code">Got a Code?</a>
             </div>
           </form>

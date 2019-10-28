@@ -124,6 +124,14 @@ form {
  transform: translate(-50%,-50%);
 }
 
+#login-button {
+  background : rgba(220,20,60,0.5);
+  padding : 1vh 1vw;
+  border : 0.5px solid white;
+  border-radius : 5px;
+  color : white;
+}
+
 .login-form-text {
   margin-left: 2.5vw;
   margin-top: 1vh;
