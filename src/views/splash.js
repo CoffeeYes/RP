@@ -9,10 +9,10 @@ class Splash extends Component {
         <div className="login-container">
           <form action="/login" method="POST" className="login-form">
             <p className="error">{this.props.error}</p>
-            <label>Username:</label>
-            <input name="username" onChange={this.props.handleTextChange}/>
-            <label>Password:</label>
-            <input name="password" type="password"onChange={this.props.handleTextChange}/>
+            <label>Username</label>
+            <input name="username" onChange={this.props.handleTextChange} className="login-input"/>
+            <label>Password</label>
+            <input name="password" type="password"onChange={this.props.handleTextChange} className="login-input"/>
             <div className="login-form-text">
               <button type="button" onClick={this.props.handleLogin} id="login-button">Login</button>
               <a href="/code">Got a Code?</a>

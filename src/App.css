@@ -112,6 +112,17 @@ form {
   filter: blur(10px);
 }
 
+.login-input {
+  background :   #f7f9f9;
+  width: 15vw;
+  height : 5vh;
+  font-size : 5vh;
+  opacity : 0.5;
+  border : 1px solid white;
+  border-radius : 2px;
+  padding: 1vh 1vw 1vh 1vw;
+}
+
 .login-form {
   color: white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
