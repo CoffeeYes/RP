@@ -1,3 +1,8 @@
+* {
+  margin : 0;
+  padding : 0;
+}
+
 .App {
   text-align: center;
 }
@@ -62,6 +67,15 @@ form {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.main {
+  background-image : url('./assets/lobby_background_1.jpg');
+  background-size : cover;
+  margin : 0;
+  padding : 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 .content-container-main {
@@ -274,6 +288,7 @@ form {
 .camHeader {
   display: flex;
   width: 100%;
+  height: 6vh;
   border-bottom : 1px solid black;
   background-color : #F0F0F0;
 }
@@ -434,7 +449,7 @@ form {
 
 .bachelorCamBox {
   width: 20vw;
-  height: 28.7vh;
+  height: 28vh;
   overflow: hidden;
 }
 
