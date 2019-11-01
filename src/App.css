@@ -180,7 +180,7 @@ form {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 2vh;
+  padding-top: 2vh;
 }
 
 .navItem {
