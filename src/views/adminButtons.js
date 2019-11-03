@@ -5,22 +5,22 @@ class AdminButtons extends Component {
     if(this.props.mode == "king of the hill") {
       return (
         <div className="buttonsContainer">
-          <button onClick={this.props.swapContestants}>Swap</button>
-          <button onClick={this.props.muteAll}>Mute All</button>
-          <button onClick={this.props.unmuteAll}>Unmute All</button>
-          <button onClick={this.props.blurAll}>Blur All</button>
-          <button onClick={this.props.unblurAll}>Unblur All</button>
-          <button onClick={this.props.resetAll}>Reset Votes</button>
+          <button onClick={this.props.swapContestants} className="adminButton">Swap</button>
+          <button onClick={this.props.muteAll} className="adminButton">Mute All</button>
+          <button onClick={this.props.unmuteAll} className="adminButton">Unmute All</button>
+          <button onClick={this.props.blurAll} className="adminButton">Blur All</button>
+          <button onClick={this.props.unblurAll} className="adminButton">Unblur All</button>
+          <button onClick={this.props.resetAll} className="adminButton">Reset Votes</button>
         </div>
       );
     }
     else if (this.props.mode == "bachelor") {
       return (
         <div className="buttonsContainer">
-          <button onClick={this.props.muteAll}>Mute All</button>
-          <button onClick={this.props.unmuteAll}>Unmute All</button>
-          <button onClick={this.props.blurAll}>Blur All</button>
-          <button onClick={this.props.unblurAll}>Unblur All</button>
+          <button onClick={this.props.muteAll} className="adminButton">Mute All</button>
+          <button onClick={this.props.unmuteAll} className="adminButton">Unmute All</button>
+          <button onClick={this.props.blurAll} className="adminButton">Blur All</button>
+          <button onClick={this.props.unblurAll} className="adminButton">Unblur All</button>
         </div>
       );
     }
