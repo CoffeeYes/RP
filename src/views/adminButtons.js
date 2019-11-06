@@ -4,7 +4,7 @@ class AdminButtons extends Component {
   render() {
     if(this.props.mode == "king of the hill") {
       return (
-        <div className="buttonsContainer">
+        <div className="buttonsContainer-koth">
           <button onClick={this.props.swapContestants} className="adminButton">Swap</button>
           <button onClick={this.props.muteAll} className="adminButton">Mute All</button>
           <button onClick={this.props.unmuteAll} className="adminButton">Unmute All</button>
@@ -16,7 +16,7 @@ class AdminButtons extends Component {
     }
     else if (this.props.mode == "bachelor") {
       return (
-        <div className="buttonsContainer">
+        <div className="buttonsContainer-bachelor">
           <button onClick={this.props.muteAll} className="adminButton">Mute All</button>
           <button onClick={this.props.unmuteAll} className="adminButton">Unmute All</button>
           <button onClick={this.props.blurAll} className="adminButton">Blur All</button>

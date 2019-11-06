@@ -279,13 +279,19 @@ form {
   justify-content: flex-end;
 }
 
-.buttonsContainer {
+.buttonsContainer-koth {
   display: flex;
   flex-wrap: wrap;
   width: 26vw;
   justify-content: center;
   margin-top : 2vh;
   height : 10vh;
+}
+
+.buttonsContainer-bachelor {
+  display : flex;
+  width: 26vw;
+  justify-content: center;
 }
 
 .camHeader {
