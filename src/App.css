@@ -292,6 +292,15 @@ form {
   display : flex;
   width: 26vw;
   justify-content: center;
+  align-self: center;
+  position : absolute;
+}
+
+.bottomBar {
+  width : 100vw;
+  display : flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .camHeader {
