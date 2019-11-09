@@ -277,6 +277,12 @@ form {
   width: 100%;
   align-items: center;
   justify-content: flex-end;
+  flex-wrap : nowrap;
+}
+
+.buttonsContainer-host {
+  display : flex;
+  justify-content: center;
 }
 
 .buttonsContainer-koth {
