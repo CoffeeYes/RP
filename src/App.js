@@ -399,6 +399,7 @@ class App extends Component {
       else {
         return(
           //if not admin only allow access to the lobby
+          <div className="main">
           <Route path='/lobby' render={() => (
             <Lobby
             mode={this.state.mode}
@@ -411,6 +412,7 @@ class App extends Component {
             kickUserFromLobby={this.kickUserFromLobby}
             />
           )}/>
+          </div>
         )
       }
     }
