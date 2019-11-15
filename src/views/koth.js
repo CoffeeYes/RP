@@ -274,9 +274,9 @@ class Koth extends Component {
                 <Cam camName="Contestant" camID="cam5" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant1"/>
                 <Cam camName="King" camID="cam6" camType="contestantCam" userType={this.props.userType} containerType="remoteCam contestant" audioID="audioContestant2"/>
                 <div className="buttonsContainer-host">
-                  <button onClick={this.hostVoteYes}>Yes</button>
-                  <button onClick={this.hostVoteNo}>No</button>
-                  <button onClick={this.resetHostVote}>Reset</button>
+                  <button onClick={this.hostVoteYes} className="hostVoteButton">Yes</button>
+                  <button onClick={this.hostVoteNo} className="hostVoteButton">No</button>
+                  <button onClick={this.resetHostVote} className="hostVoteButton">Reset</button>
                 </div>
             </div>
             <div className="cam-col">

@@ -506,3 +506,15 @@ form {
   width : 5vw;
   height : 4.5vh;
 }
+
+.hostVoteButton {
+  background : rgba(0,0,0,0.6);
+  margin-left : 0.5vw;
+  margin-top : 1vh;
+  padding : 0.4vh 0.4vw 0.4vh 0.4vw;
+  border : 0.5px solid white;
+  color : white;
+  font-size: 0.8vw;
+  width : 5vw;
+  height : 4.5vh;
+}
