@@ -64,6 +64,7 @@ class Bachelor extends Component {
                 allMuted={this.props.allMuted}
                 allBlurred={this.props.allBlurred}
                 kickUser={(camID) => this.props.kickUser(camID)}
+                mode={this.props.mode}
                 />
               )
             })}
@@ -109,6 +110,7 @@ class Bachelor extends Component {
                 allMuted={this.props.allMuted}
                 allBlurred={this.props.allBlurred}
                 kickUser={(camID) => this.props.kickUser(camID)}
+                mode={this.props.mode}
                 />
               )
             })}
