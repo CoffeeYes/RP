@@ -103,6 +103,7 @@ class Cam extends Component {
             kickUser={(camID) => this.props.kickUser(camID)}
             camID={this.props.camID}
             mode={this.props.mode}
+            highlightCam={this.props.highlightCam}
             />
             <div className="videoContainer">
               <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>

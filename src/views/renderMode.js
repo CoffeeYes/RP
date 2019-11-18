@@ -50,6 +50,10 @@ class RenderMode extends Component {
     }
   }
 
+  highlightCam() {
+    console.log("highlight")
+  }
+
 
 
   render() {
@@ -86,6 +90,7 @@ class RenderMode extends Component {
         allBlurred={this.state.allBlurred}
         allMuted={this.state.allMuted}
         kickUser={(camID) => this.kickUser(camID)}
+        highlightCam={this.highlightCam}
         />
       )
     }

@@ -12,7 +12,7 @@ class camHeader extends Component {
                 <div className="buttonContainer">
                   <img src={this.props.tickIcon} id={["tick" + this.props.iconID]} alt="tick icon"/>
                   <img src={this.props.crossIcon} id={["cross" + this.props.iconID]} alt="cross icon"/>
-                  <button className="cameraButton">H</button>
+                  <button className="cameraButton" onClick={this.props.highlightCam}>H</button>
                   <button className="cameraButton" onClick={this.props.toggleFilter}>
                     <img src={this.props.videoIcon} alt="video icon"/>
                   </button>
@@ -29,7 +29,7 @@ class camHeader extends Component {
             <div className="camHeader">
                 <p className="usersName">{this.props.camName}</p>
                 <div className="buttonContainer">
-                  <button className="cameraButton">H</button>
+                  <button className="cameraButton" onClick={this.props.highlightCam}>H</button>
                   <button className="cameraButton" onClick={this.props.toggleFilter}>
                     <img src={this.props.videoIcon} alt="video icon"/>
                   </button>
