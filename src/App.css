@@ -526,3 +526,8 @@ form {
   width : 5vw;
   height : 4.5vh;
 }
+
+.highlight {
+  width: 60vw;
+  height: 80vh;
+}

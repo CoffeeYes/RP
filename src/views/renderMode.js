@@ -50,12 +50,6 @@ class RenderMode extends Component {
     }
   }
 
-  highlightCam() {
-    console.log("highlight")
-  }
-
-
-
   render() {
     if(this.props.mode.toLowerCase() == "king of the hill") {
       return (
@@ -90,7 +84,6 @@ class RenderMode extends Component {
         allBlurred={this.state.allBlurred}
         allMuted={this.state.allMuted}
         kickUser={(camID) => this.kickUser(camID)}
-        highlightCam={this.highlightCam}
         />
       )
     }

@@ -65,7 +65,6 @@ class Bachelor extends Component {
                 allBlurred={this.props.allBlurred}
                 kickUser={(camID) => this.props.kickUser(camID)}
                 mode={this.props.mode}
-                highlightCam={this.props.highlightCam}
                 />
               )
             })}

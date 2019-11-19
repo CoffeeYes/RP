@@ -17,6 +17,7 @@ class Cam extends Component {
       camFilter : "camBlurred",
       muteIcon : mute,
       videoIcon : icon_novideo,
+      augmentClasses : "",
     }
 
     this.toggleFilter = this.toggleFilter.bind(this);
@@ -86,9 +87,18 @@ class Cam extends Component {
       this.setState({muteIcon : unmute})
     }
   }
+
+  toggleHighlightCam = () => {
+    if(this.state.augmentClasses == "") {
+      this.setState({augmentClasses : "highlight"})
+    }
+    else {
+      this.setState({augmentClasses : ""})
+    }
+  }
   render() {
           return(
-            <div className={["camBox " + this.props.containerType]}>
+            <div className={["camBox " + this.props.containerType + " " + this.state.augmentClasses]}>
             <CamHeader
             tickIcon={this.props.tickIcon}
             crossIcon={this.props.crossIcon}
@@ -103,7 +113,7 @@ class Cam extends Component {
             kickUser={(camID) => this.props.kickUser(camID)}
             camID={this.props.camID}
             mode={this.props.mode}
-            highlightCam={this.props.highlightCam}
+            highlightCam={this.toggleHighlightCam}
             />
             <div className="videoContainer">
               <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
