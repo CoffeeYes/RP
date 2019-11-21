@@ -115,8 +115,8 @@ class Cam extends Component {
             mode={this.props.mode}
             highlightCam={this.toggleHighlightCam}
             />
-            <div className="videoContainer">
-              <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter]} id={this.props.camID}></video>
+            <div className={["videoContainer" + " " + this.state.augmentClasses]}>
+              <video autoPlay={true} className={["cam " + this.props.camType + " " + this.state.camFilter + " " + this.state.augmentClasses]} id={this.props.camID}></video>
             </div>
             </div>
           )
