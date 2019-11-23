@@ -5,6 +5,7 @@ import unmute from '../assets/icon_unmute.png';
 import mute from '../assets/icon_mute.png';
 import icon_video from '../assets/icon_video.png'
 import icon_novideo from '../assets/icon_novideo.png'
+import icon_expand from '../assets/icon_expand.png'
 
 import CamHeader from './camHeader.js'
 var camID;
@@ -17,6 +18,7 @@ class Cam extends Component {
       camFilter : "camBlurred",
       muteIcon : mute,
       videoIcon : icon_novideo,
+      expandIcon : icon_expand,
       augmentClasses : "",
     }
 
@@ -108,6 +110,7 @@ class Cam extends Component {
             camType={this.props.camType}
             videoIcon={this.state.videoIcon}
             muteIcon={this.state.muteIcon}
+            expandIcon={this.state.expandIcon}
             toggleFilter={this.toggleFilter}
             toggleMute={this.toggleMute}
             kickUser={(camID) => this.props.kickUser(camID)}
