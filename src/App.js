@@ -138,6 +138,9 @@ class App extends Component {
     .then( data => {
       if(data.success == true) {
         this.setState({error : "Mode Updated"})
+        setTimeout(() => {
+          this.setState({error : ""})
+        },800)
       }
       else {
         this.setState({error : "Could not update Mode"})
