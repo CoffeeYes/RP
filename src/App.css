@@ -342,7 +342,8 @@ form {
   border-radius: 5px;
   width: 3vw;
   align-self: flex-end;
-  display: block;
+  display: flex;
+  justify-content: center;
 }
 
 .hor-center {
