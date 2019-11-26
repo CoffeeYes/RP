@@ -205,7 +205,7 @@ form {
 
 .modeForm {
   border: 1px solid black;
-  height: 30vh;
+  height: 40vh;
   width: 20vw;
   display: flex;
   justify-content: center;
@@ -391,7 +391,7 @@ form {
   display: flex;
   flex-direction: row;
   border: 1px solid black;
-  width: 30vw;
+  width: 50vw;
   height: 5vh;
   margin-bottom: 2vh;
   justify-content: space-between;
