@@ -387,6 +387,10 @@ form {
   flex-direction: column;
 }
 
+.userListContainer {
+  margin-top : 4vh;
+}
+
 .userListItem {
   display: flex;
   flex-direction: row;
@@ -401,6 +405,7 @@ form {
   display: inline;
   border: none;
   background:rgba(0,0,0,0);
+  font-size : 1.5vw;
 }
 
 .userListHead {

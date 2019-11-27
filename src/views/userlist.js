@@ -7,7 +7,7 @@ class UserList extends Component {
   }
   render() {
     return (
-      <div className="horcent">
+      <div className="horcent userListContainer">
         <ul>
         {this.props.list.map((item,index) => {
           return (
