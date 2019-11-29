@@ -8,12 +8,12 @@ class addUser extends Component {
         <form className="addUserForm">
           <p className="error">{this.props.error}</p>
           <label>Username</label>
-          <input name="username" onChange={this.props.update}/>
+          <input name="username" className="addUserInput" onChange={this.props.update}/>
           <label>Password</label>
-          <input name="password" onChange={this.props.update}/>
+          <input name="password" className="addUserInput" onChange={this.props.update}/>
           <label>Display Name</label>
-          <input name="displayname" onChange={this.props.update}/>
-          <button onClick={this.props.addUser}>Add</button>
+          <input name="displayname" className="addUserInput" onChange={this.props.update}/>
+          <button onClick={this.props.addUser} id="addUserBtn">Add</button>
         </form>
       </div>
     );
