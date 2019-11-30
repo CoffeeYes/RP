@@ -382,6 +382,10 @@ form {
   padding : 20px 20px 20px 20px;
 }
 
+.addUserLabel {
+  font-size : 1.5vw;
+}
+
 .addUserInput {
   background :   #f7f9f9;
   width: 10vw;
