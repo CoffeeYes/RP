@@ -458,7 +458,9 @@ form {
 
 .deleteUserBtn {
   border: 1px solid black;
-  margin-right: 1em;
+  margin-right: 0.2vw;
+  width: 1.5vw;
+  height: 3vh;
 }
 
 .addVotingForm {
