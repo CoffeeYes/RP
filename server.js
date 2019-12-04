@@ -570,18 +570,22 @@ app.post('/addUser',function(req,res,next) {
 })
 
 app.post('/deleteUser',function(req,res,next) {
+  try {
+    Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client) {
+      if(error)throw error;
 
-  Mclient.connect(connect.mongo.url,mongoClientOptions,function(error,client) {
-    if(error)throw error;
-
-    let database = client.db('rp');
-    try {
-      database.collection('user_data').deleteOne({username : req.body.username})
-    }
-    catch(error) {
-      console.log("ERROR(deleting user) : " + error)
-    }
-  })
+      let database = client.db('rp');
+      try {
+        database.collection('user_data').deleteOne({username : req.body.username})
+      }
+      catch(error) {
+        console.log("ERROR(deleting user) : " + error)
+      }
+    })
+  }
+  catch(error) {
+    console.log("Error connecting to database : " + error)
+  }
 })
 
 app.listen(process.env.PORT || 5000);
