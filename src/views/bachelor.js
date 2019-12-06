@@ -29,6 +29,10 @@ class Bachelor extends Component {
     this.props.socket.on("receiveBachelorUserList",(bachelorUserList) => {
       this.setState({users : bachelorUserList})
     })
+
+    this.props.socket.on("receiveKick",() => {
+      this.props.kickUserFromLobby();
+    })
   }
 
   updateUsername = (number,name) => {
