@@ -20,6 +20,7 @@ class Cam extends Component {
       videoIcon : icon_novideo,
       expandIcon : icon_expand,
       augmentClasses : "",
+      highlighted : false,
     }
 
     this.toggleFilter = this.toggleFilter.bind(this);
@@ -66,6 +67,22 @@ class Cam extends Component {
     }
   }
 
+  componentDidUpdate = (prevProps,prevState) => {
+    //if another cam has been highlighted add the hiddencam class to hide this cam component
+    if(prevProps.hideOtherCams != this.props.hideOtherCams) {
+      if(this.state.highlighted == false) {
+        if(prevProps.hideOtherCams == false) {
+          this.setState({augmentClasses : "hiddenCam"})
+        }
+        else {
+          this.setState({augmentClasses : ""})
+        }
+      }
+    }
+
+    
+  }
+
   toggleFilter(event) {
     //this.state.camFilter == "camBlurred" ? this.setState({camFilter : "camNotBlurred"}) : this.setState({camFilter : "camBlurred"})
     if(this.state.camFilter == "camBlurred") {
@@ -93,10 +110,14 @@ class Cam extends Component {
   toggleHighlightCam = () => {
     if(this.state.augmentClasses == "") {
       this.setState({augmentClasses : "highlight"})
+      this.setState({highlighted : true})
     }
     else {
       this.setState({augmentClasses : ""})
+      this.setState({highlighted : false})
     }
+
+    this.props.toggleHideNonHighlightedCams()
   }
   render() {
           return(

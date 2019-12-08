@@ -9,7 +9,8 @@ class Bachelor extends Component {
     super(props)
 
     this.state = {
-      users : []
+      users : [],
+      hideOtherCams: false,
     }
   }
 
@@ -37,6 +38,10 @@ class Bachelor extends Component {
 
   updateUsername = (number,name) => {
     this.setState({['name' + number] : name})
+  }
+
+  toggleHideNonHighlightedCams = () => {
+    this.setState({hideOtherCams : !(this.state.hideOtherCams)})
   }
 
   render() {
@@ -69,6 +74,8 @@ class Bachelor extends Component {
                 allBlurred={this.props.allBlurred}
                 kickUser={(camID) => this.props.kickUser(camID)}
                 mode={this.props.mode}
+                toggleHideNonHighlightedCams={this.toggleHideNonHighlightedCams}
+                hideOtherCams={this.state.hideOtherCams}
                 />
               )
             })}
@@ -115,6 +122,8 @@ class Bachelor extends Component {
                 allBlurred={this.props.allBlurred}
                 kickUser={(camID) => this.props.kickUser(camID)}
                 mode={this.props.mode}
+                toggleHideNonHighlightedCams={this.toggleHideNonHighlightedCams}
+                hideOtherCams={this.state.hideOtherCams}
                 />
               )
             })}
