@@ -80,7 +80,7 @@ class Cam extends Component {
       }
     }
 
-    
+
   }
 
   toggleFilter(event) {
@@ -118,6 +118,11 @@ class Cam extends Component {
     }
 
     this.props.toggleHideNonHighlightedCams()
+  }
+
+  componentWillUnmount = () => {
+    this.setState({highlighted : false})
+    this.setState({augmentClasses : ""})
   }
   render() {
           return(
