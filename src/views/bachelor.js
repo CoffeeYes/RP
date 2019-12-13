@@ -34,6 +34,10 @@ class Bachelor extends Component {
     this.props.socket.on("receiveKick",() => {
       this.props.kickUserFromLobby();
     })
+
+    this.props.socket.on("userWasKicked", () => {
+      this.setState({hideOtherCams: false})
+    })
   }
 
   updateUsername = (number,name) => {
