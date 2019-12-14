@@ -120,10 +120,16 @@ class Cam extends Component {
     this.props.toggleHideNonHighlightedCams()
   }
 
-  componentWillUnmount = () => {
-    this.setState({highlighted : false})
-    this.setState({augmentClasses : ""})
+  //catch the kick function to change local component state then call parent function
+  thisUserIsBeingKicked = (camID) => {
+    this.props.kickUser(camID)
+
+    if(this.state.highlighted == true) {
+      this.setState({highlighted: false})
+      this.setState({augmentClasses : ""})
+    }
   }
+  
   render() {
           return(
             <div className={["camBox " + this.props.containerType + " " + this.state.augmentClasses]}>
@@ -139,7 +145,7 @@ class Cam extends Component {
             expandIcon={this.state.expandIcon}
             toggleFilter={this.toggleFilter}
             toggleMute={this.toggleMute}
-            kickUser={(camID) => this.props.kickUser(camID)}
+            kickUser={(camID) => this.thisUserIsBeingKicked(camID)}
             camID={this.props.camID}
             mode={this.props.mode}
             highlightCam={this.toggleHighlightCam}
