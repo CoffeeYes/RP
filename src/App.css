@@ -417,6 +417,10 @@ form {
 
 .userListContainer {
   margin-top : 4vh;
+  height:55vh;
+  width: 55vw;
+  overflow-y : scroll;
+
 }
 
 .userListItem {
