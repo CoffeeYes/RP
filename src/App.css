@@ -219,7 +219,9 @@ form {
 }
 
 .modesContainer {
-
+  padding: 1vw;
+  overflow-y: scroll;
+  margin-left: 2vw;
 }
 
 .modeFormBtn {
