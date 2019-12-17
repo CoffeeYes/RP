@@ -53,12 +53,6 @@ class App extends Component {
     this.deleteUser = this.deleteUser.bind(this);
     this.addField = this.addField.bind(this);
     this.handleFieldText = this.handleFieldText.bind(this);
-    this.handleAddPoll = this.handleAddPoll.bind(this);
-    this.fetchPoll = this.fetchPoll.bind(this);
-    this.handleVote = this.handleVote.bind(this);
-    this.clickVote = this.clickVote.bind(this);
-    this.getAllPolls = this.getAllPolls.bind(this);
-    this.deletePoll = this.deletePoll.bind(this);
   }
 
   handleLogin = (event) => {
@@ -267,82 +261,6 @@ class App extends Component {
 
   handleFieldText(event) {
     this.setState({pollData : {...this.state.pollData,[event.target.name] : event.target.value}})
-  }
-
-  handleAddPoll(event) {
-    event.preventDefault();
-
-    fetch('/addVotingPoll',{
-      method : 'POST',
-      headers : {
-        'Content-type' : 'application/json'
-      },
-      body : JSON.stringify(this.state.pollData),
-    })
-    this.getAllPolls();
-  }
-
-  fetchPoll() {
-    let pollCode = window.location.href.split('?q=')[1];
-
-    if(pollCode != undefined) {
-      fetch(['/getPoll?code=' + pollCode])
-      .then(res => res.json())
-      .then(data => {
-        if(data.error) {
-          this.setState({error: data.error})
-        }
-        else {
-          this.setState({pollResult : data.pollResult})
-        }
-      })
-    }
-  }
-
-  handleVote(event) {
-    event.preventDefault();
-
-    let pollCode = window.location.href.split('?q=')[1];
-
-    fetch('/addVote', {
-      method: 'POST',
-      headers : {
-        'Content-type' : 'application/json'
-      },
-      body : JSON.stringify({
-      voteChoice : this.state.voteChoice,
-      pollCode : pollCode
-    })
-    })
-  }
-
-  getAllPolls() {
-    setTimeout(() => {
-      fetch('/allPolls')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({pollsData : data.data})
-      })
-    },200)
-  }
-
-  clickVote(event) {
-    this.setState({voteChoice : event.target.value});
-  }
-
-  deletePoll(event) {
-    event.preventDefault();
-
-    fetch('/deletePoll', {
-      method : 'POST',
-      headers : {
-        'Content-type' : 'application/json'
-      },
-      body : JSON.stringify({
-        pollCode : event.target.value
-      })
-    })
-    this.getAllPolls();
   }
 
   kickUserFromLobby = () => {
