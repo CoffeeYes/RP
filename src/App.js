@@ -51,8 +51,6 @@ class App extends Component {
     this.addUser = this.addUser.bind(this);
     this.updateAddUser = this.updateAddUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
-    this.addField = this.addField.bind(this);
-    this.handleFieldText = this.handleFieldText.bind(this);
   }
 
   handleLogin = (event) => {
@@ -251,16 +249,6 @@ class App extends Component {
 
   updateAddUser(event) {
     this.setState({addUser : {...this.state.addUser,[event.target.name] : event.target.value}})
-  }
-
-  addField(event) {
-    event.preventDefault();
-    let newValue = this.state.inputCount[this.state.inputCount.length-1] + 1;
-    this.setState({inputCount : [...this.state.inputCount,newValue]});
-  }
-
-  handleFieldText(event) {
-    this.setState({pollData : {...this.state.pollData,[event.target.name] : event.target.value}})
   }
 
   kickUserFromLobby = () => {
