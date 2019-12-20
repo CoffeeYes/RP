@@ -23,7 +23,7 @@ let adminUserType = "admin";
 let hostUserType = "host";
 let guestUserType = "guest";
 let bachelorUserList = [];
-let bachelorPositionList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+let bachelorPositionList = [1,2,3,4,5,6,7,8,9,10,11,12]
 
 function emitSocketsAndPositions() {
   var socketsAndPositions = [];
@@ -169,6 +169,7 @@ io.on('connection',(client) => {
           usernames.push({position : users[item].userPosition,username : users[item].username})
         }
       }
+      //send all usernames and own socket id to user
       io.to([client.id]).emit("receiveUsernames",usernames)
       io.to([client.id]).emit("receiveSelfSocketID",client.id)
 
@@ -286,6 +287,7 @@ io.on('connection',(client) => {
         //save the position of the user being kicked
         kickedUserPosition = users[i].userPosition
 
+        //add user's position back to free position array based on type
         if(users[i].userType == hostUserType) {
           io.emit("resetSingleVote",users[i].userPosition)
           freeUserPositions.push(users[i].userPosition)
@@ -301,13 +303,14 @@ io.on('connection',(client) => {
       }
     }
     for(var i = 0; i < bachelorUserList.length; i++) {
-      //remove kicked user from bachelor user list and emit back to frontend
+
       if(bachelorUserList[i].socketID == camID) {
+        //add kicked users position back to free positions list
         bachelorPositionList.push(bachelorUserList[i].position)
         bachelorPositionList.sort(function(a,b) {return a-b})
 
+        //remove kicked user from bachelor user list and emit back to frontend
         bachelorUserList.splice(i,1)
-
         io.emit("receiveBachelorUserList",bachelorUserList)
       }
     }
