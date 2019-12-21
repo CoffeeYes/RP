@@ -109,10 +109,12 @@ class App extends Component {
     })
   }
 
+  //update mode state based on users form choice
   changeMode = (event) => {
     this.setState({nextMode : event.target.value})
   }
 
+  //send update mode choice to backend
   updateModeOnBackend = (event) => {
     event.preventDefault()
     this.setState({error : ""})
@@ -140,6 +142,7 @@ class App extends Component {
     })
   }
 
+  //allow anon users to join if they have a room code created by backend
   handleCode(event) {
     event.preventDefault();
     this.setState({error : ""})
@@ -195,6 +198,7 @@ class App extends Component {
     },1500)
   }
 
+  //fetch list of all users stored in DB
   getUsers() {
     fetch('/getUsers')
     .then(res => res.json())
@@ -203,6 +207,7 @@ class App extends Component {
     })
   }
 
+  //add new user to db
   addUser(event) {
     event.preventDefault();
 
@@ -232,7 +237,7 @@ class App extends Component {
       })
     }
   }
-
+  //remove user from db
   deleteUser(event) {
     event.preventDefault();
     fetch('/deleteUser',{
@@ -247,10 +252,12 @@ class App extends Component {
     this.getUsers()
   }
 
+  //re-fetch userlist after admin adds a new user
   updateAddUser(event) {
     this.setState({addUser : {...this.state.addUser,[event.target.name] : event.target.value}})
   }
 
+  //fires when THIS user is removed from lobby
   kickUserFromLobby = () => {
     sessionStorage.setItem("authenticated",false)
     this.setState({authenticated : false})
