@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Webcam from './webcam.js'
 import Cam from './cam.js'
 import AdminButtons from './adminButtons';
+import Timer from './timer.js'
 
 class Bachelor extends Component {
   constructor(props) {
@@ -11,6 +12,8 @@ class Bachelor extends Component {
     this.state = {
       users : [],
       hideOtherCams: false,
+      timerMinutes : 20,
+      timerSeconds : 0,
     }
   }
 
@@ -62,6 +65,7 @@ class Bachelor extends Component {
             updateUsername={this.updateUsername}
             kickUserFromLobby={this.props.kickUserFromLobby}
             />
+            <Timer currentTime={this.state.timerMinutes + ":" + this.state.timerSeconds}/>
             <div className="cams-container">
             {this.state.users.map( (item,index) => {
               return(
