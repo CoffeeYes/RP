@@ -4,15 +4,17 @@ import Webcam from './webcam.js'
 import Cam from './cam.js'
 import AdminButtons from './adminButtons';
 import Timer from './timer.js'
+var timerInterval;
 
 class Bachelor extends Component {
   constructor(props) {
     super(props)
 
+
     this.state = {
       users : [],
       hideOtherCams: false,
-      timerMinutes : 20,
+      timerMinutes : 1,
       timerSeconds : 0,
     }
   }
@@ -51,6 +53,35 @@ class Bachelor extends Component {
     this.setState({hideOtherCams : !(this.state.hideOtherCams)})
   }
 
+
+  startTimer = () => {
+    timerInterval = setInterval( () => {
+      var currentSeconds = this.state.timerSeconds
+      var currentMinutes = this.state.timerMinutes
+
+      if(currentSeconds > 0) {
+        currentSeconds -= 1;
+        return this.setState({timerSeconds : currentSeconds})
+      }
+      else {
+        if(currentMinutes > 0) {
+          currentMinutes -= 1;
+          currentSeconds = 59;
+          return this.setState({timerSeconds : currentSeconds,timerMinutes : currentMinutes})
+        }
+        else {
+          clearInterval(timerInterval);
+        }
+      }
+
+      this.setState({timerSeconds : currentSeconds})
+    },1000)
+  }
+
+  resetTimer = () => {
+    clearInterval(timerInterval);
+  }
+
   render() {
     if(this.props.userType == "admin") {
       return (
@@ -65,7 +96,13 @@ class Bachelor extends Component {
             updateUsername={this.updateUsername}
             kickUserFromLobby={this.props.kickUserFromLobby}
             />
-            <Timer currentTime={this.state.timerMinutes + ":" + this.state.timerSeconds}/>
+            <div className="hor-center">
+            <Timer
+            currentTime={this.state.timerMinutes + ":" + this.state.timerSeconds}
+            startTimer={this.startTimer}
+            resetTimer={this.resetTimer}
+            />
+            </div>
             <div className="cams-container">
             {this.state.users.map( (item,index) => {
               return(
