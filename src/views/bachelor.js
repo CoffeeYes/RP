@@ -16,6 +16,8 @@ class Bachelor extends Component {
       hideOtherCams: false,
       timerMinutes : 1,
       timerSeconds : 0,
+      startingMinutes : 1,
+      startingSeconds : 0
     }
   }
 
@@ -80,6 +82,9 @@ class Bachelor extends Component {
 
   resetTimer = () => {
     clearInterval(timerInterval);
+
+    this.setState({timerMinutes : this.state.startingMinutes})
+    this.setState({timerSeconds : this.state.startingSeconds})
   }
 
   render() {
