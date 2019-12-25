@@ -16,9 +16,29 @@ class Bachelor extends Component {
       hideOtherCams: false,
       timerMinutes : 1,
       timerSeconds : 0,
-      startingMinutes : 1,
-      startingSeconds : 0
+      startingMinutes : 0,
+      startingSeconds : 5,
+      timerText : ""
     }
+  }
+
+  //create text for timer and prefix zeros if necessary
+  generateTimerText = (minutes,seconds) => {
+    var timerText
+    if(minutes < 10) {
+      timerText = "0" + minutes + ":"
+    }
+    else {
+      timerText = minutes + ":"
+    }
+
+    if(seconds < 10) {
+      timerText += "0" + seconds;
+    }
+    else {
+      timerText += seconds;
+    }
+    return timerText;
   }
 
   componentDidMount = () => {
@@ -45,6 +65,9 @@ class Bachelor extends Component {
     this.props.socket.on("userWasKicked", () => {
       this.setState({hideOtherCams: false})
     })
+
+    var initialTimer = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
+    this.setState({timerText : initialTimer})
   }
 
   updateUsername = (number,name) => {
@@ -55,7 +78,6 @@ class Bachelor extends Component {
     this.setState({hideOtherCams : !(this.state.hideOtherCams)})
   }
 
-
   startTimer = () => {
     timerInterval = setInterval( () => {
       var currentSeconds = this.state.timerSeconds
@@ -63,7 +85,7 @@ class Bachelor extends Component {
 
       if(currentSeconds > 0) {
         currentSeconds -= 1;
-        return this.setState({timerSeconds : currentSeconds})
+        this.setState({timerSeconds : currentSeconds})
       }
       else {
         if(currentMinutes > 0) {
@@ -76,7 +98,8 @@ class Bachelor extends Component {
         }
       }
 
-      this.setState({timerSeconds : currentSeconds})
+      var currentTimerText = this.generateTimerText(currentMinutes,currentSeconds);
+      this.setState({timerText : currentTimerText})
     },1000)
   }
 
@@ -85,6 +108,9 @@ class Bachelor extends Component {
 
     this.setState({timerMinutes : this.state.startingMinutes})
     this.setState({timerSeconds : this.state.startingSeconds})
+
+    var resetTimerText = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
+    this.setState({timerText : resetTimerText})
   }
 
   render() {
@@ -103,7 +129,7 @@ class Bachelor extends Component {
             />
             <div className="hor-center">
             <Timer
-            currentTime={this.state.timerMinutes + ":" + this.state.timerSeconds}
+            currentTime={this.state.timerText}
             startTimer={this.startTimer}
             resetTimer={this.resetTimer}
             />
