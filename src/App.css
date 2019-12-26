@@ -578,3 +578,20 @@ form {
   width: 80vw;
   height: 88vh;
 }
+
+.timerContainer {
+  display : flex;
+  align-items: center;
+  border : 1px solid blue;
+  padding : 1vh 1vw 1vh 1vw;
+}
+
+.timerButton {
+  width: 3vw;
+  height : 2vh;
+  margin-top : 0.2vh;
+  margin-left : 0.5vw;
+  border : 1px solid rgba(0,0,255,0.4);
+  background : rgba(0,0,0,0.6);
+  color: white;
+}
