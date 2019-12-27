@@ -79,32 +79,35 @@ class Bachelor extends Component {
   }
 
   startTimer = () => {
-    timerInterval = setInterval( () => {
-      var currentSeconds = this.state.timerSeconds
-      var currentMinutes = this.state.timerMinutes
+    if(timerInterval == null) {
+      timerInterval = setInterval( () => {
+        var currentSeconds = this.state.timerSeconds
+        var currentMinutes = this.state.timerMinutes
 
-      if(currentSeconds > 0) {
-        currentSeconds -= 1;
-        this.setState({timerSeconds : currentSeconds})
-      }
-      else {
-        if(currentMinutes > 0) {
-          currentMinutes -= 1;
-          currentSeconds = 59;
-          return this.setState({timerSeconds : currentSeconds,timerMinutes : currentMinutes})
+        if(currentSeconds > 0) {
+          currentSeconds -= 1;
+          this.setState({timerSeconds : currentSeconds})
         }
         else {
-          clearInterval(timerInterval);
+          if(currentMinutes > 0) {
+            currentMinutes -= 1;
+            currentSeconds = 59;
+            return this.setState({timerSeconds : currentSeconds,timerMinutes : currentMinutes})
+          }
+          else {
+            clearInterval(timerInterval);
+          }
         }
-      }
 
-      var currentTimerText = this.generateTimerText(currentMinutes,currentSeconds);
-      this.setState({timerText : currentTimerText})
-    },1000)
+        var currentTimerText = this.generateTimerText(currentMinutes,currentSeconds);
+        this.setState({timerText : currentTimerText})
+      },1000)
+    }
   }
 
   resetTimer = () => {
     clearInterval(timerInterval);
+    timerInterval = null;
 
     this.setState({timerMinutes : this.state.startingMinutes})
     this.setState({timerSeconds : this.state.startingSeconds})
