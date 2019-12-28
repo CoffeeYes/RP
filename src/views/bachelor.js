@@ -14,8 +14,8 @@ class Bachelor extends Component {
     this.state = {
       users : [],
       hideOtherCams: false,
-      timerMinutes : 1,
-      timerSeconds : 0,
+      timerMinutes : 0,
+      timerSeconds : 5,
       startingMinutes : 0,
       startingSeconds : 5,
       timerText : ""
@@ -86,19 +86,17 @@ class Bachelor extends Component {
 
         if(currentSeconds > 0) {
           currentSeconds -= 1;
-          this.setState({timerSeconds : currentSeconds})
         }
         else {
           if(currentMinutes > 0) {
             currentMinutes -= 1;
             currentSeconds = 59;
-            return this.setState({timerSeconds : currentSeconds,timerMinutes : currentMinutes})
           }
           else {
             clearInterval(timerInterval);
           }
         }
-
+        this.setState({timerSeconds : currentSeconds,timerMinutes : currentMinutes})
         var currentTimerText = this.generateTimerText(currentMinutes,currentSeconds);
         this.setState({timerText : currentTimerText})
       },1000)
