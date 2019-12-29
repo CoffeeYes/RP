@@ -66,6 +66,8 @@ class Bachelor extends Component {
       this.setState({hideOtherCams: false})
     })
 
+    this.setState({currentMinutes : this.state.startingMinutes,currentSeconds : this.state.startingSeconds})
+
     var initialTimer = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
     this.setState({timerText : initialTimer})
   }
