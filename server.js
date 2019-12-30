@@ -440,6 +440,18 @@ app.get('/getUsernames',function(req,res,next) {
 
   return res.send(data);
 })
+
+app.get('/getTimerValues', (req,res) => {
+  Mclient.connect(connect.mongo.url,mongoClientOptions, (error,client) => {
+    database = client.db('rp')
+
+    database.collection('app_data').find({title : "timerValues"}).toArray( (error,array) => {
+      if(error)throw error;
+
+      res.send({timerValues : array[0].values})
+    })
+  })
+})
 app.post('/login',function(req,res,next) {
   for(var item in users) {
     if(users[item].username == req.body.username) {

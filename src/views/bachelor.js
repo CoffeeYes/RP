@@ -68,8 +68,14 @@ class Bachelor extends Component {
 
     this.setState({currentMinutes : this.state.startingMinutes,currentSeconds : this.state.startingSeconds})
 
-    var initialTimer = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
-    this.setState({timerText : initialTimer})
+    //get saved starting values for timer from backend
+    fetch('/getTimerValues')
+    .then(res => res.json())
+    .then( data => {
+      this.setState({startingMinutes : data.timerValues.minutes,startingSeconds : data.timerValues.seconds})
+      var initialTimer = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
+      this.setState({timerText : initialTimer})
+    })
   }
 
   updateUsername = (number,name) => {
