@@ -452,6 +452,14 @@ app.get('/getTimerValues', (req,res) => {
     })
   })
 })
+
+app.post('updateTimerValues',(req,res) => {
+  Mclient.connect(connect.mongo.url,mongoClientOptions, (error,client) => {
+    database = client.db('rp')
+
+    database.collection('app_data').updateOne({title : "timerValues"},{$set : {"values.minutes" : req.body.minutes,"values.seconds" : req.body.seconds}})
+  })
+})
 app.post('/login',function(req,res,next) {
   for(var item in users) {
     if(users[item].username == req.body.username) {
