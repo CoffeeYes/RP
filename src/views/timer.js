@@ -9,6 +9,7 @@ class Timer extends Component {
         <div className="timerButtonContainer">
           <button className="timerButton" onClick={this.props.startTimer}>Start</button>
           <button className="timerButton" onClick={this.props.resetTimer}>Reset</button>
+          <button className="timerButton" onClick={this.props.toggleEditingTimer}>Edit</button>
         </div>
       </div>
     );
