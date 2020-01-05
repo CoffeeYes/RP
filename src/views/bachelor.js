@@ -18,7 +18,8 @@ class Bachelor extends Component {
       timerSeconds : 5,
       startingMinutes : 0,
       startingSeconds : 5,
-      timerText : ""
+      timerText : "",
+      editingTimer : false
     }
   }
 
@@ -122,6 +123,10 @@ class Bachelor extends Component {
     this.setState({timerText : resetTimerText})
   }
 
+  toggleEditingTimer = () => {
+    this.setState({editingTimer : !(this.state.editingTimer)})
+  }
+
   render() {
     if(this.props.userType == "admin") {
       return (
@@ -141,6 +146,8 @@ class Bachelor extends Component {
             currentTime={this.state.timerText}
             startTimer={this.startTimer}
             resetTimer={this.resetTimer}
+            toggleEditingTimer={this.toggleEditingTimer}
+            editing={this.state.editingTimer}
             />
             </div>
             <div className="cams-container">
