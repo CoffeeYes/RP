@@ -127,6 +127,10 @@ class Bachelor extends Component {
     this.setState({editingTimer : !(this.state.editingTimer)})
   }
 
+  updateTime = (event) => {
+    this.setState({[event.target.name] : event.target.value})
+  }
+
   render() {
     if(this.props.userType == "admin") {
       return (
@@ -148,6 +152,7 @@ class Bachelor extends Component {
             resetTimer={this.resetTimer}
             toggleEditingTimer={this.toggleEditingTimer}
             editing={this.state.editingTimer}
+            updateTime={this.updateTime}
             />
             </div>
             <div className="cams-container">

@@ -20,9 +20,9 @@ class Timer extends Component {
         <div className="timerContainer">
           <div className="updateTimerContainer">
             <label>Minutes</label>
-            <input/>
+            <input onChange={this.props.updateTime} name="updateTimerMinutes"/>
             <label>Seconds</label>
-            <input/>
+            <input onChange={this.props.updateTime} name="updateTimerSeconds"/>
           </div>
           <div className="timerButtonContainer">
             <button className="timerButton" onClick={this.props.startTimer}>Start</button>
