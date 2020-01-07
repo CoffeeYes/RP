@@ -127,8 +127,21 @@ class Bachelor extends Component {
     this.setState({editingTimer : !(this.state.editingTimer)})
   }
 
-  updateTime = (event) => {
+  updateTimeText = (event) => {
     this.setState({[event.target.name] : event.target.value})
+  }
+
+  updateTimeOnBackend = () => {
+    fetch('/updateTimerValues',{
+      method : 'POST',
+      headers : {
+        'Content-type' : 'application/json'
+      },
+      body : JSON.stringify({
+        seconds : this.state.updateTimerSeconds,
+        minutes : this.state.updateTimerMinutes
+      })
+    })
   }
 
   render() {
@@ -152,7 +165,7 @@ class Bachelor extends Component {
             resetTimer={this.resetTimer}
             toggleEditingTimer={this.toggleEditingTimer}
             editing={this.state.editingTimer}
-            updateTime={this.updateTime}
+            updateTimeText={this.updateTimeText}
             />
             </div>
             <div className="cams-container">
