@@ -142,6 +142,8 @@ class Bachelor extends Component {
         minutes : this.state.updateTimerMinutes
       })
     })
+
+    this.toggleEditingTimer()
   }
 
   render() {
@@ -166,6 +168,7 @@ class Bachelor extends Component {
             toggleEditingTimer={this.toggleEditingTimer}
             editing={this.state.editingTimer}
             updateTimeText={this.updateTimeText}
+            updateTimeOnBackend={this.updateTimeOnBackend}
             />
             </div>
             <div className="cams-container">
