@@ -69,14 +69,7 @@ class Bachelor extends Component {
 
     this.setState({currentMinutes : this.state.startingMinutes,currentSeconds : this.state.startingSeconds})
 
-    //get saved starting values for timer from backend
-    fetch('/getTimerValues')
-    .then(res => res.json())
-    .then( data => {
-      this.setState({startingMinutes : data.timerValues.minutes,startingSeconds : data.timerValues.seconds})
-      var initialTimer = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
-      this.setState({timerText : initialTimer})
-    })
+    this.getTimerValuesFromBackend()
   }
 
   updateUsername = (number,name) => {
@@ -131,6 +124,17 @@ class Bachelor extends Component {
     this.setState({[event.target.name] : event.target.value})
   }
 
+  getTimerValuesFromBackend = () => {
+    //get saved starting values for timer from backend
+    fetch('/getTimerValues')
+    .then(res => res.json())
+    .then( data => {
+      this.setState({startingMinutes : data.timerValues.minutes,startingSeconds : data.timerValues.seconds})
+      var initialTimer = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
+      this.setState({timerText : initialTimer})
+    })
+  }
+
   updateTimeOnBackend = () => {
     fetch('/updateTimerValues',{
       method : 'POST',
@@ -142,8 +146,10 @@ class Bachelor extends Component {
         minutes : this.state.updateTimerMinutes
       })
     })
-
-    this.toggleEditingTimer()
+    .then( () => {
+      this.toggleEditingTimer()
+      this.getTimerValuesFromBackend()
+    })
   }
 
   render() {

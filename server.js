@@ -457,9 +457,8 @@ app.post('/updateTimerValues',(req,res) => {
   Mclient.connect(connect.mongo.url,mongoClientOptions, (error,client) => {
     database = client.db('rp')
 
-    console.log(req.body)
-
     database.collection('app_data').updateOne({title : "timerValues"},{$set : {"values.minutes" : req.body.minutes,"values.seconds" : req.body.seconds}})
+    res.send({success : true})
   })
 })
 app.post('/login',function(req,res,next) {
