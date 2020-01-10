@@ -130,6 +130,7 @@ class Bachelor extends Component {
     .then(res => res.json())
     .then( data => {
       this.setState({startingMinutes : data.timerValues.minutes,startingSeconds : data.timerValues.seconds})
+      this.setState({timerMinutes : data.timerValues.minutes,timerSeconds : data.timerValues.seconds})
       var initialTimer = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
       this.setState({timerText : initialTimer})
     })
