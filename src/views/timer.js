@@ -18,11 +18,12 @@ class Timer extends Component {
     else {
       return (
         <div className="timerContainer">
+          <p className="error">{this.props.error}</p>
           <div className="updateTimerContainer">
             <label>Minutes</label>
-            <input onChange={this.props.updateTimeText} name="updateTimerMinutes"/>
+            <input onChange={this.props.updateTimeText} name="updateTimerMinutes" type="number"/>
             <label>Seconds</label>
-            <input onChange={this.props.updateTimeText} name="updateTimerSeconds"/>
+            <input onChange={this.props.updateTimeText} name="updateTimerSeconds" type="number"/>
           </div>
           <div className="timerButtonContainer">
             <button className="timerButton" onClick={this.props.startTimer}>Start</button>
