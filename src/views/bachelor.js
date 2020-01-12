@@ -20,8 +20,8 @@ class Bachelor extends Component {
       startingSeconds : 5,
       timerText : "",
       editingTimer : false,
-      updateTimerMinutes : 0,
-      updateTimerSeconds : 0
+      updateTimerMinutes : "",
+      updateTimerSeconds : ""
     }
   }
 
@@ -119,16 +119,16 @@ class Bachelor extends Component {
   }
 
   toggleEditingTimer = () => {
-    if(typeof(this.state.updateTimerMinutes) != 'number' | typeof(this.state.updateTimerSeconds) != 'number') {
-      return this.setState({error : "Only numbers are allowed"})
+    if(this.state.updateTimerMinutes != "" && isNaN(parseInt(this.state.updateTimerMinutes)) | this.state.updateTimerSeconds != "" && isNaN(parseInt(this.state.updateTimerSeconds))) {
+        return this.setState({error : "only numbers are allowed"})
     }
     else {
-      this.setState({editingTimer : !(this.state.editingTimer)})
+      this.setState({editingTimer : !this.state.editingTimer})
     }
   }
 
   updateTimeText = (event) => {
-    this.setState({[event.target.name] : parseInt(event.target.value)})
+    this.setState({[event.target.name] : event.target.value})
   }
 
   getTimerValuesFromBackend = () => {

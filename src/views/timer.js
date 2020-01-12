@@ -21,9 +21,9 @@ class Timer extends Component {
           <p className="error">{this.props.error}</p>
           <div className="updateTimerContainer">
             <label>Minutes</label>
-            <input onChange={this.props.updateTimeText} name="updateTimerMinutes" type="number"/>
+            <input onChange={this.props.updateTimeText} name="updateTimerMinutes"/>
             <label>Seconds</label>
-            <input onChange={this.props.updateTimeText} name="updateTimerSeconds" type="number"/>
+            <input onChange={this.props.updateTimeText} name="updateTimerSeconds"/>
           </div>
           <div className="timerButtonContainer">
             <button className="timerButton" onClick={this.props.startTimer}>Start</button>
