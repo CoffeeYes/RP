@@ -6,11 +6,13 @@ class Timer extends Component {
     if(this.props.editing == false){
       return (
         <div className="timerContainer">
-          <p id="timeText">{this.props.currentTime}</p>
-          <div className="timerButtonContainer">
-            <button className="timerButton" onClick={this.props.startTimer}>Start</button>
-            <button className="timerButton" onClick={this.props.resetTimer}>Reset</button>
-            <button className="timerButton" onClick={this.props.toggleEditingTimer}>Edit</button>
+          <div className="timerTextAndButtonsContainer">
+            <p id="timeText">{this.props.currentTime}</p>
+            <div className="timerButtonContainer">
+              <button className="timerButton" onClick={this.props.startTimer}>Start</button>
+              <button className="timerButton" onClick={this.props.resetTimer}>Reset</button>
+              <button className="timerButton" onClick={this.props.toggleEditingTimer}>Edit</button>
+            </div>
           </div>
         </div>
       );
