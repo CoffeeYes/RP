@@ -10,6 +10,7 @@ class Timer extends Component {
             <p id="timeText">{this.props.currentTime}</p>
             <div className="timerButtonContainer">
               <button className="timerButton" onClick={this.props.startTimer}>Start</button>
+              <button className="timerButton" onClick={this.props.stopTimer}>Stop</button>
               <button className="timerButton" onClick={this.props.resetTimer}>Reset</button>
               <button className="timerButton" onClick={this.props.toggleEditingTimer}>Edit</button>
             </div>
@@ -29,8 +30,6 @@ class Timer extends Component {
               <input onChange={this.props.updateTimeText} name="updateTimerSeconds"/>
             </div>
             <div className="timerButtonContainer">
-              <button className="timerButton" onClick={this.props.startTimer}>Start</button>
-              <button className="timerButton" onClick={this.props.resetTimer}>Reset</button>
               <button className="timerButton" onClick={this.props.updateTimeOnBackend}>Save</button>
             </div>
           </div>

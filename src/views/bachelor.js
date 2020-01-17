@@ -107,6 +107,10 @@ class Bachelor extends Component {
     }
   }
 
+  stopTimer = () => {
+    clearInterval(timerInterval);
+  }
+
   resetTimer = () => {
     clearInterval(timerInterval);
     timerInterval = null;
@@ -178,6 +182,7 @@ class Bachelor extends Component {
             <Timer
             currentTime={this.state.timerText}
             startTimer={this.startTimer}
+            stopTimer={this.stopTimer}
             resetTimer={this.resetTimer}
             toggleEditingTimer={this.toggleEditingTimer}
             editing={this.state.editingTimer}
