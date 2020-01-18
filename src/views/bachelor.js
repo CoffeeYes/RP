@@ -109,6 +109,7 @@ class Bachelor extends Component {
 
   stopTimer = () => {
     clearInterval(timerInterval);
+    timerInterval = null;
   }
 
   resetTimer = () => {
