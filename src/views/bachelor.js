@@ -124,8 +124,13 @@ class Bachelor extends Component {
   }
 
   toggleEditingTimer = () => {
+    this.setState({error : ""})
     if(this.state.updateTimerMinutes != "" && isNaN(parseInt(this.state.updateTimerMinutes)) | this.state.updateTimerSeconds != "" && isNaN(parseInt(this.state.updateTimerSeconds))) {
         return this.setState({error : "only numbers are allowed"})
+    }
+    else if(parseInt(this.state.updateTimerSeconds) < 0 | parseInt(this.state.updateTimerSeconds) > 60) {
+      this.setState({updateTimerSeconds : ""})
+      return this.setState({error : "please Enter a seconds value between 0 and 60"})
     }
     else {
       this.setState({editingTimer : !this.state.editingTimer})
