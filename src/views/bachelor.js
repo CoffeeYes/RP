@@ -128,7 +128,7 @@ class Bachelor extends Component {
     if(this.state.updateTimerMinutes != "" && isNaN(parseInt(this.state.updateTimerMinutes)) | this.state.updateTimerSeconds != "" && isNaN(parseInt(this.state.updateTimerSeconds))) {
         return this.setState({error : "only numbers are allowed"})
     }
-    else if(parseInt(this.state.updateTimerSeconds) < 0 | parseInt(this.state.updateTimerSeconds) > 60) {
+    else if(parseInt(this.state.updateTimerSeconds) < 0 | parseInt(this.state.updateTimerSeconds) > 59) {
       this.setState({updateTimerSeconds : ""})
       return this.setState({error : "please Enter a seconds value between 0 and 60"})
     }
