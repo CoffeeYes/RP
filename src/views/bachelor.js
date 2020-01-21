@@ -125,6 +125,10 @@ class Bachelor extends Component {
 
   toggleEditingTimer = () => {
     this.setState({error : ""})
+
+    if(this.state.editingTimer == true && (this.state.updateTimerMinutes == "" | this.state.updateTimerSeconds == "")) {
+      return this.setState({error : "Fields Cannot be empty"})
+    }
     if(this.state.updateTimerMinutes != "" && isNaN(parseInt(this.state.updateTimerMinutes)) | this.state.updateTimerSeconds != "" && isNaN(parseInt(this.state.updateTimerSeconds))) {
         return this.setState({error : "only numbers are allowed"})
     }
