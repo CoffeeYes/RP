@@ -14,14 +14,6 @@ class Bachelor extends Component {
     this.state = {
       users : [],
       hideOtherCams: false,
-      timerMinutes : 0,
-      timerSeconds : 5,
-      startingMinutes : 0,
-      startingSeconds : 5,
-      timerText : "",
-      editingTimer : false,
-      updateTimerMinutes : "",
-      updateTimerSeconds : ""
     }
   }
 
@@ -68,10 +60,6 @@ class Bachelor extends Component {
     this.props.socket.on("userWasKicked", () => {
       this.setState({hideOtherCams: false})
     })
-
-    this.setState({currentMinutes : this.state.startingMinutes,currentSeconds : this.state.startingSeconds})
-
-    this.getTimerValuesFromBackend()
   }
 
   updateUsername = (number,name) => {
@@ -80,98 +68,6 @@ class Bachelor extends Component {
 
   toggleHideNonHighlightedCams = () => {
     this.setState({hideOtherCams : !(this.state.hideOtherCams)})
-  }
-
-  startTimer = () => {
-    if(timerInterval == null) {
-      timerInterval = setInterval( () => {
-        var currentSeconds = this.state.timerSeconds
-        var currentMinutes = this.state.timerMinutes
-
-        if(currentSeconds > 0) {
-          currentSeconds -= 1;
-        }
-        else {
-          if(currentMinutes > 0) {
-            currentMinutes -= 1;
-            currentSeconds = 59;
-          }
-          else {
-            clearInterval(timerInterval);
-          }
-        }
-        this.setState({timerSeconds : currentSeconds,timerMinutes : currentMinutes})
-        var currentTimerText = this.generateTimerText(currentMinutes,currentSeconds);
-        this.setState({timerText : currentTimerText})
-      },1000)
-    }
-  }
-
-  stopTimer = () => {
-    clearInterval(timerInterval);
-    timerInterval = null;
-  }
-
-  resetTimer = () => {
-    clearInterval(timerInterval);
-    timerInterval = null;
-
-    this.setState({timerMinutes : this.state.startingMinutes})
-    this.setState({timerSeconds : this.state.startingSeconds})
-
-    var resetTimerText = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
-    this.setState({timerText : resetTimerText})
-  }
-
-  toggleEditingTimer = () => {
-    this.setState({error : ""})
-
-    if(this.state.editingTimer == true && (this.state.updateTimerMinutes == "" || this.state.updateTimerSeconds == "")) {
-      return this.setState({error : "Fields Cannot be empty"})
-    }
-    if(this.state.updateTimerMinutes != "" && isNaN(parseInt(this.state.updateTimerMinutes)) | this.state.updateTimerSeconds != "" && isNaN(parseInt(this.state.updateTimerSeconds))) {
-        return this.setState({error : "only numbers are allowed"})
-    }
-    else if(parseInt(this.state.updateTimerSeconds) < 0 | parseInt(this.state.updateTimerSeconds) > 59) {
-      this.setState({updateTimerSeconds : ""})
-      return this.setState({error : "please Enter a seconds value between 0 and 60"})
-    }
-    else {
-      this.setState({editingTimer : !this.state.editingTimer})
-    }
-  }
-
-  updateTimeText = (event) => {
-    this.setState({[event.target.name] : event.target.value})
-  }
-
-  getTimerValuesFromBackend = () => {
-    //get saved starting values for timer from backend
-    fetch('/getTimerValues')
-    .then(res => res.json())
-    .then( data => {
-      this.setState({startingMinutes : data.timerValues.minutes,startingSeconds : data.timerValues.seconds})
-      this.setState({timerMinutes : data.timerValues.minutes,timerSeconds : data.timerValues.seconds})
-      var initialTimer = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
-      this.setState({timerText : initialTimer})
-    })
-  }
-
-  updateTimeOnBackend = () => {
-    fetch('/updateTimerValues',{
-      method : 'POST',
-      headers : {
-        'Content-type' : 'application/json'
-      },
-      body : JSON.stringify({
-        seconds : this.state.updateTimerSeconds,
-        minutes : this.state.updateTimerMinutes
-      })
-    })
-    .then( () => {
-      this.toggleEditingTimer()
-      this.getTimerValuesFromBackend()
-    })
   }
 
   render() {
@@ -189,17 +85,7 @@ class Bachelor extends Component {
             kickUserFromLobby={this.props.kickUserFromLobby}
             />
             <div className="hor-center">
-            <Timer
-            currentTime={this.state.timerText}
-            startTimer={this.startTimer}
-            stopTimer={this.stopTimer}
-            resetTimer={this.resetTimer}
-            toggleEditingTimer={this.toggleEditingTimer}
-            editing={this.state.editingTimer}
-            updateTimeText={this.updateTimeText}
-            updateTimeOnBackend={this.updateTimeOnBackend}
-            error={this.state.error}
-            />
+            <Timer />
             </div>
             <div className="cams-container">
             {this.state.users.map( (item,index) => {
