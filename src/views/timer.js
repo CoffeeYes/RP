@@ -126,8 +126,8 @@ class Timer extends Component {
         'Content-type' : 'application/json'
       },
       body : JSON.stringify({
-        seconds : this.state.updateTimerSeconds,
-        minutes : this.state.updateTimerMinutes
+        seconds : parseInt(this.state.updateTimerSeconds) == 0 ? "0" : this.state.updateTimerSeconds,
+        minutes : parseInt(this.state.updateTimerMinutes) == 0 ? "0" : this.state.updateTimerMinutes
       })
     })
     .then( () => {
