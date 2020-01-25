@@ -133,6 +133,8 @@ class Timer extends Component {
     .then( () => {
       this.toggleEditingTimer()
       this.getTimerValuesFromBackend()
+      //reset updateTimer fields
+      this.setState({updateTimerMinutes : "",updateTimerSeconds : ""})
     })
   }
 
