@@ -603,3 +603,8 @@ form {
   background : rgba(0,0,0,0.6);
   color: white;
 }
+
+.timerButtonRow {
+  display: flex;
+  flex-direction: row;
+}
