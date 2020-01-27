@@ -164,10 +164,10 @@ class Timer extends Component {
           <p className="error">{this.state.error}</p>
           <div className="timerTextAndButtonsContainer">
             <div className="updateTimerContainer">
-              <label>Minutes</label>
-              <input onChange={this.updateTimeText} name="updateTimerMinutes"/>
-              <label>Seconds</label>
-              <input onChange={this.updateTimeText} name="updateTimerSeconds"/>
+              <label className="timerInputText">Minutes</label>
+              <input onChange={this.updateTimeText} name="updateTimerMinutes" className="timerInput"/>
+              <label className="timerInputText">Seconds</label>
+              <input onChange={this.updateTimeText} name="updateTimerSeconds" className="timerInput"/>
             </div>
             <div className="timerButtonContainer">
               <button className="timerButton" onClick={this.updateTimeOnBackend}>Save</button>
