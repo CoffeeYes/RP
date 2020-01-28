@@ -611,7 +611,7 @@ form {
 
 .timerInput {
   background :   #f7f9f9;
-  width: 10vw;
+  width: 7vw;
   height : 2vh;
   font-size : 2vh;
   opacity : 0.5;
@@ -621,4 +621,13 @@ form {
 
 .timerInputText {
   font-size : 14px;
+}
+
+.updateTimerContainer {
+  display : flex;
+  flex-direction: row
+}
+
+.updateTimerInputContainer:not(:first-child) {
+  margin-left : 1vw;
 }
