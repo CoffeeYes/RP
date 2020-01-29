@@ -584,7 +584,7 @@ form {
   flex-direction: column;
   align-items: center;
   border : 1px solid blue;
-  padding : 1vh 1vw 0vh 1vw;
+  padding : 1vh 1vw 1vh 1vw;
 }
 
 .timerTextAndButtonsContainer {
