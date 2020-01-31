@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 var timerInterval;
+var flashingTimer;
 
 class Timer extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class Timer extends Component {
       editing : false,
       updateTimerMinutes : "",
       updateTimerSeconds : "",
-      error : ""
+      error : "",
+      timerBorderColor : "timerBlueBorder",
     }
   }
 
@@ -58,6 +60,20 @@ class Timer extends Component {
           }
           else {
             clearInterval(timerInterval);
+            //make timerContainer flash red and blue
+            flashingTimer = setInterval( () => {
+              if(this.state.timerBorderColor == "timerBlueBorder") {
+                this.setState({timerBorderColor : "timerRedBorder"})
+              }
+              else {
+                this.setState({timerBorderColor : "timerBlueBorder"})
+              }
+            },300)
+            //stop flashing after x seconds
+            setTimeout( () => {
+              clearInterval(flashingTimer)
+              this.setState({timerBorderColor : "timerBlueBorder"})
+            },5000)
           }
         }
         this.setState({timerSeconds : currentSeconds,timerMinutes : currentMinutes})
@@ -141,7 +157,7 @@ class Timer extends Component {
   render() {
     if(this.state.editing == false){
       return (
-        <div className="timerContainer">
+        <div className={["timerContainer " + this.state.timerBorderColor]}>
           <div className="timerTextAndButtonsContainer">
             <p id="timeText">{this.state.timerText}</p>
             <div className="timerButtonContainer">
