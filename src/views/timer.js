@@ -62,11 +62,20 @@ class Timer extends Component {
             clearInterval(timerInterval);
             //make timerContainer flash red and blue
             flashingTimer = setInterval( () => {
+              //change border color
               if(this.state.timerBorderColor == "timerBlueBorder") {
                 this.setState({timerBorderColor : "timerRedBorder"})
               }
               else {
                 this.setState({timerBorderColor : "timerBlueBorder"})
+              }
+
+              //flash text
+              if(this.state.timerText == "") {
+                this.setState({timerText : "00:00"})
+              }
+              else {
+                this.setState({timerText : ""})
               }
             },300)
             //stop flashing after x seconds
