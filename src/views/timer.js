@@ -82,6 +82,9 @@ class Timer extends Component {
             setTimeout( () => {
               clearInterval(flashingTimer)
               this.setState({timerBorderColor : "timerBlueBorder"})
+              //reset timer value after it has finished flashing
+              var resetTimerText = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
+              this.setState({timerText : resetTimerText})
             },5000)
           }
         }
