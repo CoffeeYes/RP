@@ -595,6 +595,10 @@ form {
   border : 1px solid red;
 }
 
+.editingTimerBorder {
+  border : 1px solid blue;
+  width: 400px;
+}
 #timeText {
   font-size : 2vw;
   width: 5vw;

@@ -188,7 +188,7 @@ class Timer extends Component {
     }
     else {
       return (
-        <div className="timerContainer">
+        <div className="timerContainer editingTimerBorder">
           <p className="error">{this.state.error}</p>
           <div className="timerTextAndButtonsContainer">
             <div className="updateTimerContainer">
