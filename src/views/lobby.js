@@ -28,9 +28,6 @@ class Lobby extends Component {
       else {
         return (
           <div>
-            <div className="hor-center">
-              <a href="/panel" className="panel-link">Panel</a>
-            </div>
             <RenderMode mode={this.props.mode} userType={this.props.userType} localUsername={this.props.localUsername} kickUserFromLobby={this.props.kickUserFromLobby}/>
           </div>
         )

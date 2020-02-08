@@ -348,9 +348,10 @@ form {
   border: 1px solid black;
   border-radius: 5px;
   width: 3vw;
-  align-self: flex-end;
+  align-self: flex-start;
   display: flex;
   justify-content: center;
+  margin-left : auto;
 }
 
 .hor-center {
@@ -360,6 +361,17 @@ form {
   position: absolute;
   width: 100vw;
   height: 50px;
+}
+
+.horizontal-center {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.vertical-center {
+  display : flex;
+  align-items: center;
 }
 
 .generateButton {
@@ -529,9 +541,6 @@ form {
 }
 
 .bachelor-main {
-  display : flex;
-  justify-content: space-around;
-  align-items: flex-start;
 }
 
 .bachelorCamBox {
@@ -585,6 +594,7 @@ form {
   align-items: center;
   width: 250px;
   padding : 1vh 1vw 1vh 1vw;
+  margin-left : auto;
 }
 
 .timerBlueBorder {

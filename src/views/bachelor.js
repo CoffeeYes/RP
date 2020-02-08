@@ -84,11 +84,9 @@ class Bachelor extends Component {
             updateUsername={this.updateUsername}
             kickUserFromLobby={this.props.kickUserFromLobby}
             />
-            <div className="hor-center">
+            <div className="horizontal-center">
               <Timer />
-              <div className="hor-center">
-                <a href="/panel" className="panel-link">Panel</a>
-              </div>
+              <a href="/panel" className="panel-link">Panel</a>
             </div>
             <div className="cams-container">
             {this.state.users.map( (item,index) => {
