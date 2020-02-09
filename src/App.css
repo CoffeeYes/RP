@@ -316,7 +316,6 @@ form {
   width: 26vw;
   justify-content: center;
   align-self: center;
-  position : absolute;
 }
 
 .bottomBar {
@@ -534,7 +533,6 @@ form {
   display: flex;
   flex-wrap : wrap;
   height: 80vh;
-  margin-top: 10vh;
   margin-bottom: 3vh;
   width: 100vw;
   justify-content: space-around;

@@ -110,7 +110,6 @@ class Bachelor extends Component {
               )
             })}
             </div>
-          </div>
             <div className="bottomBar">
               <AdminButtons
               muteAll={this.props.muteAll}
@@ -120,6 +119,7 @@ class Bachelor extends Component {
               mode={this.props.mode}
               />
             </div>
+          </div>
           </div>
       );
     }
