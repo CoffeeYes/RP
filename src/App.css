@@ -558,12 +558,10 @@ form {
 }
 
 .adminButton {
-  background : rgba(0,0,0,0.6);
   margin-left : 0.5vw;
   margin-top : 1vh;
   padding : 0.4vh 0.4vw 0.4vh 0.4vw;
   border : 0.5px solid white;
-  color : white;
   font-size: 0.8vw;
   width : 5vw;
   height : 4.5vh;
@@ -626,8 +624,6 @@ form {
   margin-top : 0.2vh;
   margin-left : 0.5vw;
   border : 1px solid rgba(0,0,255,0.4);
-  background : rgba(0,0,0,0.6);
-  color: white;
 }
 
 .timerButtonRow {
@@ -656,4 +652,13 @@ form {
 
 .updateTimerInputContainer:not(:first-child) {
   margin-left : 1vw;
+}
+
+.blackButton {
+  background : rgba(0,0,0,0.6);
+  color: white;
+}
+
+.blackButton:hover {
+  cursor: pointer;
 }

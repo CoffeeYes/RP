@@ -174,12 +174,12 @@ class Timer extends Component {
             <p id="timeText">{this.state.timerText}</p>
             <div className="timerButtonContainer">
               <div className="timerButtonRow">
-                <button className="timerButton" onClick={this.startTimer}>Start</button>
-                <button className="timerButton" onClick={this.stopTimer}>Stop</button>
+                <button className="timerButton blackButton" onClick={this.startTimer}>Start</button>
+                <button className="timerButton blackButton" onClick={this.stopTimer}>Stop</button>
               </div>
               <div className="timerButtonRow">
-                <button className="timerButton" onClick={this.resetTimer}>Reset</button>
-                <button className="timerButton" onClick={this.toggleEditingTimer}>Edit</button>
+                <button className="timerButton blackButton" onClick={this.resetTimer}>Reset</button>
+                <button className="timerButton blackButton" onClick={this.toggleEditingTimer}>Edit</button>
               </div>
             </div>
           </div>
