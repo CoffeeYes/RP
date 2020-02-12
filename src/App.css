@@ -662,3 +662,7 @@ form {
 .blackButton:hover {
   cursor: pointer;
 }
+
+.blackButton:active {
+  background : rgba(200,0,0,0.6);
+}
