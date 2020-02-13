@@ -313,7 +313,7 @@ form {
 
 .buttonsContainer-bachelor {
   display : flex;
-  width: 26vw;
+  width: 22vw;
   justify-content: center;
   align-self: center;
 }
@@ -558,13 +558,16 @@ form {
 }
 
 .adminButton {
-  margin-left : 0.5vw;
   margin-top : 1vh;
   padding : 0.4vh 0.4vw 0.4vh 0.4vw;
   border : 0.5px solid white;
   font-size: 0.8vw;
   width : 5vw;
   height : 4.5vh;
+}
+
+.adminButton:not(:first-child) {
+    margin-left : 0.5vw;
 }
 
 .hostVoteButton {
@@ -591,6 +594,7 @@ form {
   width: 250px;
   padding : 1vh 1vw 1vh 1vw;
   margin-left : auto;
+  margin-right : -6vw;
 }
 
 .timerBlueBorder {
