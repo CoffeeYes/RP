@@ -85,6 +85,8 @@ class Timer extends Component {
               //reset timer value after it has finished flashing
               var resetTimerText = this.generateTimerText(this.state.startingMinutes,this.state.startingSeconds);
               this.setState({timerText : resetTimerText})
+
+              this.resetTimer();
             },5000)
           }
         }
