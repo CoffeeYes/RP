@@ -8,7 +8,7 @@ class AdminButtons extends Component {
           <button onClick={this.props.swapContestants} className="adminButton blackButton">Swap</button>
           <button onClick={this.props.muteAll} className="adminButton blackButton">Mute All</button>
           <button onClick={this.props.unmuteAll} className="adminButton blackButton">Unmute All</button>
-          <button onClick={this.props.blurAll} className="adminButton">Blur All</button>
+          <button onClick={this.props.blurAll} className="adminButton blackButton">Blur All</button>
           <button onClick={this.props.unblurAll} className="adminButton blackButton">Unblur All</button>
           <button onClick={this.props.resetAll} className="adminButton blackButton">Reset Votes</button>
         </div>

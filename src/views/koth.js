@@ -224,7 +224,7 @@ class Koth extends Component {
 
               <AdminButtons
               swapContestants={this.swapContestants}
-              mutAll={this.props.muteAll}
+              muteAll={this.props.muteAll}
               unmuteAll={this.props.unmuteAll}
               blurAll={this.props.blurAll}
               unblurAll={this.props.unblurAll}
