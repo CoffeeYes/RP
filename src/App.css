@@ -160,6 +160,12 @@ form {
   width: 80px;
 }
 
+#codeSubmitButton {
+  width: 60px;
+  height : 40px;
+  border : none;
+}
+
 .login-form-text {
   margin-left: 2.5vw;
   margin-top: 1vh;
