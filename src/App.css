@@ -343,9 +343,30 @@ form {
 }
 
 .codeForm {
-  border : 1px solid black;
   padding: 3vh 3vw 3vh 3vw;
   border-radius: 10px;
+  z-index: 999;
+}
+
+.codeFormContainer {
+  width: 350px;
+  height: 500px;
+  background: inherit;
+  position: absolute;
+  overflow: hidden;
+  border-radius: 8px;
+  display : flex;
+  justify-content: center;
+  border : 1px solid white;
+}
+
+.codeFormContainer:before {
+  width: 400px;
+  height: 600px;
+  content : '';
+  background: inherit;
+  position: absolute;
+  filter: blur(10px);
 }
 .panel-link {
   float: right;
