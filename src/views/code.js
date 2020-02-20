@@ -9,8 +9,11 @@ class Code extends Component {
           <form className="codeForm">
             <p className="error">{this.props.error}</p>
             <h2>Enter your code</h2>
-            <input name="codeInput" onChange={this.props.handleTextChange}/>
-            <button onClick={this.props.handleCode} className="blackButton" id="codeSubmitButton">Submit</button>
+            <input name="codeInput" className="addUserInput" onChange={this.props.handleTextChange}/>
+            <div className="button-container-row">
+              <button onClick={this.props.handleCode} className="blackButton" id="codeSubmitButton">Submit</button>
+              <a href="/" className="blackButton" id="codeHomeLink">Home</a>
+            </div>
           </form>
         </div>
       </div>

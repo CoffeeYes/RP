@@ -127,6 +127,11 @@ form {
   filter: blur(10px);
 }
 
+.button-container-row {
+  display : flex;
+  flex-direction: row;
+}
+
 .login-input {
   background :   #f7f9f9;
   width: 10vw;
@@ -164,6 +169,12 @@ form {
   width: 60px;
   height : 40px;
   border : none;
+}
+
+#codeHomeLink {
+  width: 60px;
+  height: 40px;
+  margin-left: 10px;
 }
 
 .login-form-text {
@@ -690,6 +701,9 @@ form {
 .blackButton {
   background : rgba(0,0,0,0.6);
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .blackButton:hover {
