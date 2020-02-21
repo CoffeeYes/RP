@@ -22,7 +22,7 @@ class Mode extends Component {
           )
         })}
         </div>
-        <button onClick={this.props.updateModeOnBackend} className="modeFormBtn" type="submit">Save</button>
+        <button onClick={this.props.updateModeOnBackend} className="modeFormBtn blackButton" type="submit">Save</button>
         </form>
       </div>
     );

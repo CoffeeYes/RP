@@ -119,6 +119,10 @@ class App extends Component {
     event.preventDefault()
     this.setState({error : ""})
 
+    if(this.state.nextMode == "") {
+      return this.setState({error : "please select a mode"})
+    }
+
     fetch('/updateMode',{
       method : 'POST',
       headers : {
