@@ -278,6 +278,10 @@ form {
   display : none;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .cam-col {
   display: block;
 }
@@ -335,6 +339,14 @@ form {
   width: 22vw;
   justify-content: center;
   align-self: center;
+  border : 1px solid black;
+  height: 100px;
+  border-bottom: none;
+}
+
+.buttonRow {
+  display: flex;
+  flex-direction: row;
 }
 
 .bottomBar {
