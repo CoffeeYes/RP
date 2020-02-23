@@ -73,7 +73,6 @@ class Bachelor extends Component {
   render() {
     if(this.props.userType == "admin") {
       return (
-        <div>
           <div className="bachelor-main">
             <Webcam
             socket={this.props.socket}
@@ -119,7 +118,6 @@ class Bachelor extends Component {
               mode={this.props.mode}
               />
             </div>
-          </div>
           </div>
       );
     }
