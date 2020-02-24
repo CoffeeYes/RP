@@ -351,6 +351,7 @@ form {
 
 .bottomBar {
   width : 100vw;
+  height: 10vh;
   display : flex;
   flex-direction: row;
   justify-content: center;
@@ -725,4 +726,11 @@ form {
 
 .blackButton:active {
   background : rgba(200,0,0,0.6);
+}
+
+.hideButtonContainer {
+  width: 2vw;
+  height: 2.5vh;
+  border: 1px solid white;
+  border-bottom: none;
 }

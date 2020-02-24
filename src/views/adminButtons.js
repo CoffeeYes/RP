@@ -33,7 +33,7 @@ class AdminButtons extends Component {
     else if (this.props.mode == "bachelor") {
       return (
         <div>
-          <button className="hideButtonContainer" onClick={this.toggleHideButtonContainer}>Hide</button>
+          <button className="hideButtonContainer blackButton" onClick={this.toggleHideButtonContainer}>Hide</button>
           <div className={["buttonsContainer-bachelor " + this.state.buttonContainerClasses]} onClick={this.hideAdminButtons}>
               <button onClick={this.props.muteAll} className="adminButton blackButton">Mute All</button>
               <button onClick={this.props.unmuteAll} className="adminButton blackButton">Unmute All</button>
