@@ -5,16 +5,19 @@ class AdminButtons extends Component {
     super(props)
 
     this.state = {
-      buttonContainerClasses : ""
+      buttonContainerClasses : "",
+      hideButtontext : "hide"
     }
   }
 
   toggleHideButtonContainer = () => {
     if(this.state.buttonContainerClasses == "hidden") {
-      this.setState({buttonContainerClasses : ""})
+      this.setState({buttonContainerClasses : "",
+                     hideButtontext : "hide"})
     }
     else {
-      this.setState({buttonContainerClasses : "hidden"})
+      this.setState({buttonContainerClasses : "hidden",
+                     hideButtontext : "unhide"})
     }
   }
   render() {
@@ -33,7 +36,7 @@ class AdminButtons extends Component {
     else if (this.props.mode == "bachelor") {
       return (
         <div>
-          <button className="hideButtonContainer blackButton" onClick={this.toggleHideButtonContainer}>Hide</button>
+          <button className="hideButtonContainer blackButton" onClick={this.toggleHideButtonContainer}>{this.state.hideButtontext}</button>
           <div className={["buttonsContainer-bachelor " + this.state.buttonContainerClasses]} onClick={this.hideAdminButtons}>
               <button onClick={this.props.muteAll} className="adminButton blackButton">Mute All</button>
               <button onClick={this.props.unmuteAll} className="adminButton blackButton">Unmute All</button>
