@@ -6,18 +6,18 @@ class AdminButtons extends Component {
 
     this.state = {
       buttonContainerClasses : "",
-      hideButtontext : "hide"
+      hideButtontext : "▾"
     }
   }
 
   toggleHideButtonContainer = () => {
     if(this.state.buttonContainerClasses == "hidden") {
       this.setState({buttonContainerClasses : "",
-                     hideButtontext : "hide"})
+                     hideButtontext : "▾"})
     }
     else {
       this.setState({buttonContainerClasses : "hidden",
-                     hideButtontext : "unhide"})
+                     hideButtontext : "▴"})
     }
   }
   render() {
