@@ -204,7 +204,7 @@ class Timer extends Component {
               </div>
             </div>
             <div className="timerButtonContainer">
-              <button className="timerButton" onClick={this.updateTimeOnBackend}>Save</button>
+              <button className="timerButton blackButton" onClick={this.updateTimeOnBackend}>Save</button>
             </div>
           </div>
         </div>
