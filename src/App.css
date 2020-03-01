@@ -340,7 +340,6 @@ form {
   justify-content: center;
   align-self: center;
   border : 1px solid black;
-  height: 100px;
   border-bottom: none;
 }
 
@@ -585,7 +584,7 @@ form {
 .cams-container {
   display: flex;
   flex-wrap : wrap;
-  height: 80vh;
+  height: 475px;
   margin-bottom: 3vh;
   width: 100vw;
   justify-content: space-around;
