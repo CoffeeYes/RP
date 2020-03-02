@@ -584,7 +584,7 @@ form {
 .cams-container {
   display: flex;
   flex-wrap : wrap;
-  height: 475px;
+  height: 76%;
   margin-bottom: 3vh;
   width: 100vw;
   justify-content: space-around;
@@ -644,7 +644,8 @@ form {
   display : flex;
   flex-direction: column;
   align-items: center;
-  width: 250px;
+  width: 20%;
+  height: 15%;
   padding : 1vh 1vw 1vh 1vw;
   margin-left : auto;
   margin-right : -6vw;
@@ -660,7 +661,8 @@ form {
 
 .editingTimerBorder {
   border : 1px solid blue;
-  width: 400px;
+  width: 30%;
+  height: 15%;
 }
 #timeText {
   font-size : 2vw;
