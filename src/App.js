@@ -118,6 +118,7 @@ class App extends Component {
   updateModeOnBackend = (event) => {
     event.preventDefault()
     this.setState({error : ""})
+    this.setState({error : "Working..."})
 
     if(this.state.nextMode == "") {
       return this.setState({error : "please select a mode"})
