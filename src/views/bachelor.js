@@ -85,7 +85,7 @@ class Bachelor extends Component {
             />
             <div className="horizontal-center">
               <Timer />
-              <a href="/panel" className="panel-link">Panel</a>
+              <a href="/panel/mode" className="panel-link">Panel</a>
             </div>
             <div className="cams-container">
             {this.state.users.map( (item,index) => {
