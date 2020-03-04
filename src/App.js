@@ -214,12 +214,14 @@ class App extends Component {
 
   //add new user to db
   addUser(event) {
+    this.setState({error : ""})
     event.preventDefault();
 
     if(this.state.addUser.username.trim() == "" || this.state.addUser.password.trim() == "" ||this.state.addUser.displayname.trim() == "") {
       return this.setState({error : "fields cannot be empty"})
     }
     else {
+      this.setState({error : "Working.."})
       fetch('/addUser',{
         method : 'POST',
         headers : {
@@ -237,8 +239,12 @@ class App extends Component {
           this.setState({error: data.error})
         }
         else {
+          this.setState({error : "User Added"})
           this.getUsers()
         }
+        setTimeout( () => {
+          this.setState({error : ""})
+        },1000)
       })
     }
   }

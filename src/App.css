@@ -447,7 +447,7 @@ form {
 .addUserForm {
   border : 1px solid black;
   width : 15vw;
-  height: 25vh;
+  height: 25%;
   margin-top : 2vh;
   padding : 20px 20px 20px 20px;
 }
@@ -483,7 +483,7 @@ form {
 
 .userListContainer {
   margin-top : 4vh;
-  height:55vh;
+  height: 50vh;
   width: 55vw;
   overflow-y : scroll;
 
