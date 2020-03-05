@@ -250,6 +250,7 @@ class App extends Component {
   }
   //remove user from db
   deleteUser(event) {
+    this.setState({error : "Working..."})
     event.preventDefault();
     fetch('/deleteUser',{
       method : 'POST',
@@ -260,7 +261,13 @@ class App extends Component {
         username : event.target.value
       })
     })
-    this.getUsers()
+    .then( () => {
+      this.getUsers()
+      this.setState({error : "User Deleted"})
+      setTimeout( () => {
+        this.setState({error : ""})
+      },1000)
+    })
   }
 
   //re-fetch userlist after admin adds a new user

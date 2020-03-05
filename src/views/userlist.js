@@ -18,7 +18,7 @@ class UserList extends Component {
                   <input className="userListText" value={"username: " + item.username} name="username"/>
                   <input className="userListText" value={"password: " + item.clearTextPassword} name="password"/>
                 </div>
-                <button type="submit" className="deleteUserBtn" onClick={this.props.deleteUser} value={item.username}>X</button>
+                <button type="submit" className="deleteUserBtn blackButton" onClick={this.props.deleteUser} value={item.username}>X</button>
               </form>
             )
           })}

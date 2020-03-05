@@ -601,6 +601,7 @@ app.post('/deleteUser',function(req,res,next) {
       let database = client.db('rp');
       try {
         database.collection('user_data').deleteOne({username : req.body.username})
+        res.send({success : true,error : ""})
       }
       catch(error) {
         console.log("ERROR(deleting user) : " + error)
