@@ -284,6 +284,13 @@ class App extends Component {
 
     this.setState({error : "You were kicked from the Lobby"})
   }
+
+  keyPressedOnSplash = (event) => {
+    //catch pressing of enter to fire login function
+    if(event.which == 13) {
+      this.handleLogin(event);
+    }
+  }
   render = () => {
     if(this.state.authenticated) {
       //render full panel and allow access to other routes if admin login
@@ -291,7 +298,7 @@ class App extends Component {
         return (
           <div className="main">
             <Route exact path="/" render={() => (
-              <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
+              <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error} keyPressedOnSplash={this.keyPressedOnSplash}/>
             )}/>
             <Route exact path="/code/" render={() => (
               <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
@@ -358,7 +365,7 @@ class App extends Component {
             <Code handleCode={this.handleCode} handleTextChange={this.handleTextChange} error={this.state.error}/>
           )} />
           <Route path="/" render={() => (
-            <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error}/>
+            <Splash handleLogin={this.handleLogin} handleTextChange={this.handleTextChange} error={this.state.error} keyPressedOnSplash={this.keyPressedOnSplash}/>
           )}/>
         </Switch>
       )
