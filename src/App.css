@@ -134,8 +134,8 @@ form {
 
 .login-input {
   background :   #f7f9f9;
-  width: 10vw;
-  height : 3vh;
+  width: 60%;
+  height : 7%;
   font-size : 2vh;
   opacity : 0.5;
   border : 1px solid white;
@@ -153,6 +153,8 @@ form {
  left: 50%;
  top: 50%;
  transform: translate(-50%,-50%);
+ width: 80%;
+ height: 80%;
 }
 
 #login-button {
@@ -693,7 +695,7 @@ form {
 
 .timerInput {
   background :   #f7f9f9;
-  width: 7vw;
+  width: 10vw;
   height : 2vh;
   font-size : 2vh;
   opacity : 0.5;
