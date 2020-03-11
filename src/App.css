@@ -747,3 +747,10 @@ form {
   align-items: center;
   width: 40%;
 }
+
+@media screen and (max-width: 1920px) {
+  .timerContainer {
+    width: 350px;
+    height: 40px;
+  }
+}
