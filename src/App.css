@@ -753,4 +753,18 @@ form {
     width: 350px;
     height: 40px;
   }
+
+  .modeForm {
+    width: 300px;
+    height: 400px;
+  }
+
+  .addUserForm {
+    width: 200px;
+    height: 180px;
+  }
+
+  .userListContainer {
+    width: 700px;
+  }
 }
