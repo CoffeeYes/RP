@@ -767,4 +767,32 @@ form {
   .userListContainer {
     width: 700px;
   }
+
+  .adminButton {
+    width: 90px;
+    height: 35px;
+  }
+
+  .timerButton {
+    width: 50px;
+    height: 20px;
+  }
+
+  .modeFormBtn {
+    width: 70px;
+    height: 30px;
+    font-size: 18px;
+  }
+
+  #addUserBtn {
+    width: 80px;
+    height: 30px;
+    font-size: 15px;
+  }
+
+  #login-button {
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+  }
 }
