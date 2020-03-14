@@ -795,4 +795,9 @@ form {
     height: 40px;
     font-size: 18px;
   }
+
+  #timeText {
+    margin-right: 40px;
+    font-size: 32px;
+  }
 }
