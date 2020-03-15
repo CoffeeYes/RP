@@ -800,4 +800,14 @@ form {
     margin-right: 40px;
     font-size: 32px;
   }
+
+  .guest {
+    width: 400px;
+    height: 270px;
+  }
+
+  .contestant {
+    width: 350px;
+    height: 220px
+  }
 }
