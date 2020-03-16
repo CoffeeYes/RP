@@ -810,4 +810,9 @@ form {
     width: 350px;
     height: 220px
   }
+
+  .bachelorCamBox {
+    width: 255px;
+    height: 180px;
+  }
 }
