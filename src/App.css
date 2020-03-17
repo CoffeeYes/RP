@@ -815,4 +815,8 @@ form {
     width: 255px;
     height: 180px;
   }
+
+  .cams-container {
+    height: 475px;
+  }
 }
