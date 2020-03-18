@@ -819,4 +819,14 @@ form {
   .cams-container {
     height: 475px;
   }
+
+  .panel-link {
+    width: 40px;
+    height: 20px;
+  }
+
+  .navItem {
+    width: 45px;
+    height: 25px;
+  }
 }
