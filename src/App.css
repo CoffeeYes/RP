@@ -829,4 +829,10 @@ form {
     width: 45px;
     height: 25px;
   }
+
+  .buttonsContainer-koth {
+    width: 300px;
+    margin-left : 30px;
+    height: 100px;
+  }
 }
