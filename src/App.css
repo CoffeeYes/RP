@@ -754,6 +754,10 @@ form {
     height: 40px;
   }
 
+  .timerContainerShowingError {
+    height: 60px;
+  }
+
   .modeForm {
     width: 300px;
     height: 400px;

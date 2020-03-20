@@ -18,6 +18,7 @@ class Timer extends Component {
       updateTimerSeconds : "",
       error : "",
       timerBorderColor : "timerBlueBorder",
+      augmentTimerClasses : "",
     }
   }
 
@@ -118,18 +119,18 @@ class Timer extends Component {
 
     if(this.state.editing == true ) {
       if (this.state.updateTimerMinutes == "" || this.state.updateTimerSeconds == "") {
-        return this.setState({error : "Fields Cannot be empty"})
+        return this.setState({error : "Fields Cannot be empty",augmentTimerClasses : "timerContainerShowingError"})
       }
     }
     if(this.state.updateTimerMinutes != "" && isNaN(parseInt(this.state.updateTimerMinutes)) | this.state.updateTimerSeconds != "" && isNaN(parseInt(this.state.updateTimerSeconds))) {
-        return this.setState({error : "only numbers are allowed"})
+        return this.setState({error : "only numbers are allowed",augmentTimerClasses : "timerContainerShowingError"})
     }
     else if(parseInt(this.state.updateTimerSeconds) < 0 | parseInt(this.state.updateTimerSeconds) > 59) {
       this.setState({updateTimerSeconds : ""})
-      return this.setState({error : "please Enter a seconds value between 0 and 60"})
+      return this.setState({error : "please Enter a seconds value between 0 and 60",augmentTimerClasses : "timerContainerShowingError"})
     }
     else {
-      this.setState({editing : !this.state.editing})
+      this.setState({editing : !this.state.editing,augmentTimerClasses : ""})
     }
   }
 
@@ -190,7 +191,7 @@ class Timer extends Component {
     }
     else {
       return (
-        <div className="timerContainer editingTimerBorder">
+        <div className={["timerContainer editingTimerBorder " + this.state.augmentTimerClasses]} >
           <p className="error">{this.state.error}</p>
           <div className="timerTextAndButtonsContainer">
             <div className="updateTimerContainer">
