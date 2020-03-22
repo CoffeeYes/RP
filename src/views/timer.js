@@ -191,7 +191,7 @@ class Timer extends Component {
     }
     else {
       return (
-        <div className={["timerContainer editingTimerBorder " + this.state.augmentTimerClasses]} >
+        <div className={["timerContainer editingTimerBorder editingTimerContainer" + this.state.augmentTimerClasses]} >
           <p className="error">{this.state.error}</p>
           <div className="timerTextAndButtonsContainer">
             <div className="updateTimerContainer">

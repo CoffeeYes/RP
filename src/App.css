@@ -747,11 +747,15 @@ form {
   align-items: center;
   width: 40%;
 }
-
+/* --------------------------------- 1080p sizing --*/
 @media screen and (max-width: 1920px) {
   .timerContainer {
-    width: 350px;
+    width: 250px;
     height: 40px;
+  }
+
+  .editingTimerContainer {
+    width : 500px;
   }
 
   .timerContainerShowingError {
@@ -838,5 +842,10 @@ form {
     width: 300px;
     margin-left : 30px;
     height: 100px;
+  }
+
+  .buttonsContainer-bachelor {
+    width : 450px;
+    height: 55px;
   }
 }
