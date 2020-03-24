@@ -805,7 +805,6 @@ form {
   }
 
   #timeText {
-    margin-right: 40px;
     font-size: 32px;
   }
 
@@ -847,5 +846,15 @@ form {
   .buttonsContainer-bachelor {
     width : 450px;
     height: 55px;
+  }
+
+  .modeForm {
+    width: 350px;
+    height: 400px;
+  }
+
+  .modeFormBtn {
+    width: 70px;
+    height: 40px;
   }
 }
