@@ -819,8 +819,13 @@ form {
   }
 
   .bachelorCamBox {
-    width: 255px;
-    height: 180px;
+    width: 350px;
+    height: 250px;
+  }
+
+  .highlight {
+    width: 1500px;
+    height: 800px;
   }
 
   .cams-container {
