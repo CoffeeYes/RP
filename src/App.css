@@ -803,6 +803,11 @@ form {
     font-size: 15px;
   }
 
+  .addUserInput {
+      height: 10px;
+      width: 200px;
+  }
+
   #login-button {
     width: 100px;
     height: 40px;
@@ -814,13 +819,13 @@ form {
   }
 
   .guest {
-    width: 400px;
-    height: 270px;
+    width: 600px;
+    height: 400px;
   }
 
   .contestant {
-    width: 350px;
-    height: 220px
+    width: 500px;
+    height: 350px
   }
 
   .bachelorCamBox {
@@ -849,7 +854,7 @@ form {
 
   .buttonsContainer-koth {
     width: 300px;
-    margin-left : 30px;
+    margin-left : 120px;
     height: 100px;
   }
 
