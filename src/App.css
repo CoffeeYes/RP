@@ -786,6 +786,11 @@ form {
     height: 35px;
   }
 
+  .kothButton {
+    height: 50px;
+    font-size: 18px;
+  }
+
   .timerButton {
     width: 50px;
     height: 20px;
