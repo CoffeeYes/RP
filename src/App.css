@@ -828,9 +828,19 @@ form {
     height: 400px;
   }
 
+  .guestCam {
+    width: 600px;
+    height: 338px;
+  }
+
   .contestant {
     width: 500px;
     height: 350px
+  }
+
+  .contestantCam {
+    width: 500px;
+    height: 281px;
   }
 
   .bachelorCamBox {
