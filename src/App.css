@@ -751,7 +751,7 @@ form {
 @media screen and (max-width: 1920px) {
   .timerContainer {
     width: 250px;
-    height: 40px;
+    height: 60px;
   }
 
   .editingTimerContainer {
@@ -881,6 +881,10 @@ form {
   .buttonsContainer-bachelor {
     width : 450px;
     height: 55px;
+  }
+
+  .bottomBar {
+    height: 100px;
   }
 
   .modeForm {
