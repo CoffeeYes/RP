@@ -151,6 +151,7 @@ class Timer extends Component {
   }
 
   updateTimeOnBackend = () => {
+    this.setState({error: "working..."})
     fetch('/updateTimerValues',{
       method : 'POST',
       headers : {
@@ -162,6 +163,7 @@ class Timer extends Component {
       })
     })
     .then( () => {
+      this.setState({error: ""})
       this.toggleEditingTimer()
       this.getTimerValuesFromBackend()
       //reset updateTimer fields
