@@ -59,6 +59,7 @@ class App extends Component {
     if(this.state.username.trim() == "" || this.state.password.trim() == "") {
       return this.setState({error: 'fields cannot be empty'})
     }
+    this.setState({error: "Working..."})
     fetch('/login',{
       method : 'POST',
       headers : {
@@ -75,7 +76,7 @@ class App extends Component {
         this.setState({error : data.error})
       }
       else if(data.loggedIn == true){
-        this.setState({loggedIn: true});
+        this.setState({loggedIn: true,error: ""});
         sessionStorage.setItem('authenticated',true);
         sessionStorage.setItem('user_type',data.user_type);
         if(data.username) {
