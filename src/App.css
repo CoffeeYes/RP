@@ -777,8 +777,18 @@ form {
     height: 40px;
   }
 
+  .login-container {
+    width: 350px;
+    height: 500px;
+  }
+
   .userListContainer {
     width: 1200px;
+  }
+
+  .codeFormContainer {
+    width: 350px;
+    height: 500px;
   }
 
   .adminButton {
