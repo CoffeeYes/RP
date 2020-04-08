@@ -54,9 +54,8 @@ class Cam extends Component {
         }
       }
     }
-
-    if(nextProps.allBlurred != this.props.allBlurred) {
-      if(nextProps.allBlurred == true) {
+    
+    if(nextProps.allBlurred == true) {
         this.setState({camFilter : "camBlurred"});
         this.setState({videoIcon : icon_novideo});
       }
@@ -64,7 +63,7 @@ class Cam extends Component {
         this.setState({camFilter : "camNotBlurred"})
         this.setState({videoIcon : icon_video});
       }
-    }
+
   }
 
   componentDidUpdate = (prevProps,prevState) => {
@@ -129,7 +128,7 @@ class Cam extends Component {
       this.setState({augmentClasses : ""})
     }
   }
-  
+
   render() {
           return(
             <div className={["camBox " + this.props.containerType + " " + this.state.augmentClasses]}>
