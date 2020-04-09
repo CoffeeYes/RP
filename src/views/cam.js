@@ -35,35 +35,17 @@ class Cam extends Component {
     camID = this.props.camID
   }
 
-  //track prop change to change icons when all cams are muted or blurred
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.allMuted != this.props.allMuted) {
-      if(nextProps.allMuted == true) {
-        this.setState({muteIcon : mute})
-        var video = document.querySelector("#" + this.props.camID)
-        if(video) {
-          video.muted = true
-        }
-
-      }
-      else if(nextProps.allMuted == false) {
-        this.setState({muteIcon : unmute});
-        var video = document.querySelector("#" + this.props.camID)
-        if(video) {
-          video.muted = false
-        }
-      }
+  //derive local state from parent prop for blurring/muting all cams
+  static getDerivedStateFromProps = (nextProps,prevState) => {
+    if(nextProps.allBlurred !== prevState.allBlurred) {
+      return({allBlurred : nextProps.allBlurred})
     }
-    
-    if(nextProps.allBlurred == true) {
-        this.setState({camFilter : "camBlurred"});
-        this.setState({videoIcon : icon_novideo});
-      }
-      else {
-        this.setState({camFilter : "camNotBlurred"})
-        this.setState({videoIcon : icon_video});
-      }
-
+    else if(nextProps.allMuted !== prevState.allMuted) {
+      return({allMuted : nextProps.allMuted})
+    }
+    else {
+      return null
+    }
   }
 
   componentDidUpdate = (prevProps,prevState) => {
@@ -79,7 +61,32 @@ class Cam extends Component {
       }
     }
 
+    //blur or unblur all cams based on derviedstate from parent prop allBlurred
+    if(prevState.allBlurred !== this.state.allBlurred) {
+      if(this.state.allBlurred === true) {
+        this.setState({camFilter : "camBlurred",videoIcon : icon_novideo});
+      }
+      else {
+        this.setState({camFilter : "camNotBlurred",videoIcon : icon_video})
+      }
+    }
 
+    if(prevState.allMuted !== this.state.allMuted) {
+      if(this.state.allMuted === true) {
+        this.setState({muteIcon : mute})
+        var video = document.querySelector("#" + this.props.camID)
+          if(video) {
+            video.muted = true
+          }
+      }
+      else {
+        this.setState({muteIcon : unmute});
+        var video = document.querySelector("#" + this.props.camID)
+        if(video) {
+          video.muted = false
+        }
+      }
+    }
   }
 
   toggleFilter(event) {
