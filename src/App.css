@@ -868,6 +868,14 @@ form {
     height: 197px;
   }
 
+  .videoContainer {
+    height: 320px;
+  }
+
+  .camHeader {
+    height: 100px;
+  }
+
   .highlight {
     width: 1404px;
     height: 790px;
