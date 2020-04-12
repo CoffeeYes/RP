@@ -924,4 +924,9 @@ form {
     width: 70px;
     height: 40px;
   }
+
+  .userListItem {
+    height: 40px;
+    width: 1000px;
+  }
 }
