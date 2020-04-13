@@ -797,6 +797,16 @@ form {
     height: 500px;
   }
 
+  #codeSubmitButton {
+    font-size : 18px;
+
+  }
+
+  #codeHomeLink {
+    font-size: 18px;
+    font-family: arial;
+  }
+
   .adminButton {
     width: 90px;
     height: 35px;
