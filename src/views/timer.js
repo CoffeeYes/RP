@@ -46,7 +46,7 @@ class Timer extends Component {
   }
 
   startTimer = () => {
-    if(timerInterval == null) {
+    if(timerInterval === null) {
       timerInterval = setInterval( () => {
         var currentSeconds = this.state.timerSeconds
         var currentMinutes = this.state.timerMinutes
@@ -64,7 +64,7 @@ class Timer extends Component {
             //make timerContainer flash red and blue
             flashingTimer = setInterval( () => {
               //change border color
-              if(this.state.timerBorderColor == "timerBlueBorder") {
+              if(this.state.timerBorderColor === "timerBlueBorder") {
                 this.setState({timerBorderColor : "timerRedBorder"})
               }
               else {
@@ -72,7 +72,7 @@ class Timer extends Component {
               }
 
               //flash text
-              if(this.state.timerText == "") {
+              if(this.state.timerText === "") {
                 this.setState({timerText : "00:00"})
               }
               else {
@@ -117,12 +117,12 @@ class Timer extends Component {
   toggleEditingTimer = () => {
     this.setState({error : ""})
 
-    if(this.state.editing == true ) {
-      if (this.state.updateTimerMinutes == "" || this.state.updateTimerSeconds == "") {
+    if(this.state.editing === true ) {
+      if (this.state.updateTimerMinutes === "" || this.state.updateTimerSeconds === "") {
         return this.setState({error : "Fields Cannot be empty",augmentTimerClasses : "timerContainerShowingError"})
       }
     }
-    if(this.state.updateTimerMinutes != "" && isNaN(parseInt(this.state.updateTimerMinutes)) | this.state.updateTimerSeconds != "" && isNaN(parseInt(this.state.updateTimerSeconds))) {
+    if(this.state.updateTimerMinutes !== "" && isNaN(parseInt(this.state.updateTimerMinutes)) | this.state.updateTimerSeconds !== "" && isNaN(parseInt(this.state.updateTimerSeconds))) {
         return this.setState({error : "only numbers are allowed",augmentTimerClasses : "timerContainerShowingError"})
     }
     else if(parseInt(this.state.updateTimerSeconds) < 0 | parseInt(this.state.updateTimerSeconds) > 59) {
@@ -158,8 +158,8 @@ class Timer extends Component {
         'Content-type' : 'application/json'
       },
       body : JSON.stringify({
-        seconds : parseInt(this.state.updateTimerSeconds) == 0 ? "0" : this.state.updateTimerSeconds,
-        minutes : parseInt(this.state.updateTimerMinutes) == 0 ? "0" : this.state.updateTimerMinutes
+        seconds : parseInt(this.state.updateTimerSeconds) === 0 ? "0" : this.state.updateTimerSeconds,
+        minutes : parseInt(this.state.updateTimerMinutes) === 0 ? "0" : this.state.updateTimerMinutes
       })
     })
     .then( () => {
@@ -172,7 +172,7 @@ class Timer extends Component {
   }
 
   render() {
-    if(this.state.editing == false){
+    if(this.state.editing === false){
       return (
         <div className={["timerContainer " + this.state.timerBorderColor]}>
           <div className="timerTextAndButtonsContainer">

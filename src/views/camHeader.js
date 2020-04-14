@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 class camHeader extends Component {
 
   render() {
-    if(this.props.userType == "admin") {
-      if(this.props.mode == "bachelor") {
-        if(this.props.camType == "guestCam") {
+    if(this.props.userType === "admin") {
+      if(this.props.mode === "bachelor") {
+        if(this.props.camType === "guestCam") {
           return(
             <div className="camHeader">
                 <p className="usersName">{this.props.camName}</p>
@@ -47,7 +47,7 @@ class camHeader extends Component {
         }
       }
       else {
-        if(this.props.camType == "guestCam") {
+        if(this.props.camType === "guestCam") {
           return(
             <div className="camHeader">
                 <p className="usersName">{this.props.camName}</p>
@@ -84,7 +84,7 @@ class camHeader extends Component {
       }
     }
     else {
-      if(this.props.camType == "guestCam") {
+      if(this.props.camType === "guestCam") {
         return(
           <div className="camHeader">
               <p className="usersName">{this.props.camName}</p>

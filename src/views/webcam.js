@@ -56,7 +56,7 @@ export default class Webcam extends Component {
       var userType = this.props.userType;
 
       //webcam mounting location selection
-      if(this.props.userType != 'admin') {
+      if(this.props.userType !== 'admin') {
 
         //mount local users video
         var localCam;
@@ -137,7 +137,7 @@ export default class Webcam extends Component {
 
       //adds ics candidates to RTCPeerConnection object
       socket.on("receiveNewIceCandidate", (candidate,remoteSocketID) => {
-        if(candidate != null) {
+        if(candidate !== null) {
           try {
             RTCCons[remoteSocketID].addIceCandidate(candidate)
           }
@@ -149,7 +149,7 @@ export default class Webcam extends Component {
 
       //handle cleanup after user disconnects
       socket.on("clientDisconnect", (id) => {
-        if(RTCCons[id] != undefined) {
+        if(RTCCons[id] !== undefined) {
           var video = document.querySelector('#cam' + RTCCons[id].remotePosition)
 
           if(video) {
@@ -171,7 +171,7 @@ export default class Webcam extends Component {
 
       socket.on("userWasKicked",(position,id) => {
         console.log("position : " + position)
-        if(RTCCons[id] != undefined) {
+        if(RTCCons[id] !== undefined) {
           var video = document.querySelector('#cam' + position);
 
           if(video) {
@@ -201,7 +201,7 @@ export default class Webcam extends Component {
           if(video) {
             video.srcObject = null
           }
-          
+
         }
 
         this.props.kickUserFromLobby()

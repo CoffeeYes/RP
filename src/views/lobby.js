@@ -11,8 +11,8 @@ class Lobby extends Component {
   }
 
   render() {
-    if(this.props.userType == "admin") {
-      if(this.props.mode == "king of the hill") {
+    if(this.props.userType === "admin") {
+      if(this.props.mode === "king of the hill") {
         return (
             <div className="hor-center">
               <Generate createCode={this.props.createCode} generatedCode={this.props.generatedCode} showCopied={this.props.showCopied}/>

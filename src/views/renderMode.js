@@ -43,7 +43,7 @@ class RenderMode extends Component {
 
   kickUser(camID) {
 
-    if(this.state["socketID_" + camID] != "") {
+    if(this.state["socketID_" + camID] !== "") {
       this.socket.emit("kickUser",this.state["socketID_" + camID])
 
       this.setState({["socketID_" + camID] : ""})
@@ -51,7 +51,7 @@ class RenderMode extends Component {
   }
 
   render() {
-    if(this.props.mode.toLowerCase() == "king of the hill") {
+    if(this.props.mode.toLowerCase() === "king of the hill") {
       return (
         <Koth
         userType={this.props.userType}
@@ -69,7 +69,7 @@ class RenderMode extends Component {
         />
       )
     }
-    else if(this.props.mode.toLowerCase() == "bachelor") {
+    else if(this.props.mode.toLowerCase() === "bachelor") {
       return (
         <Bachelor
         socket={this.socket}

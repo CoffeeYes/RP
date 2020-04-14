@@ -28,7 +28,7 @@ class Cam extends Component {
 
   //set cam filters based on user type
   componentDidMount() {
-    if(this.props.userType != "admin") {
+    if(this.props.userType !== "admin") {
       this.setState({camFilter : "camNotBlurred"})
     }
 
@@ -50,9 +50,9 @@ class Cam extends Component {
 
   componentDidUpdate = (prevProps,prevState) => {
     //if another cam has been highlighted add the hiddencam class to hide this cam component
-    if(prevProps.hideOtherCams != this.props.hideOtherCams) {
-      if(this.state.highlighted == false) {
-        if(prevProps.hideOtherCams == false) {
+    if(prevProps.hideOtherCams !== this.props.hideOtherCams) {
+      if(this.state.highlighted === false) {
+        if(prevProps.hideOtherCams === false) {
           this.setState({augmentClasses : "hiddenCam"})
         }
         else {
@@ -90,22 +90,22 @@ class Cam extends Component {
   }
 
   toggleFilter(event) {
-    //this.state.camFilter == "camBlurred" ? this.setState({camFilter : "camNotBlurred"}) : this.setState({camFilter : "camBlurred"})
-    if(this.state.camFilter == "camBlurred") {
+    //this.state.camFilter === "camBlurred" ? this.setState({camFilter : "camNotBlurred"}) : this.setState({camFilter : "camBlurred"})
+    if(this.state.camFilter === "camBlurred") {
       this.setState({camFilter : "camNotBlurred"})
     }
     else {
       this.setState({camFilter : "camBlurred"})
     }
     //toggle icon
-    this.state.videoIcon == icon_novideo ? this.setState({videoIcon : icon_video}) : this.setState({videoIcon : icon_novideo})
+    this.state.videoIcon === icon_novideo ? this.setState({videoIcon : icon_video}) : this.setState({videoIcon : icon_novideo})
   }
 
   toggleMute = () => {
     var video = document.querySelector('#' + this.props.camID);
     video.muted =  !(video.muted)
 
-    if(this.state.muteIcon == unmute) {
+    if(this.state.muteIcon === unmute) {
       this.setState({muteIcon : mute})
     }
     else {
@@ -114,7 +114,7 @@ class Cam extends Component {
   }
 
   toggleHighlightCam = () => {
-    if(this.state.augmentClasses == "") {
+    if(this.state.augmentClasses === "") {
       this.setState({augmentClasses : "highlight"})
       this.setState({highlighted : true})
     }
@@ -130,7 +130,7 @@ class Cam extends Component {
   thisUserIsBeingKicked = (camID) => {
     this.props.kickUser(camID)
 
-    if(this.state.highlighted == true) {
+    if(this.state.highlighted === true) {
       this.setState({highlighted: false})
       this.setState({augmentClasses : ""})
     }

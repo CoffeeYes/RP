@@ -63,10 +63,10 @@ class Koth extends Component {
 
     this.props.socket.on("receiveUserVoteStates",(voteStates) => {
       for(var i = 0; i < voteStates.length; i++) {
-        if(voteStates[i] == "yes") {
+        if(voteStates[i] === "yes") {
           this.setState({["tick" + (i+1)] : tick_filled})
         }
-        else if(voteStates[i] == "no") {
+        else if(voteStates[i] === "no") {
           this.setState({["cross" + (i+1)] : x_filled})
         }
       }
@@ -157,7 +157,7 @@ class Koth extends Component {
     this.props.socket.emit("resetAllVotes");
   }
   render() {
-    if(this.props.userType == "admin") {
+    if(this.props.userType === "admin") {
       return (
         <div className="cam-container">
           <div className="cam-col">
@@ -262,7 +262,7 @@ class Koth extends Component {
         </div>
       );
     }
-    else if(this.props.userType == "host") {
+    else if(this.props.userType === "host") {
       return (
           <div className="cam-container">
             <div className="cam-col">

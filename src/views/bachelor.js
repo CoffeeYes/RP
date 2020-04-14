@@ -71,7 +71,7 @@ class Bachelor extends Component {
   }
 
   render() {
-    if(this.props.userType == "admin") {
+    if(this.props.userType === "admin") {
       return (
           <div className="bachelor-main">
             <Webcam

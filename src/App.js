@@ -56,7 +56,7 @@ class App extends Component {
   handleLogin = (event) => {
     event.preventDefault();
     this.setState({error: ''})
-    if(this.state.username.trim() == "" || this.state.password.trim() == "") {
+    if(this.state.username.trim() === "" || this.state.password.trim() === "") {
       return this.setState({error: 'fields cannot be empty'})
     }
     this.setState({error: "Working..."})
@@ -75,7 +75,7 @@ class App extends Component {
       if(data.error) {
         this.setState({error : data.error})
       }
-      else if(data.loggedIn == true){
+      else if(data.loggedIn === true){
         this.setState({loggedIn: true,error: ""});
         sessionStorage.setItem('authenticated',true);
         sessionStorage.setItem('user_type',data.user_type);
@@ -121,7 +121,7 @@ class App extends Component {
     this.setState({error : ""})
     this.setState({error : "Working..."})
 
-    if(this.state.nextMode == "") {
+    if(this.state.nextMode === "") {
       return this.setState({error : "please select a mode"})
     }
 
@@ -136,7 +136,7 @@ class App extends Component {
     })
     .then( res => res.json())
     .then( data => {
-      if(data.success == true) {
+      if(data.success === true) {
         this.setState({error : "Mode Updated"})
         setTimeout(() => {
           this.setState({error : ""})
@@ -154,7 +154,7 @@ class App extends Component {
     this.setState({error : ""})
 
     //check empty
-    if(this.state.codeInput.trim() == "") {
+    if(this.state.codeInput.trim() === "") {
       return this.setState({error : "field cannot be empty"})
     }
     //post code to backend and handle response
@@ -169,7 +169,7 @@ class App extends Component {
       })
       .then(res => res.json())
       .then(data => {
-        if(data.sucess == false) {
+        if(data.sucess === false) {
           return this.setState({error : data.error})
         }
         else {
@@ -218,7 +218,7 @@ class App extends Component {
     this.setState({error : ""})
     event.preventDefault();
 
-    if(this.state.addUser.username.trim() == "" || this.state.addUser.password.trim() == "" ||this.state.addUser.displayname.trim() == "") {
+    if(this.state.addUser.username.trim() === "" || this.state.addUser.password.trim() === "" ||this.state.addUser.displayname.trim() === "") {
       return this.setState({error : "fields cannot be empty"})
     }
     else {
@@ -288,14 +288,14 @@ class App extends Component {
 
   keyPressedOnSplash = (event) => {
     //catch pressing of enter to fire login function
-    if(event.which == 13) {
+    if(event.which === 13) {
       this.handleLogin(event);
     }
   }
   render = () => {
     if(this.state.authenticated) {
       //render full panel and allow access to other routes if admin login
-      if(this.state.user_type == 'admin') {
+      if(this.state.user_type === 'admin') {
         return (
           <div className="main">
             <Route exact path="/" render={() => (
