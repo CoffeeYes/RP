@@ -830,12 +830,16 @@ form {
   #addUserBtn {
     width: 80px;
     height: 40px;
-    font-size: 15px;
+    font-size: 20px;
   }
 
   .addUserInput {
       height: 10px;
       width: 200px;
+  }
+
+  .addUserLabel {
+    font-size : 30px;
   }
 
   #login-button {
