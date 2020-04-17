@@ -21,6 +21,8 @@ class Cam extends Component {
       expandIcon : icon_expand,
       augmentClasses : "",
       highlighted : false,
+      allBlurred : true,
+      allMuted : true
     }
 
     this.toggleFilter = this.toggleFilter.bind(this);
@@ -38,10 +40,10 @@ class Cam extends Component {
   //derive local state from parent prop for blurring/muting all cams
   static getDerivedStateFromProps = (nextProps,prevState) => {
     if(nextProps.allBlurred !== prevState.allBlurred) {
-      return({allBlurred : nextProps.allBlurred})
+      return({allBlurred : nextProps.allBlurred,allMuted : prevState.allMuted})
     }
     else if(nextProps.allMuted !== prevState.allMuted) {
-      return({allMuted : nextProps.allMuted})
+      return({allMuted : nextProps.allMuted,allBlurred : prevState.allBlurred})
     }
     else {
       return null
@@ -87,6 +89,7 @@ class Cam extends Component {
         }
       }
     }
+
   }
 
   toggleFilter(event) {
