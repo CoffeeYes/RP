@@ -749,6 +749,7 @@ form {
 }
 /* --------------------------------- 1080p sizing --*/
 @media screen and (max-width: 1920px) {
+
   .timerContainer {
     width: 250px;
     height: 60px;
@@ -902,6 +903,20 @@ form {
 
   .cams-container {
     height: 770px;
+  }
+
+  .cam-container {
+    height: 900px;
+    width: 1800px;
+  }
+
+  .cam-col {
+    height: 900px;
+  }
+
+  .camBox {
+    margin-left : 20px;
+    margin-top : 20px;
   }
 
   .panel-link {
