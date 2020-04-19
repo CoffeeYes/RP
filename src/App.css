@@ -750,6 +750,11 @@ form {
 /* --------------------------------- 1080p sizing --*/
 @media screen and (max-width: 1920px) {
 
+  .content-container {
+    width: 1920px;
+    height: 900px;
+  }
+
   .timerContainer {
     width: 250px;
     height: 60px;
@@ -958,5 +963,9 @@ form {
   .userListItem {
     height: 40px;
     width: 1000px;
+  }
+
+  .navItem {
+    padding: 10px 80px 10px 80px;
   }
 }
