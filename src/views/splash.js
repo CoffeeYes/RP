@@ -10,7 +10,7 @@ class Splash extends Component {
           <form action="/login" method="POST" className="login-form">
             <p className="error">{this.props.error}</p>
             <label>Username</label>
-            <input name="username" onChange={this.props.handleTextChange} className="login-input"/>
+            <input name="username" onChange={this.props.handleTextChange} className="login-input" onKeyPress={this.props.keyPressedOnSplash}/>
             <label>Password</label>
             <input name="password" type="password"onChange={this.props.handleTextChange} className="login-input" onKeyPress={this.props.keyPressedOnSplash}/>
             <div className="login-form-text">
