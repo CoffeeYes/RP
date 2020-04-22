@@ -750,6 +750,11 @@ form {
 /* --------------------------------- 1080p sizing --*/
 @media screen and (max-width: 1920px) {
 
+  .main {
+    width: 1920px;
+    height: 983px;
+  }
+
   .content-container {
     width: 1920px;
     height: 900px;
@@ -782,6 +787,7 @@ form {
   .addUserForm {
     width: 300px;
     height: 300px;
+    margin-top: 20px;
   }
 
   .addUserBtn {
@@ -796,6 +802,10 @@ form {
 
   .userListContainer {
     width: 1200px;
+  }
+
+  .userListText {
+    font-size : 28px;
   }
 
   .codeFormContainer {
@@ -837,12 +847,20 @@ form {
     width: 80px;
     height: 40px;
     font-size: 20px;
+    padding: 10px 20px 10px 20px;
+  }
+
+  .deleteUserbtn {
+    width : 40px;
+    height: 20px;
+    margin-right: 10px;
   }
 
   .addUserInput {
       height: 10px;
       width: 200px;
       padding: 10px 20px 10px 20px;
+      font-size: 20px;
   }
 
   .addUserLabel {
